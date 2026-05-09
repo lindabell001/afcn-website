@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 50% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 50% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 50% 15%;
+
+    --primary: 220 70% 22%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 30% 96%;
+    --secondary-foreground: 220 50% 15%;
+
+    --muted: 210 25% 96%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 355 78% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 220 70% 22%;
+
+    --radius: 0.375rem;
+
+    --patriot-red: 355 78% 45%;
+    --patriot-blue: 220 70% 22%;
+    --cream: 40 33% 98%;
+
+    --shadow-card: 0 4px 20px -8px hsl(220 50% 15% / 0.15);
+    --shadow-elegant: 0 20px 60px -20px hsl(220 50% 15% / 0.25);
+    --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 50% 15%;
+    --sidebar-primary: 220 70% 22%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 30% 96%;
+    --sidebar-accent-foreground: 220 50% 15%;
+    --sidebar-border: 220 15% 88%;
+    --sidebar-ring: 220 70% 22%;
+  }
+
+  .dark { /* unused; light theme only for clean patriotic look */
+    --background: 0 0% 100%;
+    --foreground: 220 50% 15%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    @apply tracking-tight text-primary;
+  }
+}
+
+@layer utilities {
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .transition-smooth { transition: var(--transition-smooth); }
+  .text-patriot-red { color: hsl(var(--patriot-red)); }
+  .bg-patriot-red { background-color: hsl(var(--patriot-red)); }
+  .bg-patriot-blue { background-color: hsl(var(--patriot-blue)); }
+  .text-patriot-blue { color: hsl(var(--patriot-blue)); }
+  .bg-cream { background-color: hsl(var(--cream)); }
+  .container-narrow { @apply max-w-4xl mx-auto px-4 sm:px-6; }
+}
