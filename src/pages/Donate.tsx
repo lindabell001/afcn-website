@@ -45,26 +45,21 @@ const Donate = () => {
       </article>
 
       <div className="mt-10 bg-card border border-border rounded-md p-8 shadow-card text-center">
-        <h2 className="text-2xl font-bold text-primary">Donate Here</h2>
-        <a
-          href="https://givingtools.com/give/4206"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center justify-center h-16 px-10 bg-patriot-red hover:bg-patriot-red/90 text-white text-lg font-bold uppercase tracking-wide rounded-sm transition-smooth shadow-card"
-        >
-          Donate Now
-        </a>
-        <a
-          href="https://givingtools.com/give/4206"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 block text-patriot-red font-semibold break-all hover:underline"
-        >
-          https://givingtools.com/give/4206
-        </a>
-      </div>
+  <h2 className="text-2xl font-bold text-primary mb-6">Support the America First Citizens Network</h2>
+  
+  <a 
+    href="https://givingtools.com/give/4206" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="inline-flex items-center justify-center h-16 px-12 bg-patriot-red hover:bg-red-700 text-white text-xl font-bold uppercase tracking-wider rounded-md transition-all shadow-lg"
+  >
+    DONATE NOW
+  </a>
 
-      <p className="mt-4 text-xs text-center text-muted-foreground">
+  <p className="mt-4 text-sm text-muted-foreground">
+    Your donation is secure and goes directly to AFCN
+  </p>
+</div>      <p className="mt-4 text-xs text-center text-muted-foreground">
         America First Citizens Network is a grassroots movement. Contributions are not tax-deductible.
       </p>
     </PageShell>
