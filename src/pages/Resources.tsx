@@ -5,7 +5,7 @@ const Resources = () => {
   return (
     <PageShell
       title="AFCN Resource Page"
-      subtitle="Building a one stop page for and by Patriots!"
+      subtitle="Building a one stop page for and by Patriots"
     >
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="text-center mb-16">
@@ -15,29 +15,29 @@ const Resources = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          
-          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all">
+        <div className="space-y-12">
+
+          <div>
             <h2 className="text-3xl font-bold text-primary mb-3">Take Action</h2>
             <p className="text-lg text-muted-foreground">Building a one stop page</p>
           </div>
 
-          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all">
+          <div>
             <h2 className="text-3xl font-bold text-primary mb-3">Podcasts</h2>
             <p className="text-lg text-muted-foreground">America First Voices</p>
           </div>
 
-          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all">
+          <div>
             <h2 className="text-3xl font-bold text-primary mb-3">Music & Radio</h2>
             <p className="text-lg text-muted-foreground">Patriotic and modern religious music</p>
           </div>
 
-          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all">
+          <div>
             <h2 className="text-3xl font-bold text-primary mb-3">Educational Travel</h2>
             <p className="text-lg text-muted-foreground">Have fun with education</p>
           </div>
 
-          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all md:col-span-2">
+          <div>
             <h2 className="text-3xl font-bold text-primary mb-3">Deep Dives</h2>
             <p className="text-lg text-muted-foreground">Articles, analysis, essays, research reports</p>
           </div>
