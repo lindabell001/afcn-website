@@ -15,7 +15,7 @@ const Resources = () => {
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-16">
 
           <div>
             <h2 className="text-3xl font-bold text-primary mb-3">Take Action</h2>
