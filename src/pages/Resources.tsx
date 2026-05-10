@@ -17,40 +17,31 @@ const Resources = () => {
 
         <div className="grid md:grid-cols-2 gap-8">
           
-          {/* Take Action */}
-          <a href="/action" className="group block p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all hover:shadow-xl">
+          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all">
             <h2 className="text-3xl font-bold text-primary mb-3">Take Action</h2>
             <p className="text-lg text-muted-foreground">Building a one stop page</p>
-          </a>
+          </div>
 
-          {/* Podcasts */}
-          <a href="/podcasts" className="group block p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all hover:shadow-xl">
+          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all">
             <h2 className="text-3xl font-bold text-primary mb-3">Podcasts</h2>
             <p className="text-lg text-muted-foreground">America First Voices</p>
-          </a>
+          </div>
 
-          {/* Music & Radio */}
-          <a href="/music" className="group block p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all hover:shadow-xl">
+          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all">
             <h2 className="text-3xl font-bold text-primary mb-3">Music & Radio</h2>
             <p className="text-lg text-muted-foreground">Patriotic and modern religious music</p>
-          </a>
+          </div>
 
-          {/* Educational Travel */}
-          <a href="/travel" className="group block p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all hover:shadow-xl">
+          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all">
             <h2 className="text-3xl font-bold text-primary mb-3">Educational Travel</h2>
             <p className="text-lg text-muted-foreground">Have fun with education</p>
-          </a>
+          </div>
 
-          {/* Deep Dives */}
-          <a href="/deep-dives" className="group block p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all hover:shadow-xl md:col-span-2">
+          <div className="group p-8 bg-card border border-border rounded-2xl hover:border-patriot-red transition-all md:col-span-2">
             <h2 className="text-3xl font-bold text-primary mb-3">Deep Dives</h2>
             <p className="text-lg text-muted-foreground">Articles, analysis, essays, research reports</p>
-          </a>
+          </div>
 
-        </div>
-
-        <div className="text-center mt-16 text-sm text-muted-foreground">
-          America First Citizens Network — Faith • Family • Freedom
         </div>
       </div>
     </PageShell>
