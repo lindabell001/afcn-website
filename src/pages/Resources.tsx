@@ -5,7 +5,7 @@ const Resources = () => {
   return (
     <PageShell
       title="AFCN Resource Page"
-      subtitle="Building a one stop page for and by Patriots"
+      subtitle="Building a one stop page for and by Patriots!"
     >
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="text-center mb-16">
