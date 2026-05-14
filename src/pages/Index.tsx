@@ -44,7 +44,36 @@ const Index = () => {
           </div>
         </div>
       </section>
+{/* MAGA DARTS Live Leaderboard Embed */}
+<section className="py-12 bg-black border-t border-red-900">
+  <div className="container mx-auto px-4 max-w-6xl">
+    <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-4">
+      🔥 LIVE MAGA DARTS LEADERBOARD 🔥
+    </h2>
+    <p className="text-center text-yellow-400 mb-8 text-lg md:text-xl">
+      Compete • Earn Points • Make 2026 MAGA Stronger
+    </p>
+    
+    <iframe 
+      src="https://magadarts.netlify.app/leaderboard" 
+      width="100%" 
+      height="650" 
+      style={{ border: "none", borderRadius: "12px", background: "white" }}
+      title="MAGA DARTS Leaderboard"
+      allowFullScreen>
+    </iframe>
 
+    <div className="text-center mt-8">
+      <a 
+        href="https://magadarts.netlify.app" 
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-10 py-4 rounded-xl transition">
+        🎯 Play MAGA DARTS Now
+      </a>
+    </div>
+  </div>
+</section>
       {/* Agenda */}
       <section className="py-20 bg-cream">
         <div className="container">
