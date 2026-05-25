@@ -30,8 +30,16 @@
       border-radius: 5px; 
       font-size: 16px;
     }
-    .checkbox-group { 
-      margin: 15px 0; 
+    .checkbox-group {
+      margin: 15px 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     button { 
       background: #ff0000; 
@@ -80,22 +88,22 @@
 
     <label>Primary Issues / Committees of Observation (Select all that apply)</label>
     <div class="checkbox-group">
-      <input type="checkbox" class="issue" value="Border Security & Immigration"> Border Security & Immigration<br>
-      <input type="checkbox" class="issue" value="Election Integrity"> Election Integrity<br>
-      <input type="checkbox" class="issue" value="Education Freedom & Parental Rights"> Education Freedom & Parental Rights<br>
-      <input type="checkbox" class="issue" value="Economy, Trade & Tariffs"> Economy, Trade & Tariffs<br>
-      <input type="checkbox" class="issue" value="2nd Amendment Rights"> 2nd Amendment Rights<br>
-      <input type="checkbox" class="issue" value="Government Efficiency (DOGE)"> Government Efficiency (DOGE)<br>
-      <input type="checkbox" class="issue" value="Healthcare Freedom & Make America Healthy Again"> Healthcare Freedom & Make America Healthy Again<br>
-      <input type="checkbox" class="issue" value="Crime, Law & Order"> Crime, Law & Order<br>
-      <input type="checkbox" class="issue" value="Energy Dominance"> Energy Dominance<br>
-      <input type="checkbox" class="issue" value="Religious Liberty"> Religious Liberty<br>
-      <input type="checkbox" class="issue" value="Anti-DEI / Merit-Based Systems"> Anti-DEI / Merit-Based Systems<br>
-      <input type="checkbox" class="issue" value="Foreign Policy – America First"> Foreign Policy – America First<br>
-      <input type="checkbox" class="issue" value="Veterans Affairs"> Veterans Affairs<br>
-      <input type="checkbox" class="issue" value="Housing Affordability"> Housing Affordability<br>
-      <input type="checkbox" class="issue" value="Anti-Censorship / Free Speech"> Anti-Censorship / Free Speech<br>
-      <input type="checkbox" class="issue" value="Pro-Family & Pro-Natalist Policies"> Pro-Family & Pro-Natalist Policies<br>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Border Security & Immigration"> Border Security & Immigration</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Election Integrity"> Election Integrity</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Education Freedom & Parental Rights"> Education Freedom & Parental Rights</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Economy, Trade & Tariffs"> Economy, Trade & Tariffs</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="2nd Amendment Rights"> 2nd Amendment Rights</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Government Efficiency (DOGE)"> Government Efficiency (DOGE)</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Healthcare Freedom & Make America Healthy Again"> Healthcare Freedom & Make America Healthy Again</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Crime, Law & Order"> Crime, Law & Order</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Energy Dominance"> Energy Dominance</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Religious Liberty"> Religious Liberty</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Anti-DEI / Merit-Based Systems"> Anti-DEI / Merit-Based Systems</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Foreign Policy – America First"> Foreign Policy – America First</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Veterans Affairs"> Veterans Affairs</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Housing Affordability"> Housing Affordability</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Anti-Censorship / Free Speech"> Anti-Censorship / Free Speech</div>
+      <div class="checkbox-item"><input type="checkbox" class="issue" value="Pro-Family & Pro-Natalist Policies"> Pro-Family & Pro-Natalist Policies</div>
     </div>
 
     <label>Other / Custom Issues</label>
