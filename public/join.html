@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join - America First Citizens Network</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #0a2540; color: white; padding: 20px; }
+    body { font-family: Arial, sans-serif; background: #0a2540; color: white; padding: 40px 20px; line-height: 1.6; }
     h1 { color: #ff0000; }
     label { display: block; margin-top: 15px; font-weight: bold; }
-    input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
     button { background: #ff0000; color: white; padding: 15px 30px; font-size: 18px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; }
-    .checkbox-group { margin-top: 10px; }
+    .checkbox-group { margin: 10px 0; }
   </style>
 </head>
 <body>
@@ -20,57 +20,93 @@
 
 <form id="joinForm">
   <label>Full Name *</label>
-  <input type="text" name="full_name" required>
+  <input type="text" id="full_name" required>
 
   <label>Email Address *</label>
-  <input type="email" name="email" required>
+  <input type="email" id="email" required>
 
   <label>Phone Number</label>
-  <input type="tel" name="phone">
+  <input type="tel" id="phone">
 
   <label>City *</label>
-  <input type="text" name="city" required>
+  <input type="text" id="city" required>
 
   <label>State *</label>
-  <input type="text" name="state" maxlength="2" required>
+  <input type="text" id="state" maxlength="2" required>
 
   <label>Zip Code *</label>
-  <input type="text" name="zip" required>
+  <input type="text" id="zip" required>
 
   <label>Neighborhood / Community *</label>
-  <input type="text" name="neighborhood" required placeholder="e.g. The Chateau Apartments or My Neighborhood">
+  <input type="text" id="neighborhood" required>
 
   <label>County *</label>
-  <input type="text" name="county" required>
+  <input type="text" id="county" required>
 
   <label>Primary Issues / Committees of Observation (Select all that apply)</label>
   <div class="checkbox-group">
-    <input type="checkbox" name="issues" value="Border Security & Immigration"> Border Security & Immigration<br>
-    <input type="checkbox" name="issues" value="Election Integrity"> Election Integrity<br>
-    <input type="checkbox" name="issues" value="Education Freedom & Parental Rights"> Education Freedom & Parental Rights<br>
-    <input type="checkbox" name="issues" value="Economy, Trade & Tariffs"> Economy, Trade & Tariffs<br>
-    <input type="checkbox" name="issues" value="2nd Amendment Rights"> 2nd Amendment Rights<br>
-    <input type="checkbox" name="issues" value="Government Efficiency (DOGE)"> Government Efficiency (DOGE)<br>
-    <input type="checkbox" name="issues" value="Healthcare Freedom & Make America Healthy Again"> Healthcare Freedom & Make America Healthy Again<br>
-    <input type="checkbox" name="issues" value="Crime, Law & Order"> Crime, Law & Order<br>
-    <input type="checkbox" name="issues" value="Energy Dominance"> Energy Dominance<br>
-    <input type="checkbox" name="issues" value="Religious Liberty"> Religious Liberty<br>
-    <input type="checkbox" name="issues" value="Anti-DEI / Merit-Based Systems"> Anti-DEI / Merit-Based Systems<br>
-    <input type="checkbox" name="issues" value="Foreign Policy – America First"> Foreign Policy – America First<br>
-    <input type="checkbox" name="issues" value="Veterans Affairs"> Veterans Affairs<br>
-    <input type="checkbox" name="issues" value="Housing Affordability"> Housing Affordability<br>
-    <input type="checkbox" name="issues" value="Anti-Censorship / Free Speech"> Anti-Censorship / Free Speech<br>
-    <input type="checkbox" name="issues" value="Pro-Family & Pro-Natalist Policies"> Pro-Family & Pro-Natalist Policies<br>
+    <input type="checkbox" class="issue" value="Border Security & Immigration"> Border Security & Immigration<br>
+    <input type="checkbox" class="issue" value="Election Integrity"> Election Integrity<br>
+    <input type="checkbox" class="issue" value="Education Freedom & Parental Rights"> Education Freedom & Parental Rights<br>
+    <input type="checkbox" class="issue" value="Economy, Trade & Tariffs"> Economy, Trade & Tariffs<br>
+    <input type="checkbox" class="issue" value="2nd Amendment Rights"> 2nd Amendment Rights<br>
+    <input type="checkbox" class="issue" value="Government Efficiency (DOGE)"> Government Efficiency (DOGE)<br>
+    <input type="checkbox" class="issue" value="Healthcare Freedom & Make America Healthy Again"> Healthcare Freedom & Make America Healthy Again<br>
+    <input type="checkbox" class="issue" value="Crime, Law & Order"> Crime, Law & Order<br>
+    <input type="checkbox" class="issue" value="Energy Dominance"> Energy Dominance<br>
+    <input type="checkbox" class="issue" value="Religious Liberty"> Religious Liberty<br>
+    <input type="checkbox" class="issue" value="Anti-DEI / Merit-Based Systems"> Anti-DEI / Merit-Based Systems<br>
+    <input type="checkbox" class="issue" value="Foreign Policy – America First"> Foreign Policy – America First<br>
+    <input type="checkbox" class="issue" value="Veterans Affairs"> Veterans Affairs<br>
+    <input type="checkbox" class="issue" value="Housing Affordability"> Housing Affordability<br>
+    <input type="checkbox" class="issue" value="Anti-Censorship / Free Speech"> Anti-Censorship / Free Speech<br>
+    <input type="checkbox" class="issue" value="Pro-Family & Pro-Natalist Policies"> Pro-Family & Pro-Natalist Policies<br>
   </div>
 
   <label>Other / Custom Issues</label>
-  <input type="text" name="other_issues" placeholder="Type any additional issues, separated by commas">
+  <input type="text" id="other_issues" placeholder="Type any additional issues, separated by commas">
 
   <label>Why are you joining? Why are you ready to fight? *</label>
-  <textarea name="why_joining" rows="4" required></textarea>
+  <textarea id="why_joining" rows="5" required></textarea>
 
   <button type="submit">Submit Application</button>
 </form>
 
-</body>
-</html>
+<script>
+  const form = document.getElementById('joinForm');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Collect checked issues
+    const issues = Array.from(document.querySelectorAll('.issue:checked')).map(cb => cb.value);
+    
+    // Add custom issues
+    const other = document.getElementById('other_issues').value.trim();
+    if (other) {
+      issues.push(...other.split(',').map(i => i.trim()).filter(i => i));
+    }
+
+    const data = {
+      full_name: document.getElementById('full_name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      city: document.getElementById('city').value,
+      state: document.getElementById('state').value,
+      zip: document.getElementById('zip').value,
+      neighborhood: document.getElementById('neighborhood').value,
+      county: document.getElementById('county').value,
+      issues: issues,
+      why_joining: document.getElementById('why_joining').value
+    };
+
+    const SUPABASE_URL = 'https://iqdnboowzqdiwnymmtwi.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_YppyBKac2iPCymEzmnicUQ_dHHnqPOZ';
+
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/members`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}
