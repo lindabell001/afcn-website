@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join - America First Citizens Network</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0a2540; color: white; padding: 20px; }
+    h1 { color: #ff0000; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #ff0000; color: white; padding: 15px 30px; font-size: 18px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; }
+    .checkbox-group { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<h1>Join the America First Citizens Network</h1>
+<p>Become part of the 250-year mission of Active Citizenship.</p>
+
+<form id="joinForm">
+  <label>Full Name *</label>
+  <input type="text" name="full_name" required>
+
+  <label>Email Address *</label>
+  <input type="email" name="email" required>
+
+  <label>Phone Number</label>
+  <input type="tel" name="phone">
+
+  <label>City *</label>
+  <input type="text" name="city" required>
+
+  <label>State *</label>
+  <input type="text" name="state" maxlength="2" required>
+
+  <label>Zip Code *</label>
+  <input type="text" name="zip" required>
+
+  <label>Neighborhood / Community *</label>
+  <input type="text" name="neighborhood" required placeholder="e.g. The Chateau Apartments or My Neighborhood">
+
+  <label>County *</label>
+  <input type="text" name="county" required>
+
+  <label>Primary Issues / Committees of Observation (Select all that apply)</label>
+  <div class="checkbox-group">
+    <input type="checkbox" name="issues" value="Border Security & Immigration"> Border Security & Immigration<br>
+    <input type="checkbox" name="issues" value="Election Integrity"> Election Integrity<br>
+    <input type="checkbox" name="issues" value="Education Freedom & Parental Rights"> Education Freedom & Parental Rights<br>
+    <input type="checkbox" name="issues" value="Economy, Trade & Tariffs"> Economy, Trade & Tariffs<br>
+    <input type="checkbox" name="issues" value="2nd Amendment Rights"> 2nd Amendment Rights<br>
+    <input type="checkbox" name="issues" value="Government Efficiency (DOGE)"> Government Efficiency (DOGE)<br>
+    <input type="checkbox" name="issues" value="Healthcare Freedom & Make America Healthy Again"> Healthcare Freedom & Make America Healthy Again<br>
+    <input type="checkbox" name="issues" value="Crime, Law & Order"> Crime, Law & Order<br>
+    <input type="checkbox" name="issues" value="Energy Dominance"> Energy Dominance<br>
+    <input type="checkbox" name="issues" value="Religious Liberty"> Religious Liberty<br>
+    <input type="checkbox" name="issues" value="Anti-DEI / Merit-Based Systems"> Anti-DEI / Merit-Based Systems<br>
+    <input type="checkbox" name="issues" value="Foreign Policy – America First"> Foreign Policy – America First<br>
+    <input type="checkbox" name="issues" value="Veterans Affairs"> Veterans Affairs<br>
+    <input type="checkbox" name="issues" value="Housing Affordability"> Housing Affordability<br>
+    <input type="checkbox" name="issues" value="Anti-Censorship / Free Speech"> Anti-Censorship / Free Speech<br>
+    <input type="checkbox" name="issues" value="Pro-Family & Pro-Natalist Policies"> Pro-Family & Pro-Natalist Policies<br>
+  </div>
+
+  <label>Other / Custom Issues</label>
+  <input type="text" name="other_issues" placeholder="Type any additional issues, separated by commas">
+
+  <label>Why are you joining? Why are you ready to fight? *</label>
+  <textarea name="why_joining" rows="4" required></textarea>
+
+  <button type="submit">Submit Application</button>
+</form>
+
+</body>
+</html>
