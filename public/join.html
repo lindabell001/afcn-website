@@ -23,10 +23,11 @@
     h1 { 
       color: #ff0000; 
       text-align: center; 
+      margin-bottom: 20px;
     }
     label { 
       display: block; 
-      margin: 18px 0 6px; 
+      margin: 16px 0 8px; 
       font-weight: bold; 
     }
     input, textarea { 
@@ -35,17 +36,15 @@
       border: 1px solid #ccc; 
       border-radius: 5px; 
       font-size: 16px; 
-      margin-bottom: 8px; 
     }
     .checkbox-group label { 
-      display: block; 
-      margin: 8px 0; 
       font-weight: normal; 
+      margin: 8px 0; 
     }
     button { 
       background: #ff0000; 
       color: white; 
-      padding: 16px 32px; 
+      padding: 16px; 
       font-size: 18px; 
       border: none; 
       border-radius: 5px; 
@@ -117,6 +116,7 @@
 </div>
 
 <script>
+  // (same script as before - no change needed)
   const form = document.getElementById('joinForm');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
