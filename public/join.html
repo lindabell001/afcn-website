@@ -37,6 +37,12 @@
       border-radius: 5px; 
       font-size: 16px; 
     }
+    .issues-link {
+      color: #ff0000;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: normal;
+    }
     button { 
       background: #ff0000; 
       color: white; 
@@ -47,11 +53,6 @@
       margin-top: 30px; 
       cursor: pointer; 
       width: 100%; 
-    }
-    .issues-link {
-      color: #ff0000;
-      text-decoration: underline;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -89,9 +90,8 @@
     <label>Why are you joining? Why are you ready to fight? *</label>
     <textarea id="why_joining" rows="5" required></textarea>
 
-    <label>Primary Issues / Committees of Observation 
-      <span class="issues-link" onclick="window.location.href='issues.html'">(Select all that apply or add your own)</span>
-    </label>
+    <label>Primary Issues / Committees of Observation</label>
+    <span class="issues-link" onclick="window.location.href='issues.html'">(Select all that apply or add your own)</span>
 
     <button type="button" onclick="window.location.href='issues.html'">Continue to Select Issues →</button>
   </form>
