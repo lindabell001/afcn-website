@@ -19,7 +19,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Be Active - Directly under button */}
+      {/* Be Active */}
       <section className="bg-[#0a2540] text-white py-12 text-center">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-2xl">Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.</p>
