@@ -10,7 +10,7 @@
       background: #f8f9fa; 
       color: #0a2540; 
       padding: 40px 20px; 
-      line-height: 1.5; 
+      line-height: 1.6; 
     }
     .form-container { 
       max-width: 720px; 
@@ -38,10 +38,15 @@
       font-size: 16px; 
     }
     .checkbox-group label { 
-      display: block; 
-      margin: 4px 0;        /* Very tight spacing */
+      display: flex; 
+      align-items: center;     /* This centers the checkbox vertically */
+      margin: 8px 0; 
       font-weight: normal; 
-      padding: 2px 0;
+      padding: 4px 0;
+    }
+    .checkbox-group input[type="checkbox"] { 
+      margin-right: 12px; 
+      transform: scale(1.4);   /* Makes checkbox a bit bigger */
     }
     button { 
       background: #ff0000; 
