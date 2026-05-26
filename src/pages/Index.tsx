@@ -1,40 +1,97 @@
 import SiteLayout from "@/components/SiteLayout";
+import heroRays from "@/assets/hero-rays.jpg";
+import { Link } from "react-router-dom";
 
-const TransparencyAndOperations = () => {
+const Index = () => {
   return (
     <SiteLayout>
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-bold text-center mb-12 text-red-600">
-          Transparency &amp; Operations
-        </h1>
+      {/* Hero - Original Divine Light Flag */}
+      <section className="relative overflow-hidden">
+        <div className="relative h-[88vh] min-h-[560px] w-full">
+          <img
+            src={heroRays}
+            alt="American flag with divine light rays"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          
+          {/* Divine rays overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 60% at 50% 0%, hsl(45 100% 80% / 0.55), transparent 60%), linear-gradient(180deg, hsl(45 100% 95% / 0.35) 0%, transparent 35%, hsl(220 70% 15% / 0.35) 100%)",
+            }}
+          />
 
-        <div className="prose prose-lg mx-auto">
-          <h2 className="text-2xl font-bold mt-10">Our Commitment to Transparency</h2>
-          <p>America First Citizens Network operates with full openness and accountability. We believe citizens deserve to know exactly how their donations and membership dues are used.</p>
-
-          <h2 className="text-2xl font-bold mt-10">Financial Transparency</h2>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>All major expenditures and income sources will be summarized and published quarterly.</li>
-            <li>Donations are used for website operations, member tools, outreach, educational materials, and lawful advocacy.</li>
-            <li>We maintain clear separation between social welfare activities (primary) and any political activity (limited and compliant).</li>
-          </ul>
-
-          <h2 className="text-2xl font-bold mt-10">Membership &amp; Data Handling</h2>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Norine personally reviews every membership application.</li>
-            <li>Member data is used only for organizing by location and issue.</li>
-            <li>We never sell, rent, or share personal information with third parties.</li>
-          </ul>
-
-          <h2 className="text-2xl font-bold mt-10">Lawful Advocacy</h2>
-          <p>We operate strictly within all federal, state, and local laws. All activities follow IRS 501(c)(4) guidelines for social welfare organizations.</p>
-
-          <h2 className="text-2xl font-bold mt-10">Reporting &amp; Feedback</h2>
-          <p>Members and the public are encouraged to ask questions or report concerns. We respond promptly and document resolutions.</p>
+          <div className="relative z-10 h-full flex items-center">
+            <div className="container text-center">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+                America First Citizens Network
+              </h1>
+              <p className="mt-6 text-xl md:text-2xl font-serif italic text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+                — Active Citizenship for the Next 250 Years —
+              </p>
+              <div className="mt-10">
+                <a
+                  href="/play-darts.html"
+                  className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-bold uppercase tracking-wide px-10 py-4 rounded-lg shadow-lg"
+                >
+                  → PLAY MAGA-DARTS NOW!
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </SiteLayout>
-  );
-};
+      </section>
 
-export default TransparencyAndOperations;
+      {/* Be Active - Right under hero */}
+      <section className="bg-[#0a2540] text-white py-12 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-2xl">Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.</p>
+        </div>
+      </section>
+
+      {/* The Vision */}
+      <section className="py-20 text-center bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-red-600 mb-10">The Vision</h2>
+          <p className="text-xl leading-relaxed mb-8">
+            America First Citizens Network is your organization to secure the future for the next 250 years.
+          </p>
+          <p className="text-xl leading-relaxed">
+            We provide the education, tools, and community you need to become an active American citizen 
+            and for you to share your knowledge with fellow patriots.
+          </p>
+          <p className="text-xl leading-relaxed mt-8">
+            We have modernized the time-tested <strong>Committees of Observation</strong> our Founders used 
+            to mobilize on the issues that matter most.
+          </p>
+          <a 
+            href="/committees-of-observation.html" 
+            className="mt-10 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg"
+          >
+            Learn About Committees of Observation →
+          </a>
+        </div>
+      </section>
+
+      {/* Early Momentum */}
+      <section className="py-20 bg-gray-50 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-red-600 mb-8">Early Momentum</h2>
+          <h3 className="text-2xl mb-6">Members & Committees</h3>
+          <p className="text-lg mb-8">
+            The first wave is forming — by location and by issue — building the grassroots structure our Republic was always meant to have.
+          </p>
+          <a 
+            href="/join.html" 
+            className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg"
+          >
+            Join Now →
+          </a>
+        </div>
+      </section>
+
+      {/* Patriots Stories */}
+      <section className="py-20 text-center bg-white">
+        <div className="max-w-4xl mx-auto px-
