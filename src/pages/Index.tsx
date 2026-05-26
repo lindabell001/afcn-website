@@ -3,39 +3,75 @@ import SiteLayout from "@/components/SiteLayout";
 const Index = () => {
   return (
     <SiteLayout>
-      <div style={{ textAlign: "center", padding: "100px 20px" }}>
-        <h1 style={{ fontSize: "48px", color: "#ff0000" }}>
-          America First Citizens Network
-        </h1>
-        <p style={{ fontSize: "28px", margin: "30px 0" }}>
-          — Active Citizenship for the Next 250 Years —
-        </p>
-        <a href="/play-darts.html" 
+      {/* Hero - Beautiful American Flag with Light Rays */}
+      <div className="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center text-white"
            style={{ 
-             background: "#ff0000", 
-             color: "white", 
-             padding: "20px 40px", 
-             fontSize: "24px", 
-             textDecoration: "none", 
-             borderRadius: "8px" 
+             backgroundImage: "linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/1015/2000/1200')" 
            }}>
-          → PLAY MAGA-DARTS NOW!
-        </a>
+        <div className="text-center px-6 z-10">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">America First Citizens Network</h1>
+          <p className="text-2xl mb-10">— Active Citizenship for the Next 250 Years —</p>
+          <a href="/play-darts.html" 
+             className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-semibold px-12 py-5 rounded-lg">
+            → PLAY MAGA-DARTS NOW!
+          </a>
+        </div>
       </div>
 
-      <div style={{ background: "#0a2540", color: "white", padding: "60px 20px", textAlign: "center" }}>
-        <h2>Be Active</h2>
-        <p style={{ fontSize: "22px" }}>
-          Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.
-        </p>
-      </div>
+      {/* Be Active - Right under the button */}
+      <section className="bg-[#0a2540] text-white py-12 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-2xl">Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.</p>
+        </div>
+      </section>
 
-      <div style={{ padding: "60px 20px", textAlign: "center" }}>
-        <h2>The Vision</h2>
-        <p style={{ fontSize: "20px", maxWidth: "800px", margin: "0 auto" }}>
-          America First Citizens Network is your organization to secure the future for the next 250 years.
-        </p>
-      </div>
+      {/* The Vision */}
+      <section className="py-20 text-center bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-red-600 mb-10">The Vision</h2>
+          <p className="text-xl leading-relaxed mb-8">
+            America First Citizens Network is your organization to secure the future for the next 250 years. 
+          </p>
+          <p className="text-xl leading-relaxed">
+            We provide the education, tools, and community you need to become an active American citizen 
+            and for you to share your knowledge with fellow patriots.
+          </p>
+          <p className="text-xl leading-relaxed mt-8">
+            We have modernized the time-tested <strong>Committees of Observation</strong> our Founders used 
+            to mobilize on the issues that matter most.
+          </p>
+          <a href="/committees-of-observation.html" 
+             className="mt-10 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+            Learn About Committees of Observation →
+          </a>
+        </div>
+      </section>
+
+      {/* Early Momentum */}
+      <section className="py-20 bg-gray-50 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-red-600 mb-8">Early Momentum</h2>
+          <h3 className="text-2xl mb-6">Members & Committees</h3>
+          <p className="text-lg mb-8">
+            The first wave is forming — by location and by issue — building the grassroots structure our Republic was always meant to have.
+          </p>
+          <a href="/join.html" className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+            Join Now →
+          </a>
+        </div>
+      </section>
+
+      {/* Patriots Stories */}
+      <section className="py-20 text-center bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-red-600 mb-6">Patriots Stories</h2>
+          <p className="text-xl">This is what our descendants in 2276 will read.</p>
+          <a href="/patriots-stories.html" className="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+            Members submit Your Patriot Story →
+          </a>
+        </div>
+      </section>
+
     </SiteLayout>
   );
 };
