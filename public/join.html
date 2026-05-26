@@ -13,7 +13,7 @@
       line-height: 1.6; 
     }
     .form-container { 
-      max-width: 760px;        /* Slightly wider */
+      max-width: 780px;           /* Wider for more text room */
       margin: 0 auto; 
       background: white; 
       padding: 40px; 
@@ -40,13 +40,17 @@
     .checkbox-group label { 
       display: flex; 
       align-items: center; 
-      margin: 8px 0; 
+      margin: 9px 0; 
       font-weight: normal; 
-      font-size: 15.5px;     /* Slightly smaller text */
+      font-size: 15.5px;
+    }
+    .checkbox-group label span { 
+      flex: 1;                    /* Text takes almost all the width */
+      padding-right: 30px;        /* ~0.5 inch breathing room before checkbox */
     }
     .checkbox-group input[type="checkbox"] { 
-      margin-left: auto;      /* Pushes checkbox to the right */
-      transform: scale(1.3); 
+      flex-shrink: 0; 
+      transform: scale(1.35); 
     }
     button { 
       background: #ff0000; 
@@ -94,22 +98,22 @@
 
     <label>Primary Issues / Committees of Observation (Select all that apply)</label>
     <div class="checkbox-group">
-      <label>Border Security & Immigration <input type="checkbox" class="issue" value="Border Security & Immigration"></label>
-      <label>Election Integrity <input type="checkbox" class="issue" value="Election Integrity"></label>
-      <label>Education Freedom & Parental Rights <input type="checkbox" class="issue" value="Education Freedom & Parental Rights"></label>
-      <label>Economy, Trade & Tariffs <input type="checkbox" class="issue" value="Economy, Trade & Tariffs"></label>
-      <label>2nd Amendment Rights <input type="checkbox" class="issue" value="2nd Amendment Rights"></label>
-      <label>Government Efficiency (DOGE) <input type="checkbox" class="issue" value="Government Efficiency (DOGE)"></label>
-      <label>Healthcare Freedom & MAHA <input type="checkbox" class="issue" value="Healthcare Freedom & MAHA"></label>
-      <label>Crime, Law & Order <input type="checkbox" class="issue" value="Crime, Law & Order"></label>
-      <label>Energy Dominance <input type="checkbox" class="issue" value="Energy Dominance"></label>
-      <label>Religious Liberty <input type="checkbox" class="issue" value="Religious Liberty"></label>
-      <label>Anti-DEI / Merit-Based Systems <input type="checkbox" class="issue" value="Anti-DEI / Merit-Based Systems"></label>
-      <label>Foreign Policy – America First <input type="checkbox" class="issue" value="Foreign Policy – America First"></label>
-      <label>Veterans Affairs <input type="checkbox" class="issue" value="Veterans Affairs"></label>
-      <label>Housing Affordability <input type="checkbox" class="issue" value="Housing Affordability"></label>
-      <label>Anti-Censorship / Free Speech <input type="checkbox" class="issue" value="Anti-Censorship / Free Speech"></label>
-      <label>Pro-Family & Pro-Natalist Policies <input type="checkbox" class="issue" value="Pro-Family & Pro-Natalist Policies"></label>
+      <label><span>Border Security & Immigration</span> <input type="checkbox" class="issue" value="Border Security & Immigration"></label>
+      <label><span>Election Integrity</span> <input type="checkbox" class="issue" value="Election Integrity"></label>
+      <label><span>Education Freedom & Parental Rights</span> <input type="checkbox" class="issue" value="Education Freedom & Parental Rights"></label>
+      <label><span>Economy, Trade & Tariffs</span> <input type="checkbox" class="issue" value="Economy, Trade & Tariffs"></label>
+      <label><span>2nd Amendment Rights</span> <input type="checkbox" class="issue" value="2nd Amendment Rights"></label>
+      <label><span>Government Efficiency (DOGE)</span> <input type="checkbox" class="issue" value="Government Efficiency (DOGE)"></label>
+      <label><span>Healthcare Freedom & MAHA</span> <input type="checkbox" class="issue" value="Healthcare Freedom & MAHA"></label>
+      <label><span>Crime, Law & Order</span> <input type="checkbox" class="issue" value="Crime, Law & Order"></label>
+      <label><span>Energy Dominance</span> <input type="checkbox" class="issue" value="Energy Dominance"></label>
+      <label><span>Religious Liberty</span> <input type="checkbox" class="issue" value="Religious Liberty"></label>
+      <label><span>Anti-DEI / Merit-Based Systems</span> <input type="checkbox" class="issue" value="Anti-DEI / Merit-Based Systems"></label>
+      <label><span>Foreign Policy – America First</span> <input type="checkbox" class="issue" value="Foreign Policy – America First"></label>
+      <label><span>Veterans Affairs</span> <input type="checkbox" class="issue" value="Veterans Affairs"></label>
+      <label><span>Housing Affordability</span> <input type="checkbox" class="issue" value="Housing Affordability"></label>
+      <label><span>Anti-Censorship / Free Speech</span> <input type="checkbox" class="issue" value="Anti-Censorship / Free Speech"></label>
+      <label><span>Pro-Family & Pro-Natalist Policies</span> <input type="checkbox" class="issue" value="Pro-Family & Pro-Natalist Policies"></label>
     </div>
 
     <label>Other / Custom Issues</label>
