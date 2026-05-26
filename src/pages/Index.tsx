@@ -3,7 +3,7 @@ import SiteLayout from "@/components/SiteLayout";
 const Index = () => {
   return (
     <SiteLayout>
-      {/* Hero - Original Beautiful American Flag with Divine Light Rays */}
+      {/* Hero - Beautiful American Flag with Divine Light Rays */}
       <div className="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center text-white"
            style={{ 
              backgroundImage: "linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://picsum.photos/id/1015/2000/1200')" 
@@ -11,6 +11,7 @@ const Index = () => {
         <div className="text-center px-6 z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">America First Citizens Network</h1>
           <p className="text-2xl mb-10">— Active Citizenship for the Next 250 Years —</p>
+          
           <a href="/play-darts.html" 
              className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-semibold px-12 py-5 rounded-lg">
             → PLAY MAGA-DARTS NOW!
@@ -18,7 +19,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Be Active */}
+      {/* Be Active - Directly under button */}
       <section className="bg-[#0a2540] text-white py-12 text-center">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-2xl">Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.</p>
