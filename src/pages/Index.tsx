@@ -4,22 +4,26 @@ const Index = () => {
   return (
     <SiteLayout>
       {/* Hero - Beautiful American Flag with Divine Light Rays */}
-      <div className="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center text-white"
-           style={{ 
-             backgroundImage: "linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://picsum.photos/id/1015/2000/1200')" 
-           }}>
+      <div 
+        className="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center text-white"
+        style={{ 
+          backgroundImage: "linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://picsum.photos/id/1015/2000/1200')" 
+        }}
+      >
         <div className="text-center px-6 z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">America First Citizens Network</h1>
           <p className="text-2xl mb-10">— Active Citizenship for the Next 250 Years —</p>
           
-          <a href="/play-darts.html" 
-             className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-semibold px-12 py-5 rounded-lg">
+          <a 
+            href="/play-darts.html" 
+            className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-semibold px-12 py-5 rounded-lg transition"
+          >
             → PLAY MAGA-DARTS NOW!
           </a>
         </div>
       </div>
 
-      {/* Be Active */}
+      {/* Be Active - Directly under button */}
       <section className="bg-[#0a2540] text-white py-12 text-center">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-2xl">Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.</p>
@@ -41,8 +45,10 @@ const Index = () => {
             We have modernized the time-tested <strong>Committees of Observation</strong> our Founders used 
             to mobilize on the issues that matter most.
           </p>
-          <a href="/committees-of-observation.html" 
-             className="mt-10 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+          <a 
+            href="/committees-of-observation.html" 
+            className="mt-10 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg"
+          >
             Learn About Committees of Observation →
           </a>
         </div>
@@ -56,7 +62,10 @@ const Index = () => {
           <p className="text-lg mb-8">
             The first wave is forming — by location and by issue — building the grassroots structure our Republic was always meant to have.
           </p>
-          <a href="/join.html" className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+          <a 
+            href="/join.html" 
+            className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg"
+          >
             Join Now →
           </a>
         </div>
@@ -67,7 +76,10 @@ const Index = () => {
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-red-600 mb-6">Patriots Stories</h2>
           <p className="text-xl">This is what our descendants in 2276 will read.</p>
-          <a href="/patriots-stories.html" className="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+          <a 
+            href="/patriots-stories.html" 
+            className="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg"
+          >
             Members submit Your Patriot Story →
           </a>
         </div>
