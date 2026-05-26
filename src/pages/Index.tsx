@@ -1,155 +1,102 @@
 import { Link } from "react-router-dom";
 import SiteLayout from "@/components/SiteLayout";
-import { Button } from "@/components/ui/button";
-import heroRays from "@/assets/hero-rays.jpg";
-import { ArrowRight } from "lucide-react";
 
 const Index = () => {
   return (
     <SiteLayout>
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <div className="relative overflow-hidden">
         <div className="relative h-[88vh] min-h-[560px] w-full">
-          <img
-            src={heroRays}
-            alt="American flag with divine light rays"
-            className="absolute inset-0 h-full w-full object-cover"
+          <img 
+            src="/hero-rays.jpg" 
+            alt="American flag with divine light rays" 
+            className="absolute inset-0 h-full w-full object-cover" 
           />
-          {/* divine rays overlay starting from top (just below nav) */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at 50% 0%, hsl(45 100% 80% / 0.55), transparent 60%), linear-gradient(180deg, hsl(45 100% 95% / 0.35) 0%, transparent 35%, hsl(220 70% 15% / 0.35) 100%)",
-            }}
-          />
-          <div className="relative z-10 h-full flex items-center">
-            <div className="container text-center">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+          <div className="absolute inset-0 pointer-events-none" 
+               style={{
+                 background: "radial-gradient(ellipse 70% 60% at 50% 0%, hsl(45 100% 80% / 0.55), transparent 60%), linear-gradient(180deg, hsl(45 100% 95% / 0.35) 0%, transparent 40%)"
+               }}>
+          </div>
+
+          <div className="absolute inset-0 flex items-center justify-center text-center px-6">
+            <div>
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
                 America First Citizens Network
               </h1>
-              <p className="mt-6 text-xl md:text-2xl font-serif italic text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
-                Preserving Our Values, Protecting Our Future.
+              <p className="text-2xl text-white mb-10">
+                — Active Citizenship for the Next 250 Years —
               </p>
-              <div className="mt-10">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-patriot-red hover:bg-patriot-red/90 text-white border-0 h-14 px-8 text-base md:text-lg font-bold uppercase tracking-wide shadow-elegant"
-                >
-                  <Link to="/play-darts">→ Play MAGA-DARTS Now!</Link>
-                </Button>
-              </div>
+              <a 
+                href="/play-darts.html"
+                className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-semibold px-12 py-5 rounded-lg transition"
+              >
+                → PLAY MAGA-DARTS NOW!
+              </a>
             </div>
           </div>
         </div>
-      </section>
-{/* MAGA DARTS Live Leaderboard Embed */}
-<section className="py-12 bg-black border-t border-red-900">
-  <div className="container mx-auto px-4 max-w-6xl">
-    <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-4">
-      🔥 LIVE MAGA DARTS LEADERBOARD 🔥
-    </h2>
-    <p className="text-center text-yellow-400 mb-8 text-lg md:text-xl">
-      Compete • Earn Points • Make 2026 MAGA Stronger
-    </p>
-    
-    <iframe 
-      src="https://magadarts.netlify.app/leaderboard" 
-      width="100%" 
-      height="650" 
-      style={{ border: "none", borderRadius: "12px", background: "white" }}
-      title="MAGA DARTS Leaderboard"
-      allowFullScreen>
-    </iframe>
+      </div>
 
-    <div className="text-center mt-8">
-      <a 
-        href="https://magadarts.netlify.app" 
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-10 py-4 rounded-xl transition">
-        🎯 Play MAGA DARTS Now
-      </a>
-    </div>
-  </div>
-</section>
-      {/* Agenda */}
-      <section className="py-20 bg-cream">
-        <div className="container">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold">America First Agenda</h2>
-            <div className="mt-4 mx-auto h-1 w-24 bg-patriot-red" />
-            <p className="mt-5 text-muted-foreground text-lg">
-              Three pillars guiding our movement to restore the Republic and return power to the American people.
-            </p>
-          </div>
-
-          <div className="mt-14 grid md:grid-cols-3 gap-8">
-            {/* Box 1 */}
-            <article className="bg-card border-t-4 border-patriot-red rounded-md p-8 shadow-card flex flex-col">
-              <h3 className="text-xl font-bold uppercase tracking-tight">
-                The Citizens Declaration of Independence
-              </h3>
-              <p className="mt-4 text-foreground/80 leading-relaxed flex-1">
-                In Convention of American Citizens assembled July 4, 2027, we declare the
-                reestablishment of the Republic founded in 1776.
-              </p>
-              <Link
-                to="/declaration"
-                className="mt-6 inline-flex items-center gap-2 font-semibold text-patriot-red hover:underline"
-              >
-                📜 Read the Full Declaration <ArrowRight className="h-4 w-4" />
-              </Link>
-            </article>
-
-            {/* Box 2 */}
-            <article className="bg-card border-t-4 border-patriot-blue rounded-md p-8 shadow-card flex flex-col">
-              <h3 className="text-xl font-bold">Citizens Take Back Power</h3>
-              <div className="mt-4 text-foreground/80 leading-relaxed flex-1 space-y-4">
-                <p>
-                  It's time for everyday Americans to take back control from Washington. We are
-                  building strong local chapters in every county so patriots can educate, mobilize,
-                  and hold our leaders accountable. Power belongs to We the People — not the
-                  politicians.
-                </p>
-                <p>
-                  Operation Take Back America is the government's plan. But small actions by
-                  millions of citizens = real results. Stay safe, stay legal, and stay involved.
-                  America gets stronger when we all do our part.
-                </p>
-              </div>
-              <Link
-                to="/take-back-america"
-                className="mt-6 inline-flex items-center gap-2 font-semibold text-patriot-blue hover:underline"
-              >
-                Read the Full Plan → Citizens Take Back America
-              </Link>
-            </article>
-
-            {/* Box 3 */}
-            <article className="bg-card border-t-4 border-patriot-red rounded-md p-8 shadow-card flex flex-col">
-              <h3 className="text-xl font-bold">The Burchett Blueprint</h3>
-              <p className="mt-1 text-sm uppercase tracking-wide text-muted-foreground">
-                Citizen-to-Representative Teaching
-              </p>
-              <p className="mt-4 text-foreground/80 leading-relaxed flex-1">
-                Our tech-savvy volunteers contact their representative's home district office and
-                offer to teach them how to film short unfiltered weekly updates, hold live Q&amp;A
-                sessions, and communicate directly with constituents using their own equipment and
-                staff — like Rep. Tim Burchett. Eliminating every excuse for secrecy and
-                closed-door politics.
-              </p>
-              <Link
-                to="/burchett-blueprint"
-                className="mt-6 inline-flex items-center gap-2 font-semibold text-patriot-red hover:underline"
-              >
-                Read the Full Guide <ArrowRight className="h-4 w-4" />
-              </Link>
-            </article>
-          </div>
+      {/* Be Active */}
+      <section className="bg-[#0a2540] text-white py-16 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-6">Be Active</h2>
+          <p className="text-2xl">Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.</p>
+          <a href="/play-darts.html" className="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+            See Live Leaderboard →
+          </a>
         </div>
       </section>
+
+      {/* The Vision */}
+      <section className="py-20 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-red-600 mb-10">The Vision</h2>
+          <p className="text-xl leading-relaxed mb-8">
+            America First Citizens Network is your organization to secure the future for the next 250 years. 
+            We provide the education, tools, and community you need to become an active American citizen 
+            and for you to share your knowledge with fellow patriots.
+          </p>
+          <p className="text-xl leading-relaxed">
+            We have modernized the time-tested <strong>Committees of Observation</strong> our Founders used 
+            to mobilize on the issues that matter most — and to lawfully hold our representatives accountable 
+            at every level of government.
+          </p>
+          <a href="/committees-of-observation.html" className="mt-10 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+            Learn About Committees of Observation →
+          </a>
+        </div>
+      </section>
+
+      {/* Early Momentum */}
+      <section className="py-20 bg-gray-50 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-red-600 mb-8">Early Momentum</h2>
+          <h3 className="text-2xl mb-6">Members & Committees</h3>
+          <p className="text-lg mb-8">
+            The first wave is forming — by location and by issue — building the grassroots structure our Republic was always meant to have.
+          </p>
+          <p className="text-lg mb-10">
+            Start or join a committee in your area and/or on your passion issue.<br />
+            You can still be one of the first patriots helping build this 250-year mission from the ground up.
+          </p>
+          <a href="/join.html" className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+            Join Now →
+          </a>
+        </div>
+      </section>
+
+      {/* Patriots Stories */}
+      <section className="py-20 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-red-600 mb-6">Patriots Stories</h2>
+          <p className="text-xl">This is what our descendants in 2276 will read.</p>
+          <a href="/patriots-stories.html" className="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
+            Members submit Your Patriot Story →
+          </a>
+        </div>
+      </section>
+
     </SiteLayout>
   );
 };
