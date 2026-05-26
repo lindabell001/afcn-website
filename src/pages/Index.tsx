@@ -3,10 +3,10 @@ import SiteLayout from "@/components/SiteLayout";
 const Index = () => {
   return (
     <SiteLayout>
-      {/* Hero - Beautiful American Flag with Light Rays */}
+      {/* Hero - Beautiful American Flag with Divine Light Rays */}
       <div className="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center text-white"
            style={{ 
-             backgroundImage: "linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/1015/2000/1200')" 
+             backgroundImage: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://picsum.photos/id/1015/2000/1200')" 
            }}>
         <div className="text-center px-6 z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">America First Citizens Network</h1>
@@ -18,7 +18,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Be Active - Right under the button */}
+      {/* Be Active - Directly under button */}
       <section className="bg-[#0a2540] text-white py-12 text-center">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-2xl">Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.</p>
@@ -71,6 +71,36 @@ const Index = () => {
           </a>
         </div>
       </section>
+
+      {/* Footer - Added here for now */}
+      <footer style={{
+        background: '#0a2540',
+        color: '#ffffff',
+        padding: '50px 20px 30px',
+        textAlign: 'center',
+        borderTop: '5px solid #ff0000'
+      }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <p style={{ fontSize: '18px', marginBottom: '20px' }}><strong>America First Citizens Network</strong></p>
+          
+          <p style={{ margin: '15px 0 25px' }}>
+            <a href="/committees-of-observation.html" style={{ color: '#ffcc00', margin: '0 12px' }}>Committees of Observation</a> • 
+            <a href="/transparency-and-operations.html" style={{ color: '#ffcc00', margin: '0 12px' }}>Transparency & Operations</a> • 
+            <a href="/privacy-and-data.html" style={{ color: '#ffcc00', margin: '0 12px' }}>Privacy & Data</a> • 
+            <a href="/social-welfare-organization.html" style={{ color: '#ffcc00', margin: '0 12px' }}>Social Welfare Organization (501c4)</a>
+          </p>
+
+          <p style={{ lineHeight: '1.6', marginBottom: '20px' }}>
+            We operate lawfully.<br />
+            Norine personally reviews all membership applications.<br />
+            We never sell or share your personal data.
+          </p>
+
+          <p style={{ fontSize: '13px', opacity: '0.9' }}>
+            © 2026 America First Citizens Network • All advocacy is lawful, grassroots, and America First.
+          </p>
+        </div>
+      </footer>
 
     </SiteLayout>
   );
