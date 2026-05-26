@@ -5,35 +5,17 @@ const Index = () => {
   return (
     <SiteLayout>
       {/* Hero */}
-      <div className="relative overflow-hidden">
-        <div className="relative h-[88vh] min-h-[560px] w-full">
-          <img 
-            src="/hero-rays.jpg" 
-            alt="American flag with divine light rays" 
-            className="absolute inset-0 h-full w-full object-cover" 
-          />
-          <div className="absolute inset-0 pointer-events-none" 
-               style={{
-                 background: "radial-gradient(ellipse 70% 60% at 50% 0%, hsl(45 100% 80% / 0.55), transparent 60%), linear-gradient(180deg, hsl(45 100% 95% / 0.35) 0%, transparent 40%)"
-               }}>
-          </div>
-
-          <div className="absolute inset-0 flex items-center justify-center text-center px-6">
-            <div>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-                America First Citizens Network
-              </h1>
-              <p className="text-2xl text-white mb-10">
-                — Active Citizenship for the Next 250 Years —
-              </p>
-              <a 
-                href="/play-darts.html"
-                className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-semibold px-12 py-5 rounded-lg transition"
-              >
-                → PLAY MAGA-DARTS NOW!
-              </a>
-            </div>
-          </div>
+      <div className="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center text-white"
+           style={{ 
+             backgroundImage: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/id/1015/2000/1200')" 
+           }}>
+        <div className="text-center px-6">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">America First Citizens Network</h1>
+          <p className="text-2xl mb-10">— Active Citizenship for the Next 250 Years —</p>
+          <a href="/play-darts.html" 
+             className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-semibold px-12 py-5 rounded-lg">
+            → PLAY MAGA-DARTS NOW!
+          </a>
         </div>
       </div>
 
@@ -49,7 +31,7 @@ const Index = () => {
       </section>
 
       {/* The Vision */}
-      <section className="py-20 bg-white text-center">
+      <section className="py-20 text-center bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-red-600 mb-10">The Vision</h2>
           <p className="text-xl leading-relaxed mb-8">
@@ -76,10 +58,6 @@ const Index = () => {
           <p className="text-lg mb-8">
             The first wave is forming — by location and by issue — building the grassroots structure our Republic was always meant to have.
           </p>
-          <p className="text-lg mb-10">
-            Start or join a committee in your area and/or on your passion issue.<br />
-            You can still be one of the first patriots helping build this 250-year mission from the ground up.
-          </p>
           <a href="/join.html" className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg">
             Join Now →
           </a>
@@ -87,7 +65,7 @@ const Index = () => {
       </section>
 
       {/* Patriots Stories */}
-      <section className="py-20 text-center">
+      <section className="py-20 text-center bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-red-600 mb-6">Patriots Stories</h2>
           <p className="text-xl">This is what our descendants in 2276 will read.</p>
