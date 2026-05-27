@@ -16,7 +16,9 @@ import MemberLogin from "./pages/MemberLogin.tsx";
 import Declaration from "./pages/Declaration.tsx";
 import TakeBackAmerica from "./pages/TakeBackAmerica.tsx";
 import BurchettBlueprint from "./pages/BurchettBlueprint.tsx";
-import PatriotsStories from "./pages/PatriotsStories.tsx";   // ← Added
+import PatriotsStories from "./pages/PatriotsStories.tsx";
+import CommitteesOfObservation from "./pages/CommitteesOfObservation.tsx";
+import AmericaFirstTavern from "./pages/AmericaFirstTavern.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -47,7 +49,12 @@ const App = () => (
           <Route path="/declaration" element={<Declaration />} />
           <Route path="/take-back-america" element={<TakeBackAmerica />} />
           <Route path="/burchett-blueprint" element={<BurchettBlueprint />} />
-          <Route path="/patriots-stories" element={<PatriotsStories />} />   {/* ← Added */}
+          <Route path="/patriots-stories" element={<PatriotsStories />} />
+          
+          {/* New Pages */}
+          <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
+          <Route path="/america-first-tavern" element={<AmericaFirstTavern />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
