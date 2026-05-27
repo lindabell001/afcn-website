@@ -6,9 +6,9 @@ const navItems = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/resources", label: "Resources" },
-  { to: "/become-one.html", label: "Become One" },     // ← Fixed to point to .html
-  { to: "/play-darts.html", label: "Play DARTS" },
-  { to: "/donate.html", label: "Donate" },
+  { to: "/become-one", label: "Become One" },        // ← Now points to React component
+  { to: "/play-darts", label: "Play DARTS" },
+  { to: "/donate", label: "Donate" },
 ];
 
 const SiteHeader = () => {
@@ -31,7 +31,7 @@ const SiteHeader = () => {
               <Link to="/member-login" onClick={() => setLoginOpen(false)} className="block px-4 py-2 text-sm hover:bg-secondary transition-smooth">
                 Member Login Portal
               </Link>
-              <Link to="/become-one.html" onClick={() => setLoginOpen(false)} className="block px-4 py-2 text-sm hover:bg-secondary transition-smooth">
+              <Link to="/become-one" onClick={() => setLoginOpen(false)} className="block px-4 py-2 text-sm hover:bg-secondary transition-smooth">
                 Become a Member
               </Link>
             </div>
