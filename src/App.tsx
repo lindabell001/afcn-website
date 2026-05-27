@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+
 import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
 import Resources from "./pages/Resources.tsx";
@@ -15,6 +16,7 @@ import MemberLogin from "./pages/MemberLogin.tsx";
 import Declaration from "./pages/Declaration.tsx";
 import TakeBackAmerica from "./pages/TakeBackAmerica.tsx";
 import BurchettBlueprint from "./pages/BurchettBlueprint.tsx";
+import PatriotsStories from "./pages/PatriotsStories.tsx";   // ← Added
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -45,6 +47,7 @@ const App = () => (
           <Route path="/declaration" element={<Declaration />} />
           <Route path="/take-back-america" element={<TakeBackAmerica />} />
           <Route path="/burchett-blueprint" element={<BurchettBlueprint />} />
+          <Route path="/patriots-stories" element={<PatriotsStories />} />   {/* ← Added */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
