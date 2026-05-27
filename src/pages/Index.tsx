@@ -44,7 +44,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Be Active - Right under hero */}
+      {/* Be Active */}
       <section className="bg-[#0a2540] text-white py-12 text-center">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-2xl">Any America First patriot can play <strong>MAGA DARTS</strong> and earn points daily.</p>
@@ -84,10 +84,10 @@ const Index = () => {
             The first wave is forming — by location and by issue — building the grassroots structure our Republic was always meant to have.
           </p>
           <a 
-            href="/join.html" 
+            href="/become-one.html" 
             className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl px-10 py-4 rounded-lg"
           >
-            Join Now →
+            Become One →
           </a>
         </div>
       </section>
