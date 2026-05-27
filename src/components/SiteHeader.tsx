@@ -6,9 +6,9 @@ const navItems = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/resources", label: "Resources" },
-  { to: "/become-one", label: "Become One" },
-  { to: "/play-darts", label: "Play DARTS" },
-  { to: "/donate", label: "Donate" },
+  { to: "/become-one.html", label: "Become One" },     // ← Fixed to point to .html
+  { to: "/play-darts.html", label: "Play DARTS" },
+  { to: "/donate.html", label: "Donate" },
 ];
 
 const SiteHeader = () => {
@@ -28,18 +28,10 @@ const SiteHeader = () => {
           </button>
           {loginOpen && (
             <div className="absolute right-4 top-9 w-56 bg-card border border-border rounded-md shadow-elegant py-2 text-foreground">
-              <Link
-                to="/member-login"
-                onClick={() => setLoginOpen(false)}
-                className="block px-4 py-2 text-sm hover:bg-secondary transition-smooth"
-              >
+              <Link to="/member-login" onClick={() => setLoginOpen(false)} className="block px-4 py-2 text-sm hover:bg-secondary transition-smooth">
                 Member Login Portal
               </Link>
-              <Link
-                to="/become-one"
-                onClick={() => setLoginOpen(false)}
-                className="block px-4 py-2 text-sm hover:bg-secondary transition-smooth"
-              >
+              <Link to="/become-one.html" onClick={() => setLoginOpen(false)} className="block px-4 py-2 text-sm hover:bg-secondary transition-smooth">
                 Become a Member
               </Link>
             </div>
@@ -67,9 +59,7 @@ const SiteHeader = () => {
                 end={item.to === "/"}
                 className={({ isActive }) =>
                   `px-4 py-2 text-sm font-semibold uppercase tracking-wide rounded-sm transition-smooth ${
-                    isActive
-                      ? "text-patriot-red"
-                      : "text-primary hover:text-patriot-red"
+                    isActive ? "text-patriot-red" : "text-primary hover:text-patriot-red"
                   }`
                 }
               >
@@ -78,11 +68,7 @@ const SiteHeader = () => {
             ))}
           </nav>
 
-          <button
-            className="lg:hidden text-primary"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menu"
-          >
+          <button className="lg:hidden text-primary" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
