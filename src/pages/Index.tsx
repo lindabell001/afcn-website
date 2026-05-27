@@ -1,7 +1,6 @@
 import SiteLayout from "@/components/SiteLayout";
 import heroRays from "@/assets/hero-rays.jpg";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 
 const Index = () => {
   return (
@@ -33,31 +32,40 @@ const Index = () => {
                 — Active Citizenship for the Next 250 Years —
               </p>
 
-              {/* Buttons Row */}
+              {/* Smaller Buttons Row */}
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                {/* New Blue Button - Left */}
+                
+                {/* Blue - Read Stories */}
                 <Link
                   to="/patriots-stories"
-                  className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-lg font-bold uppercase tracking-wider px-10 py-4 rounded-lg shadow-lg transition-all duration-200"
+                  className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
                 >
-                  Read Members Patriot Stories!
+                  READ MEMBERS PATRIOT STORIES!
                 </Link>
 
-                {/* Play DARTS Button - Right */}
+                {/* Red - Play DARTS */}
                 <a
                   href="/play-darts"
-                  className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-lg font-bold uppercase tracking-wider px-10 py-4 rounded-lg shadow-lg transition-all duration-200"
+                  className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
                 >
                   → PLAY MAGA-DARTS NOW!
                 </a>
+
+                {/* New Blue - Become a Member */}
+                <Link
+                  to="/become-one"
+                  className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
+                >
+                  BECOME A MEMBER
+                </Link>
+
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Rest of your homepage sections remain the same */}
-      {/* Be Active, Vision, Early Momentum, etc. */}
+      {/* Rest of your homepage continues below... */}
 
     </SiteLayout>
   );
