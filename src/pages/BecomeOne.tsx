@@ -1,49 +1,59 @@
-import PageShell from "@/components/PageShell";
-import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
+import SiteLayout from "@/components/SiteLayout";
 
 const BecomeOne = () => {
   return (
-    <PageShell
-      title="Become One"
-      subtitle="Join the movement of citizens taking back America."
-    >
-      <div className="bg-card border border-border rounded-md p-10 shadow-card text-center">
-        <div className="mx-auto h-14 w-14 rounded-full bg-patriot-red/10 flex items-center justify-center">
-          <Mail className="h-7 w-7 text-patriot-red" />
+    <SiteLayout>
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-red-600 mb-4">Become One</h1>
+          <p className="text-2xl text-gray-700">Step Into Active Citizenship</p>
         </div>
-        <h2 className="mt-5 text-3xl font-bold">Step Up. Stand Up. Sign Up.</h2>
-        <p className="mt-4 text-foreground/85 leading-relaxed max-w-xl mx-auto">
-          Becoming a member of the America First Citizens Network is simple. Send a short email
-          introducing yourself to our Director of Membership, Norine Cantor. Tell her your name,
-          your city and state, and why you're ready to fight for the Republic.
-        </p>
 
-        <p className="mt-6 text-foreground/85">Email Norine directly:</p>
-        <a
-          href="mailto:nhcantor58@gmail.com?subject=I want to Become One — America First Citizens Network"
-          className="mt-2 inline-block text-2xl font-bold text-patriot-red hover:underline"
-        >
-          nhcantor58@gmail.com
-        </a>
+        <div className="bg-white border border-gray-200 rounded-xl p-10 shadow-sm">
+          <p className="text-center text-xl mb-8">
+            <strong>Becoming a member of the America First Citizens Network is simple.</strong><br />
+            It’s only <strong className="text-3xl text-red-600">$25 a year</strong>.
+          </p>
 
-        <div className="mt-8">
-          <Button
-            asChild
-            size="lg"
-            className="bg-patriot-red hover:bg-patriot-red/90 text-white h-14 px-8 font-bold uppercase tracking-wide"
-          >
-            <a href="mailto:nhcantor58@gmail.com?subject=I want to Become One — America First Citizens Network">
-              Email Norine Now
+          <div className="text-center mb-10">
+            <a 
+              href="/join.html" 
+              className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-16 py-6 rounded-xl transition"
+            >
+              JOIN NOW – $25 / YEAR
             </a>
-          </Button>
+          </div>
+
+          <p className="text-center text-lg mb-8">
+            Your application will go to our Director of Membership, <strong>Norine Cantor</strong>, 
+            who personally reviews every application.
+          </p>
+
+          <div className="border-t border-gray-200 pt-8">
+            <h3 className="text-xl font-bold text-center mb-6 text-red-600">Once Approved You Can:</h3>
+            <ul className="max-w-md mx-auto space-y-4 text-lg">
+              <li className="flex items-start gap-3">
+                <span className="text-red-600 font-bold">•</span> Submit your Patriot Story for publication
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-red-600 font-bold">•</span> Join or start Committees of Observation
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-red-600 font-bold">•</span> Connect with other patriots by location and issue
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-red-600 font-bold">•</span> Access member resources and tools
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <p className="mt-8 text-sm text-muted-foreground">
-          Norine personally reads and replies to every email. Welcome to the family.
+        <p className="text-center text-sm text-gray-500 mt-12">
+          We move at the speed of trust.<br />
+          Help us build the next 250 years of America First.
         </p>
       </div>
-    </PageShell>
+    </SiteLayout>
   );
 };
 
