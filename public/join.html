@@ -15,7 +15,20 @@
     .checkbox-group { margin: 15px 0; }
     .checkbox-group label { display: flex; align-items: center; margin: 8px 0; font-weight: normal; }
     .checkbox-group input { width: auto; margin-right: 10px; }
-    .button { display: block; width: 100%; max-width: 400px; margin: 40px auto; padding: 18px; background: #c8102e; color: white; text-align: center; font-size: 1.4rem; font-weight: bold; border-radius: 8px; text-decoration: none; }
+    .button { 
+      display: block; 
+      width: 100%; 
+      max-width: 400px; 
+      margin: 40px auto; 
+      padding: 18px; 
+      background: #c8102e; 
+      color: white; 
+      text-align: center; 
+      font-size: 1.4rem; 
+      font-weight: bold; 
+      border-radius: 8px; 
+      text-decoration: none; 
+    }
     .button:hover { background: #a00d24; }
     .footer { text-align: center; padding: 40px; background: #0a2540; color: white; margin-top: 60px; }
   </style>
@@ -79,7 +92,8 @@
       <label>Why are you joining? Why are you ready to fight for the Republic? *</label>
       <textarea id="why_joining" rows="6" required placeholder="Tell us in your own words..."></textarea>
 
-      <a href="#" class="button" onclick="alert('Form submitted! Redirecting to secure $25 payment... (GivingTools link goes here)')">
+      <!-- Real Payment Button -->
+      <a href="https://your-givingtools-link-here" class="button">
         SUBMIT APPLICATION & PAY $25
       </a>
     </form>
