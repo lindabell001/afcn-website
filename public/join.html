@@ -5,97 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join - America First Citizens Network</title>
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      background: #f8f9fa; 
-      color: #0a2540; 
-      padding: 40px 20px; 
-      line-height: 1.6; 
-    }
-    .form-container { 
-      max-width: 720px; 
-      margin: 0 auto; 
-      background: white; 
-      padding: 40px; 
-      border-radius: 8px; 
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-    }
-    h1 { 
-      color: #ff0000; 
-      text-align: center; 
-      margin-bottom: 20px;
-    }
-    label { 
-      display: block; 
-      margin: 14px 0 6px; 
-      font-weight: bold; 
-    }
-    input, textarea { 
-      width: 100%; 
-      padding: 12px; 
-      border: 1px solid #ccc; 
-      border-radius: 5px; 
-      font-size: 16px; 
-    }
-    .issues-link {
-      color: #ff0000;
-      text-decoration: underline;
-      cursor: pointer;
-      font-weight: normal;
-    }
-    button { 
-      background: #ff0000; 
-      color: white; 
-      padding: 16px; 
-      font-size: 18px; 
-      border: none; 
-      border-radius: 5px; 
-      margin-top: 30px; 
-      cursor: pointer; 
-      width: 100%; 
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #ffffff; color: #002868; line-height: 1.6; }
+    .container { max-width: 800px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; }
+    h1 { color: #c8102e; text-align: center; font-size: 2.6rem; margin-bottom: 10px; }
+    .subtitle { text-align: center; font-size: 1.4rem; color: #002868; margin-bottom: 30px; }
+    .important { background: #fff3cd; border-left: 6px solid #c8102e; padding: 20px; margin: 30px 0; border-radius: 4px; }
+    label { display: block; margin-top: 15px; font-weight: bold; color: #002868; }
+    input, textarea, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+    .button { display: block; width: 100%; max-width: 400px; margin: 40px auto; padding: 18px; background: #c8102e; color: white; text-align: center; font-size: 1.4rem; font-weight: bold; border-radius: 8px; text-decoration: none; }
+    .button:hover { background: #a00d24; }
+    .footer { text-align: center; padding: 40px; background: #0a2540; color: white; margin-top: 60px; }
   </style>
 </head>
 <body>
 
-<div class="form-container">
-  <h1>Join the America First Citizens Network</h1>
-  <p style="text-align:center;">Become part of the 250-year mission of Active Citizenship.</p>
+  <div class="container">
+    <h1>Become a Member</h1>
+    <p class="subtitle">America First Citizens Network — $25 per year</p>
 
-  <form id="joinForm">
-    <label>Full Name *</label>
-    <input type="text" id="full_name" required>
+    <p style="text-align:center; font-size:1.2rem;">
+      We are building a serious network of committed America First Patriots.
+    </p>
 
-    <label>Email Address *</label>
-    <input type="email" id="email" required>
+    <div class="important">
+      <strong>Important:</strong><br>
+      If your application is not approved because you do not align with America First values, 
+      your $25 payment will automatically become a donation to support our mission. 
+      No membership access will be granted.
+    </div>
 
-    <label>Phone Number</label>
-    <input type="tel" id="phone">
+    <h2 style="text-align:center; margin:30px 0;">Application Form</h2>
 
-    <label>City *</label>
-    <input type="text" id="city" required>
+    <form id="joinForm">
+      <label>Full Name *</label>
+      <input type="text" id="full_name" required>
 
-    <label>State *</label>
-    <input type="text" id="state" maxlength="2" required>
+      <label>Email Address *</label>
+      <input type="email" id="email" required>
 
-    <label>Zip Code *</label>
-    <input type="text" id="zip" required>
+      <label>Phone Number</label>
+      <input type="tel" id="phone">
 
-    <label>Neighborhood / Community *</label>
-    <input type="text" id="neighborhood" required>
+      <label>City / State / Zip Code *</label>
+      <input type="text" id="city_state_zip" required placeholder="e.g. Austin, TX 78701">
 
-    <label>County *</label>
-    <input type="text" id="county" required>
+      <label>Neighborhood / Community *</label>
+      <input type="text" id="neighborhood" required placeholder="Include apartment or community association if applicable">
 
-    <label>Why are you joining? Why are you ready to fight? *</label>
-    <textarea id="why_joining" rows="5" required></textarea>
+      <label>County *</label>
+      <input type="text" id="county" required>
 
-    <label>Primary Issues / Committees of Observation</label>
-    <span class="issues-link" onclick="window.location.href='issues.html'">(Select all that apply or add your own)</span>
+      <label>Primary Issues / Committees of Observation (Select all that apply)</label>
+      <select id="issues" multiple style="height:180px;">
+        <option>Border Security</option>
+        <option>Election Integrity</option>
+        <option>Education Freedom</option>
+        <option>Economy & Trade</option>
+        <option>2nd Amendment Rights</option>
+        <option>Government Efficiency</option>
+        <option>Healthcare Freedom</option>
+        <option>Crime & Law Enforcement</option>
+        <option>Energy Dominance</option>
+        <option>Religious Liberty</option>
+        <option>Other</option>
+      </select>
 
-    <button type="button" onclick="window.location.href='issues.html'">Continue to Select Issues →</button>
-  </form>
-</div>
+      <label>Why are you joining? Why are you ready to fight for the Republic? *</label>
+      <textarea id="why_joining" rows="6" required placeholder="Tell us in your own words..."></textarea>
+
+      <a href="https://givingtools.com/..." class="button" onclick="alert('Redirecting to secure $25 payment... (GivingTools link goes here)')">
+        SUBMIT APPLICATION & PAY $25
+      </a>
+    </form>
+
+    <p style="text-align:center; margin-top:30px; font-size:1.1rem;">
+      After payment, your application goes to <strong>Norine Cantor</strong>, Director of Membership.<br>
+      She personally reviews every application.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p><strong>America First Citizens Network</strong></p>
+    <p>© 2026 • Lawful • Grassroots • America First</p>
+  </div>
 
 </body>
 </html>
