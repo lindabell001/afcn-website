@@ -1,80 +1,116 @@
-import SiteLayout from "@/components/SiteLayout";
+import React from 'react';
+import PageShell from '../components/PageShell';
 
-const CommitteesOfObservation = () => {
+const CommitteesOfObservation: React.FC = () => {
   return (
-    <SiteLayout>
-      <div className="max-w-5xl mx-auto px-6 py-16">
-        
-        {/* Hero Image + Title */}
+    <PageShell
+      title="COMMITTEE OF OBSERVATION"
+      subtitle="Reviving the Spirit of 1776 • America First Lawful Vigilance"
+    >
+      <div className="max-w-4xl mx-auto px-6 py-12">
+
+        {/* Modern Mission */}
         <div className="text-center mb-12">
-          <img 
-            src="https://picsum.photos/id/1015/1200/600" 
-            alt="Modern patriots gathered in historic courthouse" 
-            className="rounded-2xl shadow-2xl mx-auto mb-8 w-full"
-          />
-          <h1 className="text-5xl font-bold text-red-600 mb-4">Committees of Observation</h1>
-          <p className="text-2xl text-gray-700">Reviving the Founders’ proven tool for lawful grassroots action</p>
-        </div>
-
-        {/* Historical Context */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-red-600">From 1774 to 2026</h2>
-          <p className="text-lg leading-relaxed mb-4">
-            In 1774, our Founding Fathers created Committees of Observation in cities and towns across the colonies. 
-            These committees monitored government actions, shared information, coordinated peaceful resistance, 
-            and held officials accountable — all while staying within the rule of law.
-          </p>
-          <p className="text-lg leading-relaxed">
-            Today, the America First Citizens Network is proudly reviving this powerful model for the modern era.
+          <h1 className="text-5xl md:text-6xl font-bold text-red-600 mb-4 tracking-tight">
+            COMMITTEE OF OBSERVATION
+          </h1>
+          <p className="text-xl text-blue-900 font-semibold">
+            WE THE PEOPLE are the ultimate guardians of our Republic
           </p>
         </div>
 
-        {/* How It Works */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white border border-gray-200 rounded-2xl p-10">
-            <h3 className="text-2xl font-bold mb-4 text-red-600">Organized By Location</h3>
-            <p className="text-lg">Neighborhood • City • County • Congressional District • State</p>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-2xl p-10">
-            <h3 className="text-2xl font-bold mb-4 text-red-600">Organized By Issue</h3>
-            <p className="text-lg">Border Security • Election Integrity • Education • Economy • 2nd Amendment • Parental Rights • and more</p>
-          </div>
-        </div>
+        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+          <p className="text-lg mb-10">
+            WE THE PEOPLE are the ultimate guardians of our Republic. Committees of Observation 
+            are local, decentralized citizen networks that peacefully observe, document, and 
+            advocate for secure elections, strong borders, fiscal responsibility, constitutional 
+            governance, and America First principles.
+          </p>
 
-        {/* Core Principles */}
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-10 mb-16">
-          <h2 className="text-3xl font-bold text-red-600 mb-8 text-center">Core Principles</h2>
-          <ul className="space-y-4 text-lg max-w-3xl mx-auto">
-            <li>• Facts First — Only verifiable information</li>
-            <li>• Rule of Law — Fully within the Constitution</li>
-            <li>• Peaceful & Respectful — No harassment or violence</li>
-            <li>• Transparency — We hold ourselves accountable</li>
-            <li>• America First — Focused on securing our Republic</li>
+          <p className="text-lg mb-12">
+            We revive the spirit of our Founding Fathers through lawful vigilance, transparency, 
+            and active citizenship.
+          </p>
+
+          {/* Call to Action - Top */}
+          <div className="text-center my-10">
+            <a
+              href="/become-one"
+              className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-6 rounded-xl transition-all duration-200 shadow-lg"
+            >
+              Join &amp; Become Part of a Committee →
+            </a>
+          </div>
+
+          <hr className="my-16 border-gray-300" />
+
+          {/* Historical Section */}
+          <h2 className="text-3xl font-bold text-red-600 mb-8">Historical Roots: Committees of Observation in the American Revolution</h2>
+          
+          <p className="text-lg mb-6">
+            In the early 1770s, Committees of Observation were formed across the American colonies 
+            as local revolutionary committees to monitor public affairs, enforce revolutionary policies, 
+            and detect disloyalty to the Patriot cause.
+          </p>
+
+          <p className="text-lg mb-8">
+            They worked alongside Committees of Correspondence and Committees of Safety, becoming 
+            the <strong>shadow government</strong> of the colonies during the fight for Independence.
+          </p>
+
+          <div className="bg-blue-50 border-l-8 border-blue-600 p-8 my-10 rounded-r-xl">
+            <h3 className="text-2xl font-bold text-blue-900 mb-6">Their Critical Role in 1776:</h3>
+            <ul className="list-disc pl-6 space-y-3 text-base">
+              <li>Watched for violations of non-importation agreements against British goods</li>
+              <li>Monitored suspected Loyalists and enforced revolutionary measures locally</li>
+              <li>Reported to higher authorities and coordinated resistance across colonies</li>
+              <li>In many areas, they effectively replaced royal authority as the real governing power</li>
+            </ul>
+          </div>
+
+          <p className="italic text-lg text-center my-10 border-l-4 border-red-600 pl-6">
+            Without these local Committees of Observation, historians argue the American Revolution 
+            might never have gained the momentum or coordination it needed to succeed.
+          </p>
+
+          <hr className="my-16 border-gray-300" />
+
+          {/* Transition + Modern Mission */}
+          <h2 className="text-3xl font-bold text-red-600 mb-6">Our Modern Committees of Observation</h2>
+          <p className="text-lg mb-12">
+            Today we revive this proud tradition — not as revolutionaries against a king, but as 
+            lawful guardians restoring constitutional order and America First principles.
+          </p>
+
+          {/* Core Principles */}
+          <h2 className="text-3xl font-bold text-red-600 mt-12 mb-6">Core Principles</h2>
+          <ul className="list-disc pl-8 space-y-4 text-lg mb-12">
+            <li><strong>Facts First</strong> — Only verifiable, evidence-based observations.</li>
+            <li><strong>Rule of Law</strong> — We operate fully within the Constitution and all laws.</li>
+            <li><strong>Peace &amp; Respect</strong> — Peaceful advocacy, never confrontation.</li>
+            <li><strong>Transparency</strong> — We hold ourselves accountable to the same standards we expect from government.</li>
+            <li><strong>America First</strong> — Focused on policies that strengthen our nation.</li>
           </ul>
-        </div>
 
-        {/* Connection to Tavern */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center mb-12">
-          <h2 className="text-3xl font-bold text-red-600 mb-6">From Tavern to Action</h2>
-          <p className="text-xl max-w-2xl mx-auto">
-            Ideas are born and friendships are made in the <strong>America First Tavern</strong>.<br />
-            Serious plans are developed and executed in the <strong>Committees of Observation</strong>.
-          </p>
-        </div>
+          <h2 className="text-3xl font-bold text-red-600 mt-12 mb-6">What We Observe</h2>
+          <ul className="list-disc pl-8 space-y-4 text-lg mb-12">
+            <li>Public meetings (city councils, school boards, election boards)</li>
+            <li>Election processes and procedures</li>
+            <li>Government spending and transparency</li>
+            <li>Impacts of border security and immigration policies</li>
+            <li>Legislative actions affecting American families</li>
+          </ul>
 
-        {/* Call to Action */}
-        <div className="text-center">
-          <a 
-            href="/become-one" 
-            className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-bold px-12 py-5 rounded-xl transition"
-          >
-            Become a Member → Join or Start a Committee
-          </a>
-          <p className="mt-6 text-gray-600">Norine personally reviews every membership application.</p>
-        </div>
-      </div>
-    </SiteLayout>
-  );
-};
+          <h2 className="text-3xl font-bold text-red-600 mt-12 mb-6">How We Operate</h2>
+          <ul className="list-disc pl-8 space-y-4 text-lg mb-12">
+            <li>Attend open public meetings and review public records</li>
+            <li>Submit factual reports through our secure member portal</li>
+            <li>Share verified information to educate fellow citizens</li>
+            <li>Provide toolkits for petitions, letters, and public comments</li>
+          </ul>
 
-export default CommitteesOfObservation;
+          <h2 className="text-3xl font-bold text-red-600 mt-12 mb-6">We Never:</h2>
+          <ul className="list-disc pl-8 space-y-4 text-lg mb-12">
+            <li>Engage in harassment, intimidation, or illegal activity</li>
+            <li>Trespass or record secretly</li>
+            <li>Spread unverified claims</li>
