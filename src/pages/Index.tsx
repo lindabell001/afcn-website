@@ -32,7 +32,7 @@ const Index = () => {
                 — Active Citizenship for the Next 250 Years —
               </p>
 
-              {/* Smaller Buttons Row */}
+              {/* Buttons Row */}
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 
                 {/* Blue - Read Stories */}
@@ -43,15 +43,17 @@ const Index = () => {
                   READ MEMBERS PATRIOT STORIES!
                 </Link>
 
-                {/* Red - Play DARTS */}
+                {/* Red - Play MAGA DARTS (Now links to real game) */}
                 <a
-                  href="/play-darts"
-                  className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
+                  href="https://magadarts.netlify.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-base font-bold uppercase tracking-wider px-10 py-4 rounded-lg shadow-lg transition-all duration-200 border-2 border-white/30"
                 >
                   → PLAY MAGA-DARTS NOW!
                 </a>
 
-                {/* New Blue - Become a Member */}
+                {/* Blue - Become a Member */}
                 <Link
                   to="/become-one"
                   className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
