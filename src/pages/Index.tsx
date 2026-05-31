@@ -32,7 +32,7 @@ const Index = () => {
                 — Active Citizenship for the Next 250 Years —
               </p>
 
-              {/* Buttons Row */}
+              {/* Three Buttons Row */}
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 
                 {/* Blue - Read Stories */}
@@ -43,7 +43,7 @@ const Index = () => {
                   READ MEMBERS PATRIOT STORIES!
                 </Link>
 
-                {/* Red - Play MAGA DARTS (Now links to real game) */}
+                {/* Red - Play MAGA DARTS (Real Game Link) */}
                 <a
                   href="https://magadarts.netlify.app"
                   target="_blank"
