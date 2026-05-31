@@ -1,65 +1,49 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SiteLayout from '@/components/SiteLayout';
 
-import Index from "./pages/Index.tsx";
-import About from "./pages/About.tsx";
-import Resources from "./pages/Resources.tsx";
-import BecomeOne from "./pages/BecomeOne.tsx";
-import PlayDarts from "./pages/PlayDarts.tsx";
-import Donate from "./pages/Donate.tsx";
-import MemberLogin from "./pages/MemberLogin.tsx";
-import Declaration from "./pages/Declaration.tsx";
-import TakeBackAmerica from "./pages/TakeBackAmerica.tsx";
-import BurchettBlueprint from "./pages/BurchettBlueprint.tsx";
-import PatriotsStories from "./pages/PatriotsStories.tsx";
-import CommitteesOfObservation from "./pages/CommitteesOfObservation.tsx";
-import AmericaFirstTavern from "./pages/AmericaFirstTavern.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import Index from './pages/Index';
+import About from './pages/About';
+import Resources from './pages/Resources';
+import BecomeOne from './pages/BecomeOne';
+import CommitteesOfObservation from './pages/CommitteesOfObservation';
+import AmericaFirstTavern from './pages/AmericaFirstTavern';
+import PatriotsStories from './pages/PatriotsStories';
+import PrivacyAndData from './pages/PrivacyAndData';
+import SocialWelfareOrganization from './pages/SocialWelfareOrganization';
+import TransparencyAndOperations from './pages/TransparencyAndOperations';
+import PlayDarts from './pages/PlayDarts';
+import Donate from './pages/Donate';
+import NotFound from './pages/NotFound';
 
-const queryClient = new QueryClient();
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-};
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
+const App = () => {
+  return (
+    <Router>
+      <SiteLayout>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/become-one" element={<BecomeOne />} />
-          <Route path="/play-darts" element={<PlayDarts />} />
-          <Route path="/donate" element={<Donate />} />
-          <Route path="/member-login" element={<MemberLogin />} />
-          <Route path="/declaration" element={<Declaration />} />
-          <Route path="/take-back-america" element={<TakeBackAmerica />} />
-          <Route path="/burchett-blueprint" element={<BurchettBlueprint />} />
-          <Route path="/patriots-stories" element={<PatriotsStories />} />
           
-          {/* New Pages */}
+          {/* Core Membership & Action Pages */}
+          <Route path="/become-one" element={<BecomeOne />} />
           <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
           <Route path="/america-first-tavern" element={<AmericaFirstTavern />} />
+          <Route path="/patriots-stories" element={<PatriotsStories />} />
 
+          {/* Supporting Pages */}
+          <Route path="/privacy-and-data" element={<PrivacyAndData />} />
+          <Route path="/social-welfare-organization" element={<SocialWelfareOrganization />} />
+          <Route path="/transparency-and-operations" element={<TransparencyAndOperations />} />
+          <Route path="/play-darts" element={<PlayDarts />} />
+          <Route path="/donate" element={<Donate />} />
+
+          {/* Catch-all 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+      </SiteLayout>
+    </Router>
+  );
+};
 
 export default App;
