@@ -43,7 +43,7 @@ const Index = () => {
                   READ MEMBERS PATRIOT STORIES!
                 </Link>
 
-                {/* Red - Play MAGA DARTS (Real Game Link) */}
+                {/* Red - Play MAGA DARTS (Direct to real game) */}
                 <a
                   href="https://magadarts.netlify.app"
                   target="_blank"
