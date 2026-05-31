@@ -1,73 +1,29 @@
-import SiteLayout from "@/components/SiteLayout";
+import React from 'react';
+import SiteLayout from '@/components/SiteLayout';
 
 const BecomeOne = () => {
   return (
     <SiteLayout>
       <div className="max-w-4xl mx-auto px-6 py-16">
+
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-red-600 mb-4">Become One</h1>
-          <p className="text-2xl text-gray-700">Step Into Active Citizenship</p>
+          <h1 className="text-5xl md:text-6xl font-bold text-red-600 mb-4">Become a Member</h1>
+          <p className="text-2xl text-blue-900">America First Citizens Network — $25 per year</p>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-10 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm mb-12">
           <p className="text-center text-xl mb-8">
-            <strong>Becoming a member of the America First Citizens Network is simple.</strong><br />
-            It’s only <strong className="text-3xl text-red-600">$25 a year</strong>.
+            <strong>WE THE PEOPLE</strong> are building a serious network of committed America First Patriots.
           </p>
 
-          <div className="text-center mb-10">
-            <a 
-              href="/join.html" 
-              className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-16 py-6 rounded-xl transition"
-            >
-              JOIN NOW – $25 / YEAR
-            </a>
+          <div className="bg-yellow-50 border-l-8 border-yellow-600 p-8 mb-10 rounded-r-xl text-lg">
+            <strong>Important:</strong><br />
+            If your application is not approved because you do not align with America First values, 
+            your $25 payment will automatically become a donation. No membership access will be granted.
           </div>
 
-          <p className="text-center text-lg mb-8">
-            Your application will go to our Director of Membership, <strong>Norine Cantor</strong>, 
-            who personally reviews every application.
-          </p>
+          <h2 className="text-3xl font-bold text-red-600 text-center mb-10">Two-Step Application Process</h2>
 
-          <h2 className="text-3xl font-bold text-red-600 text-center mb-8">
-            Once Approved You Can:
-          </h2>
-
-          <ul className="max-w-2xl mx-auto space-y-6 text-lg">
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              Submit your Patriot Story for publication
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              <a href="/committees-of-observation" className="text-red-600 hover:underline font-semibold">
-                Join or start Committees of Observation
-              </a>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              <a href="/america-first-tavern" className="text-red-600 hover:underline font-semibold">
-                Meet in America First Tavern
-              </a>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              Connect with other patriots by location and issue
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              Access member resources and tools
-            </li>
-          </ul>
-        </div>
-
-        <p className="text-center text-sm text-gray-500 mt-12">
-          We move at the speed of trust.<br />
-          Help us build the next 250 years of America First.
-        </p>
-      </div>
-    </SiteLayout>
-  );
-};
-
-export default BecomeOne;
+          {/* Step 1 */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold mb-6 text-red
