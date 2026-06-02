@@ -14,9 +14,7 @@ const PlayDarts = () => {
           className="mx-auto w-64 h-64 object-contain mb-8"
         />
 
-        <h2 className="text-5xl font-bold text-red-600 mb-4">
-          MAGA DARTS
-        </h2>
+        <h2 className="text-5xl font-bold text-red-600 mb-4">MAGA DARTS</h2>
 
         <p className="text-xl mb-8">
           Join the movement. Compete. Support the cause. Earn points.
@@ -49,7 +47,7 @@ const PlayDarts = () => {
           </div>
         </div>
 
-        {/* Main Play Button */}
+        {/* Big Start Playing Button */}
         <a
           href="https://magadarts.netlify.app"
           target="_blank"
