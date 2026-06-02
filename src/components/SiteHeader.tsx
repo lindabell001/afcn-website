@@ -6,8 +6,9 @@ const navItems = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/resources", label: "Resources" },
-  { to: "/become-one", label: "Become One" },        // ← Now points to React component
-  { to: "/play-darts", label: "Play DARTS" },
+  { to: "/become-one", label: "Become One" },
+  // Play DARTS is now an external link to the real game
+  { label: "Play DARTS", href: "https://magadarts.netlify.app" },
   { to: "/donate", label: "Donate" },
 ];
 
@@ -53,18 +54,32 @@ const SiteHeader = () => {
 
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === "/"}
-                className={({ isActive }) =>
-                  `px-4 py-2 text-sm font-semibold uppercase tracking-wide rounded-sm transition-smooth ${
-                    isActive ? "text-patriot-red" : "text-primary hover:text-patriot-red"
-                  }`
-                }
-              >
-                {item.label}
-              </NavLink>
+              item.href ? (
+                // External link for Play DARTS
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 text-sm font-semibold uppercase tracking-wide rounded-sm transition-smooth text-primary hover:text-patriot-red"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                // Internal links
+                <NavLink
+                  key={item.to}
+                  to={item.to!}
+                  end={item.to === "/"}
+                  className={({ isActive }) =>
+                    `px-4 py-2 text-sm font-semibold uppercase tracking-wide rounded-sm transition-smooth ${
+                      isActive ? "text-patriot-red" : "text-primary hover:text-patriot-red"
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              )
             ))}
           </nav>
 
@@ -77,26 +92,15 @@ const SiteHeader = () => {
           <nav className="lg:hidden border-t border-border bg-background">
             <div className="container py-2 flex flex-col">
               {navItems.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  end={item.to === "/"}
-                  onClick={() => setMobileOpen(false)}
-                  className={({ isActive }) =>
-                    `py-3 text-sm font-semibold uppercase tracking-wide border-b border-border last:border-0 ${
-                      isActive ? "text-patriot-red" : "text-primary"
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              ))}
-            </div>
-          </nav>
-        )}
-      </div>
-    </header>
-  );
-};
-
-export default SiteHeader;
+                item.href ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileOpen(false)}
+                    className="py-3 text-sm font-semibold uppercase tracking-wide border-b border-border last:border-0 text-primary hover:text-patriot-red"
+                  >
+                    {item.label}
+                  </a>
+               
