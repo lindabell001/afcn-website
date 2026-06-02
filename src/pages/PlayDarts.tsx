@@ -49,12 +49,12 @@ const PlayDarts = () => {
           </div>
         </div>
 
-        {/* Main Action Buttons */}
+        {/* Main Play Button */}
         <a
           href="https://magadarts.netlify.app"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-16 py-6 rounded-2xl shadow-xl transition-all mb-6"
+          className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-16 py-6 rounded-2xl shadow-xl transition-all mb-8"
         >
           → START PLAYING MAGA-DARTS NOW!
         </a>
