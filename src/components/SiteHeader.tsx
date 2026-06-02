@@ -7,8 +7,7 @@ const navItems = [
   { to: "/about", label: "About" },
   { to: "/resources", label: "Resources" },
   { to: "/become-one", label: "Become One" },
-  // Play DARTS is now an external link to the real game
-  { label: "Play DARTS", href: "https://magadarts.netlify.app" },
+  { label: "Play DARTS", href: "https://magadarts.netlify.app" },   // Direct to real game
   { to: "/donate", label: "Donate" },
 ];
 
@@ -40,7 +39,7 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* White nav bar */}
+      {/* White nav bar - Your exact style */}
       <div className="bg-background border-b border-border shadow-sm">
         <div className="container flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 font-bold text-primary">
@@ -55,7 +54,6 @@ const SiteHeader = () => {
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
               item.href ? (
-                // External link for Play DARTS
                 <a
                   key={item.label}
                   href={item.href}
@@ -66,7 +64,6 @@ const SiteHeader = () => {
                   {item.label}
                 </a>
               ) : (
-                // Internal links
                 <NavLink
                   key={item.to}
                   to={item.to!}
@@ -103,4 +100,28 @@ const SiteHeader = () => {
                   >
                     {item.label}
                   </a>
-               
+                ) : (
+                  <NavLink
+                    key={item.to}
+                    to={item.to!}
+                    end={item.to === "/"}
+                    onClick={() => setMobileOpen(false)}
+                    className={({ isActive }) =>
+                      `py-3 text-sm font-semibold uppercase tracking-wide border-b border-border last:border-0 ${
+                        isActive ? "text-patriot-red" : "text-primary"
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                )
+              ))}
+            </div>
+          </nav>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default SiteHeader;
