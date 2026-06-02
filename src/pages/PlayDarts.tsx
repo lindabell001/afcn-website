@@ -26,7 +26,7 @@ const PlayDarts = () => {
             Earn points • Climb the leaderboard • Help Make 2026 MAGA!
           </p>
 
-          {/* Point System - Matching Screenshot */}
+          {/* Point System */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
             <div className="bg-[#1E2A44] p-8 rounded-2xl border border-white/10">
               <div className="text-5xl font-bold text-green-400">10 pts</div>
@@ -46,7 +46,7 @@ const PlayDarts = () => {
             </div>
           </div>
 
-          {/* Big Red Button - Matching Screenshot */}
+          {/* Big Red Button */}
           <a
             href="https://magadarts.netlify.app"
             target="_blank"
