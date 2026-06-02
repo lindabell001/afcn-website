@@ -38,7 +38,7 @@ const CommitteesOfObservation: React.FC = () => {
               href="/become-one"
               className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-6 rounded-xl transition-all duration-200 shadow-lg"
             >
-              Join &amp; Become Part of a Committee →
+              Join & Become Part of a Committee →
             </a>
           </div>
 
@@ -87,7 +87,7 @@ const CommitteesOfObservation: React.FC = () => {
           <ul className="list-disc pl-8 space-y-4 text-lg mb-12">
             <li><strong>Facts First</strong> — Only verifiable, evidence-based observations.</li>
             <li><strong>Rule of Law</strong> — We operate fully within the Constitution and all laws.</li>
-            <li><strong>Peace &amp; Respect</strong> — Peaceful advocacy, never confrontation.</li>
+            <li><strong>Peace & Respect</strong> — Peaceful advocacy, never confrontation.</li>
             <li><strong>Transparency</strong> — We hold ourselves accountable to the same standards we expect from government.</li>
             <li><strong>America First</strong> — Focused on policies that strengthen our nation.</li>
           </ul>
@@ -114,3 +114,21 @@ const CommitteesOfObservation: React.FC = () => {
             <li>Engage in harassment, intimidation, or illegal activity</li>
             <li>Trespass or record secretly</li>
             <li>Spread unverified claims</li>
+          </ul>
+
+          {/* Final Call to Action */}
+          <div className="text-center my-16">
+            <a
+              href="/become-one"
+              className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-6 rounded-xl transition-all duration-200 shadow-lg"
+            >
+              Join & Become Part of a Committee →
+            </a>
+          </div>
+        </div>
+      </div>
+    </PageShell>
+  );
+};
+
+export default CommitteesOfObservation;
