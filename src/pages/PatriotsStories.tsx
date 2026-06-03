@@ -1,8 +1,6 @@
-import SiteLayout from "@/components/SiteLayout";
-
 const PatriotsStories = () => {
   return (
-    <SiteLayout>
+    <>
       <div className="max-w-4xl mx-auto px-6 py-16 text-center">
         <h1 className="text-5xl font-bold text-red-600 mb-6">Patriots Stories</h1>
         <p className="text-2xl text-gray-700 mb-12">
@@ -30,7 +28,7 @@ const PatriotsStories = () => {
           </p>
         </div>
       </div>
-    </SiteLayout>
+    </>
   );
 };
 
