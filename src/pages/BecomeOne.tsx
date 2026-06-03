@@ -1,8 +1,8 @@
-import SiteLayout from "@/components/SiteLayout";
+import { Link } from "react-router-dom";
 
 const BecomeOne = () => {
   return (
-    <SiteLayout>
+    <>
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-red-600 mb-4">Become One</h1>
@@ -41,15 +41,15 @@ const BecomeOne = () => {
             </li>
             <li className="flex items-start gap-3">
               <span className="text-red-600 font-bold text-xl">•</span>
-              <a href="/committees-of-observation" className="text-red-600 hover:underline font-semibold">
+              <Link to="/committees-of-observation" className="text-red-600 hover:underline font-semibold">
                 Join or start Committees of Observation
-              </a>
+              </Link>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-red-600 font-bold text-xl">•</span>
-              <a href="/america-first-tavern" className="text-red-600 hover:underline font-semibold">
+              <Link to="/america-first-tavern" className="text-red-600 hover:underline font-semibold">
                 Meet in America First Tavern
-              </a>
+              </Link>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-red-600 font-bold text-xl">•</span>
@@ -67,7 +67,7 @@ const BecomeOne = () => {
           Help us build the next 250 years of America First.
         </p>
       </div>
-    </SiteLayout>
+    </>
   );
 };
 
