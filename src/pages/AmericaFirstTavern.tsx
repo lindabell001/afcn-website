@@ -1,9 +1,8 @@
-import SiteLayout from "@/components/SiteLayout";
-import tavernImage from "@/assets/AmericaFirstTavern.jpg";   // ← This line uses your uploaded image
+import tavernImage from "@/assets/AmericaFirstTavern.jpg";
 
 const AmericaFirstTavern = () => {
   return (
-    <SiteLayout>
+    <>
       <div className="max-w-5xl mx-auto px-6 py-16">
         
         {/* Hero Image */}
@@ -46,7 +45,7 @@ const AmericaFirstTavern = () => {
           </p>
         </div>
       </div>
-    </SiteLayout>
+    </>
   );
 };
 
