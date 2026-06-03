@@ -1,12 +1,6 @@
-import React from 'react';
-import PageShell from '../components/PageShell';
-
 const CommitteesOfObservation: React.FC = () => {
   return (
-    <PageShell
-      title="COMMITTEE OF OBSERVATION"
-      subtitle="Reviving the Spirit of 1776 • America First Lawful Vigilance"
-    >
+    <>
       <div className="max-w-4xl mx-auto px-6 py-12">
 
         {/* Modern Mission */}
@@ -15,7 +9,7 @@ const CommitteesOfObservation: React.FC = () => {
             COMMITTEE OF OBSERVATION
           </h1>
           <p className="text-xl text-blue-900 font-semibold">
-            WE THE PEOPLE are the ultimate guardians of our Republic
+            Reviving the Spirit of 1776 • America First Lawful Vigilance
           </p>
         </div>
 
@@ -127,7 +121,7 @@ const CommitteesOfObservation: React.FC = () => {
           </div>
         </div>
       </div>
-    </PageShell>
+    </>
   );
 };
 
