@@ -4,7 +4,7 @@ import heroRays from "@/assets/hero-rays.jpg";
 const Index = () => {
   return (
     <>
-      {/* Hero Section - Gorgeous Flag Background */}
+      {/* Hero - Original Divine Light Flag */}
       <section className="relative overflow-hidden">
         <div className="relative h-[88vh] min-h-[560px] w-full">
           <img
@@ -13,6 +13,7 @@ const Index = () => {
             className="absolute inset-0 h-full w-full object-cover"
           />
           
+          {/* Divine rays overlay */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -30,7 +31,10 @@ const Index = () => {
                 — Active Citizenship for the Next 250 Years —
               </p>
 
+              {/* Three Beautiful Buttons */}
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                
+                {/* Blue - Read Stories */}
                 <Link
                   to="/patriots-stories"
                   className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
@@ -38,6 +42,7 @@ const Index = () => {
                   READ MEMBERS PATRIOT STORIES!
                 </Link>
 
+                {/* Red - Play MAGA DARTS */}
                 <a
                   href="https://magadarts.netlify.app"
                   target="_blank"
@@ -47,6 +52,7 @@ const Index = () => {
                   → PLAY MAGA-DARTS NOW!
                 </a>
 
+                {/* Blue - Become a Member */}
                 <Link
                   to="/become-one"
                   className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
@@ -59,7 +65,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Add more sections here later (agenda, etc.) */}
+      {/* You can add more sections below (Agenda, etc.) later */}
 
     </>
   );
