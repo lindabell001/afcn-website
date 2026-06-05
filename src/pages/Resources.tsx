@@ -38,4 +38,33 @@ const Resources = () => {
 
           <div className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md transition">
             <h2 className="text-3xl font-bold text-red-600 mb-4">Constitution Academy</h2>
-            <p className="text-gray-600 mb-4">Study founding
+            <p className="text-gray-600">Study founding documents, understand your rights, and learn how our government is supposed to work.</p>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md transition">
+            <h2 className="text-3xl font-bold text-red-600 mb-4">Podcasts & Media</h2>
+            <p className="text-gray-600">America First voices, interviews, and analysis you can trust.</p>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md transition">
+            <h2 className="text-3xl font-bold text-red-600 mb-4">Music & Radio</h2>
+            <p className="text-gray-600">Patriotic and modern religious music to lift your spirit.</p>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md transition">
+            <h2 className="text-3xl font-bold text-red-600 mb-4">Educational Travel</h2>
+            <p className="text-gray-600">Have fun with education — historical sites and meaningful trips.</p>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md transition">
+            <h2 className="text-3xl font-bold text-red-600 mb-4">Deep Dives</h2>
+            <p className="text-gray-600">Articles, analysis, essays, and research reports on America First issues.</p>
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Resources;
