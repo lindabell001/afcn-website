@@ -38,4 +38,4 @@ const Resources = () => {
 
           <div className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md transition">
             <h2 className="text-3xl font-bold text-red-600 mb-4">Constitution Academy</h2>
-            <p className="text-gray-600 mb-4">Study founding documents, history, webinars, quizzes, and reading trackers.</
+            <p className="text-gray-600 mb-4">Study founding
