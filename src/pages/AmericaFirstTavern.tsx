@@ -1,100 +1,64 @@
 import { Link } from "react-router-dom";
 
-const Resources = () => {
+const AmericaFirstTavern = () => {
   return (
     <>
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        {/* Hero Section */}
+      <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="text-center mb-16">
           <h1 className="text-6xl font-bold text-red-600 mb-6">
-            We’re Building a One Stop America First Resources
+            America First Tavern
           </h1>
-          <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
-            Curated tools, knowledge, and inspiration for active patriots — 
-            built by and for the America First movement.
+          <p className="text-2xl text-gray-700">
+            The Global Gathering Place for Patriots
           </p>
+        </div>
 
-          <div className="mt-10">
+        <div className="bg-white border border-gray-200 rounded-3xl p-12 shadow-sm">
+          <div className="text-center mb-12">
+            <p className="text-3xl font-semibold text-gray-800 mb-8">
+              Come in, pull up a chair, and talk with fellow America First patriots.
+            </p>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              This is our digital tavern — a warm, welcoming space for real conversation, 
+              strategy, laughter, and building the next 250 years of America First.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-red-50 border border-red-100 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-red-600 mb-4">Global Public Tavern</h3>
+              <p className="text-gray-700">Open to all approved members — general discussion, news, and fellowship.</p>
+              <span className="inline-block mt-6 text-sm bg-white px-4 py-2 rounded-full border">Coming Soon</span>
+            </div>
+
+            <div className="bg-red-50 border border-red-100 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-red-600 mb-4">Private Pubs</h3>
+              <p className="text-gray-700">Issue-based and location-based rooms for deeper conversations.</p>
+              <span className="inline-block mt-6 text-sm bg-white px-4 py-2 rounded-full border">Coming Soon</span>
+            </div>
+          </div>
+
+          <div className="text-center">
             <Link 
               to="/become-one"
-              className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-12 py-6 rounded-2xl transition"
+              className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-16 py-8 rounded-2xl transition"
             >
-              BECOME A MEMBER – $25 / YEAR
+              JOIN AFCN TO ENTER THE TAVERN
             </Link>
           </div>
+
+          <p className="text-center text-sm text-gray-500 mt-10">
+            Only approved members of America First Citizens Network can access the Tavern.
+          </p>
         </div>
 
-        {/* 10 Cards - Compact Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Take Action</h2>
-            <p className="text-gray-600 text-sm">Petitions, contacting representatives, observation guides, and civic tools.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Constitution Academy</h2>
-            <p className="text-gray-600 text-sm mb-3">Study founding documents, history, webinars, quizzes, and reading trackers.</p>
-            <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Self-Reliance Vault</h2>
-            <p className="text-gray-600 text-sm mb-3">Preparedness guides, American-made lists, homesteading, and emergency resources.</p>
-            <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Patriotic & Religious Music</h2>
-            <p className="text-gray-600 text-sm">Inspiring patriotic songs and religious music.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Faith Resources</h2>
-            <p className="text-gray-600 text-sm">Scripture study, prayer resources, and faith-based content.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">America First Podcasts</h2>
-            <p className="text-gray-600 text-sm">The best America First based podcasts and audio content.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Deep Dives</h2>
-            <p className="text-gray-600 text-sm">Articles, research reports, essays, and historical analysis.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Webinars & Live Events</h2>
-            <p className="text-gray-600 text-sm mb-3">Live and recorded webinars and training sessions.</p>
-            <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Educational Travel</h2>
-            <p className="text-gray-600 text-sm">Historic sites and patriotic destinations.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Books</h2>
-            <p className="text-gray-600 text-sm">Recommended reading list — America First books, founding era classics, and essential patriot literature.</p>
-            <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
-          </div>
-
-        </div>
-
-        {/* Final CTA */}
-        <div className="text-center mt-20">
-          <Link 
-            to="/become-one"
-            className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-bold px-12 py-6 rounded-2xl transition"
-          >
-            JOIN AFCN & Unlock Everything
-          </Link>
-        </div>
+        <p className="text-center text-sm text-gray-500 mt-12">
+          We move at the speed of trust.<br />
+          Real community starts here.
+        </p>
       </div>
     </>
   );
 };
 
-export default Resources;
+export default AmericaFirstTavern;
