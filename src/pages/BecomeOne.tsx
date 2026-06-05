@@ -1,40 +1,38 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const PatriotsStories = () => {
+const BecomeOne = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const subject = `New AFCN Membership Application - ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`;
+
+    window.location.href = `mailto:membership@americafirstcitizensnetwork.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    setTimeout(() => {
+      window.open("https://givingtools.com/give/4206", "_blank");
+    }, 800);
+  };
+
   return (
     <>
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold text-red-600 mb-6">Patriot Stories</h1>
-          <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
-            Real Americans. Real Stories. Standing strong for the next 250 years of America First.
-          </p>
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-red-600 mb-4">Become One</h1>
+          <p className="text-2xl text-gray-700">Step Into Active Citizenship</p>
         </div>
 
-        {/* Story Gallery - Public for Everyone */}
-        <div className="mb-20">
-          <h2 className="text-4xl font-bold text-red-600 text-center mb-12">Featured Patriot Stories</h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Story Card 1 */}
-            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-              <div className="h-64 bg-[url('https://picsum.photos/id/1015/800/600')] bg-cover bg-center"></div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Why I Fight for Election Integrity</h3>
-                <p className="text-gray-600 mb-6 line-clamp-4">
-                  After watching my local election, I knew I had to stand up. This is my story of becoming an active citizen...
-                </p>
-                <button className="text-red-600 font-semibold hover:underline">Read Full Story →</button>
-              </div>
-            </div>
-
-            {/* Story Card 2 */}
-            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-              <div className="h-64 bg-[url('https://picsum.photos/id/64/800/600')] bg-cover bg-center"></div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">From California to Texas: My American Homecoming</h3>
-                <p className="text-gray-600 mb-6 line-clamp-4">
-                  I left everything behind to raise my family in a state that still believes in freedom...
-                </p>
-                <button className="text-red-600 font-semibold hover
+        <div className="bg-white border border-gray-200 rounded-xl p-10 shadow-sm">
+          <p className="text-center
