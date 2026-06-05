@@ -3,8 +3,24 @@ const Donate = () => {
     <>
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-red-600 mb-4">Support the America First Citizens Network</h1>
-          <p className="text-2xl text-gray-700">Empowering We the People</p>
+          <h1 className="text-5xl font-bold text-red-600 mb-4">
+            Support the America First Citizens Network
+          </h1>
+          <p className="text-4xl font-bold text-red-600">
+            Empowering WE THE PEOPLE
+          </p>
+        </div>
+
+        {/* Big Donate Button - Moved directly under the headline */}
+        <div className="text-center mb-12">
+          <a 
+            href="https://givingtools.com/give/4206" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center h-16 px-12 bg-red-600 hover:bg-red-700 text-white text-xl font-bold uppercase tracking-wider rounded-md transition-all shadow-lg"
+          >
+            DONATE NOW
+          </a>
         </div>
 
         <article className="prose-content space-y-6 text-lg leading-relaxed text-gray-700">
@@ -44,23 +60,6 @@ const Donate = () => {
             and for all.
           </p>
         </article>
-
-        <div className="mt-12 bg-white border border-gray-200 rounded-xl p-10 shadow-sm text-center">
-          <h2 className="text-3xl font-bold text-red-600 mb-6">Support the America First Citizens Network</h2>
-          
-          <a 
-            href="https://givingtools.com/give/4206" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center h-16 px-12 bg-red-600 hover:bg-red-700 text-white text-xl font-bold uppercase tracking-wider rounded-md transition-all shadow-lg"
-          >
-            DONATE NOW
-          </a>
-
-          <p className="mt-6 text-sm text-gray-500">
-            Your donation is secure and goes directly to AFCN
-          </p>
-        </div>
 
         <p className="mt-8 text-xs text-center text-gray-500">
           America First Citizens Network is a grassroots movement. Contributions are not tax-deductible.
