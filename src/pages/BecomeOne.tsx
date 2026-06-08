@@ -1,31 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const BecomeOne = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const subject = `New AFCN Membership Application - ${formData.name}`;
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`;
-
-    window.location.href = `mailto:membership@americafirstcitizensnetwork.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    setTimeout(() => {
-      window.open("https://givingtools.com/give/4206", "_blank");
-    }, 800);
-  };
-
   return (
     <>
       <div className="max-w-4xl mx-auto px-6 py-16">
@@ -40,13 +15,13 @@ const BecomeOne = () => {
             It’s only <strong className="text-3xl text-red-600">$25 a year</strong>.
           </p>
 
+          {/* New Custom Application Button - Main Entry Point */}
           <div className="text-center mb-10">
             <a 
-              href="https://givingtools.com/give/4206" 
-              target="_blank"
+              href="/signup.html" 
               className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-16 py-6 rounded-xl transition"
             >
-              JOIN NOW – $25 / YEAR
+              Become a Member – Fill Out Application
             </a>
           </div>
 
@@ -56,7 +31,7 @@ const BecomeOne = () => {
           </p>
 
           <h2 className="text-3xl font-bold text-red-600 text-center mb-8">
-            Once Approved You Can:
+            Once Approved* You Can:
           </h2>
 
           <ul className="max-w-2xl mx-auto space-y-6 text-lg">
@@ -85,6 +60,10 @@ const BecomeOne = () => {
               Access member resources and tools
             </li>
           </ul>
+
+          <p className="text-center text-sm text-gray-500 mt-12">
+            * If you are not approved, your payment will be considered a donation.
+          </p>
         </div>
 
         <p className="text-center text-sm text-gray-500 mt-12">
