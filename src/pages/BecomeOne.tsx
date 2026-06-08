@@ -15,10 +15,11 @@ const BecomeOne = () => {
             It’s only <strong className="text-3xl text-red-600">$25 a year</strong>.
           </p>
 
-          {/* New Custom Application Button - Main Entry Point */}
+          {/* Updated Button - Links to signup form */}
           <div className="text-center mb-10">
             <a 
               href="/signup.html" 
+              target="_blank"
               className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-16 py-6 rounded-xl transition"
             >
               Become a Member – Fill Out Application
