@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Norine Approval - AFCN</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0c2340; color: white; padding: 20px; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    h1 { color: #ffd700; text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(255,255,255,0.1); }
+    th, td { padding: 12px; border: 1px solid #ffd700; text-align: left; }
+    th { background: #1e3a5f; }
+    button { padding: 8px 16px; margin: 4px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    .approve { background: #4CAF50; color: white; }
+    .reject { background: #f44336; color: white; }
+    .success { color: #4CAF50; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Norine - AFCN Membership Approvals</h1>
+    <p style="text-align:center;">Committee of Observation - Review Pending Applications</p>
 
+    <table id="applicationsTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th>Why Joining?</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    async function loadApplications() {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('status', 'Pending')
+        .order('created_at', { ascending: false });
+
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      if (error || !data || data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No pending applications at this time.</td></tr>';
+        return;
+      }
+
+      data.forEach(applicant => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${applicant.first_name} ${applicant.last_name}</td>
+          <td>${applicant.email}</td>
+          <td>${applicant.phone || ''}</td>
+          <td>${applicant.address || ''}</td>
+          <td>${applicant.why_joining ? applicant.why_joining.substring(0, 100) + '...' : ''}</td>
+          <td><strong>Pending</strong></td>
+          <td>
+            <button class="approve" onclick="approveApplicant('${applicant.id}')">✅ Approve</button>
+            <button class="reject" onclick="rejectApplicant('${applicant.id}')">❌ Reject</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    window.approveApplicant = async (id) => {
+      if (confirm("Approve this person as a full member?")) {
+        await supabase.from('profiles').update({ status: 'Approved' }).eq('id', id);
+        loadApplications();
+      }
+    };
+
+    window.rejectApplicant = async (id) => {
+      if (confirm("Reject this application? (They will not get member access)")) {
+        await supabase.from('profiles').update({ status: 'Rejected' }).eq('id', id);
+        loadApplications();
+      }
+    };
+
+    // Load applications when page opens
+    loadApplications();
+  </script>
+</body>
+</html>
