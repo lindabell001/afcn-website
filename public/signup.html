@@ -57,7 +57,15 @@
       const { error } = await supabase.auth.signUp({
         email: email,
         password: password,
-        options: { data: { first_name: firstName, last_name: lastName, phone: phone, address: address, why_joining: whyJoining } }
+        options: { 
+          data: { 
+            first_name: firstName, 
+            last_name: lastName, 
+            phone: phone, 
+            address: address, 
+            why_joining: whyJoining 
+          } 
+        }
       });
 
       if (error) {
