@@ -39,10 +39,13 @@
 
   <script type="module">
     import { supabase } from './supabaseClient.js';
+
     const form = document.getElementById('signupForm');
     const message = document.getElementById('message');
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const firstName = document.getElementById('firstName').value.trim();
       const lastName = document.getElementById('lastName').value.trim();
       const email = document.getElementById('email').value.trim();
@@ -51,20 +54,20 @@
       const password = document.getElementById('password').value;
       const whyJoining = document.getElementById('whyJoining').value.trim();
 
-      message.textContent = "Creating your application...";
+      message.textContent = "Submitting your application...";
       message.className = '';
 
       const { error } = await supabase.auth.signUp({
         email: email,
         password: password,
-        options: { 
-          data: { 
-            first_name: firstName, 
-            last_name: lastName, 
-            phone: phone, 
-            address: address, 
-            why_joining: whyJoining 
-          } 
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+            phone: phone,
+            address: address,
+            why_joining: whyJoining
+          }
         }
       });
 
@@ -74,6 +77,12 @@
       } else {
         message.className = 'success';
         message.innerHTML = `✅ Application received!<br><br>Norine will review it and contact you soon.`;
+
+        // Open email to Norine with the application details
+        const subject = `New AFCN Membership Application - ${firstName} ${lastName}`;
+        const body = `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nAddress: ${address}\n\nWhy joining:\n${whyJoining}\n\nPlease review this application.`;
+        window.location.href = `mailto:membership@americafirstcitizensnetwork.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
         form.reset();
       }
     });
