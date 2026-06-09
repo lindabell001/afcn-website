@@ -27,4 +27,59 @@
       <input type="text" id="firstName" placeholder="First Name" required>
       <input type="text" id="lastName" placeholder="Last Name" required>
       <input type="email" id="email" placeholder="Email Address" required>
-      <input type="tel"
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+      <input type="text" id="address" placeholder="Address (Street, City, State, ZIP)" required>
+      <input type="password" id="password" placeholder="Create Password (min 6 characters)" required>
+      <textarea id="whyJoining" placeholder="Why do you want to join America First Citizens Network? What are your main areas of interest or concern?" rows="6" required></textarea>
+      <button type="submit">Join AFCN Now</button>
+    </form>
+
+    <p id="message"></p>
+  </div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    const form = document.getElementById('signupForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const password = document.getElementById('password').value;
+      const whyJoining = document.getElementById('whyJoining').value.trim();
+
+      message.textContent = "Submitting your application...";
+      message.className = '';
+
+      const { error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+            phone: phone,
+            address: address,
+            why_joining: whyJoining
+          }
+        }
+      });
+
+      if (error) {
+        message.className = 'error';
+        message.textContent = error.message;
+      } else {
+        message.className = 'success';
+        message.innerHTML = `✅ Application received!<br><br>Norine will call you soon on a number ending in <strong>1776</strong>.`;
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
