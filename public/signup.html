@@ -16,6 +16,7 @@
     button:hover { background: #a00d24; }
     .success { color: #4CAF50; font-weight: bold; }
     .error { color: #f44336; font-weight: bold; }
+    label { display: block; margin: 15px 0 5px; text-align: left; }
   </style>
 </head>
 <body>
@@ -30,7 +31,19 @@
       <input type="tel" id="phone" placeholder="Phone Number" required>
       <input type="text" id="address" placeholder="Address (Street, City, State, ZIP)" required>
       <input type="password" id="password" placeholder="Create Password (min 6 characters)" required>
-      <textarea id="whyJoining" placeholder="Why do you want to join America First Citizens Network? What are your main areas of interest or concern?" rows="6" required></textarea>
+      
+      <textarea id="whyJoining" placeholder="Why do you want to join America First Citizens Network? What are your main areas of interest or concern?" rows="5" required></textarea>
+
+      <label>
+        X Handle(s) (optional - separate multiple with commas)<br>
+        <input type="text" id="xHandle" placeholder="@YourHandle1, @YourHandle2">
+      </label>
+
+      <label>
+        <input type="checkbox" id="noXAccount">
+        I do not have an X account
+      </label>
+
       <button type="submit">Join AFCN Now</button>
     </form>
 
@@ -53,6 +66,8 @@
       const address = document.getElementById('address').value.trim();
       const password = document.getElementById('password').value;
       const whyJoining = document.getElementById('whyJoining').value.trim();
+      const xHandle = document.getElementById('xHandle').value.trim();
+      const noXAccount = document.getElementById('noXAccount').checked;
 
       message.textContent = "Submitting your application...";
       message.className = '';
@@ -66,7 +81,9 @@
             last_name: lastName,
             phone: phone,
             address: address,
-            why_joining: whyJoining
+            why_joining: whyJoining,
+            x_handle: xHandle,
+            no_x_account: noXAccount
           }
         }
       });
