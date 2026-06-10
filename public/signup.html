@@ -30,7 +30,73 @@
       <input type="tel" id="phone" placeholder="Phone Number" required>
       <input type="text" id="address" placeholder="Address (Street, City, State, ZIP)" required>
       <input type="password" id="password" placeholder="Create Password (min 6 characters)" required>
-      
       <textarea id="whyJoining" placeholder="Why do you want to join America First Citizens Network? What are your main areas of interest or concern?" rows="5" required></textarea>
+      <input type="text" id="xHandle" placeholder="X Handle(s) or type 'none'" required>
+      <button type="submit">Join AFCN Now</button>
+    </form>
 
-      <input type="text" id="xHandle" placeholder="X Handle(s
+    <p id="message"></p>
+  </div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    const form = document.getElementById('signupForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const password = document.getElementById('password').value;
+      const whyJoining = document.getElementById('whyJoining').value.trim();
+      const xHandle = document.getElementById('xHandle').value.trim();
+
+      message.textContent = "Submitting your application...";
+      message.className = '';
+
+      const { error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+            phone: phone,
+            address: address,
+            why_joining: whyJoining,
+            x_handle: xHandle
+          }
+        }
+      });
+
+      if (error) {
+        message.className = 'error';
+        message.textContent = error.message;
+      } else {
+        message.className = 'success';
+        message.innerHTML = `✅ Application received!<br><br>Norine will review it and call you soon on a number ending in <strong>1776</strong>.`;
+
+        // Clean email to Norine (NO Grok vetting text)
+        const subject = `New AFCN Membership Application - ${firstName} ${lastName}`;
+        const body = `New Membership Application Received\n\n` +
+                     `Name: ${firstName} ${lastName}\n` +
+                     `Email: ${email}\n` +
+                     `Phone: ${phone}\n` +
+                     `Address: ${address}\n` +
+                     `X Handle: ${xHandle}\n\n` +
+                     `Why they want to join:\n${whyJoining}\n\n` +
+                     `Please review this application.`;
+
+        window.location.href = `mailto:membership@americafirstcitizensnetwork.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
