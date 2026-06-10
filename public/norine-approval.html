@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Norine Approval - AFCN Membership</title>
+  <title>Norine - AFCN Membership Approvals</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body { font-family: Arial, sans-serif; background: #0c2340; color: white; padding: 20px; }
@@ -22,86 +22,4 @@
 <body>
   <div class="container">
     <h1>Norine - AFCN Membership Approvals</h1>
-    <p style="text-align:center;">Committee of Observation - Review Pending Applications</p>
-
-    <table id="applicationsTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Address</th>
-          <th>Why Joining?</th>
-          <th>X Handle</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
-
-  <script type="module">
-    import { supabase } from './supabaseClient.js';
-
-    async function loadApplications() {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('status', 'Pending')
-        .order('created_at', { ascending: false });
-
-      const tbody = document.getElementById('tableBody');
-      tbody.innerHTML = '';
-
-      if (error || !data || data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">No pending applications at this time.</td></tr>';
-        return;
-      }
-
-      data.forEach(applicant => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${applicant.first_name} ${applicant.last_name}</td>
-          <td>${applicant.email}</td>
-          <td>${applicant.phone || ''}</td>
-          <td>${applicant.address || ''}</td>
-          <td>${applicant.why_joining ? applicant.why_joining.substring(0, 120) + '...' : ''}</td>
-          <td>${applicant.x_handle || 'none'}</td>
-          <td><strong>Pending</strong></td>
-          <td>
-            <button class="vet" onclick="vetApplicant('${applicant.id}', '${applicant.first_name} ${applicant.last_name}', '${applicant.x_handle || ''}')">🔍 Ask Grok to Vet</button>
-            <button class="approve" onclick="approveApplicant('${applicant.id}')">✅ Approve</button>
-            <button class="reject" onclick="rejectApplicant('${applicant.id}')">❌ Reject</button>
-          </td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
-
-    window.vetApplicant = async (id, name, xHandle) => {
-      const summary = prompt(`Grok Vet Summary for ${name}\n\nX Handle: ${xHandle || 'none'}\n\nType your notes here and click OK:`);
-      if (summary) {
-        alert(`Vetting summary saved for ${name}:\n\n${summary}\n\n(This will be included in the email to Norine in the next update)`);
-      }
-    };
-
-    window.approveApplicant = async (id) => {
-      if (confirm("Approve this person as a full member?")) {
-        await supabase.from('profiles').update({ status: 'Approved' }).eq('id', id);
-        loadApplications();
-      }
-    };
-
-    window.rejectApplicant = async (id) => {
-      if (confirm("Reject this application?")) {
-        await supabase.from('profiles').update({ status: 'Rejected' }).eq('id', id);
-        loadApplications();
-      }
-    };
-
-    // Load applications when page loads
-    loadApplications();
-  </script>
-</body>
-</html>
+    <
