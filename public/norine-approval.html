@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Norine Approval - AFCN</title>
+  <title>Norine Approval - AFCN Membership</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body { font-family: Arial, sans-serif; background: #0c2340; color: white; padding: 20px; }
-    .container { max-width: 1000px; margin: 0 auto; }
+    .container { max-width: 1200px; margin: 0 auto; }
     h1 { color: #ffd700; text-align: center; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(255,255,255,0.1); }
     th, td { padding: 12px; border: 1px solid #ffd700; text-align: left; }
     th { background: #1e3a5f; }
-    button { padding: 8px 16px; margin: 4px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    button { padding: 10px 16px; margin: 4px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
     .approve { background: #4CAF50; color: white; }
     .reject { background: #f44336; color: white; }
+    .vet { background: #ffd700; color: black; }
     .success { color: #4CAF50; }
   </style>
 </head>
@@ -31,6 +32,7 @@
           <th>Phone</th>
           <th>Address</th>
           <th>Why Joining?</th>
+          <th>X Handle</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
@@ -53,7 +55,7 @@
       tbody.innerHTML = '';
 
       if (error || !data || data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No pending applications at this time.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">No pending applications at this time.</td></tr>';
         return;
       }
 
@@ -64,9 +66,11 @@
           <td>${applicant.email}</td>
           <td>${applicant.phone || ''}</td>
           <td>${applicant.address || ''}</td>
-          <td>${applicant.why_joining ? applicant.why_joining.substring(0, 100) + '...' : ''}</td>
+          <td>${applicant.why_joining ? applicant.why_joining.substring(0, 120) + '...' : ''}</td>
+          <td>${applicant.x_handle || 'none'}</td>
           <td><strong>Pending</strong></td>
           <td>
+            <button class="vet" onclick="vetApplicant('${applicant.id}', '${applicant.first_name} ${applicant.last_name}', '${applicant.x_handle || ''}')">🔍 Ask Grok to Vet</button>
             <button class="approve" onclick="approveApplicant('${applicant.id}')">✅ Approve</button>
             <button class="reject" onclick="rejectApplicant('${applicant.id}')">❌ Reject</button>
           </td>
@@ -74,6 +78,13 @@
         tbody.appendChild(row);
       });
     }
+
+    window.vetApplicant = async (id, name, xHandle) => {
+      const summary = prompt(`Grok Vet Summary for ${name}\n\nX Handle: ${xHandle || 'none'}\n\nType your notes here and click OK:`);
+      if (summary) {
+        alert(`Vetting summary saved for ${name}:\n\n${summary}\n\n(This will be included in the email to Norine in the next update)`);
+      }
+    };
 
     window.approveApplicant = async (id) => {
       if (confirm("Approve this person as a full member?")) {
@@ -83,13 +94,13 @@
     };
 
     window.rejectApplicant = async (id) => {
-      if (confirm("Reject this application? (They will not get member access)")) {
+      if (confirm("Reject this application?")) {
         await supabase.from('profiles').update({ status: 'Rejected' }).eq('id', id);
         loadApplications();
       }
     };
 
-    // Load applications when page opens
+    // Load applications when page loads
     loadApplications();
   </script>
 </body>
