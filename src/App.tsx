@@ -5,6 +5,7 @@ import SiteLayout from '@/components/SiteLayout';
 import Index from './pages/Index';
 import About from './pages/About';
 import Resources from './pages/Resources';
+import ConstitutionAcademy from './pages/ConstitutionAcademy';   // New
 import BecomeOne from './pages/BecomeOne';
 import CommitteesOfObservation from './pages/CommitteesOfObservation';
 import AmericaFirstTavern from './pages/AmericaFirstTavern';
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
           
           {/* Core Membership & Action Pages */}
           <Route path="/become-one" element={<BecomeOne />} />
