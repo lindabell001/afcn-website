@@ -1,16 +1,16 @@
-# netlify.toml - SPA Routing for React Router
+# netlify.toml - SPA Routing for React Router + Vite
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Build settings
+# Build settings for Vite
 [build]
   command = "npm run build"
   publish = "dist"
 
-# Better caching
+# Cache control for better performance
 [[headers]]
   for = "/*"
   [headers.values]
