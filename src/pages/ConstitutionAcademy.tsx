@@ -5,7 +5,7 @@ const ConstitutionAcademy = () => {
     <div className="max-w-6xl mx-auto px-6 py-16">
       {/* Hero */}
       <div className="text-center mb-16">
-        <h1 className="text-6xl font-bold text-red-600 mb-6">Constitution Academy</h1>
+        <h1 className="text-6xl font-bold text-red-600 mb-6">Constitution Academy — LIVE NOW!</h1>
         <p className="text-3xl text-gray-700 max-w-4xl mx-auto font-light">
           We the People — Free videos and tools to truly understand our Founding Documents
         </p>
@@ -85,4 +85,13 @@ const ConstitutionAcademy = () => {
         </p>
         <Link 
           to="/become-one"
-          className="inline-block bg
+          className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-12 py-6 rounded-2xl transition"
+        >
+          Become a Member & Join This Committee
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default ConstitutionAcademy;
