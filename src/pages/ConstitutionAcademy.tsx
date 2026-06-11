@@ -5,7 +5,7 @@ const ConstitutionAcademy = () => {
     <div className="max-w-6xl mx-auto px-6 py-16">
       {/* Hero */}
       <div className="text-center mb-16">
-        <h1 className="text-6xl font-bold text-red-600 mb-6">Constitution Academy — LIVE NOW!</h1>
+        <h1 className="text-6xl font-bold text-red-600 mb-6">Constitution Academy</h1>
         <p className="text-3xl text-gray-700 max-w-4xl mx-auto font-light">
           We the People — Free videos and tools to truly understand our Founding Documents
         </p>
@@ -15,18 +15,21 @@ const ConstitutionAcademy = () => {
       <div className="mb-16">
         <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Core Founding Documents</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <a href="https://www.archives.gov/founding-docs/declaration-transcript" target="_blank" rel="noopener noreferrer" 
-             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center">
+          <a href="https://www.archives.gov/founding-docs/declaration-transcript" 
+             target="_blank" rel="noopener noreferrer" 
+             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center transition">
             <h3 className="text-2xl font-bold text-red-600 mb-2">Declaration of Independence</h3>
             <p className="text-gray-600">Full transcript</p>
           </a>
-          <a href="https://www.archives.gov/founding-docs/constitution-transcript" target="_blank" rel="noopener noreferrer" 
-             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center">
+          <a href="https://www.archives.gov/founding-docs/constitution-transcript" 
+             target="_blank" rel="noopener noreferrer" 
+             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center transition">
             <h3 className="text-2xl font-bold text-red-600 mb-2">U.S. Constitution</h3>
             <p className="text-gray-600">Full transcript</p>
           </a>
-          <a href="https://www.archives.gov/founding-docs/bill-of-rights-transcript" target="_blank" rel="noopener noreferrer" 
-             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center">
+          <a href="https://www.archives.gov/founding-docs/bill-of-rights-transcript" 
+             target="_blank" rel="noopener noreferrer" 
+             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center transition">
             <h3 className="text-2xl font-bold text-red-600 mb-2">Bill of Rights</h3>
             <p className="text-gray-600">First 10 Amendments</p>
           </a>
