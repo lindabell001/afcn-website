@@ -17,15 +17,6 @@ const Resources = () => {
           <div className="mt-8 text-lg text-gray-600">
             ✅ <strong>All resources on this page are free for everyone.</strong>
           </div>
-
-          <div className="mt-10">
-            <Link 
-              to="/become-one"
-              className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-12 py-6 rounded-2xl transition"
-            >
-              BECOME A MEMBER – $25 / YEAR
-            </Link>
-          </div>
         </div>
 
         {/* 10 Cards - Compact Grid */}
@@ -95,7 +86,7 @@ const Resources = () => {
 
         </div>
 
-        {/* Final Strong CTA - Your Requested Button */}
+        {/* Final CTA - Your Requested Button Only */}
         <div className="text-center mt-20">
           <p className="text-xl text-gray-600 mb-6">
             Enjoying these free resources?
