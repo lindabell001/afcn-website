@@ -32,9 +32,18 @@ const Resources = () => {
             <p className="text-gray-600 text-sm">Petitions, contacting representatives, observation guides, and civic tools.</p>
           </div>
 
+          {/* === UPDATED CONSTITUTION ACADEMY CARD === */}
           <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
             <h2 className="text-2xl font-bold text-red-600 mb-3">Constitution Academy</h2>
-            <p className="text-gray-600 text-sm mb-3">Study founding documents, history, webinars, quizzes, and reading trackers.</p>
+            <p className="text-gray-600 text-sm mb-4">
+              Study founding documents, history, webinars, quizzes, and reading trackers.
+            </p>
+            <Link 
+              to="/resources/constitution-academy"
+              className="inline-block bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-6 py-3 rounded-xl transition mb-3"
+            >
+              Enter Constitution Academy →
+            </Link>
             <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
           </div>
 
