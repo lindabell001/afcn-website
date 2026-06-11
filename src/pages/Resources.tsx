@@ -14,6 +14,10 @@ const Resources = () => {
             built by and for the America First movement.
           </p>
 
+          <div className="mt-8 text-lg text-gray-600">
+            ✅ <strong>All resources on this page are free for everyone.</strong>
+          </div>
+
           <div className="mt-10">
             <Link 
               to="/become-one"
@@ -32,7 +36,6 @@ const Resources = () => {
             <p className="text-gray-600 text-sm">Petitions, contacting representatives, observation guides, and civic tools.</p>
           </div>
 
-          {/* === UPDATED CONSTITUTION ACADEMY CARD === */}
           <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
             <h2 className="text-2xl font-bold text-red-600 mb-3">Constitution Academy</h2>
             <p className="text-gray-600 text-sm mb-4">
@@ -92,13 +95,16 @@ const Resources = () => {
 
         </div>
 
-        {/* Final CTA */}
+        {/* Final Strong CTA - Your Requested Button */}
         <div className="text-center mt-20">
+          <p className="text-xl text-gray-600 mb-6">
+            Enjoying these free resources?
+          </p>
           <Link 
             to="/become-one"
             className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-bold px-12 py-6 rounded-2xl transition"
           >
-            JOIN AFCN & Unlock Everything
+            Discover How We Are Re-Establishing the Active American Citizen
           </Link>
         </div>
       </div>
