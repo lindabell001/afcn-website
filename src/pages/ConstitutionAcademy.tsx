@@ -11,27 +11,39 @@ const ConstitutionAcademy = () => {
         </p>
       </div>
 
-      {/* Founding Documents */}
-      <div className="mb-16">
+      {/* Core Founding Documents - Improved */}
+      <div className="mb-20">
         <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Core Founding Documents</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+          Official transcripts from the National Archives — the most accurate sources available.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <a href="https://www.archives.gov/founding-docs/declaration-transcript" 
              target="_blank" rel="noopener noreferrer" 
-             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center transition">
-            <h3 className="text-2xl font-bold text-red-600 mb-2">Declaration of Independence</h3>
-            <p className="text-gray-600">Full transcript</p>
+             className="group block bg-white border border-gray-200 rounded-3xl p-10 hover:shadow-xl transition-all hover:-translate-y-1">
+            <div className="text-5xl mb-6">🗽</div>
+            <h3 className="text-2xl font-bold text-red-600 mb-3">Declaration of Independence</h3>
+            <p className="text-gray-600 leading-relaxed">July 4, 1776 — The unanimous declaration of the thirteen united States of America</p>
+            <span className="inline-block mt-6 text-red-600 font-medium group-hover:underline">Read Full Transcript →</span>
           </a>
+
           <a href="https://www.archives.gov/founding-docs/constitution-transcript" 
              target="_blank" rel="noopener noreferrer" 
-             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center transition">
-            <h3 className="text-2xl font-bold text-red-600 mb-2">U.S. Constitution</h3>
-            <p className="text-gray-600">Full transcript</p>
+             className="group block bg-white border border-gray-200 rounded-3xl p-10 hover:shadow-xl transition-all hover:-translate-y-1">
+            <div className="text-5xl mb-6">📜</div>
+            <h3 className="text-2xl font-bold text-red-600 mb-3">U.S. Constitution</h3>
+            <p className="text-gray-600 leading-relaxed">Signed September 17, 1787 — The supreme law of the land</p>
+            <span className="inline-block mt-6 text-red-600 font-medium group-hover:underline">Read Full Transcript →</span>
           </a>
+
           <a href="https://www.archives.gov/founding-docs/bill-of-rights-transcript" 
              target="_blank" rel="noopener noreferrer" 
-             className="block bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-md text-center transition">
-            <h3 className="text-2xl font-bold text-red-600 mb-2">Bill of Rights</h3>
-            <p className="text-gray-600">First 10 Amendments</p>
+             className="group block bg-white border border-gray-200 rounded-3xl p-10 hover:shadow-xl transition-all hover:-translate-y-1">
+            <div className="text-5xl mb-6">🛡️</div>
+            <h3 className="text-2xl font-bold text-red-600 mb-3">Bill of Rights</h3>
+            <p className="text-gray-600 leading-relaxed">The first 10 Amendments — Ratified December 15, 1791</p>
+            <span className="inline-block mt-6 text-red-600 font-medium group-hover:underline">Read Full Transcript →</span>
           </a>
         </div>
       </div>
