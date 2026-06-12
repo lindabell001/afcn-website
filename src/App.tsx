@@ -1,20 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SiteLayout from '@/components/SiteLayout';
+import SiteLayout from '@/components/SiteLayout';   // or wherever SiteLayout is
 
+// Page Imports
 import Index from './pages/Index';
 import About from './pages/About';
 import Resources from './pages/Resources';
-import ConstitutionAcademy from './pages/ConstitutionAcademy';   // New
 import BecomeOne from './pages/BecomeOne';
-import CommitteesOfObservation from './pages/CommitteesOfObservation';
-import AmericaFirstTavern from './pages/AmericaFirstTavern';
-import PatriotsStories from './pages/PatriotsStories';
-import PrivacyAndData from './pages/PrivacyAndData';
-import SocialWelfareOrganization from './pages/SocialWelfareOrganization';
-import TransparencyAndOperations from './pages/TransparencyAndOperations';
 import Donate from './pages/Donate';
-import NotFound from './pages/NotFound';
+import Mission from './pages/Mission';     // ← NEW MISSION IMPORT
+
+// Add other pages you already have here if needed
+// import ConstitutionAcademy from './pages/ConstitutionAcademy';
+// etc.
 
 const App = () => {
   return (
@@ -24,22 +22,17 @@ const App = () => {
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
-          
-          {/* Core Membership & Action Pages */}
           <Route path="/become-one" element={<BecomeOne />} />
-          <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
-          <Route path="/america-first-tavern" element={<AmericaFirstTavern />} />
-          <Route path="/patriots-stories" element={<PatriotsStories />} />
-
-          {/* Supporting Pages */}
-          <Route path="/privacy-and-data" element={<PrivacyAndData />} />
-          <Route path="/social-welfare-organization" element={<SocialWelfareOrganization />} />
-          <Route path="/transparency-and-operations" element={<TransparencyAndOperations />} />
           <Route path="/donate" element={<Donate />} />
+          
+          {/* NEW MISSION ROUTE */}
+          <Route path="/mission" element={<Mission />} />
 
-          {/* Catch-all 404 */}
-          <Route path="*" element={<NotFound />} />
+          {/* Add any other existing routes here */}
+          {/* Example: <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} /> */}
+
+          {/* 404 Catch-all */}
+          <Route path="*" element={<div>Page Not Found</div>} />
         </Routes>
       </SiteLayout>
     </Router>
