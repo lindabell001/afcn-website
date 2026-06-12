@@ -120,17 +120,9 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* How You Make This Happen - Tightest Version */}
+          {/* How You Make This Happen - Tightest Possible */}
           <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-8 text-center">
             <h2 className="text-4xl font-bold mb-4">How You Make This Happen</h2>
-            <p className="text-xl mb-6">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
-            
-            <div className="text-left max-w-2xl mx-auto space-y-3 text-lg mb-8">
-              <p>• Stay informed and engaged — use our resources and training</p>
-              <p>• Bring fellow patriots into the Network (referral rewards for growing this family)</p>
-              <p>• Build the America First Citizens Network by having new members apply</p>
-              <p>• WE THE PEOPLE are building a new playbook and taking action</p>
-            </div>
 
             <a 
               href="/signup.html"
