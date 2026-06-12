@@ -120,7 +120,7 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* How You Make This Happen - Very Tight */}
+          {/* How You Make This Happen - Tightest Spacing */}
           <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-8 text-center">
             <h2 className="text-4xl font-bold mb-4">How You Make This Happen</h2>
 
@@ -131,7 +131,7 @@ export default function Mission() {
               Become a Member – Fill Out Application
             </a>
 
-            <p className="text-3xl font-medium mt-6">
+            <p className="text-3xl font-medium mt-4">
               You are not just joining an organization.<br />
               <span className="text-patriot-red">You are rebuilding the Republic.</span>
             </p>
