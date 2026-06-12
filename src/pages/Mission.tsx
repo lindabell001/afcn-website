@@ -29,7 +29,7 @@ export default function Mission() {
           </div>
 
           {/* Central Purpose */}
-          <div className="prose prose-lg max-w-none mb-16">
+          <div className="mb-16">
             <h2 className="text-4xl font-bold text-patriot-blue mb-8 text-center">
               Rebuilding Active Citizenship — Now and for Future Generations
             </h2>
@@ -116,14 +116,14 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* How You Make This Happen */}
+          {/* Final Call to Action */}
           <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-12 text-center">
             <h2 className="text-4xl font-bold mb-6">How You Make This Happen</h2>
             <p className="text-xl mb-10">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
             
             <div className="text-left max-w-2xl mx-auto space-y-6 text-lg mb-12">
               <p>• Stay informed and engaged — use our resources and training</p>
-              <p>• Bring fellow patriots into the Network (referral rewards for growing this family)</p>
+              <p>• Bring fellow patriots into the Network</p>
               <p>• Support the mission with your membership and donations</p>
               <p>• Take local action — we give you the playbook</p>
             </div>
