@@ -120,7 +120,7 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* How You Make This Happen + Red Button */}
+          {/* How You Make This Happen - Button placed here */}
           <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-12 text-center">
             <h2 className="text-4xl font-bold mb-6">How You Make This Happen</h2>
             <p className="text-xl mb-10">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
@@ -132,17 +132,17 @@ export default function Mission() {
               <p>• WE THE PEOPLE are building a new playbook and taking action</p>
             </div>
 
-            <p className="text-3xl font-medium mb-10">
-              You are not just joining an organization.<br />
-              <span className="text-patriot-red">You are rebuilding the Republic.</span>
-            </p>
-
             <a 
               href="/signup.html"
               className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-6 rounded-xl transition-all"
             >
               Become a Member – Fill Out Application
             </a>
+
+            <p className="text-3xl font-medium mt-10">
+              You are not just joining an organization.<br />
+              <span className="text-patriot-red">You are rebuilding the Republic.</span>
+            </p>
           </div>
 
         </div>
