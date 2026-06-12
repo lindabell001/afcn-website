@@ -137,7 +137,6 @@ export default function Mission() {
               <span className="text-patriot-red">You are rebuilding the Republic.</span>
             </p>
 
-            {/* Red Button */}
             <a 
               href="/signup.html"
               className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-6 rounded-xl transition-all"
