@@ -1,11 +1,10 @@
 import React from 'react';
-import SiteHeader from '../components/SiteHeader';
-import SiteFooter from '../components/SiteFooter';   // Adjust if your footer path is different
+import SiteFooter from '../components/SiteFooter';   // Only footer needed
 
 export default function Mission() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteHeader />
+      {/* SiteHeader is already in SiteLayout - no duplicate */}
 
       <main className="pt-8 pb-20">
         <div className="container max-w-4xl mx-auto px-6">
@@ -86,7 +85,7 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* Call to Action Section */}
+          {/* How You Make This Happen */}
           <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-12 text-center">
             <h2 className="text-4xl font-bold mb-6">How You Make This Happen</h2>
             <p className="text-xl mb-10">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
