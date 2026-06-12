@@ -83,7 +83,7 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* Member Action Section */}
+          {/* As a Member, You: */}
           <div className="mb-16 bg-white border border-border rounded-2xl p-10">
             <h2 className="text-4xl font-bold text-patriot-blue mb-8 text-center">
               As a Member, You:
@@ -116,14 +116,14 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* Final Call to Action */}
+          {/* How You Make This Happen + Button */}
           <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-12 text-center">
             <h2 className="text-4xl font-bold mb-6">How You Make This Happen</h2>
             <p className="text-xl mb-10">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
             
             <div className="text-left max-w-2xl mx-auto space-y-6 text-lg mb-12">
               <p>• Stay informed and engaged — use our resources and training</p>
-              <p>• Bring fellow patriots into the Network</p>
+              <p>• Bring fellow patriots into the Network (referral rewards for growing this family)</p>
               <p>• Support the mission with your membership and donations</p>
               <p>• Take local action — we give you the playbook</p>
             </div>
@@ -137,7 +137,7 @@ export default function Mission() {
               href="/become-one"
               className="inline-block bg-white text-patriot-blue hover:bg-patriot-red hover:text-white font-bold text-xl px-12 py-6 rounded-xl transition-all"
             >
-              Become a Vetted America First Member Today →
+              Become a Member – Fill Out Application
             </a>
           </div>
 
