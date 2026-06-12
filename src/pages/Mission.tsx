@@ -120,7 +120,7 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* Final CTA */}
+          {/* How You Make This Happen + Red Button */}
           <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-12 text-center">
             <h2 className="text-4xl font-bold mb-6">How You Make This Happen</h2>
             <p className="text-xl mb-10">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
