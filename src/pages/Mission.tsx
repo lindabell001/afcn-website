@@ -83,12 +83,14 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* New Member Action Section */}
+          {/* Member Action Section */}
           <div className="mb-16 bg-white border border-border rounded-2xl p-10">
             <h2 className="text-4xl font-bold text-patriot-blue mb-8 text-center">
               As a Member, You:
             </h2>
-            <p className="text-center text-xl mb-10">This is where the real work begins. Here’s how you actively participate and make an impact:</p>
+            <p className="text-center text-xl mb-10">
+              This is where the real work begins. Here’s how you actively participate and make an impact:
+            </p>
             
             <div className="grid md:grid-cols-2 gap-8 text-lg leading-relaxed">
               <div>
