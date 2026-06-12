@@ -120,12 +120,12 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* How You Make This Happen - Button placed here */}
-          <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-12 text-center">
+          {/* How You Make This Happen - Tightened spacing + Red Button */}
+          <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-10 text-center">
             <h2 className="text-4xl font-bold mb-6">How You Make This Happen</h2>
-            <p className="text-xl mb-10">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
+            <p className="text-xl mb-8">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
             
-            <div className="text-left max-w-2xl mx-auto space-y-6 text-lg mb-12">
+            <div className="text-left max-w-2xl mx-auto space-y-4 text-lg mb-10">
               <p>• Stay informed and engaged — use our resources and training</p>
               <p>• Bring fellow patriots into the Network (referral rewards for growing this family)</p>
               <p>• Build the America First Citizens Network by having new members apply</p>
