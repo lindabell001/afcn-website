@@ -7,7 +7,7 @@ const navItems = [
   { to: "/about", label: "About" },
   { to: "/resources", label: "Resources" },
   { to: "/become-one", label: "Become One" },
-  { label: "Play DARTS", href: "https://magadarts.netlify.app" },   // Direct to real game
+  { to: "/mission", label: "Mission" },           // ← NEW
   { to: "/donate", label: "Donate" },
 ];
 
@@ -53,30 +53,18 @@ const SiteHeader = () => {
 
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
-              item.href ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 text-sm font-semibold uppercase tracking-wide rounded-sm transition-smooth text-primary hover:text-patriot-red"
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <NavLink
-                  key={item.to}
-                  to={item.to!}
-                  end={item.to === "/"}
-                  className={({ isActive }) =>
-                    `px-4 py-2 text-sm font-semibold uppercase tracking-wide rounded-sm transition-smooth ${
-                      isActive ? "text-patriot-red" : "text-primary hover:text-patriot-red"
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              )
+              <NavLink
+                key={item.to || item.label}
+                to={item.to!}
+                end={item.to === "/"}
+                className={({ isActive }) =>
+                  `px-4 py-2 text-sm font-semibold uppercase tracking-wide rounded-sm transition-smooth ${
+                    isActive ? "text-patriot-red" : "text-primary hover:text-patriot-red"
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
             ))}
           </nav>
 
@@ -89,32 +77,19 @@ const SiteHeader = () => {
           <nav className="lg:hidden border-t border-border bg-background">
             <div className="container py-2 flex flex-col">
               {navItems.map((item) => (
-                item.href ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setMobileOpen(false)}
-                    className="py-3 text-sm font-semibold uppercase tracking-wide border-b border-border last:border-0 text-primary hover:text-patriot-red"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <NavLink
-                    key={item.to}
-                    to={item.to!}
-                    end={item.to === "/"}
-                    onClick={() => setMobileOpen(false)}
-                    className={({ isActive }) =>
-                      `py-3 text-sm font-semibold uppercase tracking-wide border-b border-border last:border-0 ${
-                        isActive ? "text-patriot-red" : "text-primary"
-                      }`
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
-                )
+                <NavLink
+                  key={item.to || item.label}
+                  to={item.to!}
+                  end={item.to === "/"}
+                  onClick={() => setMobileOpen(false)}
+                  className={({ isActive }) =>
+                    `py-3 text-sm font-semibold uppercase tracking-wide border-b border-border last:border-0 ${
+                      isActive ? "text-patriot-red" : "text-primary"
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
               ))}
             </div>
           </nav>
