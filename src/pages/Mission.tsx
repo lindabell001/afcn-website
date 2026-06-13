@@ -63,7 +63,7 @@ export default function Mission() {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white border border-border p-8 rounded-2xl">
                 <h3 className="text-2xl font-semibold text-patriot-red mb-4">SAVE America Act & Election Integrity</h3>
-                <p className="text-lg">Every legal vote must count. Every citizen’s voice must matter. We work to secure honest elections through transparency, verifiable processes, voter ID, strict enforcement of election laws, and the SAVE America Act — because free and fair elections are the bedrock of self-government.</p>
+                <p className="text-lg">Every legal vote must count. Every citizen’s voice must matter. We work to secure honest elections through transparency, verifiable processes, voter ID, strict enforcement of election laws, and the SAVE America Act.</p>
               </div>
 
               <div className="bg-white border border-border p-8 rounded-2xl">
@@ -73,7 +73,7 @@ export default function Mission() {
 
               <div className="bg-white border border-border p-8 rounded-2xl">
                 <h3 className="text-2xl font-semibold text-patriot-red mb-4">Deep State Accountability</h3>
-                <p className="text-lg">We demand full transparency and accountability from <strong>ANY government institutions</strong>. We will expose and dismantle the weaponization of government against the American people and restore the Republic to its rightful owners — We The People.</p>
+                <p className="text-lg">We demand full transparency and accountability from every government institution. We will expose and dismantle the weaponization of government against the American people and return power where it belongs — to We The People.</p>
               </div>
 
               <div className="bg-white border border-border p-8 rounded-2xl">
@@ -83,19 +83,17 @@ export default function Mission() {
             </div>
           </div>
 
-          {/* As a Member */}
+          {/* As a Member, You */}
           <div className="mb-16 bg-white border border-border rounded-2xl p-10">
             <h2 className="text-4xl font-bold text-patriot-blue mb-8 text-center">
-              As a Member
+              As a Member, You:
             </h2>
-            <p className="text-center text-xl mb-10">
-              Here’s how you actively participate and make an impact:
-            </p>
+            <p className="text-center text-xl mb-10">This is where the real work begins. Here’s how you actively participate and make an impact:</p>
             
             <div className="grid md:grid-cols-2 gap-8 text-lg leading-relaxed">
               <div>
                 <strong>Join or start Committees of Observation</strong><br />
-                Private chat groups on the website forming watchdog groups that monitor and act in your community or about your issue.
+                Private chat groups forming local watchdog teams that monitor government, schools, and elections in your community or about your issue.
               </div>
               <div>
                 <strong>Chat with all members in America First Tavern</strong><br />
@@ -107,7 +105,7 @@ export default function Mission() {
               </div>
               <div>
                 <strong>Send Direct Messages</strong><br />
-                Privately message other members for one-on-one conversations, collaboration, or networking.
+                Privately message other members for collaboration and networking.
               </div>
               <div>
                 <strong>Add Resources</strong><br />
@@ -115,23 +113,24 @@ export default function Mission() {
               </div>
               <div className="md:col-span-2">
                 <strong>Submit Your Patriot Story</strong><br />
-                Share your experiences, victories, or testimony for publication on our site to inspire others. Submit Your Patriot Story to Linda. (She loves reading them!) They are published so everyone can read them.
+                Share your experiences, victories, or testimony for publication on our site to inspire others. Submit Your Patriot Story to Linda. (She loves reading them!)
               </div>
             </div>
           </div>
 
-          {/* How You Make This Happen - Tight Spacing */}
-          <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-8 text-center">
-            <h2 className="text-4xl font-bold mb-4">How You Make This Happen</h2>
+          {/* How You Make This Happen - Tighter Spacing */}
+          <div className="bg-gradient-to-br from-patriot-blue to-blue-900 text-white rounded-3xl p-12 text-center">
+            <h2 className="text-4xl font-bold mb-6">How You Make This Happen</h2>
+            <p className="text-xl mb-8">This movement grows because of <strong>you</strong>. Every member is a builder.</p>
 
             <a 
               href="/signup.html"
-              className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-6 rounded-xl transition-all"
+              className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-12 py-6 rounded-xl transition-all mb-6"
             >
               Become a Member – Fill Out Application
             </a>
 
-            <p className="text-3xl font-medium mt-6">
+            <p className="text-3xl font-medium">
               You are not just joining an organization.<br />
               <span className="text-patriot-red">You are rebuilding the Republic.</span>
             </p>
