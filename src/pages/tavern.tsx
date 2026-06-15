@@ -7,29 +7,55 @@ export default function Tavern() {
   const [rooms, setRooms] = useState<any[]>([]);
   const [selectedRoom, setSelectedRoom] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchRooms = async () => {
-      const { data, error } = await supabase
-        .from('chat_rooms')
-        .select('*')
-        .order('type', { ascending: false }); // Tavern first
+      try {
+        const { data, error } = await supabase
+          .from('chat_rooms')
+          .select('*')
+          .order('type', { ascending: false });
 
-      if (error) console.error('Error fetching rooms:', error);
-      else {
-        setRooms(data || []);
-        if (data && data.length > 0) {
-          setSelectedRoom(data[0]); // Auto-select the Tavern
+        if (error) {
+          console.error('Error fetching rooms:', error);
+          setError('Failed to load chat rooms. Please make sure you are logged in.');
+        } else {
+          setRooms(data || []);
+          if (data && data.length > 0) {
+            setSelectedRoom(data[0]); // Auto-select Tavern
+          }
         }
+      } catch (err) {
+        setError('Something went wrong. Please try again later.');
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchRooms();
   }, []);
 
   if (loading) {
-    return <div className="p-12 text-center">Loading America First Tavern...</div>;
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-xl">Loading America First Tavern...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <p className="text-red-600 text-xl mb-4">{error}</p>
+          <p className="text-gray-600">You may need to log in first.</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -43,7 +69,7 @@ export default function Tavern() {
         </p>
 
         <div className="grid md:grid-cols-4 gap-6">
-          {/* Sidebar - List of Pubs */}
+          {/* Sidebar */}
           <div className="md:col-span-1 bg-white border border-gray-200 rounded-2xl p-6 h-fit">
             <h3 className="font-bold mb-4 text-patriot-blue">ROOMS & PUBS</h3>
             {rooms.map((room) => (
@@ -61,12 +87,12 @@ export default function Tavern() {
             ))}
           </div>
 
-          {/* Main Chat Area */}
+          {/* Main Chat */}
           <div className="md:col-span-3">
             {selectedRoom ? (
               <ChatRoom room={selectedRoom} />
             ) : (
-              <p>No rooms available yet.</p>
+              <p className="text-center text-gray-500 py-12">No rooms available yet.</p>
             )}
           </div>
         </div>
