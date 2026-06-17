@@ -12,7 +12,6 @@ import Mission from './pages/Mission';
 import Tavern from './pages/tavern';
 import Locations from './pages/tavern/locations';
 import Issues from './pages/tavern/issues';
-import ChatRoomPage from './pages/tavern/chat/[slug]';
 import CommitteesOfObservation from './pages/CommitteesOfObservation';
 
 const App = () => {
@@ -27,14 +26,13 @@ const App = () => {
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
 
-          {/* Tavern System */}
+          {/* Main Hubs */}
           <Route path="/tavern" element={<Tavern />} />
+          <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
+
+          {/* List Pages */}
           <Route path="/tavern/locations" element={<Locations />} />
           <Route path="/tavern/issues" element={<Issues />} />
-          <Route path="/tavern/chat/:slug" element={<ChatRoomPage />} />
-
-          {/* Committees of Observation */}
-          <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
 
           <Route path="*" element={<div>Page Not Found</div>} />
         </Routes>
