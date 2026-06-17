@@ -19,9 +19,12 @@ export default function Locations() {
   return (
     <div className="min-h-screen bg-background py-12">
       <div className="max-w-6xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-patriot-blue text-center mb-12">
-          Location Pubs — Choose Your State or Territory
+        <h1 className="text-5xl font-bold text-patriot-blue text-center mb-12">
+          Pubs by Location
         </h1>
+        <p className="text-center text-xl text-gray-600 mb-12">
+          State/Territory, County, District, & City, Neighborhood Level
+        </p>
 
         <div className="grid md:grid-cols-4 gap-4">
           {states.map((state) => {
