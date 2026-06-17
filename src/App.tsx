@@ -9,6 +9,7 @@ import Resources from './pages/Resources';
 import BecomeOne from './pages/BecomeOne';
 import Donate from './pages/Donate';
 import Mission from './pages/Mission';
+import Tavern from './pages/tavern';          // ← Only this one added back
 
 const App = () => {
   return (
@@ -22,8 +23,8 @@ const App = () => {
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
 
-          {/* Tavern routes temporarily disabled to test */}
-          {/* <Route path="/tavern" element={<Tavern />} /> */}
+          {/* Tavern - Testing one route at a time */}
+          <Route path="/tavern" element={<Tavern />} />
 
           <Route path="*" element={<div>Page Not Found</div>} />
         </Routes>
