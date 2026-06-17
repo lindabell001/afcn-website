@@ -13,8 +13,8 @@ export default function Issues() {
   return (
     <div className="min-h-screen bg-background py-12">
       <div className="max-w-4xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-patriot-blue text-center mb-12">
-          Issue Pubs
+        <h1 className="text-5xl font-bold text-patriot-blue text-center mb-12">
+          Pubs by Issue
         </h1>
 
         <div className="grid md:grid-cols-2 gap-6">
