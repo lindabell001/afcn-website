@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../../../lib/supabaseClient';
 import SiteFooter from '../../../components/SiteFooter';
 
@@ -8,110 +8,69 @@ export default function ChatRoomPage() {
   const [room, setRoom] = useState<any>(null);
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState('');
+  const [isMember, setIsMember] = useState(false);
   const [loading, setLoading] = useState(true);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Load room info + messages
   useEffect(() => {
-    const loadRoom = async () => {
-      const { data: roomData } = await supabase
-        .from('chat_rooms')
-        .select('*')
-        .eq('slug', slug)
-        .single();
-
-      setRoom(roomData);
-
-      if (roomData) {
-        const { data: msgData } = await supabase
-          .from('messages')
+    const checkAuthAndLoad = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        setIsMember(true);
+        
+        // Load room info
+        const { data } = await supabase
+          .from('chat_rooms')
           .select('*')
-          .eq('room_id', roomData.id)
-          .order('created_at', { ascending: true });
-
-        setMessages(msgData || []);
+          .eq('slug', slug)
+          .single();
+        
+        setRoom(data);
       }
       setLoading(false);
     };
 
-    loadRoom();
+    checkAuthAndLoad();
+  }, [slug]);
 
-    // Realtime
-    const channel = supabase
-      .channel(`room-${slug}`)
-      .on('postgres_changes', 
-        { event: 'INSERT', schema: 'public', table: 'messages' },
-        (payload) => {
-          if (payload.new.room_id === room?.id) {
-            setMessages(prev => [...prev, payload.new]);
-          }
-        }
-      )
-      .subscribe();
+  if (loading) return <div className="p-12 text-center">Loading...</div>;
 
-    return () => supabase.removeChannel(channel);
-  }, [slug, room?.id]);
+  if (!isMember) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center py-20">
+        <div className="max-w-md text-center px-6">
+          <h1 className="text-5xl font-bold text-patriot-blue mb-6">Members Only</h1>
+          <p className="text-xl text-gray-600 mb-10">
+            This chat room is for America First Citizens Network members only.
+          </p>
+          <Link
+            to="/become-one"
+            className="inline-block bg-patriot-red text-white font-bold text-xl px-10 py-4 rounded-xl hover:bg-red-700 transition-all"
+          >
+            Become a Member →
+          </Link>
+          <p className="text-sm text-gray-500 mt-8">
+            Already a member? <Link to="/login" className="text-patriot-blue underline">Log in here</Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
 
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newMessage.trim() || !room) return;
-
-    const { data: { user } } = await supabase.auth.getUser();
-
-    await supabase.from('messages').insert({
-      room_id: room.id,
-      user_id: user?.id,
-      username: user?.email?.split('@')[0] || 'Patriot',
-      message: newMessage.trim()
-    });
-
-    setNewMessage('');
-  };
-
-  if (loading) return <div className="p-20 text-center">Loading chat room...</div>;
-  if (!room) return <div className="p-20 text-center text-red-600">Room not found</div>;
-
+  // Member is logged in — show chat room
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-4xl mx-auto px-6 py-8">
-        <div className="bg-white border border-gray-200 rounded-3xl shadow-sm overflow-hidden">
-          <div className="bg-patriot-blue text-white p-6">
-            <h1 className="text-3xl font-bold">{room.name}</h1>
-            <p className="text-blue-100 mt-1">{room.description}</p>
-          </div>
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <h1 className="text-4xl font-bold text-patriot-blue text-center mb-2">
+          {room?.name || "Chat Room"}
+        </h1>
+        <p className="text-center text-green-600 mb-10">Welcome, member! You are now in the live chat.</p>
 
-          <div className="h-[600px] p-6 overflow-y-auto bg-gray-50" ref={messagesEndRef}>
-            {messages.map((msg) => (
-              <div key={msg.id} className="mb-4">
-                <span className="font-semibold text-patriot-blue">{msg.username}</span>
-                <span className="text-xs text-gray-400 ml-3">
-                  {new Date(msg.created_at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
-                </span>
-                <p className="mt-1 text-gray-800">{msg.message}</p>
-              </div>
-            ))}
-          </div>
-
-          <form onSubmit={sendMessage} className="p-6 border-t bg-white">
-            <div className="flex gap-3">
-              <input
-                type="text"
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Type your message..."
-                className="flex-1 border border-gray-300 rounded-2xl px-6 py-4 focus:outline-none focus:border-patriot-blue"
-              />
-              <button
-                type="submit"
-                className="bg-patriot-red hover:bg-red-700 text-white px-10 rounded-2xl font-bold"
-              >
-                Send
-              </button>
-            </div>
-          </form>
+        {/* Chat UI will go here later */}
+        <div className="bg-white border border-gray-300 rounded-3xl h-[600px] flex items-center justify-center">
+          <p className="text-xl text-gray-500">Chat functionality coming next...</p>
         </div>
-      </main>
-
+      </div>
       <SiteFooter />
     </div>
   );
