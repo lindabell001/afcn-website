@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SiteLayout from '@/components/SiteLayout';
 
-// Page Imports - Safe & Stable
+// Page Imports
 import Index from './pages/Index';
 import About from './pages/About';
 import Resources from './pages/Resources';
@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
 
-          {/* Stable Hubs Only */}
+          {/* Main Hubs */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
 
