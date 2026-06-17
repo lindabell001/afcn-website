@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SiteLayout from '@/components/SiteLayout';
 
-// Page Imports
+// Page Imports - Safe & Stable
 import Index from './pages/Index';
 import About from './pages/About';
 import Resources from './pages/Resources';
@@ -10,9 +10,7 @@ import BecomeOne from './pages/BecomeOne';
 import Donate from './pages/Donate';
 import Mission from './pages/Mission';
 import Tavern from './pages/tavern';
-import Locations from './pages/tavern/locations';
-import Issues from './pages/tavern/issues';
-import ChatRoomPage from './pages/tavern/chat/[slug]';
+import CommitteesOfObservation from './pages/CommitteesOfObservation';
 
 const App = () => {
   return (
@@ -26,11 +24,9 @@ const App = () => {
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
 
-          {/* America First Tavern Routes */}
+          {/* Stable Hubs Only */}
           <Route path="/tavern" element={<Tavern />} />
-          <Route path="/tavern/locations" element={<Locations />} />
-          <Route path="/tavern/issues" element={<Issues />} />
-          <Route path="/tavern/chat/:slug" element={<ChatRoomPage />} />
+          <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
 
           <Route path="*" element={<div>Page Not Found</div>} />
         </Routes>
