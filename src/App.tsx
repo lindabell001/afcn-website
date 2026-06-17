@@ -12,7 +12,9 @@ import Mission from './pages/Mission';
 import Tavern from './pages/tavern';
 import Locations from './pages/tavern/locations';
 import Issues from './pages/tavern/issues';
+import ChatRoomPage from './pages/tavern/chat/[slug]';
 import CommitteesOfObservation from './pages/CommitteesOfObservation';
+import LocalCommittees from './pages/committees/local';   // ← New
 
 const App = () => {
   return (
@@ -33,6 +35,7 @@ const App = () => {
           {/* List Pages */}
           <Route path="/tavern/locations" element={<Locations />} />
           <Route path="/tavern/issues" element={<Issues />} />
+          <Route path="/committees/local" element={<LocalCommittees />} />
 
           <Route path="*" element={<div>Page Not Found</div>} />
         </Routes>
