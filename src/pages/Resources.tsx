@@ -1,106 +1,56 @@
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SiteFooter from '../components/SiteFooter';
 
-const Resources = () => {
+export default function Resources() {
   return (
-    <>
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        {/* Hero Section */}
+    <div className="min-h-screen bg-background">
+      <main className="max-w-5xl mx-auto px-6 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold text-red-600 mb-6">
-            We’re Building a One Stop America First Resources
+          <h1 className="text-5xl md:text-6xl font-bold text-patriot-blue mb-6">
+            Resources & Tools
           </h1>
-          <p className="text-2xl text-gray-700 max-w-3xl mx-auto">
-            Curated tools, knowledge, and inspiration for active patriots — 
-            built by and for the America First movement.
+          <p className="text-2xl text-gray-600">
+            Equipping America First Citizens for Action
           </p>
-
-          <div className="mt-8 text-lg text-gray-600">
-            ✅ <strong>All resources on this page are free for everyone.</strong>
-          </div>
         </div>
 
-        {/* 10 Cards - Compact Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Take Action</h2>
-            <p className="text-gray-600 text-sm">Petitions, contacting representatives, observation guides, and civic tools.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Constitution Academy</h2>
-            <p className="text-gray-600 text-sm mb-4">
-              Study founding documents, history, webinars, quizzes, and reading trackers.
-            </p>
-            <Link 
-              to="/resources/constitution-academy"
-              className="inline-block bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-6 py-3 rounded-xl transition mb-3"
-            >
-              Enter Constitution Academy →
-            </Link>
-            <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Self-Reliance Vault</h2>
-            <p className="text-gray-600 text-sm mb-3">Preparedness guides, American-made lists, homesteading, and emergency resources.</p>
-            <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Patriotic & Religious Music</h2>
-            <p className="text-gray-600 text-sm">Inspiring patriotic songs and religious music.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Faith Resources</h2>
-            <p className="text-gray-600 text-sm">Scripture study, prayer resources, and faith-based content.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">America First Podcasts</h2>
-            <p className="text-gray-600 text-sm">The best America First based podcasts and audio content.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Deep Dives</h2>
-            <p className="text-gray-600 text-sm">Articles, research reports, essays, and historical analysis.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Webinars & Live Events</h2>
-            <p className="text-gray-600 text-sm mb-3">Live and recorded webinars and training sessions.</p>
-            <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Educational Travel</h2>
-            <p className="text-gray-600 text-sm">Historic sites and patriotic destinations.</p>
-          </div>
-
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">Books</h2>
-            <p className="text-gray-600 text-sm">Recommended reading list — America First books, founding era classics, and essential patriot literature.</p>
-            <span className="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full">Member Recommended</span>
-          </div>
-
-        </div>
-
-        {/* Final CTA - Your Requested Button Only */}
-        <div className="text-center mt-20">
-          <p className="text-xl text-gray-600 mb-6">
-            Enjoying these free resources?
-          </p>
-          <Link 
-            to="/become-one"
-            className="inline-block bg-red-600 hover:bg-red-700 text-white text-xl font-bold px-12 py-6 rounded-2xl transition"
+        {/* Top Priority Sections */}
+        <div className="grid md:grid-cols-2 gap-8 mb-20">
+          {/* 1. Taverns & Pubs */}
+          <Link
+            to="/tavern"
+            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
           >
-            Discover How We Are Re-Establishing the Active American Citizen
+            <div className="text-7xl mb-8">🍺</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Taverns & Pubs</h2>
+            <p className="text-xl text-gray-600 mb-10">Real-time Chat Groups</p>
+            <p className="text-patriot-red font-semibold group-hover:underline text-lg">
+              Join the Conversation →
+            </p>
+          </Link>
+
+          {/* 2. Committees of Observation */}
+          <Link
+            to="/committees-of-observation"
+            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
+          >
+            <div className="text-7xl mb-8">🔍</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Committees of Observation</h2>
+            <p className="text-xl text-gray-600 mb-10">Lawful Watchdog Networks</p>
+            <p className="text-patriot-red font-semibold group-hover:underline text-lg">
+              Join or Start a Committee →
+            </p>
           </Link>
         </div>
-      </div>
-    </>
-  );
-};
 
-export default Resources;
+        {/* Other Resources (you can expand later) */}
+        <div className="text-center text-gray-500 text-sm">
+          More toolkits, guides, and training coming soon...
+        </div>
+      </main>
+
+      <SiteFooter />
+    </div>
+  );
+}
