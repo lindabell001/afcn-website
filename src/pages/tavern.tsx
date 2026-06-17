@@ -5,10 +5,11 @@ import SiteFooter from '../components/SiteFooter';
 export default function Tavern() {
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-4xl mx-auto px-6 py-16">
+      <main className="max-w-5xl mx-auto px-6 py-16">
+        {/* Header / Hero */}
         <div className="text-center mb-16">
           <Link to="/tavern/chat/america-first-tavern">
-            <h1 className="text-6xl font-bold text-patriot-blue mb-6 tracking-tight hover:text-patriot-red transition-colors">
+            <h1 className="text-6xl md:text-7xl font-bold text-patriot-blue mb-6 tracking-tight hover:text-patriot-red transition-colors">
               America First Tavern
             </h1>
           </Link>
@@ -17,35 +18,36 @@ export default function Tavern() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {/* By Location Pubs */}
+        {/* Two Cards */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Location Pubs */}
           <Link
             to="/tavern/locations"
             className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
           >
-            <div className="text-7xl mb-6">🗺️</div>
-            <h2 className="text-3xl font-bold text-patriot-blue mb-3">Location Pubs</h2>
-            <p className="text-xl text-gray-600 mb-8">50 States + 5 Territories</p>
-            <p className="text-patriot-red font-semibold group-hover:underline">
+            <div className="text-7xl mb-8">🗺️</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Location Pubs</h2>
+            <p className="text-xl text-gray-600 mb-10">50 States + 5 Territories</p>
+            <p className="text-patriot-red font-semibold group-hover:underline text-lg">
               Join your State or Territory Pub →
             </p>
           </Link>
 
-          {/* By Issue Pubs */}
+          {/* Issue Pubs */}
           <Link
             to="/tavern/issues"
             className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
           >
-            <div className="text-7xl mb-6">🎯</div>
-            <h2 className="text-3xl font-bold text-patriot-blue mb-3">Issue Pubs</h2>
-            <p className="text-xl text-gray-600 mb-8">Focused Discussion Rooms</p>
-            <p className="text-patriot-red font-semibold group-hover:underline">
+            <div className="text-7xl mb-8">🎯</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Issue Pubs</h2>
+            <p className="text-xl text-gray-600 mb-10">Focused Discussion Rooms</p>
+            <p className="text-patriot-red font-semibold group-hover:underline text-lg">
               Join an Issue Pub →
             </p>
           </Link>
         </div>
 
-        <p className="text-center text-gray-500 mt-16 text-sm">
+        <p className="text-center text-gray-500 mt-16">
           All Pubs are for vetted members only • Real-time chat
         </p>
       </main>
