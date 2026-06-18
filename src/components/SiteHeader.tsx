@@ -39,25 +39,15 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Main Nav Bar */}
+      {/* Main Nav Bar - Logo Only */}
       <div className="bg-background border-b border-border shadow-sm">
         <div className="container flex items-center justify-between h-20 px-4">
-          <Link to="/" className="flex items-center gap-4">
-            {/* YOUR FINAL LOGO */}
+          <Link to="/" className="flex items-center">
             <img 
               src="/logo.jpg" 
               alt="America First Citizens Network" 
-              className="h-14 w-auto flex-shrink-0"
+              className="h-16 w-auto flex-shrink-0"
             />
-            
-            <div className="flex flex-col">
-              <div className="font-serif text-2xl font-bold leading-none text-primary">
-                America First Citizens Network
-              </div>
-              <div className="text-patriot-red text-base font-medium tracking-wide mt-1">
-                Active Citizenship for the Next 250 Years
-              </div>
-            </div>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
