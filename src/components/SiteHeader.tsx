@@ -41,12 +41,13 @@ const SiteHeader = () => {
 
       {/* Main Nav Bar - Bigger Logo */}
       <div className="bg-background border-b border-border shadow-sm">
-        <div className="container flex items-center justify-between h-24 px-4">   {/* Increased height */}
+        <div className="container flex items-center justify-between h-24 px-4">
           <Link to="/" className="flex items-center">
+            {/* YOUR FULL LOGO (with text + slogan) */}
             <img 
               src="/logo.jpg" 
               alt="America First Citizens Network" 
-              className="h-20 w-auto flex-shrink-0"   {/* Bigger logo */}
+              className="h-20 w-auto flex-shrink-0"
             />
           </Link>
 
