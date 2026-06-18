@@ -43,9 +43,9 @@ const SiteHeader = () => {
       <div className="bg-background border-b border-border shadow-sm">
         <div className="container flex items-center justify-between h-20 px-4">
           <Link to="/" className="flex items-center gap-4">
-            {/* New Logo */}
+            {/* YOUR FINAL LOGO */}
             <img 
-              src="/logo.png" 
+              src="/logo.jpg" 
               alt="America First Citizens Network" 
               className="h-14 w-auto flex-shrink-0"
             />
