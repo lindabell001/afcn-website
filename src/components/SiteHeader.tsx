@@ -29,12 +29,11 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Logo Only */}
+      {/* Logo Only - No alt text */}
       <div className="container flex items-center justify-between h-24 px-4">
         <Link to="/">
           <img 
-            src="/logo.jpg?v=20250618final" 
-            alt="America First Citizens Network" 
+            src="/logo.jpg?v=999999" 
             className="h-20 w-auto flex-shrink-0"
           />
         </Link>
