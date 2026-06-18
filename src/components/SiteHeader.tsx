@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import newlogo from "@/assets/newlogo.jpg";   // ← This is the key line
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -29,11 +30,12 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Logo Only - No alt text */}
+      {/* Logo Only */}
       <div className="container flex items-center justify-between h-24 px-4">
         <Link to="/">
           <img 
-            src="/logo.jpg?v=999999" 
+            src={newlogo} 
+            alt="America First Citizens Network" 
             className="h-20 w-auto flex-shrink-0"
           />
         </Link>
