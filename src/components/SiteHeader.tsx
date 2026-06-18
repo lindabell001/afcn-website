@@ -1,13 +1,13 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import { ChevronDown, Flag, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 const navItems = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/resources", label: "Resources" },
   { to: "/become-one", label: "Become One" },
-  { to: "/mission", label: "Mission" },           // ← NEW
+  { to: "/mission", label: "Mission" },
   { to: "/donate", label: "Donate" },
 ];
 
@@ -39,16 +39,25 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* White nav bar - Your exact style */}
+      {/* White nav bar */}
       <div className="bg-background border-b border-border shadow-sm">
-        <div className="container flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2 font-bold text-primary">
-            <span className="inline-flex h-8 w-10 items-center justify-center rounded-sm bg-patriot-blue">
-              <Flag className="h-4 w-4 text-white" fill="white" />
-            </span>
-            <span className="font-serif text-base sm:text-lg leading-tight">
-              America First<br className="sm:hidden" /> Citizens Network
-            </span>
+        <div className="container flex items-center justify-between h-20">
+          <Link to="/" className="flex items-center gap-3">
+            {/* New Logo */}
+            <img 
+              src="/logo.png" 
+              alt="America First Citizens Network" 
+              className="h-14 w-auto"
+            />
+            
+            <div>
+              <div className="font-serif text-xl sm:text-2xl font-bold leading-tight text-primary">
+                America First Citizens Network
+              </div>
+              <div className="text-patriot-red text-sm sm:text-base font-medium tracking-wide">
+                Active Citizenship for the Next 250 Years
+              </div>
+            </div>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
