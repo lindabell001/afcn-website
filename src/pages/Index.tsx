@@ -4,7 +4,7 @@ import heroRays from "@/assets/hero-rays.jpg";
 const Index = () => {
   return (
     <>
-      {/* Hero - Original Divine Light Flag */}
+      {/* Hero Section - Clean & Powerful */}
       <section className="relative overflow-hidden">
         <div className="relative h-[88vh] min-h-[560px] w-full">
           <img
@@ -12,7 +12,7 @@ const Index = () => {
             alt="American flag with divine light rays"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          
+
           {/* Divine rays overlay */}
           <div
             className="absolute inset-0 pointer-events-none"
@@ -24,25 +24,16 @@ const Index = () => {
 
           <div className="relative z-10 h-full flex items-center">
             <div className="container text-center px-6">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
-                America First Citizens Network
-              </h1>
-              <p className="mt-6 text-xl md:text-2xl font-serif italic text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
-                — Active Citizenship for the Next 250 Years —
-              </p>
-
-              {/* Three Beautiful Buttons */}
+              {/* No repeated text here - Header logo handles branding */}
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 
-                {/* Blue - Read Stories */}
                 <Link
-                  to="/patriots-stories"
-                  className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
+                  to="/become-one"
+                  className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-10 py-4 rounded-lg shadow-lg transition-all duration-200"
                 >
-                  READ MEMBERS PATRIOT STORIES!
+                  BECOME A MEMBER
                 </Link>
 
-                {/* Red - Play MAGA DARTS */}
                 <a
                   href="https://magadarts.netlify.app"
                   target="_blank"
@@ -52,21 +43,17 @@ const Index = () => {
                   → PLAY MAGA-DARTS NOW!
                 </a>
 
-                {/* Blue - Become a Member */}
                 <Link
-                  to="/become-one"
-                  className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg shadow-lg transition-all duration-200"
+                  to="/resources"
+                  className="inline-flex items-center gap-2 bg-[#002868] hover:bg-[#001f4d] text-white text-base font-bold uppercase tracking-wider px-8 py-4 rounded-lg shadow-lg transition-all duration-200"
                 >
-                  BECOME A MEMBER
+                  EXPLORE RESOURCES
                 </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* You can add more sections below (Agenda, etc.) later */}
-
     </>
   );
 };
