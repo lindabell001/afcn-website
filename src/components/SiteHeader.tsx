@@ -29,11 +29,15 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Header without logo - for testing */}
-      <div className="container flex items-center justify-between h-20 px-4">
-        <div className="text-xl font-bold text-primary">
-          {/* Logo removed for testing */}
-        </div>
+      {/* Logo Only */}
+      <div className="container flex items-center justify-between h-24 px-4">
+        <Link to="/">
+          <img 
+            src="/logo.jpg" 
+            alt="America First Citizens Network" 
+            className="h-20 w-auto flex-shrink-0"
+          />
+        </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
