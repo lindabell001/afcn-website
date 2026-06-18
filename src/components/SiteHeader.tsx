@@ -39,22 +39,22 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* White nav bar */}
+      {/* Main Nav Bar */}
       <div className="bg-background border-b border-border shadow-sm">
-        <div className="container flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center gap-3">
+        <div className="container flex items-center justify-between h-20 px-4">
+          <Link to="/" className="flex items-center gap-4">
             {/* New Logo */}
             <img 
               src="/logo.png" 
               alt="America First Citizens Network" 
-              className="h-14 w-auto"
+              className="h-14 w-auto flex-shrink-0"
             />
             
-            <div>
-              <div className="font-serif text-xl sm:text-2xl font-bold leading-tight text-primary">
+            <div className="flex flex-col">
+              <div className="font-serif text-2xl font-bold leading-none text-primary">
                 America First Citizens Network
               </div>
-              <div className="text-patriot-red text-sm sm:text-base font-medium tracking-wide">
+              <div className="text-patriot-red text-base font-medium tracking-wide mt-1">
                 Active Citizenship for the Next 250 Years
               </div>
             </div>
@@ -82,9 +82,10 @@ const SiteHeader = () => {
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {mobileOpen && (
           <nav className="lg:hidden border-t border-border bg-background">
-            <div className="container py-2 flex flex-col">
+            <div className="container py-2 flex flex-col px-4">
               {navItems.map((item) => (
                 <NavLink
                   key={item.to || item.label}
