@@ -39,14 +39,14 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Main Nav Bar - Logo Only */}
+      {/* Main Nav Bar - Bigger Logo */}
       <div className="bg-background border-b border-border shadow-sm">
-        <div className="container flex items-center justify-between h-20 px-4">
+        <div className="container flex items-center justify-between h-24 px-4">   {/* Increased height */}
           <Link to="/" className="flex items-center">
             <img 
               src="/logo.jpg" 
               alt="America First Citizens Network" 
-              className="h-16 w-auto flex-shrink-0"
+              className="h-20 w-auto flex-shrink-0"   {/* Bigger logo */}
             />
           </Link>
 
