@@ -33,7 +33,7 @@ const SiteHeader = () => {
       <div className="container flex items-center justify-between h-24 px-4">
         <Link to="/">
           <img 
-            src="/logo.jpg" 
+            src="/logo.jpg?v=20250618" 
             alt="America First Citizens Network" 
             className="h-20 w-auto flex-shrink-0"
           />
