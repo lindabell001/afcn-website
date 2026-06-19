@@ -32,7 +32,7 @@ const Index = () => {
                 The start of the next 250 years
               </p>
 
-              {/* Three Clean Buttons */}
+              {/* Fixed Buttons */}
               <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   to="/resources"
