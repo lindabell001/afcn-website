@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SiteFooter from '../components/SiteFooter';
 
 export default function Resources() {
   return (
@@ -98,8 +97,6 @@ export default function Resources() {
           </div>
         </div>
       </main>
-
-      <SiteFooter />
     </div>
   );
 }
