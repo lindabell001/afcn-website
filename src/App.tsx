@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 import SiteLayout from '@/components/SiteLayout';
 
-// Main Pages
+// Main Stable Pages
 import Index from './pages/Index';
 import About from './pages/About';
 import Resources from './pages/Resources';
@@ -10,13 +11,24 @@ import BecomeOne from './pages/BecomeOne';
 import Donate from './pages/Donate';
 import Mission from './pages/Mission';
 
-// Tavern & Committees (basic ones only)
+// Core Secondary Pages
 import Tavern from './pages/tavern';
 import CommitteesOfObservation from './pages/CommitteesOfObservation';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+
+  return null;
+}
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <SiteLayout>
         <Routes>
           <Route path="/" element={<Index />} />
