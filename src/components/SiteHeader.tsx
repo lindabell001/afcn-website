@@ -28,7 +28,7 @@ const SiteHeader = () => {
             <ChevronDown className={`h-4 w-4 transition-transform ${loginOpen ? "rotate-180" : ""}`} />
           </button>
 
-          {/* Simplified Dropdown - For Members Only */}
+          {/* Member Login Dropdown */}
           {loginOpen && (
             <div className="absolute right-6 top-10 w-64 bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 py-2 z-50">
               <Link 
@@ -50,17 +50,20 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Main Bright Flag Blue Header */}
-      <div className="bg-[#002868] py-7">
+      {/* Main Header - Bright Flag Blue + Large Logo Only */}
+      <div className="bg-[#002868] py-8">
         <div className="container flex items-center justify-between px-4">
+          
+          {/* ONLY the Logo - No Text */}
           <Link to="/">
             <img 
               src="/newlogo.jpg?v=20250619" 
               alt="America First Citizens Network" 
-              className="h-28 w-auto flex-shrink-0" 
+              className="h-36 w-auto flex-shrink-0"   // ← Much larger logo
             />
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
               <NavLink
@@ -80,6 +83,7 @@ const SiteHeader = () => {
             ))}
           </nav>
 
+          {/* Mobile Menu Button */}
           <button 
             className="lg:hidden text-white p-2" 
             onClick={() => setMobileOpen(!mobileOpen)}
