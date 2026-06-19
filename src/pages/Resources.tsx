@@ -84,14 +84,14 @@ export default function Resources() {
 
             <Link
               to="/tavern"
-              className="inline-block bg-white hover:bg-gray-50 border-2 border-patriot-blue text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all"
+              className="inline-block bg-white hover:bg-gray-50 border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all"
             >
               Explore Tavern & Pubs
             </Link>
 
             <Link
               to="/committees-of-observation"
-              className="inline-block bg-white hover:bg-gray-50 border-2 border-patriot-blue text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all"
+              className="inline-block bg-white hover:bg-gray-50 border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all"
             >
               Explore Committees
             </Link>
