@@ -28,21 +28,14 @@ const SiteHeader = () => {
             <ChevronDown className={`h-4 w-4 transition-transform ${loginOpen ? "rotate-180" : ""}`} />
           </button>
 
-          {/* Member Login Dropdown */}
           {loginOpen && (
             <div className="absolute right-6 top-10 w-64 bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 py-2 z-50">
-              <Link 
-                to="/member-login" 
-                onClick={() => setLoginOpen(false)}
-                className="block px-6 py-3 hover:bg-gray-100 font-medium"
-              >
+              <Link to="/member-login" onClick={() => setLoginOpen(false)} className="block px-6 py-3 hover:bg-gray-100 font-medium">
                 Login to Member Portal
               </Link>
-              <a 
-                href="mailto:membership@americafirstcitizensnetwork.org?subject=Forgot%20Password%20Request"
-                onClick={() => setLoginOpen(false)}
-                className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-600"
-              >
+              <a href="mailto:membership@americafirstcitizensnetwork.org?subject=Forgot Password Request" 
+                 onClick={() => setLoginOpen(false)} 
+                 className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-600">
                 Forgot Password?
               </a>
             </div>
@@ -50,21 +43,21 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Main Header - Bright Flag Blue + Large Logo Only */}
+      {/* Main Header - Bright Blue + Logo Only */}
       <div className="bg-[#002868] py-8">
-        <div className="container flex items-center justify-between px-4">
+        <div className="container flex items-center justify-between px-6">
           
-          {/* ONLY the Logo - No Text */}
+          {/* Logo Only - No Text */}
           <Link to="/">
             <img 
               src="/newlogo.jpg?v=20250619" 
               alt="America First Citizens Network" 
-              className="h-36 w-auto flex-shrink-0"   // ← Much larger logo
+              className="h-32 w-auto flex-shrink-0" 
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Navigation */}
+          <nav className="hidden lg:flex items-center gap-2">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -72,9 +65,7 @@ const SiteHeader = () => {
                 end={item.to === "/"}
                 className={({ isActive }) =>
                   `px-5 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-all rounded-sm ${
-                    isActive 
-                      ? "border-b-2 border-white" 
-                      : "hover:text-white/80 hover:bg-white/10"
+                    isActive ? "border-b-2 border-white" : "hover:text-white/80 hover:bg-white/10"
                   }`
                 }
               >
@@ -83,7 +74,6 @@ const SiteHeader = () => {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
           <button 
             className="lg:hidden text-white p-2" 
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -96,7 +86,7 @@ const SiteHeader = () => {
       {/* Mobile Menu */}
       {mobileOpen && (
         <nav className="lg:hidden bg-[#002868] border-t border-white/20">
-          <div className="container py-4 flex flex-col px-4">
+          <div className="container py-4 flex flex-col px-6">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
