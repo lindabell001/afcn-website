@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Mission = () => {
   return (
@@ -42,11 +43,28 @@ const Mission = () => {
             This is your opportunity to help shape the next 250 years.
           </p>
 
-          <div className="pt-8 border-t border-border">
+          <div className="pt-12 border-t border-border mt-12">
             <p className="text-xl font-semibold">
               <strong>We the People</strong> of the United States, in Order to form a more perfect Union, <strong>reestablish Justice</strong>, secure our borders, insure domestic Tranquility, provide for the common defense, promote the general Welfare <strong>of American citizens first</strong>, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this <strong>America First Citizens Network</strong>.
             </p>
           </div>
+        </div>
+
+        {/* Two Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-16">
+          <Link
+            to="/become-one"
+            className="inline-flex items-center justify-center bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all shadow-lg"
+          >
+            Become a Member
+          </Link>
+
+          <Link
+            to="/resources"
+            className="inline-flex items-center justify-center bg-white hover:bg-gray-100 border border-border text-primary font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all"
+          >
+            Continue Exploring
+          </Link>
         </div>
       </div>
     </div>
