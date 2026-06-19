@@ -17,7 +17,7 @@ const SiteHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
-      {/* Red Top Bar */}
+      {/* Red Top Bar with Dropdown */}
       <div className="bg-patriot-red text-white text-sm">
         <div className="container flex justify-end items-center h-10 relative">
           <button
@@ -27,14 +27,34 @@ const SiteHeader = () => {
             Member Login
             <ChevronDown className={`h-4 w-4 transition-transform ${loginOpen ? "rotate-180" : ""}`} />
           </button>
+
+          {/* Dropdown Menu */}
+          {loginOpen && (
+            <div className="absolute right-6 top-10 w-64 bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 py-2 z-50">
+              <Link 
+                to="/member-login" 
+                onClick={() => setLoginOpen(false)}
+                className="block px-6 py-3 hover:bg-gray-100 font-medium"
+              >
+                Login to Member Portal
+              </Link>
+              <a 
+                href="mailto:membership@americafirstcitizensnetwork.org?subject=Forgot Password Request"
+                onClick={() => setLoginOpen(false)}
+                className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-600"
+              >
+                Forgot Password?
+              </a>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Main Header - Completely Empty Upper Left */}
+      {/* Main Header - Empty Upper Left */}
       <div className="bg-[#002868] py-8">
-        <div className="container flex items-center justify-center px-6">   {/* Centered nav, nothing on left */}
+        <div className="container flex items-center justify-center px-6">   {/* Centered nav */}
 
-          {/* UPPER LEFT IS NOW COMPLETELY EMPTY */}
+          {/* UPPER LEFT IS COMPLETELY EMPTY */}
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-2">
