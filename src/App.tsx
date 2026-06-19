@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useEffect } from 'react';
 import SiteLayout from '@/components/SiteLayout';
 
-// Page Imports
+// Main Page Imports
 import Index from './pages/Index';
 import About from './pages/About';
 import Resources from './pages/Resources';
@@ -11,18 +11,18 @@ import BecomeOne from './pages/BecomeOne';
 import Donate from './pages/Donate';
 import Mission from './pages/Mission';
 
-// Tavern & Committees
+// Tavern Routes (keep these - they were working before)
 import Tavern from './pages/tavern';
 import Locations from './pages/tavern/locations';
 import Issues from './pages/tavern/issues';
 import ChatRoomPage from './pages/tavern/chat/[slug]';
+
+// Committees
 import CommitteesOfObservation from './pages/CommitteesOfObservation';
-import LocalCommittees from './pages/committees/local';
-import CommitteesIssues from './pages/committees/issues';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-
+  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
@@ -49,12 +49,10 @@ const App = () => {
           <Route path="/tavern/issues" element={<Issues />} />
           <Route path="/tavern/chat/:slug" element={<ChatRoomPage />} />
 
-          {/* Committees Routes */}
+          {/* Committees */}
           <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
-          <Route path="/committees/local" element={<LocalCommittees />} />
-          <Route path="/committees/issues" element={<CommitteesIssues />} />
 
-          <Route path="*" element={<div>Page Not Found</div>} />
+          <Route path="*" element={<div className="text-center py-20">Page Not Found</div>} />
         </Routes>
       </SiteLayout>
     </Router>
