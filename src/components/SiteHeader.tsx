@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import newlogo from "@/assets/newlogo.jpg";   // ← Import from src/assets
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -30,13 +31,20 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Main Header - EMPTY LEFT SIDE */}
+      {/* Main Header - Logo in Upper Left */}
       <div className="bg-[#002868] py-8">
-        <div className="container flex items-center justify-center px-6">   {/* Centered nav */}
+        <div className="container flex items-center justify-between px-6">
+          
+          {/* Logo Only - Upper Left */}
+          <Link to="/">
+            <img 
+              src={newlogo} 
+              alt="America First Citizens Network" 
+              className="h-32 w-auto flex-shrink-0" 
+            />
+          </Link>
 
-          {/* UPPER LEFT IS COMPLETELY EMPTY - NO LOGO, NO TEXT */}
-
-          {/* Navigation - Centered */}
+          {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-2">
             {navItems.map((item) => (
               <NavLink
@@ -44,7 +52,7 @@ const SiteHeader = () => {
                 to={item.to}
                 end={item.to === "/"}
                 className={({ isActive }) =>
-                  `px-6 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-all rounded-sm ${
+                  `px-5 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-all rounded-sm ${
                     isActive ? "border-b-2 border-white" : "hover:text-white/80 hover:bg-white/10"
                   }`
                 }
