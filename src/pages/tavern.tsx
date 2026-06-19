@@ -8,8 +8,11 @@ export default function Tavern() {
       <main className="max-w-5xl mx-auto px-6 py-16">
         {/* Header / Hero - Main General Chat */}
         <div className="text-center mb-16">
-          <Link to="/tavern/chat/america-first-tavern">
-            <h1 className="text-6xl md:text-7xl font-bold text-patriot-blue mb-6 tracking-tight hover:text-patriot-red transition-colors">
+          <Link 
+            to="/tavern/chat/america-first-tavern"
+            className="group inline-block"
+          >
+            <h1 className="text-6xl md:text-7xl font-bold text-patriot-blue mb-6 tracking-tight hover:text-patriot-red transition-all duration-200 group-hover:underline">
               America First Tavern
             </h1>
           </Link>
