@@ -1,7 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import newlogo from "@/assets/newlogo.jpg";   // ← Import from src/assets
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -28,23 +27,41 @@ const SiteHeader = () => {
             Member Login
             <ChevronDown className={`h-4 w-4 transition-transform ${loginOpen ? "rotate-180" : ""}`} />
           </button>
+
+          {/* Dropdown */}
+          {loginOpen && (
+            <div 
+              className="absolute right-4 top-10 w-64 bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 py-2 z-50"
+              onClick={() => setLoginOpen(false)}   // Close when clicking inside
+            >
+              <Link 
+                to="/member-login" 
+                className="block px-6 py-3 hover:bg-gray-100 font-medium"
+              >
+                Login to Member Portal
+              </Link>
+              <a 
+                href="mailto:membership@americafirstcitizensnetwork.org?subject=Forgot Password Request"
+                className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-600"
+              >
+                Forgot Password?
+              </a>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Main Header - Logo in Upper Left */}
+      {/* Main Header */}
       <div className="bg-[#002868] py-8">
         <div className="container flex items-center justify-between px-6">
-          
-          {/* Logo Only - Upper Left */}
           <Link to="/">
             <img 
-              src={newlogo} 
+              src="/newlogo.jpg?v=20250619" 
               alt="America First Citizens Network" 
               className="h-32 w-auto flex-shrink-0" 
             />
           </Link>
 
-          {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-2">
             {navItems.map((item) => (
               <NavLink
