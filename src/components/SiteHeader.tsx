@@ -30,17 +30,13 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Main Header - LOGO ONLY */}
+      {/* Main Header - EMPTY LEFT SIDE */}
       <div className="bg-[#002868] py-8">
-        <div className="container flex items-center justify-between px-6">
-          <Link to="/">
-            <img 
-              src="/newlogo.jpg?v=20250619-clean" 
-              alt="America First Citizens Network" 
-              className="h-32 w-auto" 
-            />
-          </Link>
+        <div className="container flex items-center justify-center px-6">   {/* Centered nav */}
 
+          {/* UPPER LEFT IS COMPLETELY EMPTY - NO LOGO, NO TEXT */}
+
+          {/* Navigation - Centered */}
           <nav className="hidden lg:flex items-center gap-2">
             {navItems.map((item) => (
               <NavLink
@@ -48,7 +44,7 @@ const SiteHeader = () => {
                 to={item.to}
                 end={item.to === "/"}
                 className={({ isActive }) =>
-                  `px-5 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-all rounded-sm ${
+                  `px-6 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-all rounded-sm ${
                     isActive ? "border-b-2 border-white" : "hover:text-white/80 hover:bg-white/10"
                   }`
                 }
