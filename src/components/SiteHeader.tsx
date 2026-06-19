@@ -1,14 +1,13 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import newlogo from "@/assets/newlogo.jpg";   // ← This is the key line
 
 const navItems = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/resources", label: "Resources" },
-  { to: "/become-one", label: "Become One" },
   { to: "/mission", label: "Mission" },
+  { to: "/resources", label: "Resources" },
+  { to: "/about", label: "About" },
+  { to: "/become-one", label: "Become One" },
   { to: "/donate", label: "Donate" },
 ];
 
@@ -18,61 +17,89 @@ const SiteHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
-      {/* Red top bar */}
-      <div className="bg-patriot-red text-primary-foreground text-sm">
-        <div className="container flex justify-end items-center h-9 relative">
+      {/* Red Top Bar */}
+      <div className="bg-patriot-red text-white text-sm">
+        <div className="container flex justify-end items-center h-10 relative">
           <button
             onClick={() => setLoginOpen(!loginOpen)}
-            className="flex items-center gap-1 font-medium hover:text-white/80 transition-smooth"
+            className="flex items-center gap-1.5 font-medium hover:text-white/80 px-4 py-2"
           >
-            Member Login <ChevronDown className="h-3.5 w-3.5" />
+            Member Login
+            <ChevronDown className={`h-4 w-4 transition-transform ${loginOpen ? "rotate-180" : ""}`} />
+          </button>
+
+          {/* Simplified Dropdown - For Members Only */}
+          {loginOpen && (
+            <div className="absolute right-6 top-10 w-64 bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 py-2 z-50">
+              <Link 
+                to="/member-login" 
+                onClick={() => setLoginOpen(false)}
+                className="block px-6 py-3 hover:bg-gray-100 font-medium"
+              >
+                Login to Member Portal
+              </Link>
+              <a 
+                href="mailto:membership@americafirstcitizensnetwork.org?subject=Forgot%20Password%20Request"
+                onClick={() => setLoginOpen(false)}
+                className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-600"
+              >
+                Forgot Password?
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Main Bright Flag Blue Header */}
+      <div className="bg-[#002868] py-7">
+        <div className="container flex items-center justify-between px-4">
+          <Link to="/">
+            <img 
+              src="/newlogo.jpg?v=20250619" 
+              alt="America First Citizens Network" 
+              className="h-28 w-auto flex-shrink-0" 
+            />
+          </Link>
+
+          <nav className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === "/"}
+                className={({ isActive }) =>
+                  `px-5 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-all rounded-sm ${
+                    isActive 
+                      ? "border-b-2 border-white" 
+                      : "hover:text-white/80 hover:bg-white/10"
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+
+          <button 
+            className="lg:hidden text-white p-2" 
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
           </button>
         </div>
       </div>
 
-      {/* Logo Only */}
-      <div className="container flex items-center justify-between h-24 px-4">
-        <Link to="/">
-          <img 
-            src={newlogo} 
-            alt="America First Citizens Network" 
-            className="h-20 w-auto flex-shrink-0"
-          />
-        </Link>
-
-        <nav className="hidden lg:flex items-center gap-1">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === "/"}
-              className={({ isActive }) =>
-                `px-4 py-2 text-sm font-semibold uppercase tracking-wide rounded-sm transition-smooth ${
-                  isActive ? "text-patriot-red" : "text-primary hover:text-patriot-red"
-                }`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <button className="lg:hidden text-primary" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </div>
-
       {/* Mobile Menu */}
       {mobileOpen && (
-        <nav className="lg:hidden border-t border-border bg-background">
-          <div className="container py-2 flex flex-col px-4">
+        <nav className="lg:hidden bg-[#002868] border-t border-white/20">
+          <div className="container py-4 flex flex-col px-4">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 end={item.to === "/"}
                 onClick={() => setMobileOpen(false)}
-                className="py-3 text-sm font-semibold border-b last:border-0"
+                className="py-4 text-base font-semibold text-white border-b border-white/20 last:border-0"
               >
                 {item.label}
               </NavLink>
