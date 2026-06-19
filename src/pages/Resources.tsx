@@ -15,71 +15,48 @@ export default function Resources() {
           </p>
         </div>
 
-        {/* 1. Taverns & Pubs */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
-          <Link
-            to="/tavern"
-            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
-          >
-            <div className="text-7xl mb-8">🍺</div>
-            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Taverns & Pubs</h2>
-            <p className="text-xl text-gray-600 mb-10">Real-time Chat Groups</p>
-            <p className="text-patriot-red font-semibold group-hover:underline text-lg">
-              Join the Conversation →
-            </p>
-          </Link>
-
-          {/* 2. Committees of Observation */}
-          <Link
-            to="/committees-of-observation"
-            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
-          >
-            <div className="text-7xl mb-8">🔍</div>
-            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Committees of Observation</h2>
-            <p className="text-xl text-gray-600 mb-10">observing, recording, acting.</p>
-            <p className="text-patriot-red font-semibold group-hover:underline text-lg">
-              Join or Start a Committee →
-            </p>
-          </Link>
-        </div>
-
-        {/* 3. Constitution Academy */}
+        {/* 1. Constitution Academy */}
         <div className="bg-white p-8 rounded-3xl border border-gray-200 mb-8">
-          <h3 className="text-2xl font-bold text-patriot-blue mb-4">3. Constitution Academy</h3>
-          <p className="text-gray-600 mb-6">Videos, founding documents, and training on the Constitution and Declaration of Independence</p>
-          <Link to="/resources/constitution-academy" className="text-patriot-red font-semibold hover:underline">
+          <h3 className="text-2xl font-bold text-patriot-blue mb-4">1. Constitution Academy</h3>
+          <p className="text-gray-600 mb-6">
+            Videos, founding documents, and training on the Constitution and Declaration of Independence from Hillsdale College and other trusted sources.
+          </p>
+          <Link 
+            to="/resources/constitution-academy" 
+            className="text-patriot-red font-semibold hover:underline text-lg"
+          >
             View Constitution Academy →
           </Link>
         </div>
 
-        {/* 4. Election Integrity Toolkit */}
+        {/* 2. Election Integrity Toolkit */}
         <div className="bg-white p-8 rounded-3xl border border-gray-200 mb-8">
-          <h3 className="text-2xl font-bold text-patriot-blue mb-4">4. Election Integrity Toolkit (coming ASAP)</h3>
+          <h3 className="text-2xl font-bold text-patriot-blue mb-4">2. Election Integrity Toolkit (coming soon)</h3>
           <p className="text-gray-600">Checklists, poll watching guides, and resources for secure and honest elections.</p>
         </div>
 
-        {/* 5. Training Videos & Webinars */}
+        {/* 3. Training Videos & Webinars */}
         <div className="bg-white p-8 rounded-3xl border border-gray-200 mb-8">
-          <h3 className="text-2xl font-bold text-patriot-blue mb-4">5. Training Videos & Webinars (coming ASAP)</h3>
+          <h3 className="text-2xl font-bold text-patriot-blue mb-4">3. Training Videos & Webinars (coming soon)</h3>
           <p className="text-gray-600">Educational videos and live training sessions.</p>
         </div>
 
-        {/* 6-10. Coming Soon */}
+        {/* 4-8. Coming Soon */}
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">6. Alternative News & Media Sources (coming ASAP)</h3>
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">4. Alternative News & Media Sources (coming soon)</h3>
           </div>
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">7. Legal & Rights Resources (coming ASAP)</h3>
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">5. Legal & Rights Resources (coming soon)</h3>
           </div>
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">8. Homeschooling & Education Resources (coming ASAP)</h3>
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">6. Homeschooling & Education Resources (coming soon)</h3>
           </div>
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">9. Health & Wellness Resources (coming ASAP)</h3>
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">7. Health & Wellness Resources (coming soon)</h3>
           </div>
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">10. Business & Economic Tools (coming ASAP)</h3>
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">8. Business & Economic Tools (coming soon)</h3>
           </div>
         </div>
 
