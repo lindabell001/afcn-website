@@ -4,7 +4,6 @@ import heroRays from "@/assets/hero-rays.jpg";
 const Index = () => {
   return (
     <>
-      {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="relative h-[88vh] min-h-[560px] w-full">
           <img
@@ -13,7 +12,6 @@ const Index = () => {
             className="absolute inset-0 h-full w-full object-cover"
           />
 
-          {/* Divine rays overlay */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -24,15 +22,17 @@ const Index = () => {
 
           <div className="relative z-10 h-full flex items-center">
             <div className="container text-center px-6">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
-                America First Citizens Network
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] leading-none">
+                America First
+                <br />
+                Citizens Network
               </h1>
 
-              <p className="mt-6 text-xl md:text-2xl font-light italic text-white/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+              <p className="mt-6 text-xl md:text-2xl font-light italic text-white/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] font-medium">
                 The start of the next 250 years
               </p>
 
-              {/* Keep existing buttons for now */}
+              {/* Buttons kept as-is for now */}
               <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   to="/become-one"
