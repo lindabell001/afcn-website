@@ -39,10 +39,10 @@
       font-weight: bold; 
       cursor: pointer; 
       font-size: 18px; 
-      margin-top: 10px;
     }
     button:hover { background: #a00d24; }
-    .success { color: #4CAF50; font-weight: bold; font-size: 1.1em; }
+    .success { color: #4CAF50; }
+    .error { color: #f44336; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -74,39 +74,55 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      message.textContent = "Processing...";
+      message.className = '';
 
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName = document.getElementById('lastName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const password = document.getElementById('password').value;
-      const whyJoining = document.getElementById('whyJoining').value.trim();
-      const xHandle = document.getElementById('xHandle').value.trim();
+      try {
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const password = document.getElementById('password').value;
+        const whyJoining = document.getElementById('whyJoining').value.trim();
+        const xHandle = document.getElementById('xHandle').value.trim();
 
-      // Create Supabase account (no message shown)
-      const { error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-          data: {
-            first_name: firstName,
-            last_name: lastName,
-            phone: phone,
-            address: address,
-            why_joining: whyJoining,
-            x_handle: xHandle,
-            membership_status: "pending"   // ← Added for you
+        console.log("Attempting Supabase signup for:", email);   // ← Debug
+
+        const { data, error } = await supabase.auth.signUp({
+          email: email,
+          password: password,
+          options: {
+            data: {
+              first_name: firstName,
+              last_name: lastName,
+              phone: phone,
+              address: address,
+              why_joining: whyJoining,
+              x_handle: xHandle,
+              membership_status: "pending"
+            }
           }
-        }
-      });
+        });
 
-      if (error) {
+        if (error) {
+          console.error("Supabase Error:", error);
+          message.className = 'error';
+          message.textContent = "Error: " + error.message;
+        } else {
+          console.log("Supabase success:", data);
+          message.className = 'success';
+          message.textContent = "Account created! Redirecting to payment...";
+          
+          // Go to payment
+          setTimeout(() => {
+            window.location.href = "https://givingtools.com/give/4206";
+          }, 800);
+        }
+      } catch (err) {
+        console.error("Unexpected error:", err);
         message.className = 'error';
-        message.textContent = error.message;
-      } else {
-        // Silent success → go straight to payment
-        window.location.href = "https://givingtools.com/give/4206";
+        message.textContent = "Something went wrong. Please try again.";
       }
     });
   </script>
