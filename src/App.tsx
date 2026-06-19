@@ -18,6 +18,11 @@ import CommitteesOfObservation from './pages/CommitteesOfObservation';
 // Constitution Academy
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
 
+// Footer Pages
+import PrivacyAndData from './pages/PrivacyAndData';
+import SocialWelfareOrganization from './pages/SocialWelfareOrganization';
+import TransparencyAndOperations from './pages/TransparencyAndOperations';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -43,6 +48,11 @@ const App = () => {
 
           {/* Constitution Academy */}
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
+
+          {/* Footer Pages */}
+          <Route path="/privacy-and-data" element={<PrivacyAndData />} />
+          <Route path="/social-welfare-organization" element={<SocialWelfareOrganization />} />
+          <Route path="/transparency-and-operations" element={<TransparencyAndOperations />} />
 
           {/* Tavern & Committees */}
           <Route path="/tavern" element={<Tavern />} />
