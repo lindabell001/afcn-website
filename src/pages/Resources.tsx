@@ -15,51 +15,88 @@ export default function Resources() {
           </p>
         </div>
 
-        {/* 1. Constitution Academy */}
-        <div className="bg-white p-8 rounded-3xl border border-gray-200 mb-8">
-          <h3 className="text-2xl font-bold text-patriot-blue mb-4">1. Constitution Academy</h3>
-          <p className="text-gray-600 mb-6">
-            Videos, founding documents, and training on the Constitution and Declaration of Independence from Hillsdale College and other trusted sources.
-          </p>
-          <Link 
-            to="/resources/constitution-academy" 
-            className="text-patriot-red font-semibold hover:underline text-lg"
-          >
-            View Constitution Academy →
-          </Link>
-        </div>
+        {/* Resources List - 2 Columns */}
+        <div className="grid md:grid-cols-2 gap-8 mb-20">
+          {/* 1. Constitution Academy */}
+          <div className="bg-white p-8 rounded-3xl border border-gray-200">
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">1. Constitution Academy</h3>
+            <p className="text-gray-600 mb-6">
+              Videos, founding documents, and training on the Constitution and Declaration of Independence from Hillsdale College and other trusted sources.
+            </p>
+            <Link 
+              to="/resources/constitution-academy" 
+              className="text-patriot-red font-semibold hover:underline text-lg"
+            >
+              View Constitution Academy →
+            </Link>
+          </div>
 
-        {/* 2. Election Integrity Toolkit */}
-        <div className="bg-white p-8 rounded-3xl border border-gray-200 mb-8">
-          <h3 className="text-2xl font-bold text-patriot-blue mb-4">2. Election Integrity Toolkit (coming soon)</h3>
-          <p className="text-gray-600">Checklists, poll watching guides, and resources for secure and honest elections.</p>
-        </div>
+          {/* 2. Election Integrity Toolkit */}
+          <div className="bg-white p-8 rounded-3xl border border-gray-200">
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">2. Election Integrity Toolkit (coming soon)</h3>
+            <p className="text-gray-600">Checklists, poll watching guides, and resources for secure and honest elections.</p>
+          </div>
 
-        {/* 3. Training Videos & Webinars */}
-        <div className="bg-white p-8 rounded-3xl border border-gray-200 mb-8">
-          <h3 className="text-2xl font-bold text-patriot-blue mb-4">3. Training Videos & Webinars (coming soon)</h3>
-          <p className="text-gray-600">Educational videos and live training sessions.</p>
-        </div>
+          {/* 3. Training Videos & Webinars */}
+          <div className="bg-white p-8 rounded-3xl border border-gray-200">
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">3. Training Videos & Webinars (coming soon)</h3>
+            <p className="text-gray-600">Educational videos and live training sessions.</p>
+          </div>
 
-        {/* 4-8. Coming Soon */}
-        <div className="grid md:grid-cols-2 gap-8">
+          {/* 4. Alternative News & Media Sources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">4. Alternative News & Media Sources (coming soon)</h3>
           </div>
+
+          {/* 5. Legal & Rights Resources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">5. Legal & Rights Resources (coming soon)</h3>
           </div>
+
+          {/* 6. Homeschooling & Education Resources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">6. Homeschooling & Education Resources (coming soon)</h3>
           </div>
+
+          {/* 7. Health & Wellness Resources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">7. Health & Wellness Resources (coming soon)</h3>
           </div>
+
+          {/* 8. Business & Economic Tools */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">8. Business & Economic Tools (coming soon)</h3>
           </div>
         </div>
 
+        {/* Three Choices at Bottom */}
+        <div className="text-center mt-20">
+          <h2 className="text-3xl font-bold text-patriot-blue mb-8">
+            Ready to Take the Next Step?
+          </h2>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/become-one"
+              className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all shadow-lg"
+            >
+              Become One
+            </Link>
+
+            <Link
+              to="/tavern"
+              className="inline-block bg-white hover:bg-gray-50 border-2 border-patriot-blue text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all"
+            >
+              Explore Tavern & Pubs
+            </Link>
+
+            <Link
+              to="/committees-of-observation"
+              className="inline-block bg-white hover:bg-gray-50 border-2 border-patriot-blue text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all"
+            >
+              Explore Committees
+            </Link>
+          </div>
+        </div>
       </main>
 
       <SiteFooter />
