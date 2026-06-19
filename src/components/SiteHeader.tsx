@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import newlogo from "@/assets/newlogo.jpg";   // ← Correct import
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -17,7 +18,7 @@ const SiteHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
-      {/* Red Top Bar with Dropdown */}
+      {/* Red Top Bar */}
       <div className="bg-patriot-red text-white text-sm">
         <div className="container flex justify-end items-center h-10 relative">
           <button
@@ -28,7 +29,7 @@ const SiteHeader = () => {
             <ChevronDown className={`h-4 w-4 transition-transform ${loginOpen ? "rotate-180" : ""}`} />
           </button>
 
-          {/* Dropdown Menu */}
+          {/* Dropdown */}
           {loginOpen && (
             <div className="absolute right-6 top-10 w-64 bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 py-2 z-50">
               <Link 
@@ -50,11 +51,18 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Main Header - Empty Upper Left */}
+      {/* Main Header - Logo in Upper Left */}
       <div className="bg-[#002868] py-8">
-        <div className="container flex items-center justify-center px-6">   {/* Centered nav */}
-
-          {/* UPPER LEFT IS COMPLETELY EMPTY */}
+        <div className="container flex items-center justify-between px-6">
+          
+          {/* Logo Only */}
+          <Link to="/">
+            <img 
+              src={newlogo} 
+              alt="America First Citizens Network" 
+              className="h-32 w-auto flex-shrink-0" 
+            />
+          </Link>
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-2">
