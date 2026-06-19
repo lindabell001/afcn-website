@@ -16,7 +16,11 @@
 
   <Link
     to="/become-one"
-    onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+    onClick={() => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }, 50);
+    }}
     className="inline-block bg-white hover:bg-gray-100 text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
   >
     Become a Member
