@@ -15,6 +15,9 @@ import Mission from './pages/Mission';
 import Tavern from './pages/tavern';
 import CommitteesOfObservation from './pages/CommitteesOfObservation';
 
+// Constitution Academy
+import ConstitutionAcademy from './pages/ConstitutionAcademy';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -38,6 +41,10 @@ const App = () => {
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
 
+          {/* Constitution Academy */}
+          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
+
+          {/* Tavern & Committees */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
 
