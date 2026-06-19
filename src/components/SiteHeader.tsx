@@ -17,7 +17,7 @@ const SiteHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
-      {/* Red Top Bar - Member Login */}
+      {/* Red Top Bar */}
       <div className="bg-patriot-red text-white text-sm">
         <div className="container flex justify-end items-center h-10 relative">
           <button
@@ -27,41 +27,14 @@ const SiteHeader = () => {
             Member Login
             <ChevronDown className={`h-4 w-4 transition-transform ${loginOpen ? "rotate-180" : ""}`} />
           </button>
-
-          {/* Dropdown */}
-          {loginOpen && (
-            <div className="absolute right-6 top-10 w-64 bg-white text-gray-900 rounded-xl shadow-2xl border border-gray-200 py-2 z-50">
-              <Link 
-                to="/member-login" 
-                onClick={() => setLoginOpen(false)}
-                className="block px-6 py-3 hover:bg-gray-100 font-medium"
-              >
-                Login to Member Portal
-              </Link>
-              <a 
-                href="mailto:membership@americafirstcitizensnetwork.org?subject=Forgot Password Request"
-                onClick={() => setLoginOpen(false)}
-                className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-600"
-              >
-                Forgot Password?
-              </a>
-            </div>
-          )}
         </div>
       </div>
 
-      {/* Main Header - Logo Only */}
+      {/* Main Header - Completely Empty Upper Left */}
       <div className="bg-[#002868] py-8">
-        <div className="container flex items-center justify-between px-6">
-          
-          {/* Logo Only - Upper Left */}
-          <Link to="/">
-            <img 
-              src="/newlogo.jpg?v=20250619" 
-              alt="America First Citizens Network" 
-              className="h-32 w-auto flex-shrink-0" 
-            />
-          </Link>
+        <div className="container flex items-center justify-center px-6">   {/* Centered nav, nothing on left */}
+
+          {/* UPPER LEFT IS NOW COMPLETELY EMPTY */}
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-2">
