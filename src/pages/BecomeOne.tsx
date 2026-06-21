@@ -1,78 +1,118 @@
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/lib/supabaseClient';
 
 const BecomeOne = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage(null);
+
+    const formData = new FormData(e.currentTarget);
+    
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
+    const email = formData.get('email') as string;
+    const phone = formData.get('phone') as string;
+    const address = formData.get('address') as string;
+    const password = formData.get('password') as string;
+    const whyJoining = formData.get('whyJoining') as string;
+    const xHandle = formData.get('xHandle') as string;
+
+    try {
+      // 1. Create Auth User
+      const { data, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { first_name: firstName, last_name: lastName }
+        }
+      });
+
+      if (authError) throw authError;
+
+      // 2. Insert into profiles table
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          id: data.user?.id,
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          phone,
+          address,
+          why_joining: whyJoining,
+          x_handle: xHandle,
+          status: 'pending'
+        });
+
+      if (profileError) throw profileError;
+
+      setMessage({ type: 'success', text: 'Account created successfully! Redirecting to payment...' });
+
+      // Redirect to GivingTools
+      setTimeout(() => {
+        window.location.href = 'https://givingtools.com/give/4206';
+      }, 1500);
+
+    } catch (err: any) {
+      console.error(err);
+      setMessage({ type: 'error', text: err.message || 'Something went wrong. Please try again.' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <>
-      <div className="max-w-4xl mx-auto px-6 py-16">
+    <div className="min-h-screen bg-background py-12">
+      <div className="max-w-2xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-red-600 mb-4">Become One</h1>
-          <p className="text-2xl text-gray-700">Step Into Active Citizenship</p>
+          <h1 className="text-5xl font-bold text-patriot-blue mb-4">Become One</h1>
+          <p className="text-xl text-gray-600">Join the America First Citizens Network</p>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-xl p-10 shadow-sm">
-          <p className="text-center text-xl mb-8">
-            <strong>Becoming a member of the America First Citizens Network is simple.</strong><br />
-            It’s only <strong className="text-3xl text-red-600">$25 a year</strong>.
-          </p>
-
-          {/* Updated Button - Links to signup form */}
-          <div className="text-center mb-10">
-            <a 
-              href="/signup.html" 
-              target="_blank"
-              className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl font-bold px-16 py-6 rounded-xl transition"
-            >
-              Become a Member – Fill Out Application
-            </a>
+        <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border rounded-2xl p-10 shadow-card">
+          <div className="grid md:grid-cols-2 gap-6">
+            <input type="text" name="firstName" placeholder="First Name" required className="w-full p-4 border border-border rounded-lg" />
+            <input type="text" name="lastName" placeholder="Last Name" required className="w-full p-4 border border-border rounded-lg" />
           </div>
 
-          <p className="text-center text-lg mb-8">
-            Your application will go to our Director of Membership, <strong>Norine Cantor</strong>, 
-            who personally reviews every application.
-          </p>
+          <input type="email" name="email" placeholder="Email Address" required className="w-full p-4 border border-border rounded-lg" />
+          <input type="tel" name="phone" placeholder="Phone Number" required className="w-full p-4 border border-border rounded-lg" />
+          <input type="text" name="address" placeholder="Full Address" required className="w-full p-4 border border-border rounded-lg" />
 
-          <h2 className="text-3xl font-bold text-red-600 text-center mb-8">
-            Once Approved* You Can:
-          </h2>
+          <input type="password" name="password" placeholder="Create Password (min 6 characters)" required className="w-full p-4 border border-border rounded-lg" />
 
-          <ul className="max-w-2xl mx-auto space-y-6 text-lg">
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              Submit your Patriot Story for publication
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              <Link to="/committees-of-observation" className="text-red-600 hover:underline font-semibold">
-                Join or start Committees of Observation
-              </Link>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              <Link to="/america-first-tavern" className="text-red-600 hover:underline font-semibold">
-                Meet in America First Tavern
-              </Link>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              Connect with other patriots by location and issue
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-red-600 font-bold text-xl">•</span>
-              Access member resources and tools
-            </li>
-          </ul>
+          <textarea 
+            name="whyJoining" 
+            placeholder="Why do you want to join? What are your main concerns or interests?" 
+            rows={5}
+            required 
+            className="w-full p-4 border border-border rounded-lg"
+          />
 
-          <p className="text-center text-sm text-gray-500 mt-12">
-            * If you are not approved, your payment will be considered a donation.
-          </p>
-        </div>
+          <input type="text" name="xHandle" placeholder="X Handle (or type 'none')" required className="w-full p-4 border border-border rounded-lg" />
 
-        <p className="text-center text-sm text-gray-500 mt-12">
-          We move at the speed of trust.<br />
-          Help us build the next 250 years of America First.
-        </p>
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-5 rounded-xl text-lg transition-all disabled:opacity-50"
+          >
+            {loading ? 'Creating Account...' : 'Join AFCN Now – $25/year'}
+          </button>
+        </form>
+
+        {message && (
+          <div className={`mt-6 p-6 rounded-xl text-center text-lg ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+            {message.text}
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
