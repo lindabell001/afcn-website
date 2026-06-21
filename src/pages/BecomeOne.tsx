@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+const supabaseUrl = 'https://iskownhurcvgjrcsgtbe.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg';
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  global: {
+    headers: {
+      apikey: supabaseAnonKey,
+    },
+  },
+});
 
 const BecomeOne = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +18,7 @@ const BecomeOne = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    setMessage('Connecting to Supabase...');
+    setMessage('Sending request to Supabase...');
 
     try {
       const email = `test${Date.now()}@example.com`;
@@ -22,12 +28,13 @@ const BecomeOne = () => {
 
       if (error) throw error;
 
-      setMessage("✅ Success! Account created in Supabase.");
-      alert("✅ Success! Check your Supabase dashboard under Authentication > Users.");
+      setMessage("✅ Success! Account created.");
+      alert("✅ Success!");
     } catch (err: any) {
       console.error("Full error:", err);
-      setMessage("❌ " + (err.message || JSON.stringify(err)));
-      alert("Error: " + (err.message || JSON.stringify(err)));
+      const errorText = err.message || JSON.stringify(err, null, 2);
+      setMessage("❌ " + errorText);
+      alert("Error: " + errorText);
     } finally {
       setLoading(false);
     }
