@@ -8,34 +8,35 @@ const supabase = createClient(
 
 const BecomeOne = () => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async () => {
     setLoading(true);
-    setMessage(null);
+    setMessage('Testing...');
 
     try {
       const email = `test${Date.now()}@example.com`;
       const password = 'password123';
 
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+      console.log("🔄 Attempting signup...");
 
-      if (error) throw error;
+      const { data, error } = await supabase.auth.signUp({ email, password });
 
-      setMessage({ 
-        type: 'success', 
-        text: '✅ Account created successfully! Check Supabase dashboard.' 
-      });
+      console.log("📥 Response from Supabase:", { data, error });
+
+      if (error) {
+        console.error("❌ Supabase Error Object:", error);
+        throw error;
+      }
+
+      setMessage("✅ Success! User created.");
+      alert("✅ Success!");
 
     } catch (err: any) {
-      console.error("Signup error:", err);
-      setMessage({ 
-        type: 'error', 
-        text: '❌ ' + (err.message || 'Unknown error occurred') 
-      });
+      console.error("💥 Full caught error:", err);
+      const msg = err.message ? err.message : JSON.stringify(err, null, 2);
+      setMessage("❌ " + msg);
+      alert("Error: " + msg);
     } finally {
       setLoading(false);
     }
@@ -43,24 +44,17 @@ const BecomeOne = () => {
 
   return (
     <div className="min-h-screen bg-background py-16 px-6 text-center">
-      <div className="max-w-md mx-auto">
-        <h1 className="text-5xl font-bold text-patriot-blue mb-6">Become One</h1>
-        <p className="text-xl text-gray-600 mb-10">Test Membership Signup</p>
+      <h1 className="text-5xl font-bold text-patriot-blue mb-8">Become One - Test</h1>
+      
+      <button 
+        onClick={handleSubmit}
+        disabled={loading}
+        className="bg-patriot-red hover:bg-red-700 text-white font-bold py-6 px-12 rounded-2xl text-xl disabled:opacity-50"
+      >
+        {loading ? 'Testing...' : 'Run Test Signup'}
+      </button>
 
-        <button
-          onClick={handleSubmit}
-          disabled={loading}
-          className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-6 px-8 rounded-2xl text-xl transition-all disabled:opacity-50"
-        >
-          {loading ? 'Creating Account...' : 'Run Test Signup'}
-        </button>
-
-        {message && (
-          <div className={`mt-8 p-6 rounded-2xl text-left ${message.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
-            {message.text}
-          </div>
-        )}
-      </div>
+      {message && <p className="mt-8 text-lg max-w-lg mx-auto">{message}</p>}
     </div>
   );
 };
