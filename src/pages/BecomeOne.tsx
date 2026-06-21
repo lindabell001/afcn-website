@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = 'https://iskownhurcvgjrcsgtbe.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg';
+const supabaseAnonKey = 'sb_publishable_hWBCyn-K588J_N9cBiKIVA_oYzK1KzB';
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
