@@ -6,13 +6,13 @@
   <title>Supabase Test</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    body { font-family: Arial, sans-serif; background: #0c2340; color: white; padding: 40px; text-align: center; }
-    button { background: #c8102e; color: white; padding: 20px 40px; font-size: 20px; border: none; border-radius: 8px; cursor: pointer; }
-    #result { margin-top: 30px; font-size: 18px; }
+    body { font-family: Arial, sans-serif; background: #0c2340; color: white; padding: 50px; text-align: center; }
+    button { background: #c8102e; color: white; padding: 20px 40px; font-size: 20px; border: none; border-radius: 10px; cursor: pointer; }
+    #result { margin-top: 30px; font-size: 18px; min-height: 60px; }
   </style>
 </head>
 <body>
-  <h1>Supabase Connection Test</h1>
+  <h1>Supabase Test (Using Anon Key)</h1>
   <button onclick="runTest()">Run Supabase Test</button>
   <p id="result"></p>
 
@@ -21,7 +21,7 @@
 
     const supabase = Supabase.createClient(
       'https://iskownhurcvgjrcsgtbe.supabase.co',
-      'sb_publishable_hWBCyn-K588J_N9cBiKIVA_oYzK1KzB'
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg'
     );
 
     async function runTest() {
