@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://iskownhurcvgjrcsgtbe.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg';
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const BecomeOne = () => {
   const [loading, setLoading] = useState(false);
@@ -19,12 +25,6 @@ const BecomeOne = () => {
     const xHandle = formData.get('xHandle') as string;
 
     try {
-      const supabaseUrl = 'https://iskownhurcvgjrcsgtbe.supabase.co';
-      const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg';
-
-      const { createClient } = await import('@supabase/supabase-js');
-      const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -49,7 +49,6 @@ const BecomeOne = () => {
 
       if (profileError) throw profileError;
 
-      // Success - go straight to payment
       window.location.href = 'https://givingtools.com/give/4206';
 
     } catch (err: any) {
