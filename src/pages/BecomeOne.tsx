@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 
 const BecomeOne = () => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setMessage(null);
 
     const formData = new FormData(e.currentTarget);
     
@@ -27,8 +25,6 @@ const BecomeOne = () => {
       const { createClient } = await import('@supabase/supabase-js');
       const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-      console.log("=== Starting Signup for:", email);
-
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -36,7 +32,6 @@ const BecomeOne = () => {
       });
 
       if (authError) throw authError;
-      console.log("✅ Auth success");
 
       const { error: profileError } = await supabase
         .from('profiles')
@@ -53,25 +48,12 @@ const BecomeOne = () => {
         });
 
       if (profileError) throw profileError;
-      console.log("✅ Profile inserted successfully");
 
-      setMessage({ 
-        type: 'success', 
-        text: '✅ Account created successfully! Redirecting to payment...' 
-      });
-
-      setTimeout(() => {
-        window.location.href = 'https://givingtools.com/give/4206';
-      }, 1800);
+      // Success - redirect immediately
+      window.location.href = 'https://givingtools.com/give/4206';
 
     } catch (err: any) {
-      console.error("❌ Signup Error:", err);
-      setMessage({ 
-        type: 'error', 
-        text: err.message?.includes('Failed to fetch') 
-          ? 'Connection issue. Please check your internet and try again.' 
-          : err.message || 'Something went wrong. Please try again.' 
-      });
+      alert(err.message || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -87,43 +69,27 @@ const BecomeOne = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border rounded-2xl p-10 shadow-card">
           <div className="grid md:grid-cols-2 gap-6">
-            <input type="text" name="firstName" placeholder="First Name" required className="w-full p-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-patriot-red" />
-            <input type="text" name="lastName" placeholder="Last Name" required className="w-full p-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-patriot-red" />
+            <input type="text" name="firstName" placeholder="First Name" required className="w-full p-4 border border-border rounded-lg" />
+            <input type="text" name="lastName" placeholder="Last Name" required className="w-full p-4 border border-border rounded-lg" />
           </div>
 
-          <input type="email" name="email" placeholder="Email Address" required className="w-full p-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-patriot-red" />
-          <input type="tel" name="phone" placeholder="Phone Number" required className="w-full p-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-patriot-red" />
-          <input type="text" name="address" placeholder="Full Address" required className="w-full p-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-patriot-red" />
-          <input type="password" name="password" placeholder="Create Password (min 6 characters)" required className="w-full p-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-patriot-red" />
+          <input type="email" name="email" placeholder="Email Address" required className="w-full p-4 border border-border rounded-lg" />
+          <input type="tel" name="phone" placeholder="Phone Number" required className="w-full p-4 border border-border rounded-lg" />
+          <input type="text" name="address" placeholder="Full Address" required className="w-full p-4 border border-border rounded-lg" />
+          <input type="password" name="password" placeholder="Create Password (min 6 characters)" required className="w-full p-4 border border-border rounded-lg" />
 
-          <textarea 
-            name="whyJoining" 
-            placeholder="Why do you want to join? What are your main concerns or interests?" 
-            rows={5} 
-            required 
-            className="w-full p-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-patriot-red"
-          />
+          <textarea name="whyJoining" placeholder="Why do you want to join?" rows={5} required className="w-full p-4 border border-border rounded-lg" />
 
-          <input type="text" name="xHandle" placeholder="X Handle (or type 'none')" required className="w-full p-4 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-patriot-red" />
+          <input type="text" name="xHandle" placeholder="X Handle (or type 'none')" required className="w-full p-4 border border-border rounded-lg" />
 
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-5 rounded-xl text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-5 rounded-xl text-lg transition-all disabled:opacity-50"
           >
-            {loading ? 'Creating Account...' : 'Join AFCN Now – $25/year'}
+            Join AFCN Now – $25/year
           </button>
         </form>
-
-        {message && (
-          <div className={`mt-8 p-6 rounded-xl text-center text-lg font-medium border ${
-            message.type === 'success' 
-              ? 'bg-green-50 text-green-700 border-green-200' 
-              : 'bg-red-50 text-red-700 border-red-200'
-          }`}>
-            {message.text}
-          </div>
-        )}
       </div>
     </div>
   );
