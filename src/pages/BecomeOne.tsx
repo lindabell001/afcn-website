@@ -21,14 +21,14 @@ const BecomeOne = () => {
     const xHandle = formData.get('xHandle') as string;
 
     try {
-      // Hardcoded Supabase client using your keys
       const supabaseUrl = 'https://iskownhurcvjrcsgtbe.supabase.co';
       const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg';
 
       const { createClient } = await import('@supabase/supabase-js');
       const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-      // Create Auth User
+      console.log("Attempting signup for:", email);
+
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -37,7 +37,6 @@ const BecomeOne = () => {
 
       if (authError) throw authError;
 
-      // Insert into profiles
       const { error: profileError } = await supabase
         .from('profiles')
         .insert({
@@ -54,20 +53,17 @@ const BecomeOne = () => {
 
       if (profileError) throw profileError;
 
-      setMessage({ 
-        type: 'success', 
-        text: '✅ Account created! Redirecting to payment...' 
-      });
+      setMessage({ type: 'success', text: '✅ Account created! Redirecting to payment...' });
 
       setTimeout(() => {
         window.location.href = 'https://givingtools.com/give/4206';
       }, 1500);
 
     } catch (err: any) {
-      console.error(err);
+      console.error("Signup Error:", err);
       setMessage({ 
         type: 'error', 
-        text: err.message || 'Something went wrong. Please try again.' 
+        text: err.message || 'Network error. Please check your connection and try again.' 
       });
     } finally {
       setLoading(false);
@@ -93,13 +89,7 @@ const BecomeOne = () => {
           <input type="text" name="address" placeholder="Full Address" required className="w-full p-4 border border-border rounded-lg" />
           <input type="password" name="password" placeholder="Create Password (min 6 characters)" required className="w-full p-4 border border-border rounded-lg" />
 
-          <textarea 
-            name="whyJoining" 
-            placeholder="Why do you want to join? What are your main concerns or interests?" 
-            rows={5} 
-            required 
-            className="w-full p-4 border border-border rounded-lg"
-          />
+          <textarea name="whyJoining" placeholder="Why do you want to join? What are your main concerns?" rows={5} required className="w-full p-4 border border-border rounded-lg" />
 
           <input type="text" name="xHandle" placeholder="X Handle (or type 'none')" required className="w-full p-4 border border-border rounded-lg" />
 
@@ -113,7 +103,7 @@ const BecomeOne = () => {
         </form>
 
         {message && (
-          <div className={`mt-8 p-6 rounded-xl text-center text-lg font-medium ${message.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+          <div className={`mt-8 p-6 rounded-xl text-center text-lg font-medium ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
             {message.text}
           </div>
         )}
