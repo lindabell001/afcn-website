@@ -68,7 +68,6 @@
   </div>
 
   <script>
-    // Built-in Supabase Client
     const supabaseUrl = 'https://iskownhurcvjrcsgtbe.supabase.co';
     const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg';
 
@@ -92,55 +91,41 @@
         const whyJoining = document.getElementById('whyJoining').value.trim();
         const xHandle = document.getElementById('xHandle').value.trim();
 
-        console.log("=== Starting Signup for:", email);
-
-        // 1. Create Auth User
+        // Create user
         const { data, error: authError } = await supabase.auth.signUp({
-          email: email,
-          password: password,
-          options: {
-            data: { first_name: firstName, last_name: lastName }
-          }
+          email,
+          password,
+          options: { data: { first_name: firstName, last_name: lastName } }
         });
 
-        if (authError) {
-          console.error("Auth Error:", authError);
-          throw authError;
-        }
-        console.log("✅ Auth success. User ID:", data.user.id);
+        if (authError) throw authError;
 
-        // 2. Insert into profiles
+        // Insert profile
         const { error: profileError } = await supabase
           .from('profiles')
           .insert({
             id: data.user.id,
             first_name: firstName,
             last_name: lastName,
-            email: email,
-            phone: phone,
-            address: address,
+            email,
+            phone,
+            address,
             why_joining: whyJoining,
             x_handle: xHandle,
             status: 'pending'
           });
 
-        if (profileError) {
-          console.error("Profile Insert Error:", profileError);
-          throw profileError;
-        }
+        if (profileError) throw profileError;
 
-        console.log("✅ Profile insert successful!");
-
-        // Success
         message.className = 'success';
-        message.textContent = "✅ Account created! Redirecting to payment...";
+        message.textContent = "✅ Success! Redirecting to payment...";
 
         setTimeout(() => {
           window.location.href = "https://givingtools.com/give/4206";
-        }, 1500);
+        }, 1200);
 
       } catch (err) {
-        console.error("Full Error:", err);
+        console.error(err);
         message.className = 'error';
         message.textContent = "Error: " + (err.message || "Please try again.");
       }
