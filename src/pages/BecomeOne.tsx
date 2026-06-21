@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';   // Your existing client
 
 const BecomeOne = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
@@ -24,7 +22,6 @@ const BecomeOne = () => {
     const xHandle = formData.get('xHandle') as string;
 
     try {
-      // 1. Create Auth User
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -35,7 +32,6 @@ const BecomeOne = () => {
 
       if (authError) throw authError;
 
-      // 2. Insert into profiles table
       const { error: profileError } = await supabase
         .from('profiles')
         .insert({
@@ -52,16 +48,21 @@ const BecomeOne = () => {
 
       if (profileError) throw profileError;
 
-      setMessage({ type: 'success', text: 'Account created successfully! Redirecting to payment...' });
+      setMessage({ 
+        type: 'success', 
+        text: '✅ Account created! Redirecting to payment...' 
+      });
 
-      // Redirect to GivingTools
       setTimeout(() => {
         window.location.href = 'https://givingtools.com/give/4206';
       }, 1500);
 
     } catch (err: any) {
       console.error(err);
-      setMessage({ type: 'error', text: err.message || 'Something went wrong. Please try again.' });
+      setMessage({ 
+        type: 'error', 
+        text: err.message || 'Something went wrong. Please try again.' 
+      });
     } finally {
       setLoading(false);
     }
@@ -75,7 +76,7 @@ const BecomeOne = () => {
           <p className="text-xl text-gray-600">Join the America First Citizens Network</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border rounded-2xl p-10 shadow-card">
+        <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border rounded-2xl p-10">
           <div className="grid md:grid-cols-2 gap-6">
             <input type="text" name="firstName" placeholder="First Name" required className="w-full p-4 border border-border rounded-lg" />
             <input type="text" name="lastName" placeholder="Last Name" required className="w-full p-4 border border-border rounded-lg" />
@@ -84,13 +85,12 @@ const BecomeOne = () => {
           <input type="email" name="email" placeholder="Email Address" required className="w-full p-4 border border-border rounded-lg" />
           <input type="tel" name="phone" placeholder="Phone Number" required className="w-full p-4 border border-border rounded-lg" />
           <input type="text" name="address" placeholder="Full Address" required className="w-full p-4 border border-border rounded-lg" />
-
           <input type="password" name="password" placeholder="Create Password (min 6 characters)" required className="w-full p-4 border border-border rounded-lg" />
 
           <textarea 
             name="whyJoining" 
-            placeholder="Why do you want to join? What are your main concerns or interests?" 
-            rows={5}
+            placeholder="Why do you want to join? What are your main concerns?" 
+            rows={5} 
             required 
             className="w-full p-4 border border-border rounded-lg"
           />
@@ -107,7 +107,7 @@ const BecomeOne = () => {
         </form>
 
         {message && (
-          <div className={`mt-6 p-6 rounded-xl text-center text-lg ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+          <div className={`mt-8 p-6 rounded-xl text-center text-lg font-medium ${message.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
             {message.text}
           </div>
         )}
