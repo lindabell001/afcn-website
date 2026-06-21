@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';   // Your existing client
 
 const BecomeOne = () => {
   const [loading, setLoading] = useState(false);
@@ -22,16 +21,23 @@ const BecomeOne = () => {
     const xHandle = formData.get('xHandle') as string;
 
     try {
+      // Hardcoded Supabase client using your keys
+      const supabaseUrl = 'https://iskownhurcvjrcsgtbe.supabase.co';
+      const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg';
+
+      const { createClient } = await import('@supabase/supabase-js');
+      const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+      // Create Auth User
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: { first_name: firstName, last_name: lastName }
-        }
+        options: { data: { first_name: firstName, last_name: lastName } }
       });
 
       if (authError) throw authError;
 
+      // Insert into profiles
       const { error: profileError } = await supabase
         .from('profiles')
         .insert({
@@ -76,7 +82,7 @@ const BecomeOne = () => {
           <p className="text-xl text-gray-600">Join the America First Citizens Network</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border rounded-2xl p-10">
+        <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border rounded-2xl p-10 shadow-card">
           <div className="grid md:grid-cols-2 gap-6">
             <input type="text" name="firstName" placeholder="First Name" required className="w-full p-4 border border-border rounded-lg" />
             <input type="text" name="lastName" placeholder="Last Name" required className="w-full p-4 border border-border rounded-lg" />
@@ -89,7 +95,7 @@ const BecomeOne = () => {
 
           <textarea 
             name="whyJoining" 
-            placeholder="Why do you want to join? What are your main concerns?" 
+            placeholder="Why do you want to join? What are your main concerns or interests?" 
             rows={5} 
             required 
             className="w-full p-4 border border-border rounded-lg"
