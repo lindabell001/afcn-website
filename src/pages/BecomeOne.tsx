@@ -49,11 +49,11 @@ const BecomeOne = () => {
 
       if (profileError) throw profileError;
 
-      // Success - redirect immediately
+      // Success - go straight to payment
       window.location.href = 'https://givingtools.com/give/4206';
 
     } catch (err: any) {
-      alert(err.message || 'Something went wrong. Please try again.');
+      alert('Error: ' + (err.message || 'Something went wrong. Please try again.'));
     } finally {
       setLoading(false);
     }
