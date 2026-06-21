@@ -3,32 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Supabase Test</title>
+  <title>Supabase Debug</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    body { font-family: Arial, sans-serif; background: #0c2340; color: white; padding: 50px; text-align: center; }
+    body { font-family: Arial, sans-serif; background: #0c2340; color: white; padding: 40px; text-align: center; }
     button { background: #c8102e; color: white; padding: 20px 40px; font-size: 20px; border: none; border-radius: 10px; cursor: pointer; margin: 20px; }
-    #result { margin-top: 30px; font-size: 18px; min-height: 60px; }
+    #result { margin-top: 30px; font-size: 18px; white-space: pre-wrap; }
   </style>
 </head>
 <body>
-  <h1>Supabase Test - Debug Version</h1>
+  <h1>Supabase Debug - Full Error</h1>
   <button onclick="runTest()">Run Supabase Test</button>
   <p id="result"></p>
 
   <script>
-    console.log("✅ Script is running");
+    console.log("✅ Script loaded");
 
-    // Create Supabase client
     const supabase = Supabase.createClient(
       'https://iskownhurcvgjrcsgtbe.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg'
     );
 
-    console.log("✅ Supabase client created");
-
     async function runTest() {
-      console.log("✅ Button clicked - function running");
       const result = document.getElementById('result');
       result.textContent = "Testing...";
 
@@ -36,7 +32,14 @@
         const email = 'test' + Date.now() + '@example.com';
         const password = 'password123';
 
-        const { data, error } = await supabase.auth.signUp({ email, password });
+        console.log("Attempting signup with:", email);
+
+        const { data, error } = await supabase.auth.signUp({ 
+          email, 
+          password 
+        });
+
+        console.log("Response:", { data, error });
 
         if (error) throw error;
 
@@ -44,10 +47,11 @@
         result.textContent = '✅ SUCCESS!';
         alert('✅ SUCCESS!');
       } catch (err) {
-        console.error("Error:", err);
+        console.error("Full error object:", err);
+        const errorText = JSON.stringify(err, null, 2);
         result.style.color = 'red';
-        result.textContent = '❌ ' + (err.message || 'Unknown error');
-        alert('Error: ' + (err.message || 'Unknown error'));
+        result.textContent = '❌ Error:\n' + errorText;
+        alert('Error: ' + (err.message || JSON.stringify(err)));
       }
     }
   </script>
