@@ -92,16 +92,24 @@
         const whyJoining = document.getElementById('whyJoining').value.trim();
         const xHandle = document.getElementById('xHandle').value.trim();
 
-        // Create Auth User
+        console.log("=== Starting Signup for:", email);
+
+        // 1. Create Auth User
         const { data, error: authError } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { data: { first_name: firstName, last_name: lastName } }
+          email: email,
+          password: password,
+          options: {
+            data: { first_name: firstName, last_name: lastName }
+          }
         });
 
-        if (authError) throw authError;
+        if (authError) {
+          console.error("Auth Error:", authError);
+          throw authError;
+        }
+        console.log("✅ Auth success. User ID:", data.user.id);
 
-        // Insert into profiles table
+        // 2. Insert into profiles
         const { error: profileError } = await supabase
           .from('profiles')
           .insert({
@@ -116,7 +124,12 @@
             status: 'pending'
           });
 
-        if (profileError) throw profileError;
+        if (profileError) {
+          console.error("Profile Insert Error:", profileError);
+          throw profileError;
+        }
+
+        console.log("✅ Profile insert successful!");
 
         // Success
         message.className = 'success';
@@ -127,7 +140,7 @@
         }, 1500);
 
       } catch (err) {
-        console.error(err);
+        console.error("Full Error:", err);
         message.className = 'error';
         message.textContent = "Error: " + (err.message || "Please try again.");
       }
