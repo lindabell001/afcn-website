@@ -67,8 +67,12 @@
     <p id="message"></p>
   </div>
 
-  <script type="module">
-    import { supabase } from './supabaseClient.js';
+  <script>
+    // Built-in Supabase Client
+    const supabaseUrl = 'https://iskownhurcvjrcsgtbe.supabase.co';
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza293bmh1cmN2Z2pyY3NndGJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MjY0MzYsImV4cCI6MjA5NjQwMjQzNn0.FQd5HUAN1iOvZEZVouudktuOwKsohxFl6QiFthc4Byg';
+
+    const supabase = Supabase.createClient(supabaseUrl, supabaseAnonKey);
 
     const form = document.getElementById('signupForm');
     const message = document.getElementById('message');
@@ -88,21 +92,16 @@
         const whyJoining = document.getElementById('whyJoining').value.trim();
         const xHandle = document.getElementById('xHandle').value.trim();
 
-        // 1. Create Auth User
+        // Create Auth User
         const { data, error: authError } = await supabase.auth.signUp({
-          email: email,
-          password: password,
-          options: {
-            data: {
-              first_name: firstName,
-              last_name: lastName,
-            }
-          }
+          email,
+          password,
+          options: { data: { first_name: firstName, last_name: lastName } }
         });
 
         if (authError) throw authError;
 
-        // 2. Insert into profiles table with pending status
+        // Insert into profiles table
         const { error: profileError } = await supabase
           .from('profiles')
           .insert({
@@ -119,14 +118,13 @@
 
         if (profileError) throw profileError;
 
-        // Success!
+        // Success
         message.className = 'success';
-        message.textContent = "✅ Account created successfully! Redirecting to payment...";
+        message.textContent = "✅ Account created! Redirecting to payment...";
 
-        // Redirect to GivingTools
         setTimeout(() => {
           window.location.href = "https://givingtools.com/give/4206";
-        }, 1200);
+        }, 1500);
 
       } catch (err) {
         console.error(err);
