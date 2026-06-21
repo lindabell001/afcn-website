@@ -5,44 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Supabase Test</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    body { font-family: Arial, sans-serif; background: #0c2340; color: white; padding: 40px; text-align: center; }
-    .box { max-width: 500px; margin: 40px auto; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; }
-    button { background: #c8102e; color: white; padding: 15px 30px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; }
-  </style>
 </head>
 <body>
-  <div class="box">
-    <h1>Supabase Connection Test</h1>
-    <button onclick="runTest()">Run Test Signup</button>
-    <p id="result" style="margin-top: 20px; font-size: 18px;"></p>
-  </div>
+  <h1>Supabase Test Page</h1>
+  <button onclick="runTest()">Click Me - Run Test</button>
+  <p id="result"></p>
 
   <script>
-    const supabase = Supabase.createClient(
-      'https://iskownhurcvgjrcsgtbe.supabase.co',
-      'sb_publishable_hWBCyn-K588J_N9cBiKIVA_oYzK1KzB'
-    );
+    console.log("✅ Script is running");
 
     async function runTest() {
       const result = document.getElementById('result');
-      result.textContent = 'Testing...';
+      result.textContent = "Testing...";
 
       try {
-        const email = 'test' + Date.now() + '@example.com';
-        const password = 'password123';
-
-        const { data, error } = await supabase.auth.signUp({ email, password });
-
-        if (error) throw error;
-
-        result.style.color = 'lightgreen';
-        result.textContent = '✅ SUCCESS! Signup worked.';
-        console.log('Success:', data);
-      } catch (err) {
-        result.style.color = 'red';
-        result.textContent = '❌ Error: ' + err.message;
-        console.error(err);
+        result.textContent = "✅ JavaScript works! Supabase test would go here.";
+        alert("JavaScript is working!");
+      } catch (e) {
+        alert("Error: " + e.message);
       }
     }
   </script>
