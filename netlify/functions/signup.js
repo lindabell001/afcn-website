@@ -7,14 +7,10 @@ exports.handler = async function(event) {
     const body = JSON.parse(event.body || '{}');
     console.log("Body received:", body);
 
-    // Try every possible URL name the extension might have created
-    const supabaseUrl = process.env.SUPABASE_URL || 
-                       process.env.SUPABASE_DATABASE_URL || 
-                       process.env.VITE_SUPABASE_URL;
-
+    const supabaseUrl = process.env.SUPABASE_DATABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    console.log("URL used:", supabaseUrl ? supabaseUrl.substring(0, 40) + "..." : "MISSING");
+    console.log("URL present:", !!supabaseUrl);
     console.log("Key present:", !!supabaseKey);
 
     if (!supabaseUrl || !supabaseKey) {
@@ -24,17 +20,36 @@ exports.handler = async function(event) {
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     const { data, error } = await supabase.auth.signUp({
-      email: body.email || `test${Date.now()}@example.com`,
-      password: body.password || 'password123'
+      email: body.email,
+      password: body.password,
+      options: {
+        data: {
+          first_name: body.firstName,
+          last_name: body.lastName
+        }
+      }
     });
 
     if (error) throw error;
 
-    console.log("✅ SUCCESS - User created");
+    // Insert full profile with all your fields
+    await supabase.from('profiles').insert({
+      id: data.user.id,
+      first_name: body.firstName,
+      last_name: body.lastName,
+      email: body.email,
+      phone: body.phone,
+      address: body.address,
+      why_joining: body.whyJoining,
+      x_handle: body.xHandle,
+      membership_status: 'pending'
+    });
+
+    console.log("✅ Full signup successful");
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, message: "User created" })
+      body: JSON.stringify({ success: true, message: "Application received! Norine will review it soon." })
     };
 
   } catch (err) {
