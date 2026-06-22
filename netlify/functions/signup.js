@@ -1,31 +1,37 @@
 const { createClient } = require('@supabase/supabase-js');
 
 exports.handler = async function(event) {
-  console.log("=== FUNCTION CALLED ===");
+  console.log("=== FUNCTION STARTED ===");
 
   try {
     const body = JSON.parse(event.body || '{}');
-    console.log("Body received:", body);
+    console.log("Body:", body);
 
-    const supabase = createClient(
-      process.env.SUPABASE_DATABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
+    // Try both possible URL names
+    const supabaseUrl = process.env.SUPABASE_URL || process.env.SUPABASE_DATABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    console.log("Client created - Keys OK");
+    console.log("URL present:", !!supabaseUrl);
+    console.log("Key present:", !!supabaseKey);
+
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error("Missing Supabase URL or Service Role Key in function environment");
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const { data, error } = await supabase.auth.signUp({
-      email: body.email,
-      password: body.password,
+      email: body.email || `test${Date.now()}@example.com`,
+      password: body.password || 'password123'
     });
 
     if (error) throw error;
 
-    console.log("✅ Auth signup successful");
+    console.log("✅ Success - User ID:", data.user.id);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true })
+      body: JSON.stringify({ success: true, message: "User created" })
     };
 
   } catch (err) {
