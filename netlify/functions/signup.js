@@ -1,43 +1,36 @@
 const { createClient } = require('@supabase/supabase-js');
 
 exports.handler = async function(event) {
-  console.log("🚀 Function started");
+  console.log("=== PHASE 1 FUNCTION STARTED ===");
 
   try {
     const body = JSON.parse(event.body || '{}');
-    console.log("📦 Received data:", body);
+    console.log("Received body:", body);
 
     const supabase = createClient(
       process.env.SUPABASE_DATABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
-    console.log("✅ Supabase client created");
+    console.log("Supabase client created");
 
-    // Simple auth signup only (no profile insert yet)
     const { data, error } = await supabase.auth.signUp({
-      email: body.email,
-      password: body.password || 'password123',
-      options: {
-        data: {
-          first_name: body.firstName || 'Test',
-          last_name: body.lastName || 'User'
-        }
-      }
+      email: body.email || `test${Date.now()}@example.com`,
+      password: "password123"
     });
 
     if (error) {
-      console.error("❌ Auth signup failed:", error);
+      console.error("Auth signup error:", error);
       throw error;
     }
 
-    console.log("✅ User created successfully!");
+    console.log("✅ Auth signup successful - User ID:", data.user.id);
 
     return {
       statusCode: 200,
       body: JSON.stringify({ 
         success: true, 
-        message: "Application received! Norine will review it." 
+        message: "User created successfully" 
       })
     };
 
