@@ -1,11 +1,11 @@
 const { createClient } = require('@supabase/supabase-js');
 
 exports.handler = async function(event) {
-  console.log("🔥 Function called - Method:", event.httpMethod);
-  console.log("Body received:", event.body);
+  console.log("🚀 Function started");
 
   try {
     const body = JSON.parse(event.body || '{}');
+    console.log("📦 Received data:", body);
 
     const supabase = createClient(
       process.env.SUPABASE_DATABASE_URL,
@@ -14,41 +14,31 @@ exports.handler = async function(event) {
 
     console.log("✅ Supabase client created");
 
+    // Simple auth signup only (no profile insert yet)
     const { data, error } = await supabase.auth.signUp({
       email: body.email,
-      password: body.password,
+      password: body.password || 'password123',
       options: {
         data: {
-          first_name: body.firstName,
-          last_name: body.lastName
+          first_name: body.firstName || 'Test',
+          last_name: body.lastName || 'User'
         }
       }
     });
 
     if (error) {
-      console.error("Auth signup error:", error);
+      console.error("❌ Auth signup failed:", error);
       throw error;
     }
 
-    console.log("✅ User created in Auth");
-
-    // Insert profile
-    const { error: profileError } = await supabase.from('profiles').insert({
-      id: data.user.id,
-      first_name: body.firstName,
-      last_name: body.lastName,
-      phone: body.phone || null,
-      address: body.address || null,
-      why_joining: body.whyJoining || null,
-      x_handle: body.xHandle || null,
-      membership_status: 'pending'
-    });
-
-    if (profileError) console.error("Profile insert error:", profileError);
+    console.log("✅ User created successfully!");
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, message: "Application received!" })
+      body: JSON.stringify({ 
+        success: true, 
+        message: "Application received! Norine will review it." 
+      })
     };
 
   } catch (err) {
