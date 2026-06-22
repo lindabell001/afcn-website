@@ -7,15 +7,15 @@ exports.handler = async function(event) {
     const body = JSON.parse(event.body || '{}');
     console.log("Body received:", body);
 
-    // Try all possible URL names
+    // Try every possible URL name the extension might have created
     const supabaseUrl = process.env.SUPABASE_URL || 
                        process.env.SUPABASE_DATABASE_URL || 
                        process.env.VITE_SUPABASE_URL;
 
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    console.log("URL found:", !!supabaseUrl);
-    console.log("Key found:", !!supabaseKey);
+    console.log("URL used:", supabaseUrl ? supabaseUrl.substring(0, 40) + "..." : "MISSING");
+    console.log("Key present:", !!supabaseKey);
 
     if (!supabaseUrl || !supabaseKey) {
       throw new Error("Missing Supabase URL or Service Role Key");
@@ -38,7 +38,7 @@ exports.handler = async function(event) {
     };
 
   } catch (err) {
-    console.error("💥 FUNCTION FAILED:", err);
+    console.error("💥 FUNCTION ERROR:", err);
     return {
       statusCode: 400,
       body: JSON.stringify({ error: err.message })
