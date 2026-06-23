@@ -23,7 +23,7 @@ const BecomeOne = () => {
           <p className="text-lg">Please complete your $25/year payment below.</p>
 
           <p className="mt-8 text-lg">
-            Norine will review your application and contact you soon from (425) 425-1776.
+            Norine will review your application and contact you soon from (XXX) 425-1776.
           </p>
           
           <p className="mt-6 text-lg">
