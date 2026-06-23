@@ -13,20 +13,20 @@ const BecomeOne = () => {
           </p>
         </div>
 
-        {/* Tally Form Embed */}
-        <div className="bg-white border border-patriot-blue rounded-3xl p-8 shadow-xl">
+        {/* Tally Form Embed - Improved Version */}
+        <div className="bg-white border-2 border-patriot-blue rounded-3xl p-6 shadow-xl overflow-hidden">
           <iframe
-            data-tally-src="https://tally.so/embed/VLqDvj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            src="https://tally.so/embed/VLqDvj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             width="100%"
-            height="800"
+            height="1200"
             frameBorder="0"
             title="AFCN Membership Application"
-            style={{ minHeight: '800px' }}
+            style={{ minHeight: '1200px', border: 'none' }}
           ></iframe>
         </div>
 
         <p className="text-center text-sm text-gray-500 mt-8">
-          After you submit the form, you will be guided to complete your $25/year payment.
+          After submitting the form, you will be guided to complete your $25/year payment.
         </p>
       </div>
     </div>
