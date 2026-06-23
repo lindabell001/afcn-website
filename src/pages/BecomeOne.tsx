@@ -1,76 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const BecomeOne = () => {
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage('Sending application...');
-
-    const formData = new FormData(e.currentTarget);
-
-    const payload = {
-      firstName: formData.get('firstName') as string,
-      lastName: formData.get('lastName') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string,
-      address: formData.get('address') as string,
-      whyJoining: formData.get('whyJoining') as string,
-      xHandle: formData.get('xHandle') as string,
-      password: formData.get('password') as string,
-    };
-
-    try {
-      const response = await fetch('/.netlify/functions/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setMessage("✅ Application received! Norine will review it soon.");
-        alert("✅ Success! Your application has been submitted.");
-      } else {
-        throw new Error(result.error || "Server error");
-      }
-    } catch (err: any) {
-      console.error(err);
-      setMessage("❌ " + (err.message || "Failed to submit"));
-      alert("Error: " + (err.message || "Failed to submit"));
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background py-16 px-6">
-      <div className="max-w-md mx-auto">
-        <h1 className="text-5xl font-bold text-patriot-blue mb-8 text-center">Become One</h1>
+    <div className="min-h-screen bg-background py-20 px-6 text-center">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-6xl font-bold text-patriot-blue mb-6">Become One</h1>
+        <p className="text-2xl text-gray-600 mb-12">
+          Join the America First Citizens Network<br />
+          — Active Citizenship for the Next 250 Years —
+        </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="firstName" placeholder="First Name" required className="w-full p-4 border rounded-lg" />
-          <input type="text" name="lastName" placeholder="Last Name" required className="w-full p-4 border rounded-lg" />
-          <input type="email" name="email" placeholder="Email" required className="w-full p-4 border rounded-lg" />
-          <input type="tel" name="phone" placeholder="Phone Number" required className="w-full p-4 border rounded-lg" />
-          <input type="text" name="address" placeholder="Full Address" required className="w-full p-4 border rounded-lg" />
-          <input type="password" name="password" placeholder="Create Password (min 6 characters)" required className="w-full p-4 border rounded-lg" />
-          <textarea name="whyJoining" placeholder="Why do you want to join?" rows={4} required className="w-full p-4 border rounded-lg" />
-          <input type="text" name="xHandle" placeholder="X Handle (or type 'none')" required className="w-full p-4 border rounded-lg" />
+        <div className="bg-white border-2 border-patriot-blue rounded-3xl p-16 shadow-xl max-w-lg mx-auto">
+          <p className="text-xl leading-relaxed mb-10">
+            Fill out the membership application below. After submission, you will be directed to complete your $25/year payment on GivingTools.
+          </p>
 
-          <button 
-            type="submit" 
-            disabled={loading}
-            className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-5 rounded-xl text-lg transition-all disabled:opacity-50"
+          <a
+            href="https://tally.so/r/VLqDvj"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold text-2xl px-12 py-6 rounded-2xl transition-all shadow-lg"
           >
-            {loading ? 'Submitting...' : 'Join AFCN Now – $25/year'}
-          </button>
-        </form>
+            Start Membership Application
+          </a>
+        </div>
 
-        {message && <p className="mt-6 text-center text-lg">{message}</p>}
+        <p className="mt-12 text-sm text-gray-500">
+          After payment, Norine will review your application and contact you.
+        </p>
       </div>
     </div>
   );
