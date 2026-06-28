@@ -18,16 +18,13 @@ export default function BecomeOne() {
 
   const [submitted, setSubmitted] = useState(false);
 
-  // Officer bypass for any email containing @americafirstcitizensnetwork.org
-  const isOfficer = formData.email.toLowerCase().includes('@americafirstcitizensnetwork.org');
+  // Officer bypass for America First Citizens Network emails
+  const isOfficer = formData.email.toLowerCase().trim().endsWith('@americafirstcitizensnetwork.org');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
+    const { name, value, type } = e.target as HTMLInputElement;
     if (type === 'checkbox') {
-      setFormData(prev => ({
-        ...prev,
-        [name]: (e.target as HTMLInputElement).checked,
-      }));
+      setFormData(prev => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
@@ -37,11 +34,9 @@ export default function BecomeOne() {
     e.preventDefault();
 
     if (isOfficer) {
-      alert('✅ Officer Bypass Activated!\n\nYou have been added as an approved officer.\nNo payment required.');
+      alert('✅ Officer Bypass - You are now an approved member!\nNo payment required.');
       setSubmitted(true);
-      // TODO: Insert into Supabase with status = 'approved' and role = 'admin'
     } else {
-      // Normal flow → payment
       window.location.href = 'https://givingtools.com/give/4206';
     }
   };
@@ -49,9 +44,9 @@ export default function BecomeOne() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold text-patriot-blue mb-4">Welcome, Officer!</h1>
-          <p className="text-2xl">You are now an approved member of the America First Citizens Network.</p>
+        <div className="text-center max-w-md">
+          <h1 className="text-5xl font-bold text-patriot-blue mb-6">Welcome, Officer!</h1>
+          <p className="text-2xl">You have been added as an approved member of the America First Citizens Network.</p>
         </div>
       </div>
     );
@@ -65,130 +60,44 @@ export default function BecomeOne() {
 
         <form onSubmit={handleSubmit} className="bg-white p-10 rounded-3xl shadow-xl space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name *"
-              value={formData.firstName}
-              onChange={handleChange}
-              className="p-4 border rounded-xl"
-              required
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={handleChange}
-              className="p-4 border rounded-xl"
-            />
+            <input type="text" name="firstName" placeholder="First Name *" value={formData.firstName} onChange={handleChange} className="p-4 border rounded-xl" required />
+            <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} className="p-4 border rounded-xl" />
           </div>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address *"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-4 border rounded-xl"
-            required
-          />
+          <input type="email" name="email" placeholder="Email Address *" value={formData.email} onChange={handleChange} className="w-full p-4 border rounded-xl" required />
 
-          <input
-            type="text"
-            name="street"
-            placeholder="House number and street (neighborhood)"
-            value={formData.street}
-            onChange={handleChange}
-            className="w-full p-4 border rounded-xl"
-          />
+          <input type="text" name="street" placeholder="House number and street (neighborhood)" value={formData.street} onChange={handleChange} className="w-full p-4 border rounded-xl" />
 
           <div className="grid md:grid-cols-3 gap-6">
-            <input
-              type="text"
-              name="city"
-              placeholder="City"
-              value={formData.city}
-              onChange={handleChange}
-              className="p-4 border rounded-xl"
-            />
-            <input
-              type="text"
-              name="state"
-              placeholder="State"
-              value={formData.state}
-              onChange={handleChange}
-              className="p-4 border rounded-xl"
-            />
-            <input
-              type="text"
-              name="zip"
-              placeholder="Zip"
-              value={formData.zip}
-              onChange={handleChange}
-              className="p-4 border rounded-xl"
-            />
+            <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} className="p-4 border rounded-xl" />
+            <input type="text" name="state" placeholder="State" value={formData.state} onChange={handleChange} className="p-4 border rounded-xl" />
+            <input type="text" name="zip" placeholder="Zip" value={formData.zip} onChange={handleChange} className="p-4 border rounded-xl" />
           </div>
 
-          <input
-            type="text"
-            name="congressionalDistrict"
-            placeholder="Congressional District (e.g. TX-03 or CA-12)"
-            value={formData.congressionalDistrict}
-            onChange={handleChange}
-            className="w-full p-4 border rounded-xl"
-          />
+          <input type="text" name="congressionalDistrict" placeholder="Congressional District (e.g. TX-03 or CA-12)" value={formData.congressionalDistrict} onChange={handleChange} className="w-full p-4 border rounded-xl" />
 
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full p-4 border rounded-xl"
-          />
+          <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="w-full p-4 border rounded-xl" />
 
           <div className="flex items-center gap-3">
-            <input
-              type="checkbox"
-              name="isCitizen"
-              checked={formData.isCitizen}
-              onChange={handleChange}
-              className="w-5 h-5"
-            />
+            <input type="checkbox" name="isCitizen" checked={formData.isCitizen} onChange={handleChange} className="w-5 h-5" />
             <label>I confirm I am a United States citizen</label>
           </div>
 
           <div>
             <p className="mb-2 font-medium">Are you current military or a veteran?</p>
             <div className="flex gap-4">
-              <button
-                type="button"
-                onClick={() => setFormData(prev => ({ ...prev, isVeteran: 'yes' }))}
-                className={`px-6 py-2 rounded-xl border ${formData.isVeteran === 'yes' ? 'bg-patriot-red text-white' : ''}`}
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                onClick={() => setFormData(prev => ({ ...prev, isVeteran: 'no' }))}
-                className={`px-6 py-2 rounded-xl border ${formData.isVeteran === 'no' ? 'bg-patriot-red text-white' : ''}`}
-              >
-                No
-              </button>
+              <button type="button" onClick={() => setFormData(prev => ({ ...prev, isVeteran: 'yes' }))} className={`px-6 py-2 rounded-xl border ${formData.isVeteran === 'yes' ? 'bg-patriot-red text-white' : ''}`}>Yes</button>
+              <button type="button" onClick={() => setFormData(prev => ({ ...prev, isVeteran: 'no' }))} className={`px-6 py-2 rounded-xl border ${formData.isVeteran === 'no' ? 'bg-patriot-red text-white' : ''}`}>No</button>
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-4 rounded-2xl text-xl mt-6"
-          >
-            {isOfficer ? 'Join as Officer (Free – No Payment)' : 'Continue to Payment'}
+          <button type="submit" className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-4 rounded-2xl text-xl mt-6">
+            Continue to Payment
           </button>
 
           {isOfficer && (
-            <p className="text-center text-patriot-red font-semibold">
-              Officer email detected — Membership is free and immediate.
+            <p className="text-center text-patriot-red font-semibold text-lg">
+              Officer email detected — Immediate approved membership (no payment)
             </p>
           )}
         </form>
