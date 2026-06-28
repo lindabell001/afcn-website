@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SiteFooter from '../../components/SiteFooter';
 
 export default function TavernLocations() {
@@ -73,19 +74,17 @@ export default function TavernLocations() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {locations.map((location) => (
-            <a
+            <Link
               key={location.slug}
-              href={`https://americafirstcitizensnetwork.org/tavern/chat/${location.slug}`}
-              className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-2xl p-8 text-center transition-all hover:shadow-xl hover:-translate-y-1 block"
-              target="_blank"
-              rel="noopener noreferrer"
+              to={`/tavern/chat/${location.slug}`}
+              className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-2xl p-8 text-center transition-all hover:shadow-xl hover:-translate-y-1"
             >
               <div className="text-5xl mb-6">🏠</div>
               <h3 className="text-2xl font-bold text-patriot-blue mb-2">{location.name}</h3>
               <p className="text-patriot-red font-semibold group-hover:underline">
                 Join the Pub →
               </p>
-            </a>
+            </Link>
           ))}
         </div>
 
