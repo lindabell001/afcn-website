@@ -26,8 +26,12 @@ import TransparencyAndOperations from './pages/TransparencyAndOperations';
 // Tavern sub-pages
 import TavernLocations from './pages/tavern/locations';
 
-// Chat
+// Committees sub-pages
+import CommitteesLocal from './pages/committees/local';   // your local.tsx
+
+// Chat Rooms
 import TavernChatRoom from './pages/tavern/chat/[slug]';
+import CommitteesChatRoom from './pages/committees/chat/[slug]';   // we'll create this soon
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -60,15 +64,17 @@ const App = () => {
           <Route path="/social-welfare-organization" element={<SocialWelfareOrganization />} />
           <Route path="/transparency-and-operations" element={<TransparencyAndOperations />} />
 
-          {/* Tavern & Committees */}
+          {/* Main Sections */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
 
-          {/* Tavern Sub-pages */}
+          {/* Sub-pages */}
           <Route path="/tavern/locations" element={<TavernLocations />} />
+          <Route path="/committees/local" element={<CommitteesLocal />} />
 
           {/* Real Chat Rooms */}
           <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
+          <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
 
           <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
         </Routes>
