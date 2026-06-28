@@ -1,75 +1,97 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { supabase } from '../../../lib/supabaseClient';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { supabase } from '../../../lib/supabase'; // Adjust this path if needed
 import SiteFooter from '../../../components/SiteFooter';
 
-export default function ChatRoomPage() {
-  const { slug } = useParams();
-  const [room, setRoom] = useState<any>(null);
-  const [isMember, setIsMember] = useState(false);
+export default function TavernChatRoom() {
+  const { slug } = useParams<{ slug: string }>();
+  const [messages, setMessages] = useState<any[]>([]);
+  const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
 
+  const roomName = slug 
+    ? slug.replace('-pub', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Pub' 
+    : 'Pub';
+
   useEffect(() => {
-    const checkAuthAndLoad = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (user) {
-        setIsMember(true);
-        
-        const { data } = await supabase
-          .from('chat_rooms')
-          .select('*')
-          .eq('slug', slug)
-          .single();
-        
-        setRoom(data);
-      }
+    if (!slug) return;
+
+    const fetchMessages = async () => {
+      const { data } = await supabase
+        .from('messages')
+        .select('*')
+        .eq('room_slug', slug)
+        .order('created_at', { ascending: true });
+      setMessages(data || []);
       setLoading(false);
     };
 
-    checkAuthAndLoad();
+    fetchMessages();
+
+    // Real-time listener
+    const channel = supabase
+      .channel(`room:${slug}`)
+      .on(
+        'postgres_changes',
+        { 
+          event: 'INSERT', 
+          schema: 'public', 
+          table: 'messages', 
+          filter: `room_slug=eq.${slug}` 
+        },
+        (payload) => setMessages(prev => [...prev, payload.new])
+      )
+      .subscribe();
+
+    return () => supabase.removeChannel(channel);
   }, [slug]);
 
-  if (loading) {
-    return <div className="p-12 text-center">Loading...</div>;
-  }
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newMessage.trim() || !slug) return;
 
-  if (!isMember) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center py-20">
-        <div className="max-w-md text-center px-6">
-          <h1 className="text-5xl font-bold text-patriot-blue mb-6">Members Only</h1>
-          <p className="text-xl text-gray-600 mb-10">
-            This chat room is for America First Citizens Network members only.
-          </p>
-          <Link
-            to="/become-one"
-            className="inline-block bg-patriot-red text-white font-bold text-xl px-10 py-4 rounded-xl hover:bg-red-700 transition-all"
-          >
-            Become a Member →
-          </Link>
-          <p className="text-sm text-gray-500 mt-8">
-            Already a member? <Link to="/login" className="text-patriot-blue underline">Log in here</Link>
-          </p>
-        </div>
-      </div>
-    );
-  }
+    await supabase
+      .from('messages')
+      .insert([{ room_slug: slug, message: newMessage.trim() }]);
+
+    setNewMessage('');
+  };
+
+  if (loading) return <div className="text-center py-20 text-2xl">Loading {roomName}...</div>;
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold text-patriot-blue text-center mb-2">
-          {room?.name || "Chat Room"}
-        </h1>
-        <p className="text-center text-green-600 mb-10">
-          Welcome, member! You are now in the live chat.
-        </p>
+      <main className="max-w-4xl mx-auto px-6 py-8">
+        <h1 className="text-5xl font-bold text-patriot-blue text-center mb-8">{roomName}</h1>
 
-        <div className="bg-white border border-gray-300 rounded-3xl h-[600px] flex items-center justify-center">
-          <p className="text-xl text-gray-500">Real-time chat coming next...</p>
+        <div className="bg-white border-2 border-patriot-blue rounded-3xl h-[65vh] overflow-y-auto p-6 mb-6 space-y-4">
+          {messages.length === 0 ? (
+            <p className="text-center text-gray-500 py-10">No messages yet. Be the first to post!</p>
+          ) : (
+            messages.map((msg, i) => (
+              <div key={i} className="p-4 bg-gray-100 rounded-2xl">
+                {msg.message}
+              </div>
+            ))
+          )}
         </div>
-      </div>
+
+        <form onSubmit={sendMessage} className="flex gap-3">
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type your message here..."
+            className="flex-1 border border-patriot-blue rounded-2xl px-6 py-4 text-lg focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-patriot-red hover:bg-red-700 text-white font-bold px-12 py-4 rounded-2xl transition"
+          >
+            Send
+          </button>
+        </form>
+      </main>
       <SiteFooter />
     </div>
   );
