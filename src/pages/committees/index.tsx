@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SiteFooter from '../../components/SiteFooter';   // Updated path and casing
+import SiteFooter from '../../components/SiteFooter';
 
 export default function CommitteesOfObservation() {
   return (
@@ -18,22 +18,22 @@ export default function CommitteesOfObservation() {
 
         {/* Two Large Cards */}
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Committees by Location */}
+          {/* By Location */}
           <Link
-            to="/committees/local"
+            to="/tavern/locations"  // You can change this to a committee locations page later
             className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
           >
             <div className="text-7xl mb-8">🏛️</div>
             <h2 className="text-3xl font-bold text-patriot-blue mb-4">Committees by Location</h2>
             <p className="text-xl text-gray-600 mb-10">State/Territory, County, District, & City, Neighborhood Level</p>
             <p className="text-patriot-red font-semibold group-hover:underline text-lg">
-              Join or Start a Local Committee →
+              Join your State or Territory Committee →
             </p>
           </Link>
 
-          {/* Committees by Issue */}
+          {/* By Issue */}
           <Link
-            to="/committees/issues"
+            to="/committees/issues" 
             className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
           >
             <div className="text-7xl mb-8">📋</div>
@@ -46,7 +46,7 @@ export default function CommitteesOfObservation() {
         </div>
 
         <p className="text-center text-gray-500 mt-16">
-          Linda will set up whatever ones you want.
+          All activity is lawful observation and reporting.
         </p>
       </main>
 
