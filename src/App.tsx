@@ -27,11 +27,11 @@ import TransparencyAndOperations from './pages/TransparencyAndOperations';
 import TavernLocations from './pages/tavern/locations';
 
 // Committees sub-pages
-import CommitteesLocal from './pages/committees/local';   // your local.tsx
+import CommitteesLocal from './pages/committees/local';
 
 // Chat Rooms
 import TavernChatRoom from './pages/tavern/chat/[slug]';
-import CommitteesChatRoom from './pages/committees/chat/[slug]';   // we'll create this soon
+import CommitteesChatRoom from './pages/committees/chat/[slug]';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
