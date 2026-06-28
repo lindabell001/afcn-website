@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { supabase } from '../../../lib/supabase'; // Adjust this path if needed
+import { supabase } from '../../../lib/supabaseClient';
 import SiteFooter from '../../../components/SiteFooter';
 
 export default function TavernChatRoom() {
@@ -28,7 +28,6 @@ export default function TavernChatRoom() {
 
     fetchMessages();
 
-    // Real-time listener
     const channel = supabase
       .channel(`room:${slug}`)
       .on(
