@@ -26,18 +26,8 @@ import TransparencyAndOperations from './pages/TransparencyAndOperations';
 // Tavern sub-pages
 import TavernLocations from './pages/tavern/locations';
 
-// Temporary Chat Placeholder
-function TavernChat({ slug }: { slug: string }) {
-  const name = slug.replace('-pub', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-  return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-5xl font-bold text-patriot-blue mb-4">Loading {name} Pub...</h1>
-        <p className="text-xl text-gray-600">Connecting to Supabase chat room</p>
-      </div>
-    </div>
-  );
-}
+// Chat
+import TavernChatRoom from './pages/tavern/chat/[slug]';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -77,8 +67,8 @@ const App = () => {
           {/* Tavern Sub-pages */}
           <Route path="/tavern/locations" element={<TavernLocations />} />
 
-          {/* Chat Rooms */}
-          <Route path="/tavern/chat/:slug" element={<TavernChat slug={""} />} />
+          {/* Real Chat Rooms */}
+          <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
 
           <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
         </Routes>
