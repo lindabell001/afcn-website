@@ -23,10 +23,8 @@ import PrivacyAndData from './pages/PrivacyAndData';
 import SocialWelfareOrganization from './pages/SocialWelfareOrganization';
 import TransparencyAndOperations from './pages/TransparencyAndOperations';
 
-// Tavern sub-pages
+// Sub-pages
 import TavernLocations from './pages/tavern/locations';
-
-// Committees sub-pages
 import CommitteesLocal from './pages/committees/local';
 
 // Chat Rooms
@@ -64,7 +62,7 @@ const App = () => {
           <Route path="/social-welfare-organization" element={<SocialWelfareOrganization />} />
           <Route path="/transparency-and-operations" element={<TransparencyAndOperations />} />
 
-          {/* Main Sections - Short Names */}
+          {/* Main Sections */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
 
