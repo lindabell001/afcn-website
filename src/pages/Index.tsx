@@ -1,61 +1,71 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SiteFooter from '../components/SiteFooter';
+import heroRays from "@/assets/hero-rays.jpg";
 
-export default function CommitteesOfObservation() {
+const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        {/* Main Title - Links to General Committee Chat */}
-        <div className="text-center mb-16">
-          <Link to="/committees/chat/america-first-committee">
-            <h1 className="text-6xl md:text-7xl font-bold text-patriot-blue mb-6 tracking-tight hover:text-patriot-red transition-colors">
-              Committee of Observation
-            </h1>
-          </Link>
-          <p className="text-2xl text-gray-600 max-w-3xl mx-auto">
-            WE THE PEOPLE observing, recording, acting.
-          </p>
+    <>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="relative h-[88vh] min-h-[560px] w-full">
+          <img
+            src={heroRays}
+            alt="American flag with divine light rays"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+
+          {/* Divine rays overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 60% at 50% 0%, hsl(45 100% 80% / 0.55), transparent 60%), linear-gradient(180deg, hsl(45 100% 95% / 0.35) 0%, transparent 35%, hsl(220 70% 15% / 0.35) 100%)",
+            }}
+          />
+
+          <div className="relative z-10 h-full flex items-center">
+            <div className="container text-center px-6">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] leading-none">
+                America First<br />Citizens Network
+              </h1>
+              <p className="mt-6 text-xl md:text-2xl font-light italic text-white/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+                The start of the next 250 years
+              </p>
+
+              {/* Three Clean Buttons */}
+              <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  to="/resources"
+                  className="inline-block bg-white hover:bg-gray-100 text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
+                >
+                  Explore Resources
+                </Link>
+
+                <Link
+                  to="/mission"
+                  className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
+                >
+                  Our Mission
+                </Link>
+
+                <Link
+                  to="/become-one"
+                  onClick={() => {
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: 'instant' });
+                    }, 100);
+                  }}
+                  className="inline-block bg-white hover:bg-gray-100 text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
+                >
+                  Become a Member
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Two Large Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Committees by Location */}
-          <Link
-            to="/committees/local"
-            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
-          >
-            <div className="text-7xl mb-8">🏛️</div>
-            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Committees by Location</h2>
-            <p className="text-xl text-gray-600 mb-10">State/Territory, County, District, & City, Neighborhood Level</p>
-            <p className="text-patriot-red font-semibold group-hover:underline text-lg">
-              Join or Start a Local Committee →
-            </p>
-          </Link>
-
-          {/* Committees by Issue */}
-          <Link
-            to="/committees/issues"
-            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
-          >
-            <div className="text-7xl mb-8">📋</div>
-            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Committees by Issue</h2>
-            <p className="text-xl text-gray-600 mb-10">National & Focused Issues</p>
-            <p className="text-patriot-red font-semibold group-hover:underline text-lg">
-              Join an Issue Committee →
-            </p>
-          </Link>
-        </div>
-
-        <p className="text-center text-gray-500 mt-16">
-          Linda will set up whatever ones you want.
-        </p>
-      </main>
-
-      <SiteFooter />
-    </div>
+      </section>
+    </>
   );
-}
+};
 
-// This line must be at the very bottom
-export default CommitteesOfObservation;
+export default Index;
