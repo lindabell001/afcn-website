@@ -13,7 +13,7 @@ import Mission from './pages/Mission';
 
 // Core Secondary Pages
 import Tavern from './pages/tavern';
-import Committees from './pages/committees';   // This loads the index.tsx in the committees folder
+import Committees from './pages/committees';
 
 // Constitution Academy
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
@@ -57,6 +57,12 @@ const App = () => {
           {/* Tavern & Committees */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
+
+          {/* Sub-pages for the cards */}
+          <Route path="/tavern/locations" element={<div className="text-center py-20 text-2xl">Tavern Locations (coming soon)</div>} />
+          <Route path="/tavern/issues" element={<div className="text-center py-20 text-2xl">Tavern Issues (coming soon)</div>} />
+          <Route path="/committees/local" element={<div className="text-center py-20 text-2xl">Committees by Location (coming soon)</div>} />
+          <Route path="/committees/issues" element={<div className="text-center py-20 text-2xl">Committees by Issue (coming soon)</div>} />
 
           <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
         </Routes>
