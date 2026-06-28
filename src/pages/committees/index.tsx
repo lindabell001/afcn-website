@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SiteFooter from '../components/SiteFooter';
+import SiteFooter from '../../components/SiteFooter';   // Updated path and casing
 
 export default function CommitteesOfObservation() {
   return (
