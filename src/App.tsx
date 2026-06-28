@@ -54,7 +54,7 @@ const App = () => {
           <Route path="/social-welfare-organization" element={<SocialWelfareOrganization />} />
           <Route path="/transparency-and-operations" element={<TransparencyAndOperations />} />
 
-          {/* Tavern & Committees - Both short and long URLs work */}
+          {/* Tavern & Committees */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<CommitteesOfObservation />} />
           <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
