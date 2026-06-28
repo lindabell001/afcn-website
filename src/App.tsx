@@ -13,7 +13,7 @@ import Mission from './pages/Mission';
 
 // Core Secondary Pages
 import Tavern from './pages/tavern';
-import Committees from './pages/committees';
+import Committees from './pages/committees';   // or CommitteesOfObservation if you prefer
 
 // Constitution Academy
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
@@ -22,6 +22,9 @@ import ConstitutionAcademy from './pages/ConstitutionAcademy';
 import PrivacyAndData from './pages/PrivacyAndData';
 import SocialWelfareOrganization from './pages/SocialWelfareOrganization';
 import TransparencyAndOperations from './pages/TransparencyAndOperations';
+
+// Tavern sub-pages
+import TavernLocations from './pages/tavern/locations';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -58,11 +61,8 @@ const App = () => {
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
 
-          {/* Sub-pages for the cards */}
-          <Route path="/tavern/locations" element={<div className="text-center py-20 text-2xl">Tavern Locations (coming soon)</div>} />
-          <Route path="/tavern/issues" element={<div className="text-center py-20 text-2xl">Tavern Issues (coming soon)</div>} />
-          <Route path="/committees/local" element={<div className="text-center py-20 text-2xl">Committees by Location (coming soon)</div>} />
-          <Route path="/committees/issues" element={<div className="text-center py-20 text-2xl">Committees by Issue (coming soon)</div>} />
+          {/* Tavern Sub-pages */}
+          <Route path="/tavern/locations" element={<TavernLocations />} />
 
           <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
         </Routes>
