@@ -54,9 +54,10 @@ const App = () => {
           <Route path="/social-welfare-organization" element={<SocialWelfareOrganization />} />
           <Route path="/transparency-and-operations" element={<TransparencyAndOperations />} />
 
-          {/* Tavern & Committees */}
+          {/* Tavern & Committees - Updated for easier URLs */}
           <Route path="/tavern" element={<Tavern />} />
-          <Route path="/committees-of-observation" element={<CommitteesOfObservation />} />
+          <Route path="/committees" element={<CommitteesOfObservation />} />   {/* Short easy link */}
+          <Route path="/committees-of-observation" element={<CommitteesOfObservation />} /> {/* Old link still works */}
 
           <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
         </Routes>
