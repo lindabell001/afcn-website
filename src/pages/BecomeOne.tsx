@@ -12,17 +12,17 @@ export default function BecomeOne() {
     zip: '',
     congressionalDistrict: '',
     phone: '',
+    xHandle: '',
     isCitizen: false,
     isVeteran: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
 
-  // Officer bypass for America First Citizens Network emails
   const isOfficer = formData.email.toLowerCase().trim().endsWith('@americafirstcitizensnetwork.org');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target as HTMLInputElement;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
     if (type === 'checkbox') {
       setFormData(prev => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
     } else {
@@ -34,7 +34,7 @@ export default function BecomeOne() {
     e.preventDefault();
 
     if (isOfficer) {
-      alert('✅ Officer Bypass - You are now an approved member!\nNo payment required.');
+      alert('✅ Officer Bypass - Immediate approved membership! No payment required.');
       setSubmitted(true);
     } else {
       window.location.href = 'https://givingtools.com/give/4206';
@@ -77,6 +77,8 @@ export default function BecomeOne() {
           <input type="text" name="congressionalDistrict" placeholder="Congressional District (e.g. TX-03 or CA-12)" value={formData.congressionalDistrict} onChange={handleChange} className="w-full p-4 border rounded-xl" />
 
           <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="w-full p-4 border rounded-xl" />
+
+          <input type="text" name="xHandle" placeholder="X Account (@username)" value={formData.xHandle} onChange={handleChange} className="w-full p-4 border rounded-xl" />
 
           <div className="flex items-center gap-3">
             <input type="checkbox" name="isCitizen" checked={formData.isCitizen} onChange={handleChange} className="w-5 h-5" />
