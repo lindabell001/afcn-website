@@ -1,25 +1,77 @@
-import PageShell from "@/components/PageShell";
-import eagle from "@/assets/eagle-locked.png";
+import React, { useState } from 'react';
+import { supabase } from '../lib/supabaseClient';
+import SiteFooter from '../components/SiteFooter';
 
 const MemberLogin = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setMessage('Error: ' + error.message);
+    } else {
+      setMessage('Login successful! Redirecting...');
+      window.location.href = '/tavern/chat/alabama-pub';
+    }
+
+    setLoading(false);
+  };
+
   return (
-    <PageShell title="Member Login" subtitle="Patriot portal access.">
-      <div className="text-center bg-card border border-border rounded-md p-10 shadow-card">
-        <img
-          src={eagle}
-          alt="Cartoon eagle guarding a locked door"
-          loading="lazy"
-          width={768}
-          height={768}
-          className="mx-auto w-64 h-64 object-contain"
-        />
-        <h2 className="mt-4 text-3xl font-bold">Coming Soon!</h2>
-        <p className="mt-3 text-muted-foreground max-w-lg mx-auto">
-          The members-only portal is being built. Soon, registered patriots will sign in here to
-          access exclusive briefings, chapter tools, and event RSVPs.
+    <div className="min-h-screen bg-background">
+      <main className="max-w-md mx-auto px-6 py-16">
+        <div className="text-center mb-8">
+          <h1 className="text-5xl font-bold text-patriot-blue">Member Login</h1>
+          <p className="text-gray-600 mt-2">Sign in to access the pubs and committees</p>
+        </div>
+
+        <form onSubmit={handleLogin} className="bg-white p-8 rounded-3xl shadow-xl space-y-6">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email Address"
+            className="w-full p-4 border border-patriot-blue rounded-2xl"
+            required
+          />
+
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            className="w-full p-4 border border-patriot-blue rounded-2xl"
+            required
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-4 rounded-2xl text-xl disabled:opacity-50"
+          >
+            {loading ? 'Signing in...' : 'Sign In'}
+          </button>
+
+          {message && <p className="text-center text-red-600 font-medium">{message}</p>}
+        </form>
+
+        <p className="text-center text-gray-500 mt-8">
+          Don't have an account? <a href="/become-one" className="text-patriot-red">Become One</a>
         </p>
-      </div>
-    </PageShell>
+      </main>
+      <SiteFooter />
+    </div>
   );
 };
 
