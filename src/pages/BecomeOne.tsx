@@ -46,7 +46,7 @@ export default function BecomeOne() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center max-w-md">
           <h1 className="text-5xl font-bold text-patriot-blue mb-6">Welcome, Officer!</h1>
-          <p className="text-2xl">You have been added as an approved member of the America First Citizens Network.</p>
+          <p className="text-2xl">You have been added as an approved member.</p>
         </div>
       </div>
     );
@@ -78,7 +78,7 @@ export default function BecomeOne() {
 
           <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="w-full p-4 border rounded-xl" />
 
-          <input type="text" name="xHandle" placeholder="X Account (@username)" value={formData.xHandle} onChange={handleChange} className="w-full p-4 border rounded-xl" />
+          <input type="text" name="xHandle" placeholder="X Account (@username) - enter 'none' if none" value={formData.xHandle} onChange={handleChange} className="w-full p-4 border rounded-xl" />
 
           <div className="flex items-center gap-3">
             <input type="checkbox" name="isCitizen" checked={formData.isCitizen} onChange={handleChange} className="w-5 h-5" />
