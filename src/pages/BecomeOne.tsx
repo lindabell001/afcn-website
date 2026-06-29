@@ -76,7 +76,9 @@ export default function BecomeOne() {
         alert('✅ Officer approved! You can now log in.');
         setSubmitted(true);
       } else {
-        alert('Thank you! Your profile is pending approval. Check your email for confirmation.');
+        alert('Thank you! Redirecting to payment page...');
+        // Redirect to giving page for normal members
+        window.location.href = 'https://givingtools.com/give/4206';
       }
     }
 
