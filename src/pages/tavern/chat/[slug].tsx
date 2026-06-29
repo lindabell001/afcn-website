@@ -17,17 +17,20 @@ export default function TavernChatRoom() {
     if (!slug) return;
 
     const fetchMessages = async () => {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('messages')
         .select('*')
         .eq('room_slug', slug)
         .order('created_at', { ascending: true });
-      setMessages(data || []);
+      
+      if (error) console.error(error);
+      else setMessages(data || []);
       setLoading(false);
     };
 
     fetchMessages();
 
+    // Realtime - new messages appear instantly
     const channel = supabase
       .channel(`room:${slug}`)
       .on(
@@ -49,11 +52,20 @@ export default function TavernChatRoom() {
     e.preventDefault();
     if (!newMessage.trim() || !slug) return;
 
-    await supabase
+    const { error } = await supabase
       .from('messages')
-      .insert([{ room_slug: slug, message: newMessage.trim() }]);
+      .insert([{
+        room_slug: slug,
+        username: 'Test User',        // Change this later when you add real login
+        message: newMessage.trim(),
+      }]);
 
-    setNewMessage('');
+    if (error) {
+      console.error('Send error:', error);
+      alert('Could not send message. Check console (press F12)');
+    } else {
+      setNewMessage('');   // Clear the input box
+    }
   };
 
   if (loading) return <div className="text-center py-20 text-2xl">Loading {roomName}...</div>;
@@ -69,7 +81,7 @@ export default function TavernChatRoom() {
           ) : (
             messages.map((msg, i) => (
               <div key={i} className="p-4 bg-gray-100 rounded-2xl">
-                {msg.message}
+                <strong>{msg.username || 'Anonymous'}:</strong> {msg.message}
               </div>
             ))
           )}
