@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../lib/supabaseClient';   // Fixed import
+import { supabase } from '../lib/supabaseClient';
 import SiteFooter from '../components/SiteFooter';
 
 export default function BecomeOne() {
@@ -56,13 +56,13 @@ export default function BecomeOne() {
 
     if (error) {
       alert('Error saving profile: ' + error.message);
+      console.error(error);
     } else {
       if (isOfficer) {
-        alert('✅ Officer Bypass - Immediate approved membership! No payment required.');
+        alert('✅ Officer approved! You can now log in.');
         setSubmitted(true);
       } else {
-        alert('Thank you! Your payment is being processed. Profile saved as pending.');
-        window.location.href = 'https://givingtools.com/give/4206';
+        alert('Thank you! Your profile is pending approval.');
       }
     }
 
