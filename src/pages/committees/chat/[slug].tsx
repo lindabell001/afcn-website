@@ -8,10 +8,15 @@ export default function CommitteesChatRoom() {
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<any>(null);
 
   const roomName = slug 
     ? slug.replace('-committee', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Committee' 
     : 'Committee';
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setCurrentUser(data.user));
+  }, []);
 
   useEffect(() => {
     if (!slug) return;
@@ -20,7 +25,7 @@ export default function CommitteesChatRoom() {
       const { data } = await supabase
         .from('messages')
         .select('*')
-        .eq('room_slug', slug)
+        .eq('slug', slug)
         .order('created_at', { ascending: true });
       setMessages(data || []);
       setLoading(false);
@@ -36,7 +41,7 @@ export default function CommitteesChatRoom() {
           event: 'INSERT', 
           schema: 'public', 
           table: 'messages', 
-          filter: `room_slug=eq.${slug}` 
+          filter: `slug=eq.${slug}` 
         },
         (payload) => setMessages(prev => [...prev, payload.new])
       )
@@ -47,51 +52,27 @@ export default function CommitteesChatRoom() {
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim() || !slug) return;
+    if (!newMessage.trim()) return;
 
-    await supabase
+    if (!currentUser) {
+      alert('You must be logged in to send messages');
+      return;
+    }
+
+    const { error } = await supabase
       .from('messages')
-      .insert([{ room_slug: slug, message: newMessage.trim() }]);
+      .insert([{
+        slug: slug,
+        user_id: currentUser.id,
+        username: currentUser.email || 'Test User',
+        message: newMessage.trim(),
+      }]);
 
-    setNewMessage('');
+    if (error) {
+      alert('Send failed: ' + error.message);
+    } else {
+      setNewMessage('');
+    }
   };
 
-  if (loading) return <div className="text-center py-20 text-2xl">Loading {roomName}...</div>;
-
-  return (
-    <div className="min-h-screen bg-background">
-      <main className="max-w-4xl mx-auto px-6 py-8">
-        <h1 className="text-5xl font-bold text-patriot-blue text-center mb-8">{roomName}</h1>
-
-        <div className="bg-white border-2 border-patriot-blue rounded-3xl h-[65vh] overflow-y-auto p-6 mb-6 space-y-4">
-          {messages.length === 0 ? (
-            <p className="text-center text-gray-500 py-10">No messages yet. Be the first to post!</p>
-          ) : (
-            messages.map((msg, i) => (
-              <div key={i} className="p-4 bg-gray-100 rounded-2xl">
-                {msg.message}
-              </div>
-            ))
-          )}
-        </div>
-
-        <form onSubmit={sendMessage} className="flex gap-3">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type your message here..."
-            className="flex-1 border border-patriot-blue rounded-2xl px-6 py-4 text-lg focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="bg-patriot-red hover:bg-red-700 text-white font-bold px-12 py-4 rounded-2xl transition"
-          >
-            Send
-          </button>
-        </form>
-      </main>
-      <SiteFooter />
-    </div>
-  );
-}
+  if (loading) return <div className="text-center py-20 text...
