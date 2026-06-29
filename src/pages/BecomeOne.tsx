@@ -76,8 +76,17 @@ export default function BecomeOne() {
         alert('✅ Officer approved! You can now log in.');
         setSubmitted(true);
       } else {
-        alert('Thank you! Redirecting to payment page...');
-        // Redirect to giving page for normal members
+        // Send email to Norine
+        await supabase.functions.invoke('notify-norine', {
+          body: {
+            name: `${formData.firstName} ${formData.lastName}`,
+            email: formData.email,
+            xHandle: formData.xHandle,
+            message: 'New member pending approval'
+          }
+        });
+
+        alert('Thank you! Your profile is pending approval. Norine has been notified.');
         window.location.href = 'https://givingtools.com/give/4206';
       }
     }
@@ -103,6 +112,7 @@ export default function BecomeOne() {
         <p className="text-center text-xl mb-12">Join the America First Citizens Network</p>
 
         <form onSubmit={handleSubmit} className="bg-white p-10 rounded-3xl shadow-xl space-y-6">
+          {/* form fields same as before */}
           <div className="grid md:grid-cols-2 gap-6">
             <input type="text" name="firstName" placeholder="First Name *" value={formData.firstName} onChange={handleChange} className="p-4 border rounded-xl" required />
             <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} className="p-4 border rounded-xl" />
