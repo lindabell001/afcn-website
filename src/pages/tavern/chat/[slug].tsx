@@ -9,6 +9,7 @@ export default function TavernChatRoom() {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState('main'); // 'main' or 'issues'
 
   const roomName = slug 
     ? slug.replace('-pub', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Pub' 
@@ -25,13 +26,12 @@ export default function TavernChatRoom() {
     if (!slug) return;
 
     const fetchMessages = async () => {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('messages')
         .select('*')
+        .eq('room_slug', slug)
         .order('created_at', { ascending: true });
-      
-      if (error) console.error(error);
-      else setMessages(data || []);
+      setMessages(data || []);
       setLoading(false);
     };
 
@@ -44,7 +44,8 @@ export default function TavernChatRoom() {
         { 
           event: 'INSERT', 
           schema: 'public', 
-          table: 'messages' 
+          table: 'messages', 
+          filter: `room_slug=eq.${slug}` 
         },
         (payload) => setMessages(prev => [...prev, payload.new])
       )
@@ -57,10 +58,6 @@ export default function TavernChatRoom() {
     e.preventDefault();
     if (!newMessage.trim()) return;
 
-    console.log('Trying to send message...');
-    console.log('Slug:', slug);
-    console.log('Is user logged in?', !!currentUser);
-
     if (!currentUser) {
       alert('You must be logged in to send messages');
       return;
@@ -69,17 +66,15 @@ export default function TavernChatRoom() {
     const { error } = await supabase
       .from('messages')
       .insert([{
-        room_id: 1, // temporary - change later
+        room_slug: slug,
         user_id: currentUser.id,
         username: currentUser.email || 'Test User',
         message: newMessage.trim(),
       }]);
 
     if (error) {
-      console.error('Supabase insert error:', error);
       alert('Send failed: ' + error.message);
     } else {
-      console.log('Message sent successfully!');
       setNewMessage('');
     }
   };
@@ -90,6 +85,22 @@ export default function TavernChatRoom() {
     <div className="min-h-screen bg-background">
       <main className="max-w-4xl mx-auto px-6 py-8">
         <h1 className="text-5xl font-bold text-patriot-blue text-center mb-8">{roomName}</h1>
+
+        {/* Tabs */}
+        <div className="flex gap-4 mb-6 border-b">
+          <button 
+            onClick={() => setActiveTab('main')}
+            className={`px-6 py-3 font-semibold ${activeTab === 'main' ? 'border-b-4 border-patriot-red text-patriot-red' : 'text-gray-600'}`}
+          >
+            Main Pub
+          </button>
+          <button 
+            onClick={() => setActiveTab('issues')}
+            className={`px-6 py-3 font-semibold ${activeTab === 'issues' ? 'border-b-4 border-patriot-red text-patriot-red' : 'text-gray-600'}`}
+          >
+            Issues (Save America Act)
+          </button>
+        </div>
 
         <div className="bg-white border-2 border-patriot-blue rounded-3xl h-[65vh] overflow-y-auto p-6 mb-6 space-y-4">
           {messages.length === 0 ? (
