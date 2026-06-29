@@ -60,6 +60,7 @@ export default function TavernLocations() {
     { name: 'U.S. Virgin Islands', slug: 'us-virgin-islands-pub' },
     { name: 'Northern Mariana Islands', slug: 'northern-mariana-islands-pub' },
     { name: 'American Samoa', slug: 'american-samoa-pub' },
+    { name: 'District of Columbia', slug: 'district-of-columbia-pub' },
   ];
 
   return (
@@ -70,6 +71,9 @@ export default function TavernLocations() {
             Pubs by Location
           </h1>
           <p className="text-2xl text-gray-600">Join your State or Territory Pub</p>
+          <p className="text-xl text-patriot-red mt-6">
+            or <Link to="/tavern/chat/america-first-tavern" className="underline hover:no-underline">America First Tavern (National)</Link>
+          </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -92,7 +96,6 @@ export default function TavernLocations() {
           All Pubs are for vetted members only • Real-time chat
         </p>
       </main>
-
       <SiteFooter />
     </div>
   );
