@@ -8,10 +8,18 @@ export default function TavernChatRoom() {
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<any>(null);
 
   const roomName = slug 
     ? slug.replace('-pub', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Pub' 
     : 'Pub';
+
+  // Get current user
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setCurrentUser(data.user);
+    });
+  }, []);
 
   useEffect(() => {
     if (!slug) return;
@@ -20,7 +28,6 @@ export default function TavernChatRoom() {
       const { data, error } = await supabase
         .from('messages')
         .select('*')
-        .eq('room_slug', slug)
         .order('created_at', { ascending: true });
       
       if (error) console.error(error);
@@ -30,7 +37,6 @@ export default function TavernChatRoom() {
 
     fetchMessages();
 
-    // Realtime - new messages appear instantly
     const channel = supabase
       .channel(`room:${slug}`)
       .on(
@@ -38,8 +44,7 @@ export default function TavernChatRoom() {
         { 
           event: 'INSERT', 
           schema: 'public', 
-          table: 'messages', 
-          filter: `room_slug=eq.${slug}` 
+          table: 'messages' 
         },
         (payload) => setMessages(prev => [...prev, payload.new])
       )
@@ -50,21 +55,32 @@ export default function TavernChatRoom() {
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim() || !slug) return;
+    if (!newMessage.trim()) return;
+
+    console.log('Trying to send message...');
+    console.log('Slug:', slug);
+    console.log('Is user logged in?', !!currentUser);
+
+    if (!currentUser) {
+      alert('You must be logged in to send messages');
+      return;
+    }
 
     const { error } = await supabase
       .from('messages')
       .insert([{
-        room_slug: slug,
-        username: 'Test User',        // Change this later when you add real login
+        room_id: 1, // temporary - change later
+        user_id: currentUser.id,
+        username: currentUser.email || 'Test User',
         message: newMessage.trim(),
       }]);
 
     if (error) {
-      console.error('Send error:', error);
-      alert('Could not send message. Check console (press F12)');
+      console.error('Supabase insert error:', error);
+      alert('Send failed: ' + error.message);
     } else {
-      setNewMessage('');   // Clear the input box
+      console.log('Message sent successfully!');
+      setNewMessage('');
     }
   };
 
