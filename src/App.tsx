@@ -10,6 +10,7 @@ import Resources from './pages/Resources';
 import BecomeOne from './pages/BecomeOne';
 import Donate from './pages/Donate';
 import Mission from './pages/Mission';
+import MemberLogin from './pages/MemberLogin';   // Added
 
 // Core Secondary Pages
 import Tavern from './pages/tavern';
@@ -53,6 +54,9 @@ const App = () => {
           <Route path="/become-one" element={<BecomeOne />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
+
+          {/* Member Login */}
+          <Route path="/member-login" element={<MemberLogin />} />
 
           {/* Constitution Academy */}
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
