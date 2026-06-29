@@ -9,17 +9,14 @@ export default function TavernChatRoom() {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState('main'); // 'main' or 'issues'
+  const [activeTab, setActiveTab] = useState('main');
 
   const roomName = slug 
     ? slug.replace('-pub', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Pub' 
     : 'Pub';
 
-  // Get current user
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      setCurrentUser(data.user);
-    });
+    supabase.auth.getUser().then(({ data }) => setCurrentUser(data.user));
   }, []);
 
   useEffect(() => {
@@ -29,7 +26,7 @@ export default function TavernChatRoom() {
       const { data } = await supabase
         .from('messages')
         .select('*')
-        .eq('room_slug', slug)
+        .eq('slug', slug)   // Changed to 'slug'
         .order('created_at', { ascending: true });
       setMessages(data || []);
       setLoading(false);
@@ -45,7 +42,7 @@ export default function TavernChatRoom() {
           event: 'INSERT', 
           schema: 'public', 
           table: 'messages', 
-          filter: `room_slug=eq.${slug}` 
+          filter: `slug=eq.${slug}` 
         },
         (payload) => setMessages(prev => [...prev, payload.new])
       )
@@ -66,7 +63,7 @@ export default function TavernChatRoom() {
     const { error } = await supabase
       .from('messages')
       .insert([{
-        room_slug: slug,
+        slug: slug,                    // Changed to 'slug'
         user_id: currentUser.id,
         username: currentUser.email || 'Test User',
         message: newMessage.trim(),
@@ -86,7 +83,6 @@ export default function TavernChatRoom() {
       <main className="max-w-4xl mx-auto px-6 py-8">
         <h1 className="text-5xl font-bold text-patriot-blue text-center mb-8">{roomName}</h1>
 
-        {/* Tabs */}
         <div className="flex gap-4 mb-6 border-b">
           <button 
             onClick={() => setActiveTab('main')}
