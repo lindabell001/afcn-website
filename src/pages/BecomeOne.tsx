@@ -7,6 +7,7 @@ export default function BecomeOne() {
     firstName: '',
     lastName: '',
     email: '',
+    password: '',
     street: '',
     city: '',
     state: '',
@@ -36,7 +37,21 @@ export default function BecomeOne() {
     e.preventDefault();
     setLoading(true);
 
+    // Create auth user
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (authError) {
+      alert('Auth error: ' + authError.message);
+      setLoading(false);
+      return;
+    }
+
+    // Create profile
     const profileData = {
+      id: authData.user.id,
       first_name: formData.firstName,
       last_name: formData.lastName,
       email: formData.email,
@@ -52,17 +67,16 @@ export default function BecomeOne() {
       role: isOfficer ? 'admin' : 'member',
     };
 
-    const { error } = await supabase.from('profiles').insert([profileData]);
+    const { error: profileError } = await supabase.from('profiles').insert([profileData]);
 
-    if (error) {
-      alert('Error saving profile: ' + error.message);
-      console.error(error);
+    if (profileError) {
+      alert('Profile error: ' + profileError.message);
     } else {
       if (isOfficer) {
         alert('✅ Officer approved! You can now log in.');
         setSubmitted(true);
       } else {
-        alert('Thank you! Your profile is pending approval.');
+        alert('Thank you! Your profile is pending approval. Check your email for confirmation.');
       }
     }
 
@@ -93,6 +107,8 @@ export default function BecomeOne() {
           </div>
 
           <input type="email" name="email" placeholder="Email Address *" value={formData.email} onChange={handleChange} className="w-full p-4 border rounded-xl" required />
+
+          <input type="password" name="password" placeholder="Password *" value={formData.password} onChange={handleChange} className="w-full p-4 border rounded-xl" required />
 
           <input type="text" name="street" placeholder="House number and street (neighborhood)" value={formData.street} onChange={handleChange} className="w-full p-4 border rounded-xl" />
 
