@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { supabase } from '../../../lib/supabaseClient';
 import SiteFooter from '../../../components/SiteFooter';
 
-export default function CommitteesChatRoom() {
+export default function TavernChatRoom() {
   const { slug } = useParams<{ slug: string }>();
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState('');
@@ -11,8 +11,8 @@ export default function CommitteesChatRoom() {
   const [currentUser, setCurrentUser] = useState<any>(null);
 
   const roomName = slug 
-    ? slug.replace('-committee', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Committee' 
-    : 'Committee';
+    ? slug.replace('-pub', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Pub' 
+    : 'Pub';
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setCurrentUser(data.user));
