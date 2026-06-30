@@ -6,39 +6,44 @@ export default function Committees() {
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-5xl mx-auto px-6 py-16">
-        {/* Main Title */}
+        {/* Header / Hero - Main General Chat */}
         <div className="text-center mb-16">
-          <h1 className="text-6xl md:text-7xl font-bold text-patriot-blue mb-6 tracking-tight">
-            Committee of Observation
-          </h1>
-          <p className="text-2xl text-gray-600 max-w-3xl mx-auto">
-            WE THE PEOPLE observing, recording, acting.
+          <Link 
+            to="/committees/chat/national-observation"
+            className="group inline-block"
+          >
+            <h1 className="text-6xl md:text-7xl font-bold text-patriot-blue mb-6 tracking-tight hover:text-patriot-red transition-all duration-200 group-hover:underline">
+              National Observation Committee
+            </h1>
+          </Link>
+          <p className="text-2xl text-gray-600 max-w-2xl mx-auto">
+            The main gathering place for national level observation
           </p>
         </div>
 
-        {/* Two Large Cards */}
+        {/* Two Cards */}
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* By Location */}
+          {/* Location Committees */}
           <Link
             to="/committees/local"
             className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
           >
-            <div className="text-7xl mb-8">🏛️</div>
+            <div className="text-7xl mb-8">🗺️</div>
             <h2 className="text-3xl font-bold text-patriot-blue mb-4">Committees by Location</h2>
             <p className="text-xl text-gray-600 mb-10">State/Territory, County, District, & City, Neighborhood Level</p>
             <p className="text-patriot-red font-semibold group-hover:underline text-lg">
-              Join or Start a Local Committee →
+              Join your State or Territory Committee →
             </p>
           </Link>
 
-          {/* By Issue */}
+          {/* Issue Committees */}
           <Link
             to="/committees/issues"
             className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-2xl hover:-translate-y-1"
           >
-            <div className="text-7xl mb-8">📋</div>
+            <div className="text-7xl mb-8">🎯</div>
             <h2 className="text-3xl font-bold text-patriot-blue mb-4">Committees by Issue</h2>
-            <p className="text-xl text-gray-600 mb-10">National & Focused Issues</p>
+            <p className="text-xl text-gray-600 mb-10">Focused Discussion Rooms</p>
             <p className="text-patriot-red font-semibold group-hover:underline text-lg">
               Join an Issue Committee →
             </p>
@@ -46,7 +51,7 @@ export default function Committees() {
         </div>
 
         <p className="text-center text-gray-500 mt-16">
-          All Committees are for members only • Lawful vigilance
+          All Committees are for members only • Real-time chat
         </p>
       </main>
 
