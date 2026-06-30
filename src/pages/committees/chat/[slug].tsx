@@ -75,4 +75,42 @@ export default function CommitteesChatRoom() {
     }
   };
 
-  if (loading) return <div className="text-center py-20 text...
+  if (loading) return <div className="text-center py-20 text-2xl">Loading {roomName}...</div>;
+
+  return (
+    <div className="min-h-screen bg-background">
+      <main className="max-w-4xl mx-auto px-6 py-8">
+        <h1 className="text-5xl font-bold text-patriot-blue text-center mb-8">{roomName}</h1>
+
+        <div className="bg-white border-2 border-patriot-blue rounded-3xl h-[65vh] overflow-y-auto p-6 mb-6 space-y-4">
+          {messages.length === 0 ? (
+            <p className="text-center text-gray-500 py-10">No messages yet. Be the first to post!</p>
+          ) : (
+            messages.map((msg, i) => (
+              <div key={i} className="p-4 bg-gray-100 rounded-2xl">
+                <strong>{msg.username || 'Anonymous'}:</strong> {msg.message}
+              </div>
+            ))
+          )}
+        </div>
+
+        <form onSubmit={sendMessage} className="flex gap-3">
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type your message here..."
+            className="flex-1 border border-patriot-blue rounded-2xl px-6 py-4 text-lg focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-patriot-red hover:bg-red-700 text-white font-bold px-12 py-4 rounded-2xl transition"
+          >
+            Send
+          </button>
+        </form>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
