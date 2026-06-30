@@ -3,17 +3,16 @@ import { useParams } from 'react-router-dom';
 import { supabase } from '../../../lib/supabaseClient';
 import SiteFooter from '../../../components/SiteFooter';
 
-export default function TavernChatRoom() {
+export default function CommitteesChatRoom() {
   const { slug } = useParams<{ slug: string }>();
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState('main');
 
   const roomName = slug 
-    ? slug.replace('-pub', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Pub' 
-    : 'Pub';
+    ? slug.replace('-committee', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Committee' 
+    : 'Committee';
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setCurrentUser(data.user));
@@ -26,7 +25,7 @@ export default function TavernChatRoom() {
       const { data } = await supabase
         .from('messages')
         .select('*')
-        .eq('slug', slug)   // Changed to 'slug'
+        .eq('slug', slug)
         .order('created_at', { ascending: true });
       setMessages(data || []);
       setLoading(false);
@@ -63,7 +62,7 @@ export default function TavernChatRoom() {
     const { error } = await supabase
       .from('messages')
       .insert([{
-        slug: slug,                    // Changed to 'slug'
+        slug: slug,
         user_id: currentUser.id,
         username: currentUser.email || 'Test User',
         message: newMessage.trim(),
@@ -82,21 +81,6 @@ export default function TavernChatRoom() {
     <div className="min-h-screen bg-background">
       <main className="max-w-4xl mx-auto px-6 py-8">
         <h1 className="text-5xl font-bold text-patriot-blue text-center mb-8">{roomName}</h1>
-
-        <div className="flex gap-4 mb-6 border-b">
-          <button 
-            onClick={() => setActiveTab('main')}
-            className={`px-6 py-3 font-semibold ${activeTab === 'main' ? 'border-b-4 border-patriot-red text-patriot-red' : 'text-gray-600'}`}
-          >
-            Main Pub
-          </button>
-          <button 
-            onClick={() => setActiveTab('issues')}
-            className={`px-6 py-3 font-semibold ${activeTab === 'issues' ? 'border-b-4 border-patriot-red text-patriot-red' : 'text-gray-600'}`}
-          >
-            Issues (Save America Act)
-          </button>
-        </div>
 
         <div className="bg-white border-2 border-patriot-blue rounded-3xl h-[65vh] overflow-y-auto p-6 mb-6 space-y-4">
           {messages.length === 0 ? (
