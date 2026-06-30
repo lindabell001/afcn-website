@@ -1,116 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { supabase } from '../../../lib/supabaseClient';
-import SiteFooter from '../../../components/SiteFooter';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
+import SiteLayout from '@/components/SiteLayout';
 
-export default function CommitteesChatRoom() {
-  const { slug } = useParams<{ slug: string }>();
-  const [messages, setMessages] = useState<any[]>([]);
-  const [newMessage, setNewMessage] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState<any>(null);
+// Main Stable Pages
+import Index from './pages/Index';
+import About from './pages/About';
+import Resources from './pages/Resources';
+import BecomeOne from './pages/BecomeOne';
+import Donate from './pages/Donate';
+import Mission from './pages/Mission';
+import MemberLogin from './pages/MemberLogin';
+import MemberDashboard from './pages/MemberDashboard';
 
-  const roomName = slug 
-    ? slug.replace('-committee', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + ' Committee' 
-    : 'Committee';
+// Core Secondary Pages
+import Tavern from './pages/tavern';
+import Committees from './pages/committees';
 
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setCurrentUser(data.user));
-  }, []);
+// Sub-pages
+import TavernLocations from './pages/tavern/locations';
+import CommitteesLocal from './pages/committees/local';
 
-  useEffect(() => {
-    if (!slug) return;
+// Chat Rooms
+import TavernChatRoom from './pages/tavern/chat/[slug]';
+import CommitteesChatRoom from './pages/committees/chat/[slug]';
 
-    const fetchMessages = async () => {
-      const { data } = await supabase
-        .from('messages')
-        .select('*')
-        .eq('slug', slug)
-        .order('created_at', { ascending: true });
-      setMessages(data || []);
-      setLoading(false);
-    };
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
-    fetchMessages();
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
 
-    const channel = supabase
-      .channel(`room:${slug}`)
-      .on(
-        'postgres_changes',
-        { 
-          event: 'INSERT', 
-          schema: 'public', 
-          table: 'messages', 
-          filter: `slug=eq.${slug}` 
-        },
-        (payload) => setMessages(prev => [...prev, payload.new])
-      )
-      .subscribe();
-
-    return () => supabase.removeChannel(channel);
-  }, [slug]);
-
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newMessage.trim()) return;
-
-    if (!currentUser) {
-      alert('You must be logged in to send messages');
-      return;
-    }
-
-    const { error } = await supabase
-      .from('messages')
-      .insert([{
-        slug: slug,
-        user_id: currentUser.id,
-        username: currentUser.email || 'Test User',
-        message: newMessage.trim(),
-      }]);
-
-    if (error) {
-      alert('Send failed: ' + error.message);
-    } else {
-      setNewMessage('');
-    }
-  };
-
-  if (loading) return <div className="text-center py-20 text-2xl">Loading {roomName}...</div>;
-
-  return (
-    <div className="min-h-screen bg-background">
-      <main className="max-w-4xl mx-auto px-6 py-8">
-        <h1 className="text-5xl font-bold text-patriot-blue text-center mb-8">{roomName}</h1>
-
-        <div className="bg-white border-2 border-patriot-blue rounded-3xl h-[65vh] overflow-y-auto p-6 mb-6 space-y-4">
-          {messages.length === 0 ? (
-            <p className="text-center text-gray-500 py-10">No messages yet. Be the first to post!</p>
-          ) : (
-            messages.map((msg, i) => (
-              <div key={i} className="p-4 bg-gray-100 rounded-2xl">
-                <strong>{msg.username || 'Anonymous'}:</strong> {msg.message}
-              </div>
-            ))
-          )}
-        </div>
-
-        <form onSubmit={sendMessage} className="flex gap-3">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type your message here..."
-            className="flex-1 border border-patriot-blue rounded-2xl px-6 py-4 text-lg focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="bg-patriot-red hover:bg-red-700 text-white font-bold px-12 py-4 rounded-2xl transition"
-          >
-            Send
-          </button>
-        </form>
-      </main>
-      <SiteFooter />
-    </div>
-  );
+  return null;
 }
+
+const App = () => {
+  return (
+    <Router>
+      <ScrollToTop />
+      <SiteLayout>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/become-one" element={<BecomeOne />} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/mission" element={<Mission />} />
+
+          {/* Member Login */}
+          <Route path="/member-login" element={<MemberLogin />} />
+
+          {/* Member Dashboard */}
+          <Route path="/member-dashboard" element={<MemberDashboard />} />
+
+          {/* Main Sections */}
+          <Route path="/tavern" element={<Tavern />} />
+          <Route path="/committees" element={<Committees />} />
+
+          {/* Sub-pages */}
+          <Route path="/tavern/locations" element={<TavernLocations />} />
+          <Route path="/committees/local" element={<CommitteesLocal />} />
+
+          {/* Real Chat Rooms */}
+          <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
+          <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
+
+          <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
+        </Routes>
+      </SiteLayout>
+    </Router>
+  );
+};
+
+export default App;
