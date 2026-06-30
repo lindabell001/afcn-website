@@ -89,7 +89,7 @@ export default function Resources() {
             </Link>
 
             <Link
-              to="/committees-of-observation"
+              to="/committees"
               className="inline-block border-b-2 border-patriot-blue hover:border-patriot-red text-patriot-blue font-bold uppercase tracking-wider px-10 py-4 text-lg transition-all hover:text-patriot-red"
             >
               Explore Committees
