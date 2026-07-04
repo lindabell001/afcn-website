@@ -107,12 +107,9 @@ export default function BecomeOne() {
       <main className="max-w-3xl mx-auto px-6 py-16">
         
         <h1 className="text-6xl font-bold text-patriot-blue text-center mb-4">Become One</h1>
-        <p className="text-center text-3xl font-semibold text-patriot-red mb-6">
-          $25 per Year Membership
-        </p>
         <p className="text-center text-xl mb-12">Join the America First Citizens Network</p>
 
-        {/* Benefits Box */}
+        {/* Benefits Box - Only one $25 */}
         <div className="bg-white border-2 border-patriot-red rounded-3xl p-8 mb-10 shadow-lg">
           <div className="text-center mb-8">
             <div className="text-5xl font-bold text-patriot-red mb-2">$25</div>
