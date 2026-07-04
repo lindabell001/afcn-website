@@ -37,7 +37,6 @@ export default function BecomeOne() {
     e.preventDefault();
     setLoading(true);
 
-    // Create auth user
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
@@ -49,7 +48,6 @@ export default function BecomeOne() {
       return;
     }
 
-    // Create profile
     const profileData = {
       id: authData.user.id,
       first_name: formData.firstName,
@@ -76,7 +74,6 @@ export default function BecomeOne() {
         alert('✅ Officer approved! You can now log in.');
         setSubmitted(true);
       } else {
-        // Send email to Norine
         await supabase.functions.invoke('notify-norine', {
           body: {
             name: `${formData.firstName} ${formData.lastName}`,
@@ -86,7 +83,7 @@ export default function BecomeOne() {
           }
         });
 
-        alert('Thank you! Your profile is pending approval. Norine has been notified.');
+        alert('Thank you! Your profile is pending approval. You will now be taken to secure $25 payment.');
         window.location.href = 'https://givingtools.com/give/4206';
       }
     }
@@ -108,11 +105,33 @@ export default function BecomeOne() {
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-3xl mx-auto px-6 py-16">
+        
+        {/* Clear $25 Headline */}
         <h1 className="text-6xl font-bold text-patriot-blue text-center mb-4">Become One</h1>
+        <p className="text-center text-3xl font-semibold text-patriot-red mb-6">
+          $25 per Year Membership
+        </p>
         <p className="text-center text-xl mb-12">Join the America First Citizens Network</p>
 
+        {/* Prominent Pricing Box */}
+        <div className="bg-white border-2 border-patriot-red rounded-3xl p-8 mb-10 shadow-lg text-center">
+          <div className="text-5xl font-bold text-patriot-red mb-2">$25</div>
+          <div className="text-2xl font-semibold mb-6">per year</div>
+          
+          <div className="text-left max-w-md mx-auto space-y-3 text-lg">
+            <p>✓ Connect with local Committees of Observation</p>
+            <p>✓ Receive action alerts, toolkits, and training</p>
+            <p>✓ Join issue teams in your area</p>
+            <p>✓ Access member resources and updates</p>
+            <p>✓ Help build real grassroots power for 2026</p>
+          </div>
+
+          <p className="mt-6 text-sm text-gray-600">
+            Renews automatically • Cancel anytime • Supports lawful issue advocacy
+          </p>
+        </div>
+
         <form onSubmit={handleSubmit} className="bg-white p-10 rounded-3xl shadow-xl space-y-6">
-          {/* form fields same as before */}
           <div className="grid md:grid-cols-2 gap-6">
             <input type="text" name="firstName" placeholder="First Name *" value={formData.firstName} onChange={handleChange} className="p-4 border rounded-xl" required />
             <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} className="p-4 border rounded-xl" />
@@ -149,8 +168,12 @@ export default function BecomeOne() {
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-4 rounded-2xl text-xl mt-6 disabled:opacity-50">
-            {loading ? 'Saving...' : 'Continue to Payment'}
+          <button 
+            type="submit" 
+            disabled={loading} 
+            className="w-full bg-patriot-red hover:bg-red-700 text-white font-bold py-4 rounded-2xl text-xl mt-6 disabled:opacity-50"
+          >
+            {loading ? 'Saving...' : 'Join for $25/Year – Continue to Secure Payment'}
           </button>
 
           {isOfficer && (
@@ -158,6 +181,10 @@ export default function BecomeOne() {
               Officer email detected — Immediate approved membership (no payment)
             </p>
           )}
+
+          <p className="text-center text-sm text-gray-500 mt-4">
+            After you submit, you will be taken to secure payment for your $25 yearly membership.
+          </p>
         </form>
       </main>
       <SiteFooter />
