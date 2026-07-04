@@ -114,7 +114,7 @@ export default function BecomeOne() {
 
         {/* Benefits Box */}
         <div className="bg-white border-2 border-patriot-red rounded-3xl p-8 mb-10 shadow-lg">
-          <div className="text-center mb-6">
+          <div className="text-center mb-8">
             <div className="text-5xl font-bold text-patriot-red mb-2">$25</div>
             <div className="text-2xl font-semibold">per year</div>
           </div>
@@ -140,7 +140,7 @@ export default function BecomeOne() {
             <p>• Request action alerts, toolkits, training, or any other topic</p>
           </div>
 
-          <p className="mt-8 text-center text-sm text-gray-600">
+          <p className="mt-10 text-center text-sm text-gray-600">
             This organization is By the people, for the people to be the Citizens who can keep our Republic another 250 years.
           </p>
         </div>
