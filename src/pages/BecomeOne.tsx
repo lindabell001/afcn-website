@@ -106,28 +106,42 @@ export default function BecomeOne() {
     <div className="min-h-screen bg-background">
       <main className="max-w-3xl mx-auto px-6 py-16">
         
-        {/* Clear $25 Headline */}
         <h1 className="text-6xl font-bold text-patriot-blue text-center mb-4">Become One</h1>
         <p className="text-center text-3xl font-semibold text-patriot-red mb-6">
           $25 per Year Membership
         </p>
         <p className="text-center text-xl mb-12">Join the America First Citizens Network</p>
 
-        {/* Prominent Pricing Box */}
-        <div className="bg-white border-2 border-patriot-red rounded-3xl p-8 mb-10 shadow-lg text-center">
-          <div className="text-5xl font-bold text-patriot-red mb-2">$25</div>
-          <div className="text-2xl font-semibold mb-6">per year</div>
+        {/* Benefits Box */}
+        <div className="bg-white border-2 border-patriot-red rounded-3xl p-8 mb-10 shadow-lg">
+          <div className="text-center mb-6">
+            <div className="text-5xl font-bold text-patriot-red mb-2">$25</div>
+            <div className="text-2xl font-semibold">per year</div>
+          </div>
+          
+          <p className="font-semibold text-center mb-6 text-lg">Gain access to:</p>
           
           <div className="text-left max-w-md mx-auto space-y-3 text-lg">
-            <p>✓ Connect with local Committees of Observation</p>
-            <p>✓ Receive action alerts, toolkits, and training</p>
-            <p>✓ Join issue teams in your area</p>
-            <p>✓ Access member resources and updates</p>
-            <p>✓ Help build real grassroots power for 2026</p>
+            <p>• Realtime chat rooms</p>
+            <p>• Action Alerts & Notifications</p>
+            <p>• Upload Videos & Photos</p>
+            <p>• Lessons & Training</p>
+            <p>• Private 1-on-1 chats (just request)</p>
+
+            <p className="font-semibold mt-6">America First Tavern (national chat room)</p>
+            <p>• State pubs (already set up)</p>
+            <p>• Request pubs for County, District, City, Neighborhood or any issue</p>
+
+            <p className="font-semibold mt-6">Committees of Observation</p>
+            <p>• Committees of Observation (like our Founders formed)</p>
+            <p>• Organized by volunteer Committee Chair – “Observe, Report, Plan”</p>
+            <p>• State Committee rooms (already set up)</p>
+            <p>• Request Committee for County, District, City, Neighborhood or any issue</p>
+            <p>• Request action alerts, toolkits, training, or any other topic</p>
           </div>
 
-          <p className="mt-6 text-sm text-gray-600">
-            Renews automatically • Cancel anytime • Supports lawful issue advocacy
+          <p className="mt-8 text-center text-sm text-gray-600">
+            This organization is By the people, for the people to be the Citizens who can keep our Republic another 250 years.
           </p>
         </div>
 
