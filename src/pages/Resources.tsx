@@ -1,4 +1,4 @@
-Import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Resources() {
@@ -30,10 +30,18 @@ export default function Resources() {
             </Link>
           </div>
 
-          {/* 2. Election Integrity Toolkit */}
+          {/* 2. America First Learning Sources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">2. Election Integrity Toolkit (coming soon)</h3>
-            <p className="text-gray-600">Checklists, poll watching guides, and resources for secure and honest elections.</p>
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">#2 America First Learning Sources</h3>
+            <p className="text-gray-600 mb-6">
+              In-depth classes, reports, and training from America First organizations.
+            </p>
+            <Link 
+              to="/learning-sources" 
+              className="text-patriot-red font-semibold hover:underline text-lg"
+            >
+              View America First Learning Sources →
+            </Link>
           </div>
 
           {/* 3. Training Videos & Webinars */}
