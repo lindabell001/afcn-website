@@ -19,7 +19,7 @@ export default function LearningSources() {
             Weekly in-depth classes on the American System, economics, history, policy, and strategy.
           </p>
 
-          {/* Embedded Latest Videos */}
+          {/* Embedded Videos */}
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <iframe width="100%" height="280" src="https://www.youtube.com/embed/pFRmx0hcXPg" title="America Turns 250" frameBorder="0" allowFullScreen></iframe>
             <iframe width="100%" height="280" src="https://www.youtube.com/embed/V-gv0NIObZo" title="The System Britain Stole" frameBorder="0" allowFullScreen></iframe>
