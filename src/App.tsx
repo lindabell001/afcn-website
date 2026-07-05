@@ -17,6 +17,10 @@ import MemberDashboard from './pages/MemberDashboard';
 import Tavern from './pages/tavern';
 import Committees from './pages/committees';
 
+// Resources Sub-pages
+import ConstitutionAcademy from './pages/ConstitutionAcademy';
+import LearningSources from './pages/learning-sources';
+
 // Sub-pages
 import TavernLocations from './pages/tavern/locations';
 import CommitteesLocal from './pages/committees/local';
@@ -57,6 +61,10 @@ const App = () => {
           {/* Main Sections */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
+
+          {/* Resources Sub-pages */}
+          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
+          <Route path="/resources/learning-sources" element={<LearningSources />} />
 
           {/* Sub-pages */}
           <Route path="/tavern/locations" element={<TavernLocations />} />
