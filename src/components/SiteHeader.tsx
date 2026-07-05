@@ -1,12 +1,13 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import newlogo from "@/assets/newlogo.jpg";   // ← Correct import
+import newlogo from "@/assets/newlogo.jpg";
 
 const navItems = [
   { to: "/", label: "Home" },
   { to: "/mission", label: "Mission" },
   { to: "/resources", label: "Resources" },
+  { to: "/take-action", label: "Take Action" },   // ← Added
   { to: "/about", label: "About" },
   { to: "/become-one", label: "Become One" },
   { to: "/donate", label: "Donate" },
