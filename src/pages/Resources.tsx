@@ -37,40 +37,35 @@ export default function Resources() {
               In-depth classes, reports, and training from America First organizations.
             </p>
             <Link 
-              to="/learning-sources" 
+              to="/LearningSources" 
               className="text-patriot-red font-semibold hover:underline text-lg"
             >
               View America First Learning Sources →
             </Link>
           </div>
 
-          {/* 3. Training Videos & Webinars */}
+          {/* Other sections remain the same */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">3. Training Videos & Webinars (coming soon)</h3>
             <p className="text-gray-600">Educational videos and live training sessions.</p>
           </div>
 
-          {/* 4. Alternative News & Media Sources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">4. Alternative News & Media Sources (coming soon)</h3>
           </div>
 
-          {/* 5. Legal & Rights Resources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">5. Legal & Rights Resources (coming soon)</h3>
           </div>
 
-          {/* 6. Homeschooling & Education Resources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">6. Homeschooling & Education Resources (coming soon)</h3>
           </div>
 
-          {/* 7. Health & Wellness Resources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">7. Health & Wellness Resources (coming soon)</h3>
           </div>
 
-          {/* 8. Business & Economic Tools */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">8. Business & Economic Tools (coming soon)</h3>
           </div>
