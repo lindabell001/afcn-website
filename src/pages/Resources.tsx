@@ -23,7 +23,7 @@ export default function Resources() {
               Videos, founding documents, and training on the Constitution and Declaration of Independence from Hillsdale College and other trusted sources.
             </p>
             <Link 
-              to="/resources/constitution-academy" 
+              to="/ConstitutionAcademy" 
               className="text-patriot-red font-semibold hover:underline text-lg"
             >
               View Constitution Academy →
@@ -44,7 +44,7 @@ export default function Resources() {
             </Link>
           </div>
 
-          {/* Other sections remain the same */}
+          {/* 3–8 remain the same (coming soon) */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">3. Training Videos & Webinars (coming soon)</h3>
             <p className="text-gray-600">Educational videos and live training sessions.</p>
