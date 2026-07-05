@@ -16,6 +16,7 @@ import MemberDashboard from './pages/MemberDashboard';
 // Core Secondary Pages
 import Tavern from './pages/tavern';
 import Committees from './pages/committees';
+import TakeAction from './pages/take-action';   // ← Added
 
 // Resources Sub-pages
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
@@ -61,6 +62,7 @@ const App = () => {
           {/* Main Sections */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
+          <Route path="/take-action" element={<TakeAction />} />   {/* ← Added */}
 
           {/* Resources Sub-pages */}
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
