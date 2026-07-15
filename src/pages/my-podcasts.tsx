@@ -29,7 +29,7 @@ export default function MyPodcasts() {
 
           <Link
             to="/video-studio"
-            className="bg-gray-100 border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue px-10 py-6 rounded-3xl text-2xl font-bold transition-all hover:shadow-xl"
+            className="bg-white border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue px-10 py-6 rounded-3xl text-2xl font-bold transition-all hover:shadow-xl"
           >
             Create Faceless Video
           </Link>
