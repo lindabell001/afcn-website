@@ -17,7 +17,6 @@ export default function EpisodeEditor() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Basic Info */}
           <div className="md:col-span-1 bg-white rounded-3xl p-8">
             <h2 className="text-2xl font-bold mb-6">Basic Info</h2>
             <div className="space-y-6">
@@ -32,33 +31,11 @@ export default function EpisodeEditor() {
             </div>
           </div>
 
-          {/* Text-Based Editing */}
           <div className="md:col-span-2 bg-white rounded-3xl p-8">
             <h2 className="text-2xl font-bold mb-6">Text-Based Editing</h2>
             <div className="border border-gray-300 rounded-2xl p-8 h-96 bg-gray-50">
               <p className="text-gray-500">Transcript editor goes here. Edit text → audio updates automatically.</p>
             </div>
-          </div>
-
-          {/* Audio Tools */}
-          <div className="bg-white rounded-3xl p-8">
-            <h2 className="text-2xl font-bold mb-6">Audio Tools</h2>
-            <div className="space-y-4">
-              <button className="w-full py-4 bg-patriot-blue text-white rounded-2xl font-semibold">Trim Silence</button>
-              <button className="w-full py-4 bg-white border border-patriot-blue text-patriot-blue rounded-2xl font-semibold">Enhance Audio</button>
-            </div>
-          </div>
-
-          {/* Chapters & Show Notes */}
-          <div className="bg-white rounded-3xl p-8">
-            <h2 className="text-2xl font-bold mb-6">Chapters & Show Notes</h2>
-            <textarea className="w-full border border-gray-300 rounded-2xl p-6 h-64" placeholder="Add chapters and detailed show notes..." />
-          </div>
-
-          {/* Video Tools */}
-          <div className="bg-white rounded-3xl p-8">
-            <h2 className="text-2xl font-bold mb-6">Video Tools</h2>
-            <button className="w-full py-6 bg-gradient-to-r from-patriot-blue to-patriot-red text-white rounded-3xl text-xl font-bold">Generate Faceless Video</button>
           </div>
         </div>
 
