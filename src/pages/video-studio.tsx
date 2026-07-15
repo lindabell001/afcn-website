@@ -16,7 +16,7 @@ export default function VideoStudio() {
             <div className="text-6xl mb-8">🎥</div>
             <h2 className="text-3xl font-bold mb-4">Generate Faceless Video</h2>
             <p className="text-gray-600 mb-8">Turn your audio into animated video with Grok Animate</p>
-            <button className="bg-patriot-blue text-white px-12 py-6 rounded-3xl text-xl font-bold w-full">Start Generating</button>
+            <button className="bg-patriot-blue hover:bg-patriot-red text-white px-12 py-6 rounded-3xl text-xl font-bold w-full">Start Generating</button>
           </div>
 
           {/* Text-to-Video */}
@@ -24,7 +24,7 @@ export default function VideoStudio() {
             <div className="text-6xl mb-8">📝</div>
             <h2 className="text-3xl font-bold mb-4">Text-to-Video</h2>
             <p className="text-gray-600 mb-8">Paste a script and generate a video with AI voiceover</p>
-            <button className="bg-white border-2 border-patriot-blue text-patriot-blue px-12 py-6 rounded-3xl text-xl font-bold w-full">Start with Text</button>
+            <button className="bg-white border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue px-12 py-6 rounded-3xl text-xl font-bold w-full">Start with Text</button>
           </div>
 
           {/* Shorts & Clips */}
@@ -32,7 +32,7 @@ export default function VideoStudio() {
             <div className="text-6xl mb-8">✂️</div>
             <h2 className="text-3xl font-bold mb-4">Shorts & Clips</h2>
             <p className="text-gray-600 mb-8">Auto-generate vertical shorts with captions</p>
-            <button className="bg-white border-2 border-patriot-blue text-patriot-blue px-12 py-6 rounded-3xl text-xl font-bold w-full">Generate Shorts</button>
+            <button className="bg-white border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue px-12 py-6 rounded-3xl text-xl font-bold w-full">Generate Shorts</button>
           </div>
         </div>
 
