@@ -36,7 +36,7 @@ export default function GuestBooking() {
         </div>
 
         <div className="text-center mt-12">
-          <button className="bg-patriot-blue text-white px-12 py-6 rounded-3xl text-2xl font-bold">Invite New Guest</button>
+          <button className="bg-patriot-blue hover:bg-patriot-red text-white px-12 py-6 rounded-3xl text-2xl font-bold">Invite New Guest</button>
         </div>
       </main>
       <SiteFooter />
