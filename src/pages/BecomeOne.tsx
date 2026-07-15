@@ -109,7 +109,7 @@ export default function BecomeOne() {
         <h1 className="text-6xl font-bold text-patriot-blue text-center mb-4">Become One</h1>
         <p className="text-center text-xl mb-12">Join the America First Citizens Network</p>
 
-        {/* Benefits Box - Only one $25 */}
+        {/* Benefits Box */}
         <div className="bg-white border-2 border-patriot-red rounded-3xl p-8 mb-10 shadow-lg">
           <div className="text-center mb-8">
             <div className="text-5xl font-bold text-patriot-red mb-2">$25</div>
@@ -197,6 +197,19 @@ export default function BecomeOne() {
             After you submit, you will be taken to secure payment for your $25 yearly membership.
           </p>
         </form>
+
+        {/* New Podcast Section */}
+        <div className="mt-16 bg-white border-2 border-patriot-blue rounded-3xl p-10 text-center">
+          <h2 className="text-4xl font-bold text-patriot-blue mb-6">Podcast Studio is Now Available</h2>
+          <p className="text-xl text-gray-600 mb-8">As a paid member you can record, upload, edit, and publish your own podcasts.</p>
+          
+          <a 
+            href="/my-podcasts" 
+            className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold text-2xl px-16 py-6 rounded-3xl"
+          >
+            Go to My Podcasts →
+          </a>
+        </div>
       </main>
       <SiteFooter />
     </div>
