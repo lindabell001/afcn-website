@@ -16,11 +16,19 @@ import MemberDashboard from './pages/MemberDashboard';
 // Core Secondary Pages
 import Tavern from './pages/tavern';
 import Committees from './pages/committees';
-import TakeAction from './pages/take-action';   // ← Added
+import TakeAction from './pages/take-action';
 
 // Resources Sub-pages
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
 import LearningSources from './pages/learning-sources';
+
+// Podcast Pages (NEW)
+import MyPodcasts from './pages/my-podcasts';
+import GuestBooking from './pages/guest-booking';
+import VideoStudio from './pages/video-studio';
+import Analytics from './pages/analytics';
+import Earnings from './pages/earnings';
+import Community from './pages/community';
 
 // Sub-pages
 import TavernLocations from './pages/tavern/locations';
@@ -62,11 +70,19 @@ const App = () => {
           {/* Main Sections */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
-          <Route path="/take-action" element={<TakeAction />} />   {/* ← Added */}
+          <Route path="/take-action" element={<TakeAction />} />
 
           {/* Resources Sub-pages */}
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
           <Route path="/resources/learning-sources" element={<LearningSources />} />
+
+          {/* Podcast Pages */}
+          <Route path="/my-podcasts" element={<MyPodcasts />} />
+          <Route path="/guest-booking" element={<GuestBooking />} />
+          <Route path="/video-studio" element={<VideoStudio />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/earnings" element={<Earnings />} />
+          <Route path="/community" element={<Community />} />
 
           {/* Sub-pages */}
           <Route path="/tavern/locations" element={<TavernLocations />} />
