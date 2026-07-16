@@ -10,15 +10,43 @@ export default function ExperiencedSetup() {
     rssUrl: '',
   });
 
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
-    // TODO: Connect to Supabase later
-    alert('Podcast connected successfully! (Demo)');
-    window.location.href = '/my-podcasts';
+    setIsSuccess(true);
   };
+
+  if (isSuccess) {
+    return (
+      <div className="min-h-screen bg-background">
+        <main className="max-w-3xl mx-auto px-6 py-16 text-center">
+          <h1 className="text-5xl font-bold text-patriot-blue mb-6">Podcast Connected Successfully!</h1>
+          <p className="text-2xl text-gray-600 mb-12">Your podcast is now connected.</p>
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <button 
+              onClick={() => window.location.reload()} 
+              className="bg-white border-2 border-patriot-blue text-patriot-blue px-10 py-6 rounded-3xl text-xl font-bold hover:bg-patriot-red hover:text-white transition-all"
+            >
+              Add Another Existing Podcast
+            </button>
+            
+            <Link 
+              to="/my-podcasts" 
+              className="bg-patriot-blue text-white px-10 py-6 rounded-3xl text-xl font-bold hover:bg-patriot-red transition-all"
+            >
+              Go to My Podcasts
+            </Link>
+          </div>
+        </main>
+        <SiteFooter />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -32,24 +60,12 @@ export default function ExperiencedSetup() {
           <div className="space-y-8">
             <div>
               <label className="block text-sm font-semibold mb-2">Podcast Name</label>
-              <input 
-                type="text" 
-                name="name" 
-                placeholder="Your Podcast Name" 
-                className="w-full p-4 border border-gray-300 rounded-2xl" 
-                onChange={handleChange} 
-              />
+              <input type="text" name="name" placeholder="Your Podcast Name" className="w-full p-4 border border-gray-300 rounded-2xl" onChange={handleChange} />
             </div>
 
             <div>
               <label className="block text-sm font-semibold mb-2">Short Tagline</label>
-              <input 
-                type="text" 
-                name="tagline" 
-                placeholder="Short description for directories" 
-                className="w-full p-4 border border-gray-300 rounded-2xl" 
-                onChange={handleChange} 
-              />
+              <input type="text" name="tagline" placeholder="Short description" className="w-full p-4 border border-gray-300 rounded-2xl" onChange={handleChange} />
             </div>
 
             <div>
@@ -65,23 +81,15 @@ export default function ExperiencedSetup() {
 
             <div>
               <label className="block text-sm font-semibold mb-2">Existing RSS Feed URL (optional)</label>
-              <input 
-                type="text" 
-                name="rssUrl" 
-                placeholder="https://your-rss-feed.com/feed.xml" 
-                className="w-full p-4 border border-gray-300 rounded-2xl" 
-                onChange={handleChange} 
-              />
+              <input type="text" name="rssUrl" placeholder="https://your-rss-feed.com/feed.xml" className="w-full p-4 border border-gray-300 rounded-2xl" onChange={handleChange} />
             </div>
 
-            <div className="pt-6">
-              <button 
-                onClick={handleSubmit}
-                className="w-full bg-patriot-blue text-white py-6 rounded-2xl text-xl font-bold hover:bg-patriot-red transition-colors"
-              >
-                Connect My Podcast
-              </button>
-            </div>
+            <button 
+              onClick={handleSubmit}
+              className="w-full bg-patriot-blue text-white py-6 rounded-2xl text-xl font-bold hover:bg-patriot-red transition-colors mt-6"
+            >
+              Connect My Podcast
+            </button>
           </div>
         </div>
 
