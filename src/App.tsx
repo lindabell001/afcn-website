@@ -22,29 +22,22 @@ import TakeAction from './pages/take-action';
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
 import LearningSources from './pages/learning-sources';
 
-// Podcast Pages (NEW)
+// Podcast Pages
 import MyPodcasts from './pages/my-podcasts';
-import GuestBooking from './pages/guest-booking';
-import VideoStudio from './pages/video-studio';
-import Analytics from './pages/analytics';
-import Earnings from './pages/earnings';
-import Community from './pages/community';
+import BeginnerSetup from './pages/podcast-setup/beginner';
+import ExperiencedSetup from './pages/podcast-setup/experienced';
 
-// Sub-pages
+// Sub-pages (keep your existing ones)
 import TavernLocations from './pages/tavern/locations';
 import CommitteesLocal from './pages/committees/local';
-
-// Chat Rooms
 import TavernChatRoom from './pages/tavern/chat/[slug]';
 import CommitteesChatRoom from './pages/committees/chat/[slug]';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
-
   return null;
 }
 
@@ -60,11 +53,7 @@ const App = () => {
           <Route path="/become-one" element={<BecomeOne />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
-
-          {/* Member Login */}
           <Route path="/member-login" element={<MemberLogin />} />
-
-          {/* Member Dashboard */}
           <Route path="/member-dashboard" element={<MemberDashboard />} />
 
           {/* Main Sections */}
@@ -72,23 +61,18 @@ const App = () => {
           <Route path="/committees" element={<Committees />} />
           <Route path="/take-action" element={<TakeAction />} />
 
-          {/* Resources Sub-pages */}
+          {/* Resources */}
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
           <Route path="/resources/learning-sources" element={<LearningSources />} />
 
-          {/* Podcast Pages */}
+          {/* Podcast Routes */}
           <Route path="/my-podcasts" element={<MyPodcasts />} />
-          <Route path="/guest-booking" element={<GuestBooking />} />
-          <Route path="/video-studio" element={<VideoStudio />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/earnings" element={<Earnings />} />
-          <Route path="/community" element={<Community />} />
+          <Route path="/podcast-setup/beginner" element={<BeginnerSetup />} />
+          <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
 
-          {/* Sub-pages */}
+          {/* Your existing sub-pages */}
           <Route path="/tavern/locations" element={<TavernLocations />} />
           <Route path="/committees/local" element={<CommitteesLocal />} />
-
-          {/* Real Chat Rooms */}
           <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
           <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
 
