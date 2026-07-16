@@ -19,7 +19,7 @@ export default function BeginnerSetup() {
   const prevStep = () => setStep(step - 1);
 
   const finishSetup = () => {
-    alert("Your Podcast Platform is Ready! (Demo mode - Supabase coming soon)");
+    alert("Congratulations! Your Podcast Platform is Ready! (Demo - Supabase coming soon)");
     window.location.href = '/my-podcasts';
   };
 
