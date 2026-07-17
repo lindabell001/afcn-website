@@ -1,4 +1,7 @@
+'use client'
+
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SiteFooter from '../components/SiteFooter';
 
 export default function VideoStudio() {
@@ -15,15 +18,19 @@ export default function VideoStudio() {
           <div className="bg-white rounded-3xl p-8 text-center">
             <div className="text-6xl mb-8">🎥</div>
             <h2 className="text-3xl font-bold mb-4">Generate Faceless Video</h2>
-            <p className="text-gray-600 mb-8">Turn your audio into animated video with Grok Animate</p>
-            <button className="bg-patriot-blue hover:bg-patriot-red text-white px-12 py-6 rounded-3xl text-xl font-bold w-full">Start Generating</button>
+            <p className="text-gray-600 mb-6">Turn your audio into animated video with Grok Imagine</p>
+            <p className="text-sm text-gray-500 mb-8">Upload audio → AI creates scenes → full video (30s–5min)</p>
+            <Link to="/faceless-generate" className="bg-patriot-blue hover:bg-patriot-red text-white px-12 py-6 rounded-3xl text-xl font-bold w-full inline-block">
+              Start Generating
+            </Link>
           </div>
 
           {/* Text-to-Video */}
           <div className="bg-white rounded-3xl p-8 text-center">
             <div className="text-6xl mb-8">📝</div>
             <h2 className="text-3xl font-bold mb-4">Text-to-Video</h2>
-            <p className="text-gray-600 mb-8">Paste a script and generate a video with AI voiceover</p>
+            <p className="text-gray-600 mb-6">Paste a script and generate a video with AI voiceover</p>
+            <p className="text-sm text-gray-500 mb-8">Choose voice → Grok generates images → full video</p>
             <button className="bg-white border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue px-12 py-6 rounded-3xl text-xl font-bold w-full">Start with Text</button>
           </div>
 
@@ -31,7 +38,8 @@ export default function VideoStudio() {
           <div className="bg-white rounded-3xl p-8 text-center">
             <div className="text-6xl mb-8">✂️</div>
             <h2 className="text-3xl font-bold mb-4">Shorts & Clips</h2>
-            <p className="text-gray-600 mb-8">Auto-generate vertical shorts with captions</p>
+            <p className="text-gray-600 mb-6">Auto-generate vertical shorts with captions</p>
+            <p className="text-sm text-gray-500 mb-8">Perfect for X, TikTok, Reels (15–60 seconds)</p>
             <button className="bg-white border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue px-12 py-6 rounded-3xl text-xl font-bold w-full">Generate Shorts</button>
           </div>
         </div>
