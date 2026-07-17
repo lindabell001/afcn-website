@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import SiteFooter from '../components/SiteFooter';
+import SiteFooter from '../../components/SiteFooter';
 
 export default function TextToVideo() {
   const [script, setScript] = useState('');
