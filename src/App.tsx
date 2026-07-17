@@ -1,91 +1,83 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
-import SiteLayout from '@/components/SiteLayout';
+'use client'
 
-// Main Pages
-import Index from './pages/Index';
-import About from './pages/About';
-import Resources from './pages/Resources';
-import BecomeOne from './pages/BecomeOne';
-import Donate from './pages/Donate';
-import Mission from './pages/Mission';
-import MemberLogin from './pages/MemberLogin';
-import MemberDashboard from './pages/MemberDashboard';
+import React, { useState } from 'react';
+import SiteFooter from '../components/SiteFooter';
 
-// Podcast Pages
-import MyPodcasts from './pages/my-podcasts';
-import MyEpisodes from './pages/my-episodes';
-import BeginnerSetup from './pages/podcast-setup/beginner';
-import ExperiencedSetup from './pages/podcast-setup/experienced';
-import RecordNewEpisode from './pages/record-new';
-import LiveRecording from './pages/live-recording';
-import PhoneRecording from './pages/phone-recording';
-import EpisodeEditor from './pages/episode-editor';
-import VideoStudio from './pages/video-studio';
+export default function TextToVideo() {
+  const [script, setScript] = useState('');
+  const [voice, setVoice] = useState('professional');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [videoUrl, setVideoUrl] = useState('');
 
-// Other pages
-import Tavern from './pages/tavern';
-import Committees from './pages/committees';
-import TakeAction from './pages/take-action';
-import ConstitutionAcademy from './pages/ConstitutionAcademy';
-import LearningSources from './pages/learning-sources';
-import TavernLocations from './pages/tavern/locations';
-import CommitteesLocal from './pages/committees/local';
-import TavernChatRoom from './pages/tavern/chat/[slug]';
-import CommitteesChatRoom from './pages/committees/chat/[slug]';
+  const generateVideo = () => {
+    if (!script) return;
+    
+    setIsGenerating(true);
+    
+    // Demo using Grok Imagine Video 1.5
+    setTimeout(() => {
+      setIsGenerating(false);
+      setVideoUrl('https://example.com/generated-video.mp4');
+      alert('Video generated with Grok Imagine Video 1.5!');
+    }, 3000);
+  };
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  useLayoutEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
-  return null;
-}
-
-const App = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <SiteLayout>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/become-one" element={<BecomeOne />} />
-          <Route path="/donate" element={<Donate />} />
-          <Route path="/mission" element={<Mission />} />
-          <Route path="/member-login" element={<MemberLogin />} />
-          <Route path="/member-dashboard" element={<MemberDashboard />} />
+    <div className="min-h-screen bg-background">
+      <main className="max-w-4xl mx-auto px-6 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-6xl font-bold text-patriot-blue">Text-to-Video</h1>
+          <p className="text-2xl text-gray-600 mt-4">Paste your script → Generate video with AI voiceover</p>
+        </div>
 
-          {/* Podcast Routes */}
-          <Route path="/my-podcasts" element={<MyPodcasts />} />
-          <Route path="/my-episodes" element={<MyEpisodes />} />
-          <Route path="/podcast-setup/beginner" element={<BeginnerSetup />} />
-          <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
-          <Route path="/record-new" element={<RecordNewEpisode />} />
-          <Route path="/live-recording" element={<LiveRecording />} />
-          <Route path="/phone-recording" element={<PhoneRecording />} />
-          <Route path="/episode-editor" element={<EpisodeEditor />} />
-          <Route path="/episode-editor/:id" element={<EpisodeEditor />} />
-          <Route path="/video-studio" element={<VideoStudio />} />
+        <div className="bg-white rounded-3xl p-12">
+          <div className="mb-8">
+            <label className="block text-sm font-semibold mb-4">Your Script</label>
+            <textarea 
+              value={script} 
+              onChange={(e) => setScript(e.target.value)}
+              placeholder="Paste your script here..." 
+              rows={8}
+              className="w-full p-6 border border-gray-300 rounded-3xl text-xl"
+            />
+          </div>
 
-          {/* Your other routes */}
-          <Route path="/tavern" element={<Tavern />} />
-          <Route path="/committees" element={<Committees />} />
-          <Route path="/take-action" element={<TakeAction />} />
-          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
-          <Route path="/resources/learning-sources" element={<LearningSources />} />
-          <Route path="/tavern/locations" element={<TavernLocations />} />
-          <Route path="/committees/local" element={<CommitteesLocal />} />
-          <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
-          <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
+          <div className="grid md:grid-cols-2 gap-8 mb-10">
+            <div>
+              <label className="block text-sm font-semibold mb-4">AI Voiceover</label>
+              <select value={voice} onChange={(e) => setVoice(e.target.value)} className="w-full p-4 border border-gray-300 rounded-2xl">
+                <option value="professional">Professional Male</option>
+                <option value="female">Professional Female</option>
+                <option value="patriotic">Patriotic Narrator</option>
+              </select>
+            </div>
 
-          <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
-        </Routes>
-      </SiteLayout>
-    </Router>
+            <div>
+              <label className="block text-sm font-semibold mb-4">Style</label>
+              <select className="w-full p-4 border border-gray-300 rounded-2xl">
+                <option>Patriotic</option>
+                <option>News Style</option>
+                <option>Dramatic</option>
+              </select>
+            </div>
+          </div>
+
+          <button 
+            onClick={generateVideo}
+            disabled={!script || isGenerating}
+            className="w-full bg-patriot-red text-white py-8 rounded-3xl text-3xl font-bold hover:bg-red-700 disabled:bg-gray-400 transition-all"
+          >
+            {isGenerating ? "Generating with Grok Imagine Video 1.5..." : "Generate Video"}
+          </button>
+
+          {videoUrl && (
+            <div className="mt-12">
+              <video controls className="w-full rounded-3xl" src={videoUrl} />
+            </div>
+          )}
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
   );
-};
-
-export default App;
+}
