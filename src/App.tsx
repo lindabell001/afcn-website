@@ -20,6 +20,7 @@ import BeginnerSetup from './pages/podcast-setup/beginner';
 import ExperiencedSetup from './pages/podcast-setup/experienced';
 import RecordNewEpisode from './pages/record-new';
 import LiveRecording from './pages/live-recording';
+import PhoneRecording from './pages/phone-recording';
 import EpisodeEditor from './pages/episode-editor';
 import VideoStudio from './pages/video-studio';
 
@@ -64,6 +65,7 @@ const App = () => {
           <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
           <Route path="/record-new" element={<RecordNewEpisode />} />
           <Route path="/live-recording" element={<LiveRecording />} />
+          <Route path="/phone-recording" element={<PhoneRecording />} />
           <Route path="/episode-editor" element={<EpisodeEditor />} />
           <Route path="/episode-editor/:id" element={<EpisodeEditor />} />
           <Route path="/video-studio" element={<VideoStudio />} />
