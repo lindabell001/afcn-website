@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useLayoutEffect } from 'react';
 import SiteLayout from '@/components/SiteLayout';
 
-// Main Stable Pages
+// Main Pages
 import Index from './pages/Index';
 import About from './pages/About';
 import Resources from './pages/Resources';
@@ -13,21 +13,19 @@ import Mission from './pages/Mission';
 import MemberLogin from './pages/MemberLogin';
 import MemberDashboard from './pages/MemberDashboard';
 
-// Core Secondary Pages
-import Tavern from './pages/tavern';
-import Committees from './pages/committees';
-import TakeAction from './pages/take-action';
-
-// Resources Sub-pages
-import ConstitutionAcademy from './pages/ConstitutionAcademy';
-import LearningSources from './pages/learning-sources';
-
 // Podcast Pages
 import MyPodcasts from './pages/my-podcasts';
 import BeginnerSetup from './pages/podcast-setup/beginner';
 import ExperiencedSetup from './pages/podcast-setup/experienced';
+import RecordNewEpisode from './pages/record-new';
+import EpisodeEditor from './pages/episode-editor';
 
-// Sub-pages (keep your existing ones)
+// Other pages you already have
+import Tavern from './pages/tavern';
+import Committees from './pages/committees';
+import TakeAction from './pages/take-action';
+import ConstitutionAcademy from './pages/ConstitutionAcademy';
+import LearningSources from './pages/learning-sources';
 import TavernLocations from './pages/tavern/locations';
 import CommitteesLocal from './pages/committees/local';
 import TavernChatRoom from './pages/tavern/chat/[slug]';
@@ -56,21 +54,20 @@ const App = () => {
           <Route path="/member-login" element={<MemberLogin />} />
           <Route path="/member-dashboard" element={<MemberDashboard />} />
 
-          {/* Main Sections */}
-          <Route path="/tavern" element={<Tavern />} />
-          <Route path="/committees" element={<Committees />} />
-          <Route path="/take-action" element={<TakeAction />} />
-
-          {/* Resources */}
-          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
-          <Route path="/resources/learning-sources" element={<LearningSources />} />
-
           {/* Podcast Routes */}
           <Route path="/my-podcasts" element={<MyPodcasts />} />
           <Route path="/podcast-setup/beginner" element={<BeginnerSetup />} />
           <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
+          <Route path="/record-new" element={<RecordNewEpisode />} />
+          <Route path="/episode-editor" element={<EpisodeEditor />} />
+          <Route path="/episode-editor/:id" element={<EpisodeEditor />} />
 
-          {/* Your existing sub-pages */}
+          {/* Your other routes */}
+          <Route path="/tavern" element={<Tavern />} />
+          <Route path="/committees" element={<Committees />} />
+          <Route path="/take-action" element={<TakeAction />} />
+          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
+          <Route path="/resources/learning-sources" element={<LearningSources />} />
           <Route path="/tavern/locations" element={<TavernLocations />} />
           <Route path="/committees/local" element={<CommitteesLocal />} />
           <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
