@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import SiteLayout from '@/components/SiteLayout';
+import SiteFooter from './components/SiteFooter';   // <--- Correct import
 
 // Main Pages
 import Index from './pages/Index';
