@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import SiteLayout from '@/components/SiteLayout';
-import SiteFooter from './components/SiteFooter';   // <--- Correct import
+import SiteFooter from './components/SiteFooter';  // Correct path
 
 // Main Pages
 import Index from './pages/Index';
@@ -73,7 +73,7 @@ const App = () => {
           <Route path="/video-studio" element={<VideoStudio />} />
           <Route path="/text-to-video" element={<TextToVideo />} />
 
-          {/* Your other routes */}
+          {/* Other routes */}
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
           <Route path="/take-action" element={<TakeAction />} />
