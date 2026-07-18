@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SiteFooter from '../components/SiteFooter';
 
 export default function TextToVideo() {
@@ -8,18 +8,24 @@ export default function TextToVideo() {
   const [voice, setVoice] = useState('professional');
   const [isGenerating, setIsGenerating] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
-  const [apiKey, setApiKey] = useState(''); // In real version, load from user settings
+  const [apiKey, setApiKey] = useState('');
+
+  // Load key from localStorage (demo) - in real version from Supabase
+  useEffect(() => {
+    const savedKey = localStorage.getItem('grokApiKey');
+    if (savedKey) setApiKey(savedKey);
+  }, []);
 
   const generateVideo = () => {
     if (!script) return;
     
     setIsGenerating(true);
     
-    // Demo - in real version use apiKey to call Grok Imagine
+    // Real version would use apiKey to call Grok Imagine API
     setTimeout(() => {
       setIsGenerating(false);
       setVideoUrl('https://example.com/generated-video.mp4');
-      alert('Video generated with Grok Imagine Video 1.5 using your key!');
+      alert('Video generated with Grok Imagine Video 1.5!');
     }, 3000);
   };
 
