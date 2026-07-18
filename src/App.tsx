@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import SiteLayout from '@/components/SiteLayout';
-import SiteFooter from './components/SiteFooter';  // Correct
+import SiteFooter from './components/SiteFooter';
 
 // Main Pages
 import Index from './pages/Index';
@@ -25,6 +25,7 @@ import PhoneRecording from './pages/phone-recording';
 import EpisodeEditor from './pages/episode-editor';
 import VideoStudio from './pages/video-studio';
 import TextToVideo from './pages/text-to-video';
+import MemberPodcasts from './pages/resources/member-podcasts';
 
 // Other pages
 import Tavern from './pages/tavern';
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/member-podcasts" element={<MemberPodcasts />} />
           <Route path="/become-one" element={<BecomeOne />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
