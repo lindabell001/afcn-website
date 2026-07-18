@@ -28,16 +28,6 @@ import TextToVideo from './pages/text-to-video';
 import MemberPodcasts from './pages/resources/member-podcasts';
 import PodcastPage from './pages/resources/podcasts/[slug]';
 
-// Dashboard Pages
-import MemberReports from './pages/member/reports';
-import MemberEvents from './pages/member/events';
-import MemberProfile from './pages/member/profile';
-import MemberMessages from './pages/member/messages';
-import MemberTasks from './pages/member/tasks';
-import MemberNetwork from './pages/member/network';
-import MemberResources from './pages/member/resources';
-import MemberHelp from './pages/member/help';
-
 // Other pages
 import Tavern from './pages/tavern';
 import Committees from './pages/committees';
@@ -73,16 +63,6 @@ const App = () => {
           <Route path="/mission" element={<Mission />} />
           <Route path="/member-login" element={<MemberLogin />} />
           <Route path="/member-dashboard" element={<MemberDashboard />} />
-
-          {/* Member Dashboard Pages */}
-          <Route path="/member/reports" element={<MemberReports />} />
-          <Route path="/member/events" element={<MemberEvents />} />
-          <Route path="/member/profile" element={<MemberProfile />} />
-          <Route path="/member/messages" element={<MemberMessages />} />
-          <Route path="/member/tasks" element={<MemberTasks />} />
-          <Route path="/member/network" element={<MemberNetwork />} />
-          <Route path="/member/resources" element={<MemberResources />} />
-          <Route path="/member/help" element={<MemberHelp />} />
 
           {/* Podcast Routes */}
           <Route path="/my-podcasts" element={<MyPodcasts />} />
