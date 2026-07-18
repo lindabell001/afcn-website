@@ -26,6 +26,7 @@ import EpisodeEditor from './pages/episode-editor';
 import VideoStudio from './pages/video-studio';
 import TextToVideo from './pages/text-to-video';
 import MemberPodcasts from './pages/resources/member-podcasts';
+import PodcastPage from './pages/resources/podcasts/[slug]';
 
 // Other pages
 import Tavern from './pages/tavern';
@@ -56,6 +57,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/member-podcasts" element={<MemberPodcasts />} />
+          <Route path="/resources/podcasts/:slug" element={<PodcastPage />} />
           <Route path="/become-one" element={<BecomeOne />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
