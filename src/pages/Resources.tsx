@@ -14,9 +14,9 @@ export default function Resources() {
           </p>
         </div>
 
-        {/* Resources List - 2 Columns */}
+        {/* Resources List */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
-          {/* 1. Constitution Academy */}
+          {/* Constitution Academy */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">1. Constitution Academy</h3>
             <p className="text-gray-600 mb-6">
@@ -30,7 +30,7 @@ export default function Resources() {
             </Link>
           </div>
 
-          {/* 2. America First Learning Sources */}
+          {/* America First Learning Sources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
             <h3 className="text-2xl font-bold text-patriot-blue mb-4">#2 America First Learning Sources</h3>
             <p className="text-gray-600 mb-6">
@@ -44,35 +44,24 @@ export default function Resources() {
             </Link>
           </div>
 
-          {/* 3. Training Videos & Webinars */}
+          {/* Member Podcasts */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">3. Training Videos & Webinars (coming soon)</h3>
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">Member Podcasts</h3>
+            <p className="text-gray-600 mb-6">
+              America First podcasts from AFCN members. Listen and support patriots.
+            </p>
+            <Link 
+              to="/resources/member-podcasts" 
+              className="text-patriot-red font-semibold hover:underline text-lg"
+            >
+              Browse Member Podcasts →
+            </Link>
+          </div>
+
+          {/* Coming Soon */}
+          <div className="bg-white p-8 rounded-3xl border border-gray-200">
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">Training Videos & Webinars (coming soon)</h3>
             <p className="text-gray-600">Educational videos and live training sessions.</p>
-          </div>
-
-          {/* 4. Alternative News & Media Sources */}
-          <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">4. Alternative News & Media Sources (coming soon)</h3>
-          </div>
-
-          {/* 5. Legal & Rights Resources */}
-          <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">5. Legal & Rights Resources (coming soon)</h3>
-          </div>
-
-          {/* 6. Homeschooling & Education Resources */}
-          <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">6. Homeschooling & Education Resources (coming soon)</h3>
-          </div>
-
-          {/* 7. Health & Wellness Resources */}
-          <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">7. Health & Wellness Resources (coming soon)</h3>
-          </div>
-
-          {/* 8. Business & Economic Tools */}
-          <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">8. Business & Economic Tools (coming soon)</h3>
           </div>
         </div>
 
