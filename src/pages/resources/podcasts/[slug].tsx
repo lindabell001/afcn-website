@@ -1,22 +1,27 @@
 'use client'
 
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import SiteFooter from '../../../components/SiteFooter';
 
 export default function PodcastPage() {
   const { slug } = useParams();
+  const [playingEpisode, setPlayingEpisode] = useState(null);
 
-  // Demo data - replace with real data from Supabase later
+  // Demo data
   const podcast = {
     name: slug ? slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Member Podcast',
     tagline: "Truth and Liberty Every Week",
     description: "Join us as we discuss America First values, current events, and how to stand up for our country.",
     image: "https://picsum.photos/id/1015/800/400",
     episodes: [
-      { id: 1, title: "The Future of America", duration: "52:18", date: "2026-07-10" },
-      { id: 2, title: "Standing for Liberty", duration: "38:45", date: "2026-07-03" },
+      { id: 1, title: "The Future of America", duration: "52:18", date: "2026-07-10", type: "video" },
+      { id: 2, title: "Standing for Liberty", duration: "38:45", date: "2026-07-03", type: "audio" },
     ]
+  };
+
+  const playEpisode = (episode) => {
+    setPlayingEpisode(episode);
   };
 
   return (
@@ -45,12 +50,27 @@ export default function PodcastPage() {
                   <p className="text-gray-600">{ep.duration} • {ep.date}</p>
                 </div>
                 <div className="flex gap-4">
-                  <button className="px-8 py-4 bg-patriot-blue text-white rounded-3xl text-xl font-semibold hover:bg-patriot-red">Listen</button>
-                  <button className="px-8 py-4 bg-white border-2 border-patriot-blue text-patriot-blue rounded-3xl text-xl font-semibold hover:bg-patriot-red hover:text-white">Watch</button>
+                  <button 
+                    onClick={() => playEpisode(ep)}
+                    className="px-8 py-4 bg-patriot-blue text-white rounded-3xl text-xl font-semibold hover:bg-patriot-red"
+                  >
+                    {ep.type === 'video' ? 'Watch' : 'Listen'}
+                  </button>
                 </div>
               </div>
             ))}
           </div>
+
+          {playingEpisode && (
+            <div className="mt-12 bg-white rounded-3xl p-12">
+              <h3 className="text-3xl font-bold mb-6">{playingEpisode.title}</h3>
+              <p className="text-gray-600 mb-8">Now playing...</p>
+              <div className="bg-gray-900 rounded-2xl aspect-video flex items-center justify-center text-white">
+                {playingEpisode.type === 'video' ? 'Video Player' : 'Audio Player'}
+              </div>
+              <button onClick={() => setPlayingEpisode(null)} className="mt-8 text-patriot-red">Close Player</button>
+            </div>
+          )}
         </div>
       </main>
       <SiteFooter />
