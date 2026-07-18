@@ -1,98 +1,47 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
-import SiteLayout from '@/components/SiteLayout';
-import SiteFooter from './components/SiteFooter';
+import { Link } from 'react-router-dom';
+import SiteFooter from '../components/SiteFooter';
 
-// Main Pages
-import Index from './pages/Index';
-import About from './pages/About';
-import Resources from './pages/Resources';
-import BecomeOne from './pages/BecomeOne';
-import Donate from './pages/Donate';
-import Mission from './pages/Mission';
-import MemberLogin from './pages/MemberLogin';
-import MemberDashboard from './pages/MemberDashboard';
-
-// Podcast Pages
-import MyPodcasts from './pages/my-podcasts';
-import MyEpisodes from './pages/my-episodes';
-import BeginnerSetup from './pages/podcast-setup/beginner';
-import ExperiencedSetup from './pages/podcast-setup/experienced';
-import RecordNewEpisode from './pages/record-new';
-import LiveRecording from './pages/live-recording';
-import PhoneRecording from './pages/phone-recording';
-import EpisodeEditor from './pages/episode-editor';
-import VideoStudio from './pages/video-studio';
-import TextToVideo from './pages/text-to-video';
-import MemberPodcasts from './pages/resources/member-podcasts';
-import PodcastPage from './pages/resources/podcasts/[slug]';
-
-// Other pages
-import Tavern from './pages/tavern';
-import Committees from './pages/committees';
-import TakeAction from './pages/take-action';
-import ConstitutionAcademy from './pages/ConstitutionAcademy';
-import LearningSources from './pages/learning-sources';
-import TavernLocations from './pages/tavern/locations';
-import CommitteesLocal from './pages/committees/local';
-import TavernChatRoom from './pages/tavern/chat/[slug]';
-import CommitteesChatRoom from './pages/committees/chat/[slug]';
-
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  useLayoutEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
-  return null;
-}
-
-const App = () => {
+export default function VideoStudio() {
   return (
-    <Router>
-      <ScrollToTop />
-      <SiteLayout>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/member-podcasts" element={<MemberPodcasts />} />
-          <Route path="/resources/podcasts/:slug" element={<PodcastPage />} />
-          <Route path="/become-one" element={<BecomeOne />} />
-          <Route path="/donate" element={<Donate />} />
-          <Route path="/mission" element={<Mission />} />
-          <Route path="/member-login" element={<MemberLogin />} />
-          <Route path="/member-dashboard" element={<MemberDashboard />} />
+    <div className="min-h-screen bg-background">
+      <main className="max-w-5xl mx-auto px-6 py-16">
+        <div className="text-center mb-16">
+          <h1 className="text-6xl font-bold text-patriot-blue mb-6">Video Studio</h1>
+          <p className="text-2xl text-gray-600">Create faceless videos and shorts from your episodes</p>
+        </div>
 
-          {/* Podcast Routes */}
-          <Route path="/my-podcasts" element={<MyPodcasts />} />
-          <Route path="/my-episodes" element={<MyEpisodes />} />
-          <Route path="/podcast-setup/beginner" element={<BeginnerSetup />} />
-          <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
-          <Route path="/record-new" element={<RecordNewEpisode />} />
-          <Route path="/live-recording" element={<LiveRecording />} />
-          <Route path="/phone-recording" element={<PhoneRecording />} />
-          <Route path="/episode-editor" element={<EpisodeEditor />} />
-          <Route path="/episode-editor/:id" element={<EpisodeEditor />} />
-          <Route path="/video-studio" element={<VideoStudio />} />
-          <Route path="/text-to-video" element={<TextToVideo />} />
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Go Live */}
+          <Link to="/live-recording" className="group bg-white rounded-3xl p-8 text-center border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
+            <div className="text-6xl mb-6">🎤</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Go Live</h2>
+            <p className="text-gray-600">Live streaming with audience chat</p>
+          </Link>
 
-          {/* Other routes */}
-          <Route path="/tavern" element={<Tavern />} />
-          <Route path="/committees" element={<Committees />} />
-          <Route path="/take-action" element={<TakeAction />} />
-          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
-          <Route path="/resources/learning-sources" element={<LearningSources />} />
-          <Route path="/tavern/locations" element={<TavernLocations />} />
-          <Route path="/committees/local" element={<CommitteesLocal />} />
-          <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
-          <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
+          {/* Record New Episode */}
+          <Link to="/record-new" className="group bg-white rounded-3xl p-8 text-center border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
+            <div className="text-6xl mb-6">🎙️</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Record New Episode</h2>
+            <p className="text-gray-600">Desktop recording with mic and camera</p>
+          </Link>
 
-          <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
-        </Routes>
-      </SiteLayout>
-    </Router>
+          {/* Create Faceless Video */}
+          <Link to="/faceless-options" className="group bg-white rounded-3xl p-8 text-center border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
+            <div className="text-6xl mb-6">🎥</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Create Faceless Video</h2>
+            <p className="text-gray-600">Turn audio or script into animated video</p>
+          </Link>
+
+          {/* Phone Recording */}
+          <Link to="/phone-recording" className="group bg-white rounded-3xl p-8 text-center border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
+            <div className="text-6xl mb-6">📱</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Phone Recording</h2>
+            <p className="text-gray-600">Record from your phone (live or saved)</p>
+          </Link>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
   );
-};
-
-export default App;
+}
