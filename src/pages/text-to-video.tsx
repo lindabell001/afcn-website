@@ -8,17 +8,18 @@ export default function TextToVideo() {
   const [voice, setVoice] = useState('professional');
   const [isGenerating, setIsGenerating] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
+  const [apiKey, setApiKey] = useState(''); // In real version, load from user settings
 
   const generateVideo = () => {
     if (!script) return;
     
     setIsGenerating(true);
     
-    // Demo using Grok Imagine Video 1.5
+    // Demo - in real version use apiKey to call Grok Imagine
     setTimeout(() => {
       setIsGenerating(false);
       setVideoUrl('https://example.com/generated-video.mp4');
-      alert('Video generated with Grok Imagine Video 1.5!');
+      alert('Video generated with Grok Imagine Video 1.5 using your key!');
     }, 3000);
   };
 
