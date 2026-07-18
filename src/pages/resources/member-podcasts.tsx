@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SiteFooter from '../../components/SiteFooter';
 
 export default function MemberPodcasts() {
-  // Demo data - replace with real member podcasts later
+  // Demo data
   const podcasts = [
     {
       id: 1,
@@ -11,6 +11,7 @@ export default function MemberPodcasts() {
       tagline: "Truth and Liberty Every Week",
       image: "https://picsum.photos/id/1015/300/200",
       episodesCount: 24,
+      slug: "john-doe-patriot-show"
     },
     {
       id: 2,
@@ -18,6 +19,7 @@ export default function MemberPodcasts() {
       tagline: "Standing Up for Our Values",
       image: "https://picsum.photos/id/102/300/200",
       episodesCount: 18,
+      slug: "jane-smith-america-first"
     },
   ];
 
@@ -27,11 +29,12 @@ export default function MemberPodcasts() {
         <div className="text-center mb-16">
           <h1 className="text-6xl font-bold text-patriot-blue">AFCNUS Member Podcasts</h1>
           <p className="text-2xl text-gray-600 mt-4">Real Patriots Sharing Real Truth</p>
+          <p className="text-xl text-patriot-red mt-6">Share your podcast: afcnus.org/p/[your-name]</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {podcasts.map(podcast => (
-            <Link key={podcast.id} to={`/resources/podcasts/${podcast.name.toLowerCase().replace(/ /g, '-')}`} className="group">
+            <Link key={podcast.id} to={`/resources/podcasts/${podcast.slug}`} className="group">
               <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
                 <img src={podcast.image} alt={podcast.name} className="w-full h-48 object-cover" />
                 <div className="p-8">
