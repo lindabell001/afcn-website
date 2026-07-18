@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SiteFooter from '../components/SiteFooter';
@@ -13,42 +11,34 @@ export default function VideoStudio() {
           <p className="text-2xl text-gray-600">Create faceless videos and shorts from your episodes</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Generate Faceless Video */}
-          <div className="bg-white rounded-3xl p-8 text-center">
-            <div className="text-6xl mb-8">🎥</div>
-            <h2 className="text-3xl font-bold mb-4">Generate Faceless Video</h2>
-            <p className="text-gray-600 mb-6">Turn your audio into animated video with Grok Imagine</p>
-            <p className="text-sm text-gray-500 mb-8">Upload audio → AI creates scenes → full video (30s–5min)</p>
-            <Link to="/faceless-generate" className="bg-patriot-blue hover:bg-patriot-red text-white px-12 py-6 rounded-3xl text-xl font-bold w-full inline-block">
-              Start Generating
-            </Link>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Go Live */}
+          <Link to="/live-recording" className="group bg-white rounded-3xl p-8 text-center border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
+            <div className="text-6xl mb-6">🎤</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Go Live</h2>
+            <p className="text-gray-600">Live streaming with audience chat</p>
+          </Link>
 
-          {/* Text-to-Video */}
-          <div className="bg-white rounded-3xl p-8 text-center">
-            <div className="text-6xl mb-8">📝</div>
-            <h2 className="text-3xl font-bold mb-4">Text-to-Video</h2>
-            <p className="text-gray-600 mb-6">Paste a script and generate a video with AI voiceover</p>
-            <p className="text-sm text-gray-500 mb-8">Choose voice → Grok generates images → full video</p>
-            <button className="bg-white border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue px-12 py-6 rounded-3xl text-xl font-bold w-full">Start with Text</button>
-          </div>
+          {/* Record New Episode */}
+          <Link to="/record-new" className="group bg-white rounded-3xl p-8 text-center border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
+            <div className="text-6xl mb-6">🎙️</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Record New Episode</h2>
+            <p className="text-gray-600">Desktop recording with mic and camera</p>
+          </Link>
 
-          {/* Shorts & Clips */}
-          <div className="bg-white rounded-3xl p-8 text-center">
-            <div className="text-6xl mb-8">✂️</div>
-            <h2 className="text-3xl font-bold mb-4">Shorts & Clips</h2>
-            <p className="text-gray-600 mb-6">Auto-generate vertical shorts with captions</p>
-            <p className="text-sm text-gray-500 mb-8">Perfect for X, TikTok, Reels (15–60 seconds)</p>
-            <button className="bg-white border-2 border-patriot-blue hover:border-patriot-red text-patriot-blue px-12 py-6 rounded-3xl text-xl font-bold w-full">Generate Shorts</button>
-          </div>
-        </div>
+          {/* Create Faceless Video */}
+          <Link to="/text-to-video" className="group bg-white rounded-3xl p-8 text-center border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
+            <div className="text-6xl mb-6">🎥</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Create Faceless Video</h2>
+            <p className="text-gray-600">Turn audio or script into animated video</p>
+          </Link>
 
-        <div className="mt-16 bg-white rounded-3xl p-8">
-          <h2 className="text-3xl font-bold mb-8 text-center">Preview Area</h2>
-          <div className="bg-gray-100 rounded-2xl h-96 flex items-center justify-center">
-            <p className="text-gray-500">Generated video preview will appear here</p>
-          </div>
+          {/* Phone Recording */}
+          <Link to="/phone-recording" className="group bg-white rounded-3xl p-8 text-center border border-gray-100 hover:border-patriot-red transition-all hover:shadow-xl">
+            <div className="text-6xl mb-6">📱</div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-4">Phone Recording</h2>
+            <p className="text-gray-600">Record from your phone (live or saved)</p>
+          </Link>
         </div>
       </main>
       <SiteFooter />
