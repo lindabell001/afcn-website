@@ -32,6 +32,7 @@ import MemberPodcasts from './pages/resources/member-podcasts';
 import PodcastPage from './pages/resources/podcasts/[slug]';
 
 // Member Pages
+import MemberRequestNew from './pages/member/request-new';
 import MemberHelp from './pages/member/help';
 
 // Other pages
@@ -87,6 +88,7 @@ const App = () => {
           <Route path="/shorts-generator" element={<ShortsGenerator />} />
 
           {/* Member Pages */}
+          <Route path="/member/request-new" element={<MemberRequestNew />} />
           <Route path="/member/help" element={<MemberHelp />} />
 
           {/* Other routes */}
