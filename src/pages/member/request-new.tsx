@@ -2,29 +2,26 @@ The Netlify deploy errored, with the following guidance provided:
 
 **Error type:** esbuild transform/syntax error.
 
-The relevant error is at [line 60](#L60): the file `src/pages/member/request-new.tsx` fails to parse. Looking at [lines 63-65](#L63-L65), the very first line of that file is literally the text:
+**Cause:** The build fails while transforming `src/pages/member/request-new.tsx`. According to [line 60](#L60) and [lines 64-65](#L64-L65), the very first line of that file is not valid TypeScript/JSX — it literally reads `The Netlify deploy errored, with the following guidance provided:`. esbuild expects a `;` but instead finds the word `Netlify`.
 
-```
-The Netlify deploy errored, with the following guidance provided:
-```
-
-This is not valid TypeScript/JSX — esbuild expects a `;` and instead finds the word `Netlify`. In other words, the file [src/pages/member/request-new.tsx](https://github.com/lindabell001/afcn-website/blob/main/src/pages/member/request-new.tsx) has been overwritten with a plain‑text error/guidance message instead of actual source code.
+In other words, `src/pages/member/request-new.tsx` doesn't contain source code at all — it appears to contain prose/error text that was accidentally saved into the file (or committed as a placeholder). esbuild cannot parse this as a module.
 
 **Solution:**
 
-Open `src/pages/member/request-new.tsx` and remove the pasted error text. Restore the file with the intended React component code, for example:
+1. Open [`src/pages/member/request-new.tsx`](https://github.com/lindabell001/afcn-website/blob/main/src/pages/member/request-new.tsx) and inspect its contents. You'll find it starts with plain text rather than valid TSX.
+2. Replace the file contents with valid React/TypeScript code. For example, a minimal valid component:
 
 ```tsx
+import React from "react";
+
 export default function RequestNew() {
-  return (
-    <div>
-      {/* your page content */}
-    </div>
-  );
+  return <div>Request New</div>;
 }
 ```
 
-Then commit and push the corrected file so the build can transform it successfully. If you have a previous working version, revert the file via git (e.g. `git checkout <good-commit> -- src/pages/member/request-new.tsx`) before committing.
+3. Commit the corrected file and redeploy.
+
+If this file was never meant to exist (e.g. it was an accidental commit), simply delete it and remove any imports that reference it, then push the change.
 
 The relevant error logs are:
 
@@ -39,8 +36,8 @@ Line 52: Browserslist: browsers data (caniuse-lite) is 13 months old. Please run
 Line 53:   npx update-browserslist-db@latest
 Line 54:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
 Line 55: Failed during stage 'building site': Build script returned non-zero exit code: 2
-Line 56: ✓ 28 modules transformed.
-Line 57: x Build failed in 960ms
+Line 56: ✓ 30 modules transformed.
+Line 57: x Build failed in 1.27s
 Line 58: error during build:
 Line 59: [vite:esbuild] Transform failed with 1 error:
 Line 60: /opt/build/repo/src/pages/member/request-new.tsx:1:4: ERROR: Expected ";" but found "Netlify"
@@ -50,7 +47,7 @@ Line 63: Expected ";" but found "Netlify"
 Line 64: 1  |  The Netlify deploy errored, with the following guidance provided:
 Line 65:    |      ^
 Line 66: 2  |
-Line 67: 3  |  The build fails during the esbuild transform stage.
+Line 67: 3  |  **Error type:** esbuild transform/syntax error.
 Line 68: 
 Line 69:     at failureErrorWithLog (/opt/build/repo/node_modules/esbuild/lib/main.js:1472:15)
 Line 70:     at /opt/build/repo/node_modules/esbuild/lib/main.js:755:50
@@ -92,4 +89,4 @@ Line 116:       to: /index.html
 Line 117:   redirectsOrigin: config
 Line 118: Build failed due to a user error: Build script returned non-zero exit code: 2
 Line 119: Failing build: Failed to build site
-Line 120: Finished processing build request in 9.031s
+Line 120: Finished processing build request in 10.496s
