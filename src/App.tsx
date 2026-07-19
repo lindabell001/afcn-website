@@ -31,6 +31,9 @@ import ShortsGenerator from './pages/shorts-generator';
 import MemberPodcasts from './pages/resources/member-podcasts';
 import PodcastPage from './pages/resources/podcasts/[slug]';
 
+// Member Pages
+import MemberHelp from './pages/member/help';
+
 // Other pages
 import Tavern from './pages/tavern';
 import Committees from './pages/committees';
@@ -82,6 +85,9 @@ const App = () => {
           <Route path="/faceless-options" element={<FacelessOptions />} />
           <Route path="/faceless-generate" element={<FacelessGenerate />} />
           <Route path="/shorts-generator" element={<ShortsGenerator />} />
+
+          {/* Member Pages */}
+          <Route path="/member/help" element={<MemberHelp />} />
 
           {/* Other routes */}
           <Route path="/tavern" element={<Tavern />} />
