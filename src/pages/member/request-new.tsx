@@ -1,18 +1,18 @@
 The Netlify deploy errored, with the following guidance provided:
 
-The build fails during the esbuild transform stage.
+**Error type:** esbuild transform/syntax error.
 
-**Error type:** Syntax/transform error (esbuild).
+The relevant error is at [line 60](#L60): the file `src/pages/member/request-new.tsx` fails to parse. Looking at [lines 63-65](#L63-L65), the very first line of that file is literally the text:
 
-**Cause:** [Line 60](#L60) shows the failure in `src/pages/member/request-new.tsx`, and [lines 64-67](#L64-L67) reveal that this `.tsx` file actually contains raw HTML (`<!DOCTYPE html>`, `<html lang="en">`, `<head>`) rather than valid TypeScript/JSX. esbuild expects an identifier at the top of a `.tsx` module but finds `<!`, so it aborts.
+```
+The Netlify deploy errored, with the following guidance provided:
+```
+
+This is not valid TypeScript/JSX — esbuild expects a `;` and instead finds the word `Netlify`. In other words, the file [src/pages/member/request-new.tsx](https://github.com/lindabell001/afcn-website/blob/main/src/pages/member/request-new.tsx) has been overwritten with a plain‑text error/guidance message instead of actual source code.
 
 **Solution:**
 
-The file [`src/pages/member/request-new.tsx`](https://github.com/lindabell001/afcn-website/blob/main/src/pages/member/request-new.tsx) was created with HTML content instead of a React component. You have two options:
-
-1. **If this was meant to be an HTML page**, rename it so it isn't processed by esbuild as a module. Move it to the `public/` directory and give it an `.html` extension (e.g. `public/request-new.html`). Files in `public/` are served as-is.
-
-2. **If this was meant to be a React page/route**, replace the HTML with a valid React component, for example:
+Open `src/pages/member/request-new.tsx` and remove the pasted error text. Restore the file with the intended React component code, for example:
 
 ```tsx
 export default function RequestNew() {
@@ -24,9 +24,7 @@ export default function RequestNew() {
 }
 ```
 
-Then convert the HTML markup (from `<body>`) into JSX inside the returned element (remember JSX uses `className` instead of `class`, self-closing tags, etc.).
-
-The unrelated Browserslist notice on [lines 52-53](#L52-L53) is only a warning and does not cause the failure.
+Then commit and push the corrected file so the build can transform it successfully. If you have a previous working version, revert the file via git (e.g. `git checkout <good-commit> -- src/pages/member/request-new.tsx`) before committing.
 
 The relevant error logs are:
 
@@ -41,18 +39,18 @@ Line 52: Browserslist: browsers data (caniuse-lite) is 13 months old. Please run
 Line 53:   npx update-browserslist-db@latest
 Line 54:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
 Line 55: Failed during stage 'building site': Build script returned non-zero exit code: 2
-Line 56: ✓ 12 modules transformed.
-Line 57: x Build failed in 1.09s
+Line 56: ✓ 28 modules transformed.
+Line 57: x Build failed in 960ms
 Line 58: error during build:
 Line 59: [vite:esbuild] Transform failed with 1 error:
-Line 60: /opt/build/repo/src/pages/member/request-new.tsx:1:1: ERROR: Expected identifier but found "!"
-Line 61: file: /opt/build/repo/src/pages/member/request-new.tsx:1:1
+Line 60: /opt/build/repo/src/pages/member/request-new.tsx:1:4: ERROR: Expected ";" but found "Netlify"
+Line 61: file: /opt/build/repo/src/pages/member/request-new.tsx:1:4
 Line 62: 
-Line 63: Expected identifier but found "!"
-Line 64: 1  |  <!DOCTYPE html>
-Line 65:    |   ^
-Line 66: 2  |  <html lang="en">
-Line 67: 3  |  <head>
+Line 63: Expected ";" but found "Netlify"
+Line 64: 1  |  The Netlify deploy errored, with the following guidance provided:
+Line 65:    |      ^
+Line 66: 2  |
+Line 67: 3  |  The build fails during the esbuild transform stage.
 Line 68: 
 Line 69:     at failureErrorWithLog (/opt/build/repo/node_modules/esbuild/lib/main.js:1472:15)
 Line 70:     at /opt/build/repo/node_modules/esbuild/lib/main.js:755:50
@@ -94,4 +92,4 @@ Line 116:       to: /index.html
 Line 117:   redirectsOrigin: config
 Line 118: Build failed due to a user error: Build script returned non-zero exit code: 2
 Line 119: Failing build: Failed to build site
-Line 120: Finished processing build request in 10.913s
+Line 120: Finished processing build request in 9.031s
