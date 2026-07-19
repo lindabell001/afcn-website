@@ -2,26 +2,38 @@ The Netlify deploy errored, with the following guidance provided:
 
 **Error type:** esbuild transform/syntax error.
 
-**Cause:** The build fails while transforming `src/pages/member/request-new.tsx`. According to [line 60](#L60) and [lines 64-65](#L64-L65), the very first line of that file is not valid TypeScript/JSX — it literally reads `The Netlify deploy errored, with the following guidance provided:`. esbuild expects a `;` but instead finds the word `Netlify`.
+The relevant error is at [line 60](#L60) and shown in [lines 63-65](#L63-L65). The build fails because `src/pages/member/request-new.tsx` does not contain valid TypeScript/JSX code. Its first line is plain English text:
 
-In other words, `src/pages/member/request-new.tsx` doesn't contain source code at all — it appears to contain prose/error text that was accidentally saved into the file (or committed as a placeholder). esbuild cannot parse this as a module.
+> `The Netlify deploy errored, with the following guidance provided:`
+
+esbuild tries to parse this as code, reads `The` as an identifier, then expects a `;` but instead finds `Netlify` — hence `Expected ";" but found "Netlify"`.
+
+**Cause:** The file [src/pages/member/request-new.tsx](https://github.com/lindabell001/afcn-website/blob/main/src/pages/member/request-new.tsx) appears to have been overwritten with prose (likely a pasted error/guidance message) instead of actual React component source code.
 
 **Solution:**
 
-1. Open [`src/pages/member/request-new.tsx`](https://github.com/lindabell001/afcn-website/blob/main/src/pages/member/request-new.tsx) and inspect its contents. You'll find it starts with plain text rather than valid TSX.
-2. Replace the file contents with valid React/TypeScript code. For example, a minimal valid component:
+1. Open `src/pages/member/request-new.tsx` and inspect its contents. It currently starts with prose text rather than valid code.
+2. Replace the file contents with the correct React/TypeScript source. A valid component file should look something like:
 
 ```tsx
 import React from "react";
 
-export default function RequestNew() {
-  return <div>Request New</div>;
-}
+const RequestNew = () => {
+  return (
+    <div>
+      {/* your component markup */}
+    </div>
+  );
+};
+
+export default RequestNew;
 ```
 
-3. Commit the corrected file and redeploy.
+3. If the correct code was lost, restore it from your version control history (e.g. `git log`/`git checkout` an earlier commit of that file), then commit and push the fix.
 
-If this file was never meant to exist (e.g. it was an accidental commit), simply delete it and remove any imports that reference it, then push the change.
+Once the file contains valid syntax, the build should succeed.
+
+(Optional, unrelated to the failure: the Browserslist warning on [lines 52-53](#L52-L53) is just informational — you can silence it by running `npx update-browserslist-db@latest`.)
 
 The relevant error logs are:
 
@@ -36,8 +48,8 @@ Line 52: Browserslist: browsers data (caniuse-lite) is 13 months old. Please run
 Line 53:   npx update-browserslist-db@latest
 Line 54:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
 Line 55: Failed during stage 'building site': Build script returned non-zero exit code: 2
-Line 56: ✓ 30 modules transformed.
-Line 57: x Build failed in 1.27s
+Line 56: ✓ 29 modules transformed.
+Line 57: x Build failed in 1.25s
 Line 58: error during build:
 Line 59: [vite:esbuild] Transform failed with 1 error:
 Line 60: /opt/build/repo/src/pages/member/request-new.tsx:1:4: ERROR: Expected ";" but found "Netlify"
@@ -89,4 +101,4 @@ Line 116:       to: /index.html
 Line 117:   redirectsOrigin: config
 Line 118: Build failed due to a user error: Build script returned non-zero exit code: 2
 Line 119: Failing build: Failed to build site
-Line 120: Finished processing build request in 10.496s
+Line 120: Finished processing build request in 11.3s
