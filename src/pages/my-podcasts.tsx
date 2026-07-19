@@ -9,8 +9,8 @@ export default function MyPodcasts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // This will be connected to Supabase in the backend
     const fetchPodcasts = async () => {
+      // This will be connected to Supabase in the backend
       // Demo data for now
       setPodcasts([
         {
