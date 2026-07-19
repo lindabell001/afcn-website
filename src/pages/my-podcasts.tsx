@@ -2,13 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { createClient } from '@supabase/supabase-js';
 import SiteFooter from '../components/SiteFooter';
-
-const supabase = createClient(
-  process.env.REACT_APP_SUPABASE_URL,
-  process.env.REACT_APP_SUPABASE_ANON_KEY
-);
 
 export default function MyPodcasts() {
   const [podcasts, setPodcasts] = useState([]);
@@ -16,53 +10,39 @@ export default function MyPodcasts() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchMyPodcasts = async () => {
+    const fetchPodcasts = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        
-        if (!user) {
-          setError("Please log in to see your podcasts");
-          setLoading(false);
-          return;
-        }
-
-        const { data, error } = await supabase
-          .from('podcasts')
-          .select(`
-            *,
-            episodes (*)
-          `)
-          .eq('host_id', user.id)
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-
-        setPodcasts(data || []);
+        // Demo data until Supabase is fully connected
+        setPodcasts([
+          {
+            id: 1,
+            name: "Your First Podcast",
+            tagline: "Truthful news and commentary",
+            episodesCount: 12,
+            status: "Active",
+            logo: "🇺🇸",
+            episodes: [
+              { id: 1, title: "Episode 1", status: "Published" },
+              { id: 2, title: "Episode 2", status: "Draft" }
+            ]
+          }
+        ]);
       } catch (err) {
-        console.error(err);
         setError("Failed to load your podcasts");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchMyPodcasts();
+    fetchPodcasts();
   }, []);
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-2xl text-gray-600">Loading your podcasts...</p>
-      </div>
-    );
+    return <div className="min-h-screen bg-background flex items-center justify-center"><p className="text-2xl">Loading your podcasts...</p></div>;
   }
 
   if (error) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-2xl text-red-600">{error}</p>
-      </div>
-    );
+    return <div className="min-h-screen bg-background flex items-center justify-center"><p className="text-2xl text-red-600">{error}</p></div>;
   }
 
   return (
@@ -114,8 +94,27 @@ export default function MyPodcasts() {
                           <div>
                             <h4 className="font-bold text-lg">{episode.title}</h4>
                             <p className="text-sm text-gray-500">
-                              {episode.status} • {episode.duration || '—'}
+                              {episode.status}
                             </p>
                           </div>
                           <div className="text-right">
-                            <span className={`Sorry about that, something didn't go as planned. Please try again, and if you're still seeing this message, go ahead and restart the app.
+                            <span className="px-4 py-2 bg-green-100 text-green-800 rounded-xl text-sm font-medium">
+                              {episode.status}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-gray-500">No episodes yet.</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
