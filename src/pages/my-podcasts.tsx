@@ -9,7 +9,7 @@ export default function MyPodcasts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Demo data
+    // Demo data - replace with real Supabase data later
     setPodcasts([
       {
         id: 1,
@@ -70,7 +70,7 @@ export default function MyPodcasts() {
                   <Link to={`/my-episodes?podcast_id=${podcast.id}`} className="bg-patriot-blue text-white px-8 py-4 rounded-2xl font-bold hover:bg-patriot-red">Manage Episodes</Link>
                   <button 
                     onClick={() => deletePodcast(podcast.id)}
-                    className="px-6 py-4 text-red-600 hover:bg-red-50 rounded-2xl"
+                    className="px-6 py-4 text-red-600 hover:bg-red-50 rounded-2xl font-medium"
                   >
                     Delete
                   </button>
