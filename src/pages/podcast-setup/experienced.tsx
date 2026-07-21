@@ -8,6 +8,7 @@ import SiteFooter from '../../components/SiteFooter';
 export default function ExperiencedSetup() {
   const navigate = useNavigate();
   const [rssUrls, setRssUrls] = useState(['']);
+  const [x_handle, setXHandle] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -38,24 +39,23 @@ export default function ExperiencedSetup() {
         return;
       }
 
-      // For simplicity, update the most recent podcast or create new
-      // You can improve this later to select which podcast to link
+      const rssUrl = rssUrls[0].trim();
+
       const { data: existing } = await supabase
         .from('podcasts')
         .select('id')
         .eq('host_id', user.id)
         .limit(1);
 
-      const rssUrl = rssUrls[0].trim(); // Use first for now
-
       if (existing && existing.length > 0) {
-        // Update existing
         await supabase
           .from('podcasts')
-          .update({ rss_url: rssUrl })
+          .update({ 
+            rss_url: rssUrl,
+            x_handle: x_handle || null 
+          })
           .eq('id', existing[0].id);
       } else {
-        // Create new with RSS
         await supabase
           .from('podcasts')
           .insert({
@@ -63,12 +63,13 @@ export default function ExperiencedSetup() {
             description: 'RSS connected podcast',
             host_id: user.id,
             rss_url: rssUrl,
+            x_handle: x_handle || null,
             status: 'active'
           });
       }
 
-      setMessage('RSS feeds connected successfully!');
-      setTimeout(() => navigate('/my-podcasts'), 1500);
+      setMessage('RSS feeds connected successfully! Your page will be at afcnus.org/@' + (x_handle || 'your-show-name'));
+      setTimeout(() => navigate('/my-podcasts'), 2000);
 
     } catch (error) {
       setMessage('Error connecting RSS. Check console.');
@@ -109,6 +110,19 @@ export default function ExperiencedSetup() {
             >
               + Add Another RSS URL
             </button>
+
+            {/* X Handle Field */}
+            <div className="mb-8">
+              <label className="block text-sm font-semibold mb-2">X Handle for this Podcast (optional)</label>
+              <input
+                type="text"
+                value={x_handle}
+                onChange={(e) => setXHandle(e.target.value)}
+                placeholder="@YourXHandle"
+                className="w-full p-4 border border-gray-300 rounded-2xl"
+              />
+              <p className="text-sm text-gray-500 mt-2">Your podcast page will be afcnus.org/@YourXHandle (or afcnus.org/your-show-name)</p>
+            </div>
 
             <button 
               onClick={handleSubmit}
