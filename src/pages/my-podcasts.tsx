@@ -41,7 +41,7 @@ export default function MyPodcasts() {
         </div>
 
         {loading ? (
-          <p>Loading your podcasts...</p>
+          <p>Loading...</p>
         ) : podcasts.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-2xl text-gray-500">You don't have any podcast platforms yet.</p>
@@ -51,21 +51,9 @@ export default function MyPodcasts() {
           <div className="space-y-8">
             {podcasts.map((p) => (
               <div key={p.id} className="bg-white rounded-3xl p-8 border border-gray-100">
-                <div className="flex justify-between">
-                  <div>
-                    <h3 className="text-3xl font-bold text-patriot-blue">{p.title}</h3>
-                    <p className="text-gray-600">{p.description}</p>
-                    <p className="text-sm text-gray-500">Category: {p.category || 'General'}</p>
-                  </div>
-                  <div className="text-green-600 font-medium">Active</div>
-                </div>
-
-                <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <Link to={`/record-new?podcast_id=${p.id}`} className="bg-patriot-blue text-white py-4 rounded-2xl text-center font-bold hover:bg-patriot-red">🎤 Record New</Link>
-                  <Link to={`/live-recording?podcast_id=${p.id}`} className="bg-patriot-red text-white py-4 rounded-2xl text-center font-bold hover:bg-red-700">📡 Go Live</Link>
-                  <Link to={`/video-studio?podcast_id=${p.id}`} className="bg-patriot-blue text-white py-4 rounded-2xl text-center font-bold hover:bg-patriot-red">🎥 Video Studio</Link>
-                  <Link to={`/faceless-options?podcast_id=${p.id}`} className="bg-patriot-red text-white py-4 rounded-2xl text-center font-bold hover:bg-red-700">🎬 Faceless Video</Link>
-                </div>
+                <h3 className="text-3xl font-bold text-patriot-blue">{p.title}</h3>
+                <p className="text-gray-600">{p.description}</p>
+                <p className="text-sm text-gray-500">Category: {p.category || 'General'}</p>
               </div>
             ))}
           </div>
