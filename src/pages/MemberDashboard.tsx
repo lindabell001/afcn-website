@@ -5,13 +5,25 @@ import SiteFooter from '../components/SiteFooter';
 export default function MemberDashboard() {
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-5xl mx-auto px-6 py-16">
+      <main className="max-w-6xl mx-auto px-6 py-16">
         <div className="text-center mb-16">
           <h1 className="text-6xl font-bold text-patriot-blue mb-6">Member Dashboard</h1>
           <p className="text-2xl text-gray-600">Quick Access for Patriots</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Left: Start/Setup Podcast */}
+          <Link
+            to="/podcast-setup"
+            className="group bg-white border-2 border-patriot-red hover:border-patriot-blue rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1"
+          >
+            <div className="text-7xl mb-8">🎙️</div>
+            <h2 className="text-4xl font-bold text-patriot-blue mb-4">Start Your Podcast</h2>
+            <p className="text-xl text-gray-600">Beginner or Experienced Setup</p>
+            <p className="mt-8 text-patriot-red font-semibold group-hover:underline">Go to Setup →</p>
+          </Link>
+
+          {/* Middle: My Podcasts */}
           <Link
             to="/my-podcasts"
             className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1"
@@ -22,6 +34,7 @@ export default function MemberDashboard() {
             <p className="mt-8 text-patriot-red font-semibold group-hover:underline">Go to My Podcasts →</p>
           </Link>
 
+          {/* Right: Taverns & Pubs */}
           <Link
             to="/tavern/locations"
             className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1"
