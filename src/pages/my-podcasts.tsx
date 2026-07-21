@@ -2,31 +2,57 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabaseClient.js';
 import SiteFooter from '../components/SiteFooter';
 
 export default function MyPodcasts() {
-  const [podcasts, setPodcasts] = useState([]);
+  const [podcasts, setPodcasts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    // Demo data - replace with real Supabase data later
-    setPodcasts([
-      {
-        id: 1,
-        name: "Your First Podcast",
-        tagline: "Truthful news and commentary",
-        episodesCount: 12,
-        status: "Active",
-        logo: "🇺🇸"
-      }
-    ]);
-    setLoading(false);
+    fetchPodcasts();
   }, []);
 
-  const deletePodcast = (id) => {
-    if (window.confirm('Delete this podcast platform?')) {
+  const fetchPodcasts = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      console.log('My Podcasts - Current user ID:', user?.id);
+
+      if (!user) {
+        setError('Please log in to see your podcasts.');
+        setLoading(false);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('podcasts')
+        .select('*')
+        .eq('host_id', user.id)
+        .order('created_at', { ascending: false });
+
+      console.log('My Podcasts - Fetched data:', data);
+
+      if (error) throw error;
+
+      setPodcasts(data || []);
+    } catch (err: any) {
+      console.error('Fetch error:', err);
+      setError('Failed to load podcasts. Check console.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deletePodcast = async (id: string) => {
+    if (!window.confirm('Delete this podcast?')) return;
+
+    try {
+      const { error } = await supabase.from('podcasts').delete().eq('id', id);
+      if (error) throw error;
       setPodcasts(podcasts.filter(p => p.id !== id));
-      alert('Podcast platform deleted.');
+    } catch (err) {
+      alert('Delete failed.');
     }
   };
 
@@ -38,42 +64,25 @@ export default function MyPodcasts() {
             <h1 className="text-6xl font-bold text-patriot-blue">My Podcasts</h1>
             <p className="text-2xl text-gray-600">Manage your podcast platforms</p>
           </div>
-          <Link
-            to="/podcast-setup/beginner"
-            className="bg-patriot-red text-white px-8 py-4 rounded-2xl font-bold hover:bg-patriot-blue transition-colors"
-          >
-            + Create New Podcast Platform
-          </Link>
+          <Link to="/podcast-setup/beginner" className="bg-patriot-red text-white px-8 py-4 rounded-2xl font-bold hover:bg-patriot-blue">+ Create New Podcast Platform</Link>
         </div>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : podcasts.length === 0 ? (
+        {loading ? <p>Loading...</p> : error ? <p className="text-red-600">{error}</p> : podcasts.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-2xl text-gray-500">You don't have any podcast platforms yet.</p>
-            <Link to="/podcast-setup/beginner" className="mt-8 inline-block bg-patriot-red text-white px-10 py-4 rounded-2xl text-xl font-bold">Create Your First</Link>
+            <p>No podcasts yet.</p>
+            <Link to="/podcast-setup/beginner" className="mt-8 inline-block bg-patriot-red text-white px-10 py-4 rounded-2xl">Create Your First</Link>
           </div>
         ) : (
           <div className="space-y-8">
-            {podcasts.map((podcast) => (
-              <div key={podcast.id} className="bg-white rounded-3xl p-8 flex items-center justify-between border border-gray-100">
-                <div className="flex items-center gap-6">
-                  <div className="text-5xl">{podcast.logo}</div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-patriot-blue">{podcast.name}</h3>
-                    <p className="text-gray-600">{podcast.tagline}</p>
-                    <p className="text-sm text-gray-500 mt-1">{podcast.episodesCount} episodes</p>
-                  </div>
+            {podcasts.map((p) => (
+              <div key={p.id} className="bg-white rounded-3xl p-8 flex justify-between items-center">
+                <div>
+                  <h3 className="text-3xl font-bold">{p.title}</h3>
+                  <p>{p.description}</p>
                 </div>
-
-                <div className="flex items-center gap-4">
-                  <Link to={`/my-episodes?podcast_id=${podcast.id}`} className="bg-patriot-blue text-white px-8 py-4 rounded-2xl font-bold hover:bg-patriot-red">Manage Episodes</Link>
-                  <button 
-                    onClick={() => deletePodcast(podcast.id)}
-                    className="px-6 py-4 text-red-600 hover:bg-red-50 rounded-2xl font-medium"
-                  >
-                    Delete
-                  </button>
+                <div>
+                  <Link to={`/my-episodes?podcast_id=${p.id}`} className="bg-patriot-blue text-white px-8 py-4 rounded-2xl mr-4">Manage Episodes</Link>
+                  <button onClick={() => deletePodcast(p.id)} className="text-red-600">Delete</button>
                 </div>
               </div>
             ))}
