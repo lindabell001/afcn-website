@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabaseClient.js';
+import { supabase } from '../../lib/supabaseClient';
 import SiteFooter from '../../components/SiteFooter';
 
 export default function BeginnerSetup() {
@@ -10,12 +10,13 @@ export default function BeginnerSetup() {
   const [formData, setFormData] = useState({
     name: '',
     tagline: '',
-    category: ''
+    category: '',
+    x_handle: ''   // New field
   });
   const [isCreating, setIsCreating] = useState(false);
   const [message, setMessage] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -29,45 +30,41 @@ export default function BeginnerSetup() {
     setMessage('');
 
     try {
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      if (userError || !user) {
-        setMessage('You must be logged in. Please log in first.');
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setMessage('You must be logged in.');
         setIsCreating(false);
         return;
       }
 
-      console.log('Current user ID:', user.id); // debug
+      const slug = formData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
       const newPodcast = {
         title: formData.name,
         description: formData.tagline,
         category: formData.category || 'other',
         host_id: user.id,
+        slug: slug,
+        x_handle: formData.x_handle || null,   // Save X handle
         status: 'active',
-        is_public: false,
-        slug: formData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+        is_public: false
       };
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('podcasts')
-        .insert(newPodcast)
-        .select();
+        .insert(newPodcast);
 
-      if (error) {
-        console.error('Insert error:', error);
-        throw error;
-      }
+      if (error) throw error;
 
-      console.log('Created podcast:', data);
-      setMessage('Podcast created successfully! Redirecting...');
+      setMessage('Podcast created successfully! Your page will be at afcnus.org/@' + (formData.x_handle || slug));
       
       setTimeout(() => {
         navigate('/my-podcasts');
-      }, 1500);
+      }, 2000);
 
-    } catch (error: any) {
-      console.error('Full error:', error);
-      setMessage('Error: ' + (error.message || 'Check console for details'));
+    } catch (error) {
+      setMessage('Error creating podcast. Check console.');
+      console.error(error);
     } finally {
       setIsCreating(false);
     }
@@ -122,6 +119,20 @@ export default function BeginnerSetup() {
                 <option value="border">Border Security</option>
                 <option value="other">Other</option>
               </select>
+            </div>
+
+            {/* New X Handle Field */}
+            <div>
+              <label className="block text-sm font-semibold mb-2">X Handle for this Podcast (optional)</label>
+              <input
+                type="text"
+                name="x_handle"
+                value={formData.x_handle}
+                onChange={handleChange}
+                placeholder="@YourXHandle"
+                className="w-full p-4 border border-gray-300 rounded-2xl text-lg"
+              />
+              <p className="text-sm text-gray-500 mt-2">Your podcast page will be afcnus.org/@YourXHandle (or afcnus.org/your-show-name)</p>
             </div>
 
             <button 
