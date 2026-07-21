@@ -8,38 +8,22 @@ import SiteFooter from '../components/SiteFooter';
 export default function MyPodcasts() {
   const [podcasts, setPodcasts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchPodcasts();
   }, []);
 
   const fetchPodcasts = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      console.log('Current user ID:', user?.id);
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
 
-      if (!user) {
-        setError('Please log in.');
-        setLoading(false);
-        return;
-      }
+    const { data } = await supabase
+      .from('podcasts')
+      .select('*')
+      .eq('host_id', user.id);
 
-      const { data, error } = await supabase
-        .from('podcasts')
-        .select('*')
-        .eq('host_id', user.id);
-
-      console.log('Fetched:', data);
-
-      if (error) throw error;
-      setPodcasts(data || []);
-    } catch (err) {
-      console.error(err);
-      setError('Load failed - check console');
-    } finally {
-      setLoading(false);
-    }
+    setPodcasts(data || []);
+    setLoading(false);
   };
 
   return (
@@ -50,18 +34,38 @@ export default function MyPodcasts() {
             <h1 className="text-6xl font-bold text-patriot-blue">My Podcasts</h1>
             <p className="text-2xl text-gray-600">Manage your podcast platforms</p>
           </div>
-          <Link to="/podcast-setup/beginner" className="bg-patriot-red text-white px-8 py-4 rounded-2xl font-bold">+ Create New</Link>
+          <Link to="/podcast-setup/beginner" className="bg-patriot-red text-white px-8 py-4 rounded-2xl font-bold">+ Create New Podcast Platform</Link>
         </div>
 
-        {loading ? <p>Loading...</p> : error ? <p>{error}</p> : podcasts.length === 0 ? (
-          <p>No podcasts yet. Create one!</p>
+        {loading ? <p>Loading...</p> : podcasts.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-2xl">No podcasts yet.</p>
+            <Link to="/podcast-setup/beginner" className="mt-8 inline-block bg-patriot-red text-white px-10 py-4 rounded-2xl">Create Your First</Link>
+          </div>
         ) : (
-          podcasts.map(p => (
-            <div key={p.id} className="bg-white p-8 rounded-3xl mb-4">
-              <h3>{p.title}</h3>
-              <p>{p.description}</p>
-            </div>
-          ))
+          <div className="space-y-8">
+            {podcasts.map((p) => (
+              <div key={p.id} className="bg-white rounded-3xl p-8 border border-gray-100">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-3xl font-bold text-patriot-blue">{p.title}</h3>
+                    <p className="text-gray-600">{p.description}</p>
+                    <p className="text-sm text-gray-500">Category: {p.category || 'General'}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-green-600 font-medium">Active</span>
+                  </div>
+                </div>
+
+                <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <Link to={`/record-new?podcast_id=${p.id}`} className="bg-patriot-blue text-white py-4 rounded-2xl text-center font-bold hover:bg-patriot-red">🎤 Record New</Link>
+                  <Link to={`/live-recording?podcast_id=${p.id}`} className="bg-patriot-red text-white py-4 rounded-2xl text-center font-bold hover:bg-red-700">📡 Go Live</Link>
+                  <Link to={`/video-studio?podcast_id=${p.id}`} className="bg-patriot-blue text-white py-4 rounded-2xl text-center font-bold hover:bg-patriot-red">🎥 Video Studio</Link>
+                  <Link to={`/faceless-options?podcast_id=${p.id}`} className="bg-patriot-red text-white py-4 rounded-2xl text-center font-bold hover:bg-red-700">🎬 Faceless Video</Link>
+                </div>
+              </div>
+            ))}
+          </div>
         )}
       </main>
       <SiteFooter />
