@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabaseClient';
+import { supabase } from '../../lib/supabaseClient.js';
 import SiteFooter from '../../components/SiteFooter';
 
 export default function BeginnerSetup() {
@@ -29,13 +29,14 @@ export default function BeginnerSetup() {
     setMessage('');
 
     try {
-      // Get current user
       const { data: { user }, error: userError } = await supabase.auth.getUser();
       if (userError || !user) {
-        setMessage('You must be logged in to create a podcast.');
+        setMessage('You must be logged in. Please log in first.');
         setIsCreating(false);
         return;
       }
+
+      console.log('Current user ID:', user.id); // debug
 
       const newPodcast = {
         title: formData.name,
@@ -47,22 +48,26 @@ export default function BeginnerSetup() {
         slug: formData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
       };
 
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('podcasts')
-        .insert(newPodcast);
+        .insert(newPodcast)
+        .select();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Insert error:', error);
+        throw error;
+      }
 
-      setMessage('Podcast created successfully!');
+      console.log('Created podcast:', data);
+      setMessage('Podcast created successfully! Redirecting...');
       
-      // Redirect after short delay
       setTimeout(() => {
         navigate('/my-podcasts');
       }, 1500);
 
     } catch (error: any) {
-      console.error(error);
-      setMessage('Something went wrong. Please try again. ' + (error.message || ''));
+      console.error('Full error:', error);
+      setMessage('Error: ' + (error.message || 'Check console for details'));
     } finally {
       setIsCreating(false);
     }
