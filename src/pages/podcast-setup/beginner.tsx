@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
 import SiteFooter from '../../components/SiteFooter';
 
 export default function BeginnerSetup() {
@@ -14,7 +15,7 @@ export default function BeginnerSetup() {
   const [isCreating, setIsCreating] = useState(false);
   const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -28,18 +29,41 @@ export default function BeginnerSetup() {
     setMessage('');
 
     try {
-      // This will be connected to Supabase in the backend
-      setTimeout(() => {
-        setMessage('Podcast created successfully!');
+      // Get current user
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      if (userError || !user) {
+        setMessage('You must be logged in to create a podcast.');
         setIsCreating(false);
-        
-        // Redirect to my-podcasts after 1 second
-        setTimeout(() => {
-          navigate('/my-podcasts');
-        }, 1000);
+        return;
+      }
+
+      const newPodcast = {
+        title: formData.name,
+        description: formData.tagline,
+        category: formData.category || 'other',
+        host_id: user.id,
+        status: 'active',
+        is_public: false,
+        slug: formData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+      };
+
+      const { error } = await supabase
+        .from('podcasts')
+        .insert(newPodcast);
+
+      if (error) throw error;
+
+      setMessage('Podcast created successfully!');
+      
+      // Redirect after short delay
+      setTimeout(() => {
+        navigate('/my-podcasts');
       }, 1500);
-    } catch (error) {
-      setMessage('Something went wrong. Please try again.');
+
+    } catch (error: any) {
+      console.error(error);
+      setMessage('Something went wrong. Please try again. ' + (error.message || ''));
+    } finally {
       setIsCreating(false);
     }
   };
