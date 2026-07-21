@@ -19,6 +19,7 @@ import MyPodcasts from './pages/my-podcasts';
 import MyEpisodes from './pages/my-episodes';
 import BeginnerSetup from './pages/podcast-setup/beginner';
 import ExperiencedSetup from './pages/podcast-setup/experienced';
+import PodcastSetupHub from './pages/podcast-setup';  // <-- New choice page
 import RecordNewEpisode from './pages/record-new';
 import LiveRecording from './pages/live-recording';
 import PhoneRecording from './pages/phone-recording';
@@ -74,6 +75,7 @@ const App = () => {
           {/* Podcast Routes */}
           <Route path="/my-podcasts" element={<MyPodcasts />} />
           <Route path="/my-episodes" element={<MyEpisodes />} />
+          <Route path="/podcast-setup" element={<PodcastSetupHub />} />   {/* New choice page */}
           <Route path="/podcast-setup/beginner" element={<BeginnerSetup />} />
           <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
           <Route path="/record-new" element={<RecordNewEpisode />} />
