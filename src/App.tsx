@@ -31,6 +31,7 @@ import FacelessGenerate from './pages/faceless-generate';
 import ShortsGenerator from './pages/shorts-generator';
 import MemberPodcasts from './pages/resources/member-podcasts';
 import PodcastPage from './pages/resources/podcasts/[slug]';
+import EpisodeCalendar from './pages/episode-calendar';   // ← New
 
 // Short Link Handler
 import ShortLinkHandler from './pages/ShortLinkHandler';
@@ -78,6 +79,7 @@ const App = () => {
           {/* Podcast Routes */}
           <Route path="/my-podcasts" element={<MyPodcasts />} />
           <Route path="/my-episodes" element={<MyEpisodes />} />
+          <Route path="/episode-calendar" element={<EpisodeCalendar />} />   {/* ← New Calendar */}
           <Route path="/podcast-setup" element={<PodcastSetupHub />} />
           <Route path="/podcast-setup/beginner" element={<BeginnerSetup />} />
           <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
