@@ -33,7 +33,7 @@ import MemberPodcasts from './pages/resources/member-podcasts';
 import PodcastPage from './pages/resources/podcasts/[slug]';
 
 // Short Link Handler
-import ShortLinkHandler from './pages/ShortLinkHandler';  // New file
+import ShortLinkHandler from './pages/ShortLinkHandler';
 
 // Member Pages
 import MemberRequestNew from './pages/member/request-new';
@@ -107,7 +107,7 @@ const App = () => {
           <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
           <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
 
-          {/* Short Links - Catch-all for @handle or slug */}
+          {/* Short Links */}
           <Route path="/:shortLink" element={<ShortLinkHandler />} />
 
           <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
