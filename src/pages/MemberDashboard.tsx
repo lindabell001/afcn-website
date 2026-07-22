@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import SiteFooter from '../components/SiteFooter';
 
@@ -14,7 +14,6 @@ export default function MemberDashboard() {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        // Not logged in → send to login
         navigate('/member-login');
       } else {
         setLoading(false);
@@ -25,7 +24,11 @@ export default function MemberDashboard() {
   }, [navigate]);
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-2xl">Loading Dashboard...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-2xl text-patriot-blue bg-background">
+        Loading your Member Dashboard...
+      </div>
+    );
   }
 
   return (
@@ -37,19 +40,28 @@ export default function MemberDashboard() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <Link to="/my-podcasts" className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1">
+          <Link 
+            to="/my-podcasts"
+            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1"
+          >
             <div className="text-7xl mb-8">🎙️</div>
             <h2 className="text-4xl font-bold text-patriot-blue mb-4">My Podcasts</h2>
             <p className="text-xl text-gray-600">Record, manage, and grow your shows</p>
           </Link>
 
-          <Link to="/tavern/locations" className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1">
+          <Link 
+            to="/tavern/locations"
+            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1"
+          >
             <div className="text-7xl mb-8">🏠</div>
             <h2 className="text-4xl font-bold text-patriot-blue mb-4">Taverns & Pubs</h2>
             <p className="text-xl text-gray-600">Join your state and issue rooms</p>
           </Link>
 
-          <Link to="/podcast-setup" className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1">
+          <Link 
+            to="/podcast-setup"
+            className="group bg-white border-2 border-patriot-blue hover:border-patriot-red rounded-3xl p-12 text-center transition-all hover:shadow-xl hover:-translate-y-1"
+          >
             <div className="text-7xl mb-8">📻</div>
             <h2 className="text-4xl font-bold text-patriot-blue mb-4">Start a Podcast</h2>
             <p className="text-xl text-gray-600">Beginner or experienced setup</p>
