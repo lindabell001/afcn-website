@@ -12,7 +12,14 @@ export default function MemberLogin() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  const handleLogin = async (e: React.FormEvent) => {
+  // Redirect if already logged in
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) navigate('/member-dashboard');
+    });
+  }, [navigate]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
@@ -23,39 +30,28 @@ export default function MemberLogin() {
     });
 
     if (error) {
-      setMessage('Error: ' + error.message);
+      setMessage(error.message);
     } else {
-      // ✅ FIXED: Send to Member Dashboard after login
-      navigate('/memberdashboard');
+      navigate('/member-dashboard');
     }
     setLoading(false);
   };
 
-  // If already logged in, go straight to dashboard
-  useEffect(() => {
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        navigate('/memberdashboard');
-      }
-    };
-    checkSession();
-  }, [navigate]);
-
   return (
-    <div className="min-h-screen bg-background">
-      <main className="max-w-md mx-auto px-6 py-20">
+    <div className="min-h-screen bg-background pt-20">
+      <div className="max-w-md mx-auto px-6">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-patriot-blue">Member Login</h1>
+          <h1 className="text-6xl font-bold text-patriot-blue">Member Login</h1>
+          <p className="text-2xl text-gray-600 mt-4">Sign in to access your dashboard and podcasts</p>
         </div>
 
-        <form onSubmit={handleLogin} className="bg-white rounded-3xl p-10">
+        <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-10 shadow-xl">
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-2xl mb-4"
+            className="w-full p-5 border border-gray-300 rounded-2xl mb-6 text-lg"
             required
           />
           <input
@@ -63,26 +59,25 @@ export default function MemberLogin() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-2xl mb-6"
+            className="w-full p-5 border border-gray-300 rounded-2xl mb-8 text-lg"
             required
           />
 
-          <button
-            type="submit"
+          <button 
+            type="submit" 
             disabled={loading}
-            className="w-full bg-patriot-red text-white py-4 rounded-2xl font-bold text-xl hover:bg-red-700 disabled:opacity-50"
+            className="w-full bg-patriot-red text-white py-5 rounded-2xl font-bold text-xl hover:bg-red-700 disabled:opacity-50"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? "Signing In..." : "Sign In"}
           </button>
 
-          {message && <p className="text-red-600 text-center mt-4">{message}</p>}
+          {message && <p className="text-red-600 text-center mt-6 font-medium">{message}</p>}
         </form>
 
-        <p className="text-center mt-8">
-          Don't have an account? <a href="/become-one" className="text-patriot-red">Become a Member</a>
+        <p className="text-center mt-10 text-gray-600">
+          New here? <a href="/become-one" className="text-patriot-red font-semibold">Become a Member</a>
         </p>
-      </main>
-      <SiteFooter />
+      </div>
     </div>
   );
 }
