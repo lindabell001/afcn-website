@@ -10,80 +10,59 @@ export default function BecomeOne() {
     lastName: '',
     email: '',
     password: '',
-    street: '',
-    city: '',
-    state: '',
-    zip: '',
-    congressionalDistrict: '',
-    phone: '',
     xHandle: '',
     isCitizen: false,
-    isVeteran: '',
   });
 
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [message, setMessage] = useState('');
 
   const isOfficer = formData.email.toLowerCase().trim().endsWith('@americafirstcitizensnetwork.org');
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    if (type === 'checkbox') {
-      setFormData(prev => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
-    } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    }
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setMessage('');
 
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-    });
+    try {
+      // Create auth user
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
 
-    if (authError) {
-      alert('Auth error: ' + authError.message);
-      setLoading(false);
-      return;
-    }
+      if (authError) throw authError;
 
-    const profileData = {
-      id: authData.user.id,
-      full_name: `${formData.firstName} ${formData.lastName}`,
-      email: formData.email,
-      x_handle: formData.xHandle,
-      membership_tier: 'basic',
-      status: 'pending',                    // ← Pending until admin approves
-      is_admin: isOfficer,
-    };
+      // Create profile with pending status
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert([{
+          id: authData.user.id,
+          full_name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          x_handle: formData.xHandle,
+          membership_tier: 'basic',
+          status: 'pending',           // Waiting for admin approval
+          is_admin: isOfficer,
+        }]);
 
-    const { error: profileError } = await supabase
-      .from('profiles')
-      .insert([profileData]);
+      if (profileError) throw profileError;
 
-    if (profileError) {
-      alert('Profile error: ' + profileError.message);
-    } else {
-      setSubmitted(true);
+      setMessage('Application submitted! Pending admin review.');
+    } catch (error) {
+      setMessage('Error: ' + error.message);
     }
 
     setLoading(false);
   };
-
-  if (submitted) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center max-w-md">
-          <h1 className="text-5xl font-bold text-patriot-blue mb-6">Application Received</h1>
-          <p className="text-2xl text-gray-600">Thank you! Your membership is pending admin review.</p>
-          <p className="mt-8 text-lg">You will be notified once approved.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -94,27 +73,28 @@ export default function BecomeOne() {
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-12">
-          {/* Form fields here - same as before */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input type="text" name="firstName" placeholder="First Name" onChange={handleChange} required className="p-4 border rounded-2xl" />
-            <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required className="p-4 border rounded-2xl" />
-            <input type="email" name="email" placeholder="Email" onChange={handleChange} required className="p-4 border rounded-2xl" />
-            <input type="password" name="password" placeholder="Password" onChange={handleChange} required className="p-4 border rounded-2xl" />
-            <input type="text" name="xHandle" placeholder="X Handle (@username)" onChange={handleChange} className="p-4 border rounded-2xl" />
-            {/* Add other fields as needed */}
+          <div className="space-y-6">
+            <input type="text" name="firstName" placeholder="First Name" onChange={handleChange} required className="w-full p-4 border rounded-2xl" />
+            <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required className="w-full p-4 border rounded-2xl" />
+            <input type="email" name="email" placeholder="Email Address" onChange={handleChange} required className="w-full p-4 border rounded-2xl" />
+            <input type="password" name="password" placeholder="Password" onChange={handleChange} required className="w-full p-4 border rounded-2xl" />
+            <input type="text" name="xHandle" placeholder="X Handle (@username)" onChange={handleChange} className="w-full p-4 border rounded-2xl" />
+            
+            <label className="flex items-center gap-3">
+              <input type="checkbox" name="isCitizen" onChange={handleChange} className="w-6 h-6" />
+              <span>I am a US Citizen</span>
+            </label>
           </div>
 
           <button 
             type="submit" 
             disabled={loading} 
-            className="w-full mt-10 bg-patriot-red hover:bg-red-700 text-white font-bold py-5 rounded-2xl text-xl disabled:opacity-50"
+            className="w-full mt-10 bg-patriot-red text-white py-5 rounded-2xl text-xl font-bold hover:bg-red-700 disabled:opacity-50"
           >
-            {loading ? 'Submitting...' : 'Join for $25/Year – Continue to Payment'}
+            {loading ? 'Submitting...' : 'Submit Application'}
           </button>
 
-          {isOfficer && (
-            <p className="text-center text-green-600 mt-6 font-semibold">Officer email detected — Immediate approval</p>
-          )}
+          {message && <p className="text-center mt-6 text-lg font-medium">{message}</p>}
         </form>
       </main>
       <SiteFooter />
