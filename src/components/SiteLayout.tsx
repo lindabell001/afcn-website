@@ -1,34 +1,32 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import SiteHeader from './SiteHeader';
+import SiteFooter from './SiteFooter';
 
 const SiteLayout = ({ children }) => {
-  const location = useLocation();
+  const sendHelpEmail = () => {
+    const subject = encodeURIComponent("Website Help Request - AFCN");
+    const body = encodeURIComponent("Please describe the issue you're having:\n\n");
+    window.location.href = `mailto:Web@americafirstcitizensnetwork.org?subject=${subject}&body=${body}`;
+  };
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top Navigation */}
-      <nav className="bg-patriot-blue text-white sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <Link to="/" className="font-bold text-2xl">AFCN</Link>
-            <div className="hidden md:flex gap-8 text-lg">
-              <Link to="/resources" className="hover:text-patriot-red transition">Resources</Link>
-              <Link to="/tavern" className="hover:text-patriot-red transition">Tavern</Link>
-              <Link to="/committees" className="hover:text-patriot-red transition">Committees</Link>
-              <Link to="/member-dashboard" className="hover:text-patriot-red transition">Member Dashboard</Link>
-            </div>
-          </div>
+      <SiteHeader />
+      
+      <main>
+        {children}
+      </main>
 
-          <div className="flex items-center gap-6">
-            <Link to="/member-login" className="hover:text-patriot-red transition">Login</Link>
-            <Link to="/become-one" className="bg-patriot-red px-8 py-3 rounded-2xl font-bold hover:bg-red-700 transition">Become a Member</Link>
-          </div>
-        </div>
-      </nav>
+      {/* Help Button - Fixed on every page */}
+      <button
+        onClick={sendHelpEmail}
+        className="fixed bottom-8 right-8 bg-patriot-blue hover:bg-patriot-red text-white px-8 py-4 rounded-2xl shadow-xl flex items-center gap-3 z-50 transition-all text-lg font-medium"
+        title="Get help with the website"
+      >
+        ❓ Website Help
+      </button>
 
-      {children}
-
-      {/* Footer is in each page */}
+      <SiteFooter />
     </div>
   );
 };
