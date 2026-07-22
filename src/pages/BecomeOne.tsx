@@ -33,7 +33,7 @@ export default function BecomeOne() {
     setMessage('');
 
     try {
-      // Create auth user
+      // 1. Create auth account
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -41,7 +41,7 @@ export default function BecomeOne() {
 
       if (authError) throw authError;
 
-      // Create profile with pending status
+      // 2. Create profile with pending status
       const { error: profileError } = await supabase
         .from('profiles')
         .insert([{
@@ -50,13 +50,19 @@ export default function BecomeOne() {
           email: formData.email,
           x_handle: formData.xHandle,
           membership_tier: 'basic',
-          status: 'pending',           // Waiting for admin approval
+          status: 'pending',                    // Pending until approved
           is_admin: isOfficer,
         }]);
 
       if (profileError) throw profileError;
 
-      setMessage('Application submitted! Pending admin review.');
+      // 3. Notification call (placeholder for now)
+      if (!isOfficer) {
+        console.log(`📧 Notification would be sent to Norine & Linda: New pending member - ${formData.email}`);
+        // In future, this will call an Edge Function to send real email
+      }
+
+      setMessage('Thank you! Your application is pending admin review.');
     } catch (error) {
       setMessage('Error: ' + error.message);
     }
@@ -94,7 +100,7 @@ export default function BecomeOne() {
             {loading ? 'Submitting...' : 'Submit Application'}
           </button>
 
-          {message && <p className="text-center mt-6 text-lg font-medium">{message}</p>}
+          {message && <p className="text-center mt-6 text-lg font-medium text-green-600">{message}</p>}
         </form>
       </main>
       <SiteFooter />
