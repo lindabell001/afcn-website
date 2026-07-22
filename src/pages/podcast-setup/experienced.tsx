@@ -2,117 +2,89 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SiteFooter from '../components/SiteFooter';
+import SiteFooter from '../../components/SiteFooter';
 
-export default function UploadEpisode() {
-  const [file, setFile] = useState<File | null>(null);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+export default function ExperiencedSetup() {
+  const [rssUrls, setRssUrls] = useState(['']);
+  const [files, setFiles] = useState([]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
-    }
+  const addRssField = () => setRssUrls([...rssUrls, '']);
+
+  const updateRssUrl = (index, value) => {
+    const newUrls = [...rssUrls];
+    newUrls[index] = value;
+    setRssUrls(newUrls);
   };
 
-  const handleUpload = () => {
-    if (!file || !title) return;
-    
-    setIsUploading(true);
-    
-    // Demo upload - replace with real Supabase upload later
-    setTimeout(() => {
-      setIsUploading(false);
-      setIsSuccess(true);
-    }, 1500);
+  const handleFileUpload = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setFiles([...files, ...selectedFiles]);
   };
 
-  if (isSuccess) {
-    return (
-      <div className="min-h-screen bg-background">
-        <main className="max-w-3xl mx-auto px-6 py-16 text-center">
-          <h1 className="text-5xl font-bold text-patriot-blue mb-6">Upload Successful!</h1>
-          <p className="text-2xl text-gray-600 mb-12">Your episode has been uploaded and saved as draft.</p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to="/my-episodes" className="bg-patriot-blue text-white px-10 py-6 rounded-3xl text-xl font-bold hover:bg-patriot-red transition-all">
-              Go to My Episodes
-            </Link>
-            <Link to="/upload-episode" className="bg-white border-2 border-patriot-blue text-patriot-blue px-10 py-6 rounded-3xl text-xl font-bold hover:bg-patriot-red hover:text-white transition-all">
-              Upload Another
-            </Link>
-          </div>
-        </main>
-        <SiteFooter />
-      </div>
-    );
-  }
+  const removeFile = (index) => {
+    setFiles(files.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = () => {
+    alert('Setup complete! RSS + uploaded episodes saved (demo).');
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-3xl mx-auto px-6 py-16">
         <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold text-patriot-blue">Upload Episode</h1>
-          <p className="text-2xl text-gray-600 mt-4">Upload audio or video from your computer</p>
+          <h1 className="text-5xl font-bold text-patriot-blue mb-4">Experienced Setup</h1>
+          <p className="text-xl text-gray-600">Connect RSS or upload episodes directly</p>
         </div>
 
         <div className="bg-white rounded-3xl p-12">
-          {/* File Upload Area */}
-          <div className="border-2 border-dashed border-patriot-blue rounded-3xl p-12 text-center mb-10">
-            <div className="text-6xl mb-6">📁</div>
-            <p className="text-2xl mb-4">Drag & Drop or</p>
-            
-            <label className="inline-block bg-patriot-blue text-white px-8 py-4 rounded-2xl text-xl font-bold cursor-pointer hover:bg-patriot-red transition-all">
-              Choose File
-              <input 
-                type="file" 
-                accept="audio/*,video/*" 
-                onChange={handleFileChange} 
-                className="hidden" 
-              />
+          {/* RSS Section */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-patriot-blue mb-6">1. Connect RSS Feeds</h2>
+            {rssUrls.map((url, index) => (
+              <div key={index} className="mb-4">
+                <input 
+                  type="text" 
+                  value={url} 
+                  onChange={(e) => updateRssUrl(index, e.target.value)}
+                  placeholder="https://your-rss-feed.com/feed.xml" 
+                  className="w-full p-4 border border-gray-300 rounded-2xl" 
+                />
+              </div>
+            ))}
+            <button onClick={addRssField} className="text-patriot-red hover:underline mb-8">+ Add Another RSS</button>
+          </div>
+
+          {/* Upload Section */}
+          <div>
+            <h2 className="text-3xl font-bold text-patriot-blue mb-6">2. Upload Episodes</h2>
+            <p className="text-gray-600 mb-8">Drag & drop audio or video files</p>
+
+            <label className="block border-2 border-dashed border-patriot-red rounded-3xl p-16 text-center hover:bg-red-50 cursor-pointer">
+              <div className="text-7xl mb-6">📤</div>
+              <p className="text-2xl">Click or drop files here</p>
+              <input type="file" multiple accept="audio/*,video/*" onChange={handleFileUpload} className="hidden" />
             </label>
-            
-            <p className="text-sm text-gray-500 mt-4">MP3, MP4, WAV supported</p>
-            
-            {file && (
-              <p className="mt-4 text-green-600 font-semibold">Selected: {file.name}</p>
+
+            {files.length > 0 && (
+              <div className="mt-8">
+                <h3 className="font-bold mb-4">Selected Files:</h3>
+                {files.map((file, i) => (
+                  <div key={i} className="flex justify-between bg-gray-50 p-4 rounded-2xl mb-3">
+                    <span>{file.name}</span>
+                    <button onClick={() => removeFile(i)} className="text-red-600">Remove</button>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
 
-          {/* Form */}
-          <div className="space-y-8">
-            <div>
-              <label className="block text-sm font-semibold mb-2">Episode Title *</label>
-              <input 
-                type="text" 
-                value={title} 
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Episode Title" 
-                className="w-full p-4 border border-gray-300 rounded-2xl text-xl" 
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-2">Description</label>
-              <textarea 
-                value={description} 
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Write a short description..." 
-                rows={5}
-                className="w-full p-4 border border-gray-300 rounded-2xl text-xl" 
-              />
-            </div>
-
-            <button 
-              onClick={handleUpload}
-              disabled={!file || !title || isUploading}
-              className="w-full bg-patriot-red text-white py-6 rounded-3xl text-2xl font-bold hover:bg-red-700 transition-all disabled:bg-gray-400"
-            >
-              {isUploading ? "Uploading..." : "Upload Episode"}
-            </button>
-          </div>
+          <button 
+            onClick={handleSubmit}
+            className="w-full mt-12 bg-patriot-red text-white py-6 rounded-3xl text-xl font-bold hover:bg-red-700"
+          >
+            Finish Setup
+          </button>
         </div>
 
         <div className="text-center mt-8">
