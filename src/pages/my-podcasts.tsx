@@ -9,7 +9,7 @@ export default function MyPodcasts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: Replace with real Supabase data later
+    // Demo data for now
     setPodcasts([
       {
         id: 1,
@@ -45,7 +45,7 @@ export default function MyPodcasts() {
               📅 Calendar
             </Link>
             <Link
-              to="/podcast-setup/beginner"
+              to="/podcast-setup"   // ← Changed to the choice hub
               className="bg-patriot-red text-white px-8 py-4 rounded-2xl font-bold hover:bg-patriot-blue transition-colors"
             >
               + Create New Podcast Platform
@@ -58,7 +58,7 @@ export default function MyPodcasts() {
         ) : podcasts.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-3xl text-gray-500">No podcasts yet</p>
-            <Link to="/podcast-setup/beginner" className="mt-8 inline-block bg-patriot-red text-white px-10 py-4 rounded-2xl text-xl font-bold">
+            <Link to="/podcast-setup" className="mt-8 inline-block bg-patriot-red text-white px-10 py-4 rounded-2xl text-xl font-bold">
               Create Your First
             </Link>
           </div>
