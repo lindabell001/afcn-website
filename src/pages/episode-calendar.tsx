@@ -30,51 +30,43 @@ export default function EpisodeCalendar() {
     fetchEpisodes();
   }, []);
 
-  const grouped = episodes.reduce((acc, ep) => {
-    const date = ep.publish_date ? new Date(ep.publish_date).toLocaleDateString() : 'No Date';
-    if (!acc[date]) acc[date] = [];
-    acc[date].push(ep);
-    return acc;
-  }, {});
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-2xl">Loading your calendar...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-5xl mx-auto px-6 py-16">
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <h1 className="text-6xl font-bold text-patriot-blue">Episode Calendar</h1>
           <p className="text-2xl text-gray-600 mt-4">Your scheduled and published episodes</p>
         </div>
 
-        {loading ? (
-          <p className="text-center text-xl">Loading calendar...</p>
-        ) : episodes.length === 0 ? (
-          <div className="text-center py-20 text-2xl text-gray-500">
-            No episodes yet.<br />Create some from My Podcasts.
+        {episodes.length === 0 ? (
+          <div className="text-center py-24">
+            <div className="text-8xl mb-8">📅</div>
+            <h2 className="text-4xl font-bold text-gray-400">No episodes yet</h2>
+            <p className="text-2xl text-gray-500 mt-6 max-w-md mx-auto">
+              When you create episodes, they will appear here organized by publish date.
+            </p>
+            <Link 
+              to="/my-podcasts" 
+              className="inline-block mt-12 bg-patriot-red text-white px-12 py-5 rounded-2xl text-xl font-bold hover:bg-patriot-blue transition-all"
+            >
+              Create Your First Episode →
+            </Link>
           </div>
         ) : (
-          <div className="space-y-12">
-            {Object.keys(grouped).map(date => (
-              <div key={date}>
-                <h2 className="text-3xl font-bold text-patriot-blue border-b pb-3 mb-6">{date}</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {grouped[date].map(ep => (
-                    <div key={ep.id} className="bg-white rounded-3xl p-8 border border-gray-100">
-                      <h3 className="text-2xl font-bold">{ep.title}</h3>
-                      <p className="text-gray-600 mt-2">{ep.description}</p>
-                      <p className="text-sm text-gray-500 mt-4">
-                        Status: <span className="capitalize">{ep.status}</span>
-                      </p>
-                    </div>
-                  ))}
-                </div>
+          <div className="space-y-16">
+            {/* Episodes will go here when they exist */}
+            {episodes.map(ep => (
+              <div key={ep.id} className="bg-white rounded-3xl p-10 border border-gray-100">
+                <h3 className="text-3xl font-bold">{ep.title}</h3>
+                <p className="text-gray-600 mt-3">{ep.description}</p>
               </div>
             ))}
           </div>
         )}
-
-        <div className="text-center mt-12">
-          <Link to="/my-podcasts" className="text-patriot-red text-xl hover:underline">← Back to My Podcasts</Link>
-        </div>
       </main>
       <SiteFooter />
     </div>
