@@ -33,7 +33,7 @@ export default function BecomeOne() {
     setMessage('');
 
     try {
-      // 1. Create auth account
+      // Create auth account
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -41,7 +41,7 @@ export default function BecomeOne() {
 
       if (authError) throw authError;
 
-      // 2. Create profile with pending status
+      // Create profile with pending status
       const { error: profileError } = await supabase
         .from('profiles')
         .insert([{
@@ -50,16 +50,26 @@ export default function BecomeOne() {
           email: formData.email,
           x_handle: formData.xHandle,
           membership_tier: 'basic',
-          status: 'pending',                    // Pending until approved
+          status: 'pending',
           is_admin: isOfficer,
         }]);
 
       if (profileError) throw profileError;
 
-      // 3. Notification call (placeholder for now)
+      // Call Edge Function for notification
       if (!isOfficer) {
-        console.log(`📧 Notification would be sent to Norine & Linda: New pending member - ${formData.email}`);
-        // In future, this will call an Edge Function to send real email
+        await fetch('https://iskownhurcvjrcsgtbe.supabase.co/functions/v1/notify-admins', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            full_name: `${formData.firstName} ${formData.lastName}`,
+            x_handle: formData.xHandle,
+          }),
+        });
       }
 
       setMessage('Thank you! Your application is pending admin review.');
