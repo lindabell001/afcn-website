@@ -34,7 +34,7 @@ import PodcastPage from './pages/resources/podcasts/[slug]';
 import EpisodeCalendar from './pages/episode-calendar';
 
 // Admin Pages
-import VerificationDashboard from './pages/admin/verification';   // ← New
+import VerificationDashboard from './pages/admin/verification';
 
 // Short Link Handler
 import ShortLinkHandler from './pages/ShortLinkHandler';
@@ -78,7 +78,7 @@ const App = () => {
           <Route path="/mission" element={<Mission />} />
           <Route path="/member-login" element={<MemberLogin />} />
           <Route path="/member-dashboard" element={<MemberDashboard />} />
-          <Route path="/admin/verification" element={<VerificationDashboard />} />   {/* ← New */}
+          <Route path="/admin/verification" element={<VerificationDashboard />} />
 
           {/* Podcast Routes */}
           <Route path="/my-podcasts" element={<MyPodcasts />} />
@@ -104,4 +104,23 @@ const App = () => {
 
           {/* Other routes */}
           <Route path="/tavern" element={<Tavern />} />
-          <Route path="/committees" element={<Commit
+          <Route path="/committees" element={<Committees />} />
+          <Route path="/take-action" element={<TakeAction />} />
+          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
+          <Route path="/resources/learning-sources" element={<LearningSources />} />
+          <Route path="/tavern/locations" element={<TavernLocations />} />
+          <Route path="/committees/local" element={<CommitteesLocal />} />
+          <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
+          <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
+
+          {/* Short Links */}
+          <Route path="/:shortLink" element={<ShortLinkHandler />} />
+
+          <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
+        </Routes>
+      </SiteLayout>
+    </Router>
+  );
+};
+
+export default App;
