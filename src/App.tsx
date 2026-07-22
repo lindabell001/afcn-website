@@ -35,6 +35,7 @@ import EpisodeCalendar from './pages/episode-calendar';
 
 // Admin Pages
 import VerificationDashboard from './pages/admin/verification';
+import FreeMembership from './pages/free-membership';   // ← New
 
 // Short Link Handler
 import ShortLinkHandler from './pages/ShortLinkHandler';
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="/member-login" element={<MemberLogin />} />
           <Route path="/member-dashboard" element={<MemberDashboard />} />
           <Route path="/admin/verification" element={<VerificationDashboard />} />
+          <Route path="/free-membership" element={<FreeMembership />} />   {/* ← New */}
 
           {/* Podcast Routes */}
           <Route path="/my-podcasts" element={<MyPodcasts />} />
