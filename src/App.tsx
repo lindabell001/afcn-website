@@ -19,7 +19,7 @@ import MyPodcasts from './pages/my-podcasts';
 import MyEpisodes from './pages/my-episodes';
 import BeginnerSetup from './pages/podcast-setup/beginner';
 import ExperiencedSetup from './pages/podcast-setup/experienced';
-import PodcastSetupHub from './pages/podcast-setup';  // <-- New choice page
+import PodcastSetupHub from './pages/podcast-setup';
 import RecordNewEpisode from './pages/record-new';
 import LiveRecording from './pages/live-recording';
 import PhoneRecording from './pages/phone-recording';
@@ -31,6 +31,9 @@ import FacelessGenerate from './pages/faceless-generate';
 import ShortsGenerator from './pages/shorts-generator';
 import MemberPodcasts from './pages/resources/member-podcasts';
 import PodcastPage from './pages/resources/podcasts/[slug]';
+
+// Short Link Handler
+import ShortLinkHandler from './pages/ShortLinkHandler';  // New file
 
 // Member Pages
 import MemberRequestNew from './pages/member/request-new';
@@ -75,7 +78,7 @@ const App = () => {
           {/* Podcast Routes */}
           <Route path="/my-podcasts" element={<MyPodcasts />} />
           <Route path="/my-episodes" element={<MyEpisodes />} />
-          <Route path="/podcast-setup" element={<PodcastSetupHub />} />   {/* New choice page */}
+          <Route path="/podcast-setup" element={<PodcastSetupHub />} />
           <Route path="/podcast-setup/beginner" element={<BeginnerSetup />} />
           <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
           <Route path="/record-new" element={<RecordNewEpisode />} />
@@ -103,6 +106,9 @@ const App = () => {
           <Route path="/committees/local" element={<CommitteesLocal />} />
           <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
           <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
+
+          {/* Short Links - Catch-all for @handle or slug */}
+          <Route path="/:shortLink" element={<ShortLinkHandler />} />
 
           <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
         </Routes>
