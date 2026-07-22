@@ -33,7 +33,6 @@ export default function BecomeOne() {
     setMessage('');
 
     try {
-      // 1. Create auth account
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -41,7 +40,6 @@ export default function BecomeOne() {
 
       if (authError) throw authError;
 
-      // 2. Create profile with pending status
       const { error: profileError } = await supabase
         .from('profiles')
         .insert([{
@@ -50,15 +48,15 @@ export default function BecomeOne() {
           email: formData.email,
           x_handle: formData.xHandle,
           membership_tier: 'basic',
-          status: 'pending',
+          status: isOfficer ? 'approved' : 'pending',
           is_admin: isOfficer,
         }]);
 
       if (profileError) throw profileError;
 
-      // 3. Call Edge Function for notification (real email to Norine/Linda)
+      // Notification
       if (!isOfficer) {
-        await fetch('https://iskownhurcvjrcsgtbe.supabase.co/functions/v1/notify-admins', {
+        await fetch('https://iskownhurcvjrcsgtbe.supabase.co/functions/v1/hyper-responder', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -72,7 +70,7 @@ export default function BecomeOne() {
         });
       }
 
-      setMessage('Thank you! Your application is pending admin review. Norine & Linda have been notified.');
+      setMessage(isOfficer ? 'Officer account approved!' : 'Account created. Please complete payment to activate.');
     } catch (error) {
       setMessage('Error: ' + error.message);
     }
@@ -107,7 +105,7 @@ export default function BecomeOne() {
             disabled={loading} 
             className="w-full mt-10 bg-patriot-red text-white py-5 rounded-2xl text-xl font-bold hover:bg-red-700 disabled:opacity-50"
           >
-            {loading ? 'Submitting...' : 'Submit Application'}
+            {loading ? 'Submitting...' : 'Join for $25/Year – Continue to Secure Payment'}
           </button>
 
           {message && <p className="text-center mt-6 text-lg font-medium text-green-600">{message}</p>}
