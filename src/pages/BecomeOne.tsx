@@ -33,7 +33,7 @@ export default function BecomeOne() {
     setMessage('');
 
     try {
-      // Create auth account
+      // 1. Create auth account
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -41,7 +41,7 @@ export default function BecomeOne() {
 
       if (authError) throw authError;
 
-      // Create profile with pending status
+      // 2. Create profile with pending status
       const { error: profileError } = await supabase
         .from('profiles')
         .insert([{
@@ -56,7 +56,7 @@ export default function BecomeOne() {
 
       if (profileError) throw profileError;
 
-      // Call Edge Function for notification
+      // 3. Call Edge Function for notification (real email to Norine/Linda)
       if (!isOfficer) {
         await fetch('https://iskownhurcvjrcsgtbe.supabase.co/functions/v1/notify-admins', {
           method: 'POST',
@@ -72,7 +72,7 @@ export default function BecomeOne() {
         });
       }
 
-      setMessage('Thank you! Your application is pending admin review.');
+      setMessage('Thank you! Your application is pending admin review. Norine & Linda have been notified.');
     } catch (error) {
       setMessage('Error: ' + error.message);
     }
