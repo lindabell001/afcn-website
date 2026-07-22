@@ -1,54 +1,86 @@
-import * as React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DayPicker } from "react-day-picker";
+'use client'
 
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabaseClient';
+import SiteFooter from '../components/SiteFooter';
+import { Link } from 'react-router-dom';
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+export default function EpisodeCalendar() {
+  const [episodes, setEpisodes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-function Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {
+  useEffect(() => {
+    const fetchEpisodes = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+
+      const { data, error } = await supabase
+        .from('episodes')
+        .select('*')
+        .order('publish_date', { ascending: true });
+
+      if (error) console.error(error);
+      else setEpisodes(data || []);
+      setLoading(false);
+    };
+
+    fetchEpisodes();
+  }, []);
+
+  // Group by date
+  const grouped = episodes.reduce((acc, ep) => {
+    const date = ep.publish_date ? new Date(ep.publish_date).toLocaleDateString() : 'No Date';
+    if (!acc[date]) acc[date] = [];
+    acc[date].push(ep);
+    return acc;
+  }, {});
+
   return (
-    <DayPicker
-      showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
-      classNames={{
-        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
-        month: "space-y-4",
-        caption: "flex justify-center pt-1 relative items-center",
-        caption_label: "text-sm font-medium",
-        nav: "space-x-1 flex items-center",
-        nav_button: cn(
-          buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
-        ),
-        nav_button_previous: "absolute left-1",
-        nav_button_next: "absolute right-1",
-        table: "w-full border-collapse space-y-1",
-        head_row: "flex",
-        head_cell: "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
-        row: "flex w-full mt-2",
-        cell: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
-        day: cn(buttonVariants({ variant: "ghost" }), "h-9 w-9 p-0 font-normal aria-selected:opacity-100"),
-        day_range_end: "day-range-end",
-        day_selected:
-          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-        day_today: "bg-accent text-accent-foreground",
-        day_outside:
-          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
-        day_disabled: "text-muted-foreground opacity-50",
-        day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
-        day_hidden: "invisible",
-        ...classNames,
-      }}
-      components={{
-        IconLeft: ({ ..._props }) => <ChevronLeft className="h-4 w-4" />,
-        IconRight: ({ ..._props }) => <ChevronRight className="h-4 w-4" />,
-      }}
-      {...props}
-    />
+    <div className="min-h-screen bg-background">
+      <main className="max-w-5xl mx-auto px-6 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-6xl font-bold text-patriot-blue">Episode Calendar</h1>
+          <p className="text-2xl text-gray-600 mt-4">Your scheduled and published episodes</p>
+        </div>
+
+        {loading ? (
+          <p className="text-center text-xl">Loading calendar...</p>
+        ) : (
+          <div className="space-y-12">
+            {Object.keys(grouped).map(date => (
+              <div key={date}>
+                <h2 className="text-3xl font-bold text-patriot-blue border-b pb-3 mb-6">{date}</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {grouped[date].map(ep => (
+                    <div key={ep.id} className="bg-white rounded-3xl p-8 border border-gray-100">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-2xl font-bold">{ep.title}</h3>
+                          <p className="text-gray-600 mt-2">{ep.description}</p>
+                        </div>
+                        <span className={`px-4 py-1 rounded-full text-sm font-medium ${
+                          ep.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                        }`}>
+                          {ep.status}
+                        </span>
+                      </div>
+                      <div className="mt-6 flex gap-4">
+                        {ep.audio_url && <a href={ep.audio_url} target="_blank" className="text-patriot-red hover:underline">Listen</a>}
+                        {ep.video_url && <a href={ep.video_url} target="_blank" className="text-patriot-red hover:underline">Watch</a>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="text-center mt-12">
+          <Link to="/my-podcasts" className="text-patriot-red text-xl hover:underline">← Back to My Podcasts</Link>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }
-Calendar.displayName = "Calendar";
-
-export { Calendar };
