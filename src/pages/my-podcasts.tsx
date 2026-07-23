@@ -73,7 +73,7 @@ export default function MyPodcasts() {
                 <div className="flex items-center gap-6">
                   <div className="text-5xl">🇺🇸</div>
                   <div>
-                    <h3 className="text-3xl font-bold text-patriot-blue">{podcast.name || podcast.title}</h3>
+                    <h3 className="text-3xl font-bold text-patriot-blue">{podcast.title || podcast.name || 'Untitled Podcast'}</h3>
                     <p className="text-gray-600">{podcast.tagline}</p>
                     <p className="text-sm text-gray-500 mt-1">0 episodes</p>
                   </div>
