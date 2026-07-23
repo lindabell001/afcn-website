@@ -54,7 +54,7 @@ export default function BeginnerSetup() {
       
       setTimeout(() => {
         navigate('/my-podcasts');
-      }, 1500);
+      }, 1000);
     } catch (error) {
       console.error(error);
       setMessage('Error: ' + error.message);
@@ -74,7 +74,7 @@ export default function BeginnerSetup() {
         <div className="bg-white rounded-3xl p-12">
           <div className="space-y-8">
             <div>
-              <label className="block text-sm font-semibold mb-2">Podcast Name</label>
+              <label className="block text-sm font-semibold mb-2">Podcast Name *</label>
               <input 
                 type="text" 
                 name="name"
@@ -86,7 +86,7 @@ export default function BeginnerSetup() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2">Tagline</label>
+              <label className="block text-sm font-semibold mb-2">Tagline *</label>
               <input 
                 type="text" 
                 name="tagline"
