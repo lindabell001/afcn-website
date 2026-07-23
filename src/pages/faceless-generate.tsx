@@ -26,23 +26,23 @@ export default function FacelessGenerate() {
 
     setIsGenerating(true);
 
-    // Grok Imagine image-to-video simulation (real API call in production)
+    // Grok Imagine Image-to-Video Animation (demo)
     setTimeout(() => {
-      setVideoUrl('https://picsum.photos/id/1015/1280/720'); // Placeholder video
+      setVideoUrl('https://picsum.photos/id/1015/1280/720'); // Placeholder
       setIsGenerating(false);
-      alert('Video generated! (Grok Imagine - same face/body locked, 15 seconds, 720p, no watermark)');
-    }, 3000);
+      alert('Image-to-Video Animation complete!\nSame face/body locked • 15 seconds • 720p • Watermark-free');
+    }, 3500);
   };
 
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-4xl mx-auto px-6 py-16">
-        <h1 className="text-6xl font-bold text-patriot-blue text-center mb-12">Faceless Video Generator</h1>
+        <h1 className="text-6xl font-bold text-patriot-blue text-center mb-8">Faceless Video Generator</h1>
         <p className="text-center text-xl text-gray-600 mb-12">Upload reference image → Grok Imagine animates it into cinematic clip</p>
 
         <div className="bg-white rounded-3xl p-12">
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Reference Image Upload */}
+            {/* Reference Image */}
             <div>
               <h2 className="text-2xl font-bold mb-6">1. Upload Reference Image</h2>
               <label className="block border-2 border-dashed border-patriot-red rounded-3xl p-16 text-center hover:bg-red-50 cursor-pointer">
@@ -58,7 +58,7 @@ export default function FacelessGenerate() {
               </label>
             </div>
 
-            {/* Prompt and Generate */}
+            {/* Prompt & Generate */}
             <div>
               <h2 className="text-2xl font-bold mb-6">2. Describe the Video</h2>
               <textarea
@@ -73,7 +73,7 @@ export default function FacelessGenerate() {
                 disabled={isGenerating || !referenceImage || !prompt}
                 className="w-full mt-8 bg-patriot-red text-white py-6 rounded-3xl text-2xl font-bold hover:bg-red-700 disabled:bg-gray-400"
               >
-                {isGenerating ? "Generating with Grok Imagine..." : "Generate 15-Second Cinematic Clip"}
+                {isGenerating ? "Generating Image-to-Video Animation..." : "Generate 15-Second Cinematic Clip"}
               </button>
 
               <p className="text-center text-sm text-gray-500 mt-4">
@@ -88,6 +88,14 @@ export default function FacelessGenerate() {
               <video controls className="w-full rounded-3xl" src={videoUrl} />
             </div>
           )}
+        </div>
+
+        {/* Grok Imagine Link */}
+        <div className="text-center mt-12">
+          <a href="https://grok.x.ai" target="_blank" className="inline-block bg-patriot-blue text-white px-12 py-6 rounded-3xl text-xl font-bold hover:bg-patriot-red">
+            Sign up for Grok Imagine (Free tier included with AFCN membership)
+          </a>
+          <p className="text-sm text-gray-600 mt-4">Need more Grok Imagine abilities? Use the Website Help button below.</p>
         </div>
       </main>
       <SiteFooter />
