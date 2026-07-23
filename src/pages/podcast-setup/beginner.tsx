@@ -50,8 +50,11 @@ export default function BeginnerSetup() {
 
       if (error) throw error;
 
-      setMessage('Podcast created successfully!');
-      setTimeout(() => navigate('/my-podcasts'), 1200);
+      setMessage('Podcast "' + formData.name + '" created successfully!');
+      
+      setTimeout(() => {
+        navigate('/my-podcasts');
+      }, 1500);
     } catch (error) {
       console.error(error);
       setMessage('Error: ' + error.message);
@@ -111,7 +114,7 @@ export default function BeginnerSetup() {
               disabled={isCreating || !formData.name || !formData.tagline}
               className="w-full bg-patriot-red text-white py-6 rounded-3xl text-2xl font-bold hover:bg-red-700 disabled:bg-gray-400 transition-all"
             >
-              {isCreating ? "Creating..." : "Create My Podcast"}
+              {isCreating ? "Creating Podcast..." : "Create My Podcast"}
             </button>
 
             {message && <p className="text-center text-lg font-medium mt-6">{message}</p>}
