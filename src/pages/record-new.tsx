@@ -1,137 +1,81 @@
-import React, { useState, useRef, useEffect } from 'react';
+'use client'
+
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
+import { supabase } from '../lib/supabaseClient';
 import SiteFooter from '../components/SiteFooter';
 
-export default function RecordNewEpisode() {
-  const [isRecording, setIsRecording] = useState(false);
-  const [recordedChunks, setRecordedChunks] = useState([]);
-  const [mediaStream, setMediaStream] = useState(null);
-  const [selectedMic, setSelectedMic] = useState('');
-  const [selectedCamera, setSelectedCamera] = useState('');
-  const [availableMics, setAvailableMics] = useState([]);
-  const [availableCameras, setAvailableCameras] = useState([]);
+export default function MyEpisodes() {
+  const [searchParams] = useSearchParams();
+  const podcastId = searchParams.get('podcast_id');
+  const [episodes, setEpisodes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const mediaRecorderRef = useRef(null);
-  const videoRef = useRef(null);
-
-  // Get available devices
   useEffect(() => {
-    navigator.mediaDevices.enumerateDevices().then(devices => {
-      const mics = devices.filter(d => d.kind === 'audioinput');
-      const cameras = devices.filter(d => d.kind === 'videoinput');
-      setAvailableMics(mics);
-      setAvailableCameras(cameras);
-      if (mics.length > 0) setSelectedMic(mics[0].deviceId);
-      if (cameras.length > 0) setSelectedCamera(cameras[0].deviceId);
-    });
-  }, []);
+    fetchEpisodes();
+  }, [podcastId]);
 
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: { deviceId: selectedMic ? { exact: selectedMic } : undefined },
-        video: selectedCamera ? { deviceId: { exact: selectedCamera } } : false
-      });
-      
-      setMediaStream(stream);
-      if (videoRef.current) videoRef.current.srcObject = stream;
-
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = mediaRecorder;
-      const chunks = [];
-
-      mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
-      mediaRecorder.onstop = () => setRecordedChunks(chunks);
-
-      mediaRecorder.start();
-      setIsRecording(true);
-    } catch (err) {
-      alert("Error accessing microphone/camera. Please check permissions.");
-    }
-  };
-
-  const stopRecording = () => {
-    if (mediaRecorderRef.current) {
-      mediaRecorderRef.current.stop();
-      mediaStream?.getTracks().forEach(track => track.stop());
-      setIsRecording(false);
-    }
-  };
-
-  const saveAsDraft = () => {
-    alert("Episode saved as draft! (Demo - we'll upload to Supabase later)");
-    window.location.href = '/my-podcasts';
+  const fetchEpisodes = async () => {
+    if (!podcastId) return;
+    const { data, error } = await supabase
+      .from('episodes')
+      .select('*')
+      .eq('podcast_id', podcastId);
+    if (error) console.error(error);
+    else setEpisodes(data || []);
+    setLoading(false);
   };
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-4xl mx-auto px-6 py-16">
-        <h1 className="text-5xl font-bold text-patriot-blue mb-8 text-center">Record New Episode</h1>
+      <main className="max-w-5xl mx-auto px-6 py-16">
+        <div className="flex justify-between items-center mb-12">
+          <h1 className="text-6xl font-bold text-patriot-blue">Manage Episodes</h1>
+          <Link to="/my-podcasts" className="text-patriot-red hover:underline">← Back to My Podcasts</Link>
+        </div>
 
-        <div className="bg-white rounded-3xl p-10">
-          {/* Device Selection */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div>
-              <label className="block text-sm font-semibold mb-3">Microphone</label>
-              <select 
-                value={selectedMic} 
-                onChange={(e) => setSelectedMic(e.target.value)}
-                className="w-full p-4 border border-gray-300 rounded-2xl"
-              >
-                {availableMics.map(mic => (
-                  <option key={mic.deviceId} value={mic.deviceId}>{mic.label || 'Default Mic'}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-semibold mb-3">Camera (optional)</label>
-              <select 
-                value={selectedCamera} 
-                onChange={(e) => setSelectedCamera(e.target.value)}
-                className="w-full p-4 border border-gray-300 rounded-2xl"
-              >
-                <option value="">No Video</option>
-                {availableCameras.map(cam => (
-                  <option key={cam.deviceId} value={cam.deviceId}>{cam.label || 'Default Camera'}</option>
-                ))}
-              </select>
-            </div>
-          </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16">
+          <Link to="/record-new" className="bg-white rounded-3xl p-12 text-center hover:shadow-xl transition-all border border-patriot-blue">
+            <div className="text-6xl mb-6">🎙️</div>
+            <h3 className="text-2xl font-bold">Record New</h3>
+          </Link>
+          <Link to="/live-recording" className="bg-white rounded-3xl p-12 text-center hover:shadow-xl transition-all border border-patriot-blue">
+            <div className="text-6xl mb-6">🔴</div>
+            <h3 className="text-2xl font-bold">Go Live</h3>
+          </Link>
+          <Link to="/faceless-options" className="bg-white rounded-3xl p-12 text-center hover:shadow-xl transition-all border border-patriot-blue">
+            <div className="text-6xl mb-6">🎥</div>
+            <h3 className="text-2xl font-bold">Faceless Video</h3>
+          </Link>
+          <Link to="/phone-recording" className="bg-white rounded-3xl p-12 text-center hover:shadow-xl transition-all border border-patriot-blue">
+            <div className="text-6xl mb-6">📱</div>
+            <h3 className="text-2xl font-bold">Phone Recording</h3>
+          </Link>
+          <Link to="/text-to-video" className="bg-white rounded-3xl p-12 text-center hover:shadow-xl transition-all border border-patriot-blue">
+            <div className="text-6xl mb-6">✍️</div>
+            <h3 className="text-2xl font-bold">Text to Video</h3>
+          </Link>
+          <Link to="/shorts-generator" className="bg-white rounded-3xl p-12 text-center hover:shadow-xl transition-all border border-patriot-blue">
+            <div className="text-6xl mb-6">📱</div>
+            <h3 className="text-2xl font-bold">Shorts Generator</h3>
+          </Link>
+        </div>
 
-          {/* Video Preview */}
-          {selectedCamera && (
-            <div className="mb-12">
-              <video ref={videoRef} autoPlay muted className="w-full rounded-3xl bg-black" />
-            </div>
-          )}
-
-          {/* Record Controls */}
-          <div className="flex justify-center gap-6">
-            {!isRecording ? (
-              <button 
-                onClick={startRecording}
-                className="bg-patriot-red text-white px-16 py-8 rounded-3xl text-3xl font-bold hover:bg-red-700 transition-all"
-              >
-                Start Recording
-              </button>
-            ) : (
-              <button 
-                onClick={stopRecording}
-                className="bg-red-600 text-white px-16 py-8 rounded-3xl text-3xl font-bold hover:bg-red-700 transition-all"
-              >
-                Stop Recording
-              </button>
-            )}
-          </div>
-
-          {recordedChunks.length > 0 && (
-            <div className="mt-12 text-center">
-              <p className="text-green-600 font-semibold mb-6">Recording complete!</p>
-              <button 
-                onClick={saveAsDraft}
-                className="bg-patriot-blue text-white px-12 py-6 rounded-3xl text-xl font-bold hover:bg-patriot-red"
-              >
-                Save as Draft & Go to Editor
-              </button>
+        <div>
+          <h2 className="text-3xl font-bold mb-8">Your Episodes</h2>
+          {episodes.length === 0 ? (
+            <p className="text-xl text-gray-500">No episodes yet. Use the buttons above to create one.</p>
+          ) : (
+            <div className="space-y-6">
+              {episodes.map(ep => (
+                <div key={ep.id} className="bg-white rounded-3xl p-8 flex justify-between">
+                  <div>
+                    <h3 className="text-2xl font-bold">{ep.title}</h3>
+                    <p className="text-gray-600">{ep.description}</p>
+                  </div>
+                  <span className="px-6 py-3 bg-gray-100 rounded-2xl text-sm font-medium">{ep.status}</span>
+                </div>
+              ))}
             </div>
           )}
         </div>
