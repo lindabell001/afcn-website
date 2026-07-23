@@ -30,9 +30,23 @@ export default function Resources() {
             </Link>
           </div>
 
+          {/* NEW: Communism In America */}
+          <div className="bg-white p-8 rounded-3xl border border-gray-200">
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">2. Communism In America</h3>
+            <p className="text-gray-600 mb-6">
+              Primary Senate records from the McCarthy era, Americanism vs Communism contrasts, and current threats — so We the People can recognize and defeat Communism.
+            </p>
+            <Link 
+              to="/resources/communism-in-america" 
+              className="text-patriot-red font-semibold hover:underline text-lg"
+            >
+              View Communism In America →
+            </Link>
+          </div>
+
           {/* America First Learning Sources */}
           <div className="bg-white p-8 rounded-3xl border border-gray-200">
-            <h3 className="text-2xl font-bold text-patriot-blue mb-4">#2 America First Learning Sources</h3>
+            <h3 className="text-2xl font-bold text-patriot-blue mb-4">#3 America First Learning Sources</h3>
             <p className="text-gray-600 mb-6">
               In-depth classes, reports, and training from America First organizations.
             </p>
