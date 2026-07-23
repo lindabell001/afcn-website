@@ -63,66 +63,6 @@ const CommunismInAmerica = () => {
           </div>
         </div>
 
-        {/* Communism in the Movie Industry */}
-        <div className="mt-16">
-          <h3 className="text-3xl font-bold text-red-600 mb-6 text-center">Communism in the Movie Industry</h3>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-              <div className="aspect-video bg-black">
-                <iframe 
-                  src="https://www.youtube.com/embed/5gK4z2mF1cQ" 
-                  title="Ronald Reagan HUAC Testimony" 
-                  className="w-full h-full" 
-                  allowFullScreen
-                ></iframe>
-              </div>
-              <div className="p-6">
-                <h4 className="font-semibold">Ronald Reagan HUAC Testimony (1947)</h4>
-                <p className="text-gray-600 text-sm">SAG President on Communist tactics in Hollywood</p>
-              </div>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-              <div className="aspect-video bg-black">
-                <iframe 
-                  src="https://www.youtube.com/embed/0t3c1v4f6zQ" 
-                  title="HUAC Hollywood Hearings" 
-                  className="w-full h-full" 
-                  allowFullScreen
-                ></iframe>
-              </div>
-              <div className="p-6">
-                <h4 className="font-semibold">HUAC Hollywood Hearings Original Newsreel</h4>
-              </div>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-              <div className="aspect-video bg-black">
-                <iframe 
-                  src="https://www.prageru.com/videos/why-is-hollywood-so-woke" 
-                  title="Why is Hollywood So Woke? - PragerU" 
-                  className="w-full h-full" 
-                  allowFullScreen
-                ></iframe>
-              </div>
-              <div className="p-6">
-                <h4 className="font-semibold">PragerU – Why is Hollywood So Woke?</h4>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center mt-8">
-            <a 
-              href="https://www.prageru.com/search?q=hollywood" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-patriot-red font-semibold hover:underline"
-            >
-              Explore All PragerU Hollywood Content →
-            </a>
-          </div>
-        </div>
-
         {/* Link to Take Down page */}
         <div className="text-center mt-12">
           <Link 
@@ -138,7 +78,7 @@ const CommunismInAmerica = () => {
       <div className="mb-16">
         <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Communism Today</h2>
         <p className="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
-          The ideology didn't disappear — it changed its clothing. Modern cultural Marxism, CCP influence, and "woke" narratives continue the same assault on American sovereignty and ordered liberty.
+          The ideology didn't disappear — it changed its clothing. Modern cultural Marxism, CCP influence, Hollywood's woke narratives, and other threats continue the assault on American sovereignty and ordered liberty.
         </p>
         <div className="text-center">
           <Link 
