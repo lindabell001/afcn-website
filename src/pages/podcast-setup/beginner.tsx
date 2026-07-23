@@ -8,7 +8,7 @@ import SiteFooter from '../../components/SiteFooter';
 export default function BeginnerSetup() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
+    title: '',
     tagline: '',
     category: ''
   });
@@ -20,8 +20,8 @@ export default function BeginnerSetup() {
   };
 
   const handleSubmit = async () => {
-    if (!formData.name || !formData.tagline) {
-      setMessage('Please fill in name and tagline');
+    if (!formData.title || !formData.tagline) {
+      setMessage('Please fill in title and tagline');
       return;
     }
 
@@ -39,7 +39,7 @@ export default function BeginnerSetup() {
       const { data, error } = await supabase
         .from('podcasts')
         .insert([{
-          name: formData.name,
+          title: formData.title,
           tagline: formData.tagline,
           category: formData.category,
           host_id: session.user.id,
@@ -74,11 +74,11 @@ export default function BeginnerSetup() {
         <div className="bg-white rounded-3xl p-12">
           <div className="space-y-8">
             <div>
-              <label className="block text-sm font-semibold mb-2">Podcast Name</label>
+              <label className="block text-sm font-semibold mb-2">Podcast Title</label>
               <input 
                 type="text" 
-                name="name"
-                value={formData.name}
+                name="title"
+                value={formData.title}
                 onChange={handleChange}
                 placeholder="My America First Show" 
                 className="w-full p-4 border border-gray-300 rounded-2xl text-xl" 
@@ -111,7 +111,7 @@ export default function BeginnerSetup() {
 
             <button 
               onClick={handleSubmit}
-              disabled={isCreating || !formData.name || !formData.tagline}
+              disabled={isCreating || !formData.title || !formData.tagline}
               className="w-full bg-patriot-red text-white py-6 rounded-3xl text-2xl font-bold hover:bg-red-700 disabled:bg-gray-400 transition-all"
             >
               {isCreating ? "Creating Podcast..." : "Create My Podcast"}
