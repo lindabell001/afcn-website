@@ -150,7 +150,7 @@ const CommunismInAmerica = () => {
         </div>
       </div>
 
-      {/* Americanism v Communism - Placeholder */}
+      {/* Americanism v Communism - Placeholder at the end */}
       <div className="mb-20">
         <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Americanism v Communism</h2>
         <div className="bg-white border border-gray-200 rounded-2xl p-12 text-center max-w-2xl mx-auto">
