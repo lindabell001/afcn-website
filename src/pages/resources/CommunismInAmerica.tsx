@@ -134,7 +134,7 @@ const CommunismInAmerica = () => {
         </div>
       </div>
 
-      {/* Communism Today */}
+      {/* Communism Today - Link to dedicated page */}
       <div className="mb-16">
         <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Communism Today</h2>
         <p className="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
