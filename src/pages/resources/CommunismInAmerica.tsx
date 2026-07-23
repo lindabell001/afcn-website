@@ -86,30 +86,40 @@ const CommunismInAmerica = () => {
               <div className="aspect-video bg-black">
                 <iframe 
                   src="https://www.youtube.com/embed/0t3c1v4f6zQ" 
-                  title="HUAC Hollywood Hearings Newsreel" 
+                  title="HUAC Hollywood Hearings" 
                   className="w-full h-full" 
                   allowFullScreen
                 ></iframe>
               </div>
               <div className="p-6">
-                <h4 className="font-semibold">HUAC Hollywood Hearings - Original Newsreel (Hollywood Ten)</h4>
+                <h4 className="font-semibold">HUAC Hollywood Hearings Original Newsreel</h4>
               </div>
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
               <div className="aspect-video bg-black">
                 <iframe 
-                  src="https://www.youtube.com/embed/[PRAGERU_VIDEO_ID]" 
-                  title="PragerU Why Hollywood is So Liberal" 
+                  src="https://www.prageru.com/videos/why-is-hollywood-so-woke" 
+                  title="Why is Hollywood So Woke? - PragerU" 
                   className="w-full h-full" 
                   allowFullScreen
                 ></iframe>
               </div>
               <div className="p-6">
-                <h4 className="font-semibold">PragerU – Why Hollywood is So Liberal</h4>
-                <p className="text-gray-600 text-sm">Cultural front context</p>
+                <h4 className="font-semibold">PragerU – Why is Hollywood So Woke?</h4>
               </div>
             </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <a 
+              href="https://www.prageru.com/search?q=hollywood" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-patriot-red font-semibold hover:underline"
+            >
+              Explore All PragerU Hollywood Content →
+            </a>
           </div>
         </div>
 
@@ -124,33 +134,28 @@ const CommunismInAmerica = () => {
         </div>
       </div>
 
-      {/* SECTION 2: Americanism v Communism */}
+      {/* Communism Today */}
       <div className="mb-16">
-        <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Americanism v Communism</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-red-600 mb-2">Founding Documents vs. Communist Manifesto</h3>
-            <p className="text-gray-600">Primary contrasts (coming soon)</p>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-red-600 mb-2">Classic Anti-Communist Resources</h3>
-            <p className="text-gray-600">HUAC, FBI pamphlets, etc.</p>
-          </div>
+        <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Communism Today</h2>
+        <p className="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
+          The ideology didn't disappear — it changed its clothing. Modern cultural Marxism, CCP influence, and "woke" narratives continue the same assault on American sovereignty and ordered liberty.
+        </p>
+        <div className="text-center">
+          <Link 
+            to="/resources/communism-today" 
+            className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all shadow-lg"
+          >
+            Explore Communism Today →
+          </Link>
         </div>
       </div>
 
-      {/* SECTION 3: Communism Today */}
+      {/* Americanism v Communism - Placeholder */}
       <div className="mb-20">
-        <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Communism Today</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-red-600 mb-2">CCP Influence & Modern Threats</h3>
-            <p className="text-gray-600">Congressional reports (coming soon)</p>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-red-600 mb-2">Current Hearings & Analysis</h3>
-            <p className="text-gray-600">Latest primary sources</p>
-          </div>
+        <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Americanism v Communism</h2>
+        <div className="bg-white border border-gray-200 rounded-2xl p-12 text-center max-w-2xl mx-auto">
+          <h3 className="text-3xl font-bold text-red-600 mb-4">Lessons Coming Soon</h3>
+          <p className="text-gray-600">Founding principles vs. Marxist ideology — deep contrasts and primary source comparisons.</p>
         </div>
       </div>
 
