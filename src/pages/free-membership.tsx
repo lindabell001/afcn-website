@@ -27,6 +27,19 @@ export default function FreeMembership() {
     setMessage('');
 
     try {
+      // Check if email already exists
+      const { data: existing } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('email', formData.email)
+        .single();
+
+      if (existing) {
+        setMessage('Email already exists. Use a different email or contact admin.');
+        setLoading(false);
+        return;
+      }
+
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -81,7 +94,7 @@ export default function FreeMembership() {
             {loading ? 'Creating...' : 'Create Free Membership'}
           </button>
 
-          {message && <p className="text-center mt-6 text-lg font-medium text-green-600">{message}</p>}
+          {message && <p className="text-center mt-6 text-lg font-medium">{message}</p>}
         </form>
       </main>
       <SiteFooter />
