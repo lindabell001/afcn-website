@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
+import { supabase } from '../lib/supabaseClient';
 import SiteFooter from '../components/SiteFooter';
 
 export default function RecordNew() {
@@ -9,6 +10,7 @@ export default function RecordNew() {
   const videoRef = useRef(null);
   const mediaRecorder = useRef(null);
   const recordedChunks = useRef([]);
+  const [uploading, setUploading] = useState(false);
 
   const startRecording = async () => {
     try {
@@ -25,16 +27,7 @@ export default function RecordNew() {
       recordedChunks.current = [];
 
       mediaRecorder.current.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          recordedChunks.current.push(event.data);
-        }
-      };
-
-      mediaRecorder.current.onstop = () => {
-        const blob = new Blob(recordedChunks.current, { type: 'video/webm' });
-        const url = URL.createObjectURL(blob);
-        console.log('Recording saved:', url);
-        alert('Recording saved! (Demo - saved to console)');
+        if (event.data.size > 0) recordedChunks.current.push(event.data);
       };
 
       mediaRecorder.current.start();
@@ -52,6 +45,31 @@ export default function RecordNew() {
       mediaStream.getTracks().forEach(track => track.stop());
     }
     setIsRecording(false);
+  };
+
+  const saveRecording = async () => {
+    if (recordedChunks.current.length === 0) return;
+
+    setUploading(true);
+    const blob = new Blob(recordedChunks.current, { type: 'video/webm' });
+    const fileName = `episode-${Date.now()}.webm`;
+
+    try {
+      const { data, error } = await supabase.storage
+        .from('episodes')
+        .upload(fileName, blob);
+
+      if (error) throw error;
+
+      const publicUrl = supabase.storage.from('episodes').getPublicUrl(fileName).data.publicUrl;
+
+      alert('Recording saved to Supabase Storage!\nURL: ' + publicUrl);
+      // In real app, save the URL to episodes table
+    } catch (error) {
+      alert('Upload error: ' + error.message);
+    }
+
+    setUploading(false);
   };
 
   return (
@@ -82,7 +100,15 @@ export default function RecordNew() {
             )}
           </div>
 
-          <p className="text-center text-gray-600 mt-8">Mic and camera will be used. Recording saved as demo.</p>
+          {recordedChunks.current.length > 0 && !isRecording && (
+            <button 
+              onClick={saveRecording}
+              disabled={uploading}
+              className="w-full mt-8 bg-green-600 text-white py-6 rounded-3xl text-2xl font-bold"
+            >
+              {uploading ? "Saving to Supabase..." : "Save Recording"}
+            </button>
+          )}
         </div>
       </main>
       <SiteFooter />
