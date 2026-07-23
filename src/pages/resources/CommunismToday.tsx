@@ -12,7 +12,7 @@ const CommunismToday = () => {
         </p>
       </div>
 
-      {/* PragerU Videos */}
+      {/* PragerU Videos - Hollywood & Culture */}
       <div className="mb-16">
         <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">PragerU on Hollywood & Culture</h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -27,7 +27,7 @@ const CommunismToday = () => {
             </div>
             <div className="p-6">
               <h4 className="font-semibold">Why is Hollywood So Woke?</h4>
-              <p className="text-gray-600 text-sm">The cultural front explained</p>
+              <p className="text-gray-600 text-sm">The cultural front today</p>
             </div>
           </div>
 
@@ -77,7 +77,7 @@ const CommunismToday = () => {
         <h2 className="text-4xl font-bold text-red-600 mb-8 text-center">Current Threats</h2>
         <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center max-w-3xl mx-auto">
           <p className="text-gray-700 leading-relaxed">
-            CCP influence operations, Big Tech censorship, identity politics as class warfare, and the weaponization of entertainment and education against American values. 
+            CCP influence operations in Hollywood and tech, identity politics as modern class warfare, Big Tech censorship, and the weaponization of entertainment against American values. 
             More primary sources and analysis coming soon.
           </p>
         </div>
