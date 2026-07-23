@@ -56,6 +56,9 @@ import CommitteesLocal from './pages/committees/local';
 import TavernChatRoom from './pages/tavern/chat/[slug]';
 import CommitteesChatRoom from './pages/committees/chat/[slug]';
 
+// NEW IMPORT FOR COMMUNISM PAGE
+import CommunismInAmerica from './pages/resources/CommunismInAmerica';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useLayoutEffect(() => {
@@ -113,6 +116,10 @@ const App = () => {
           <Route path="/take-action" element={<TakeAction />} />
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
           <Route path="/resources/learning-sources" element={<LearningSources />} />
+
+          {/* NEW ROUTE FOR COMMUNISM PAGE */}
+          <Route path="/resources/communism-in-america" element={<CommunismInAmerica />} />
+
           <Route path="/tavern/locations" element={<TavernLocations />} />
           <Route path="/committees/local" element={<CommitteesLocal />} />
           <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
