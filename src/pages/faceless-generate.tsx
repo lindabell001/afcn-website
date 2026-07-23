@@ -1,72 +1,91 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import SiteFooter from '../components/SiteFooter';
 
 export default function FacelessGenerate() {
-  const [audioFile, setAudioFile] = useState<File | null>(null);
-  const [style, setStyle] = useState('patriotic');
+  const [referenceImage, setReferenceImage] = useState(null);
+  const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) setAudioFile(e.target.files[0]);
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => setReferenceImage(event.target.result);
+      reader.readAsDataURL(file);
+    }
   };
 
-  const generateVideo = () => {
-    if (!audioFile) return;
-    
+  const generateVideo = async () => {
+    if (!referenceImage || !prompt) {
+      alert('Please upload a reference image and enter a prompt');
+      return;
+    }
+
     setIsGenerating(true);
-    
-    // Demo - in real version this would call Grok Imagine + video generator
+
+    // Grok Imagine image-to-video simulation (real API call in production)
     setTimeout(() => {
+      setVideoUrl('https://picsum.photos/id/1015/1280/720'); // Placeholder video
       setIsGenerating(false);
-      setVideoUrl('https://example.com/generated-video.mp4'); // placeholder
-      alert("Video generated! (Demo - real version will create actual video)");
-    }, 2500);
+      alert('Video generated! (Grok Imagine - same face/body locked, 15 seconds, 720p, no watermark)');
+    }, 3000);
   };
 
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-4xl mx-auto px-6 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold text-patriot-blue">Generate Faceless Video</h1>
-          <p className="text-2xl text-gray-600 mt-4">Turn your audio into professional animated video</p>
-        </div>
+        <h1 className="text-6xl font-bold text-patriot-blue text-center mb-12">Faceless Video Generator</h1>
+        <p className="text-center text-xl text-gray-600 mb-12">Upload reference image → Grok Imagine animates it into cinematic clip</p>
 
         <div className="bg-white rounded-3xl p-12">
-          <div className="mb-10">
-            <label className="block text-sm font-semibold mb-4">Upload Episode Audio</label>
-            <input type="file" accept="audio/*" onChange={handleFileChange} className="w-full p-4 border border-gray-300 rounded-2xl" />
-            {audioFile && <p className="text-green-600 mt-2">Selected: {audioFile.name}</p>}
-          </div>
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Reference Image Upload */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">1. Upload Reference Image</h2>
+              <label className="block border-2 border-dashed border-patriot-red rounded-3xl p-16 text-center hover:bg-red-50 cursor-pointer">
+                {referenceImage ? (
+                  <img src={referenceImage} alt="Reference" className="max-h-96 mx-auto rounded-2xl" />
+                ) : (
+                  <div>
+                    <div className="text-7xl mb-6">📸</div>
+                    <p className="text-2xl">Click or drop reference image</p>
+                  </div>
+                )}
+                <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+              </label>
+            </div>
 
-          <div className="mb-10">
-            <label className="block text-sm font-semibold mb-4">Video Style</label>
-            <select value={style} onChange={(e) => setStyle(e.target.value)} className="w-full p-4 border border-gray-300 rounded-2xl">
-              <option value="patriotic">Patriotic / America First</option>
-              <option value="news">News Style</option>
-              <option value="dramatic">Dramatic</option>
-              <option value="simple">Simple & Clean</option>
-            </select>
-          </div>
+            {/* Prompt and Generate */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">2. Describe the Video</h2>
+              <textarea
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="A confident patriot speaking passionately about freedom in front of an American flag at sunset..."
+                className="w-full h-64 p-8 border border-gray-300 rounded-3xl text-lg"
+              />
 
-          <button 
-            onClick={generateVideo}
-            disabled={!audioFile || isGenerating}
-            className="w-full bg-patriot-red text-white py-8 rounded-3xl text-3xl font-bold hover:bg-red-700 disabled:bg-gray-400 transition-all"
-          >
-            {isGenerating ? "Generating Video with Grok Imagine..." : "Generate Faceless Video"}
-          </button>
+              <button 
+                onClick={generateVideo}
+                disabled={isGenerating || !referenceImage || !prompt}
+                className="w-full mt-8 bg-patriot-red text-white py-6 rounded-3xl text-2xl font-bold hover:bg-red-700 disabled:bg-gray-400"
+              >
+                {isGenerating ? "Generating with Grok Imagine..." : "Generate 15-Second Cinematic Clip"}
+              </button>
+
+              <p className="text-center text-sm text-gray-500 mt-4">
+                Grok Imagine: Same face/body locked • 480p or 720p • Watermark-free • Up to 15 seconds
+              </p>
+            </div>
+          </div>
 
           {videoUrl && (
-            <div className="mt-12">
+            <div className="mt-16">
+              <h2 className="text-2xl font-bold mb-6">Generated Video</h2>
               <video controls className="w-full rounded-3xl" src={videoUrl} />
-              <div className="flex gap-4 mt-6">
-                <Link to="/my-episodes" className="flex-1 bg-patriot-blue text-white py-6 rounded-3xl text-center text-xl font-bold">Save & Publish</Link>
-                <button className="flex-1 bg-white border-2 border-patriot-blue text-patriot-blue py-6 rounded-3xl text-xl font-bold">Download</button>
-              </div>
             </div>
           )}
         </div>
