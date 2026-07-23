@@ -8,7 +8,7 @@ import SiteFooter from '../../components/SiteFooter';
 export default function BeginnerSetup() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    title: '',
+    name: '',
     tagline: '',
     category: ''
   });
@@ -20,8 +20,8 @@ export default function BeginnerSetup() {
   };
 
   const handleSubmit = async () => {
-    if (!formData.title || !formData.tagline) {
-      setMessage('Please fill in title and tagline');
+    if (!formData.name || !formData.tagline) {
+      setMessage('Please fill in name and tagline');
       return;
     }
 
@@ -39,9 +39,9 @@ export default function BeginnerSetup() {
       const { data, error } = await supabase
         .from('podcasts')
         .insert([{
-          title: formData.title,
+          name: formData.name,
           tagline: formData.tagline,
-          category: formData.category,
+          category: formData.category || null,
           host_id: session.user.id,
           status: 'active'
         }])
@@ -51,13 +51,10 @@ export default function BeginnerSetup() {
       if (error) throw error;
 
       setMessage('Podcast created successfully!');
-      
-      setTimeout(() => {
-        navigate('/my-podcasts');
-      }, 1500);
+      setTimeout(() => navigate('/my-podcasts'), 1200);
     } catch (error) {
       console.error(error);
-      setMessage('Error creating podcast: ' + error.message);
+      setMessage('Error: ' + error.message);
     }
 
     setIsCreating(false);
@@ -74,11 +71,11 @@ export default function BeginnerSetup() {
         <div className="bg-white rounded-3xl p-12">
           <div className="space-y-8">
             <div>
-              <label className="block text-sm font-semibold mb-2">Podcast Title</label>
+              <label className="block text-sm font-semibold mb-2">Podcast Name</label>
               <input 
                 type="text" 
-                name="title"
-                value={formData.title}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
                 placeholder="My America First Show" 
                 className="w-full p-4 border border-gray-300 rounded-2xl text-xl" 
@@ -111,10 +108,10 @@ export default function BeginnerSetup() {
 
             <button 
               onClick={handleSubmit}
-              disabled={isCreating || !formData.title || !formData.tagline}
+              disabled={isCreating || !formData.name || !formData.tagline}
               className="w-full bg-patriot-red text-white py-6 rounded-3xl text-2xl font-bold hover:bg-red-700 disabled:bg-gray-400 transition-all"
             >
-              {isCreating ? "Creating Podcast..." : "Create My Podcast"}
+              {isCreating ? "Creating..." : "Create My Podcast"}
             </button>
 
             {message && <p className="text-center text-lg font-medium mt-6">{message}</p>}
