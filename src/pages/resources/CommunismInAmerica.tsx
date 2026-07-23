@@ -63,7 +63,57 @@ const CommunismInAmerica = () => {
           </div>
         </div>
 
-        {/* Link to new sub-page */}
+        {/* Communism in the Movie Industry */}
+        <div className="mt-16">
+          <h3 className="text-3xl font-bold text-red-600 mb-6 text-center">Communism in the Movie Industry</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+              <div className="aspect-video bg-black">
+                <iframe 
+                  src="https://www.youtube.com/embed/5gK4z2mF1cQ" 
+                  title="Ronald Reagan HUAC Testimony" 
+                  className="w-full h-full" 
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="p-6">
+                <h4 className="font-semibold">Ronald Reagan HUAC Testimony (1947)</h4>
+                <p className="text-gray-600 text-sm">SAG President on Communist tactics in Hollywood</p>
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+              <div className="aspect-video bg-black">
+                <iframe 
+                  src="https://www.youtube.com/embed/0t3c1v4f6zQ" 
+                  title="HUAC Hollywood Hearings Newsreel" 
+                  className="w-full h-full" 
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="p-6">
+                <h4 className="font-semibold">HUAC Hollywood Hearings - Original Newsreel (Hollywood Ten)</h4>
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+              <div className="aspect-video bg-black">
+                <iframe 
+                  src="https://www.youtube.com/embed/[PRAGERU_VIDEO_ID]" 
+                  title="PragerU Why Hollywood is So Liberal" 
+                  className="w-full h-full" 
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="p-6">
+                <h4 className="font-semibold">PragerU – Why Hollywood is So Liberal</h4>
+                <p className="text-gray-600 text-sm">Cultural front context</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Link to Take Down page */}
         <div className="text-center mt-12">
           <Link 
             to="/resources/take-down-of-mccarthy" 
