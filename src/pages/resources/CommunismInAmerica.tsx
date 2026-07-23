@@ -61,38 +61,16 @@ const CommunismInAmerica = () => {
               <h4 className="font-semibold">Army-McCarthy Hearings - Opening Session</h4>
             </div>
           </div>
-          <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-            <div className="aspect-video bg-black">
-              <iframe 
-                src="https://www.youtube.com/embed/UBXoopRCrcE" 
-                title="Stevens Testimony" 
-                className="w-full h-full" 
-                allowFullScreen
-              ></iframe>
-            </div>
-            <div className="p-6">
-              <h4 className="font-semibold">Secretary Stevens Testimony & McCarthy Response</h4>
-            </div>
-          </div>
         </div>
 
-        {/* NEW SUB-SECTION: The Take Down of McCarthy */}
-        <div className="mt-16">
-          <h3 className="text-3xl font-bold text-red-600 mb-6 text-center">The Take Down of McCarthy</h3>
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 max-w-4xl mx-auto">
-            <p className="text-gray-700 leading-relaxed">
-              In the spring of 1954, the U.S. Army — under Secretary Robert T. Stevens — launched a counter-attack against Senator Joseph R. McCarthy and his chief counsel Roy Cohn. Stevens and Army officials accused McCarthy’s team of pressuring the Army for special treatment for Private G. David Schine while McCarthy was aggressively investigating Communist infiltration in the Army Signal Corps and other defense installations.
-            </p>
-            <p className="text-gray-700 leading-relaxed mt-4">
-              <strong>From an America First perspective:</strong> Senator McCarthy was exposing a very real and documented threat — Soviet espionage and Communist sympathizers embedded in sensitive government and military positions during the height of the Cold War. The Army’s aggressive pushback, including the highly publicized hearings, was widely seen by McCarthy’s supporters as an attempt to shield institutions from legitimate scrutiny and to silence one of the few voices willing to name names and demand accountability. McCarthy argued that even a small number of Communists in the military represented an unacceptable security risk to the nation.
-            </p>
-            <p className="text-gray-700 leading-relaxed mt-4">
-              The exchanges between Stevens (and Army counsel Joseph Welch) and McCarthy became the dramatic centerpiece of the televised hearings. Welch’s famous rebuke — “Have you no sense of decency, sir?” — was portrayed in the establishment media as the moral takedown of McCarthy. To McCarthy’s defenders, it was a calculated deflection that shifted focus away from the substantive issue of Communist subversion and toward personal attacks on the investigators.
-            </p>
-            <p className="text-gray-700 leading-relaxed mt-4">
-              These hearings ultimately contributed to McCarthy’s censure by the Senate later in 1954. From the America First viewpoint, they represent a pivotal moment when the permanent bureaucracy and political establishment successfully pushed back against a populist anti-Communist crusader, protecting institutional power at the expense of national security vigilance.
-            </p>
-          </div>
+        {/* Link to new sub-page */}
+        <div className="text-center mt-12">
+          <Link 
+            to="/resources/take-down-of-mccarthy" 
+            className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all shadow-lg"
+          >
+            The Take Down of McCarthy → Key Hearings & Analysis
+          </Link>
         </div>
       </div>
 
