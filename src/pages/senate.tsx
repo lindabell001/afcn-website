@@ -1,73 +1,225 @@
 // src/pages/senate.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabaseClient';
 
 export default function Senate() {
+  const [people, setPeople] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Filters
+  const [stateFilter, setStateFilter] = useState('All');
+  const [partyFilter, setPartyFilter] = useState('All');
+  const [afFilter, setAfFilter] = useState('All');
+
+  useEffect(() => {
+    async function fetchPeople() {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('people')
+          .select('*')
+          .order('state', { ascending: true });
+
+        if (error) throw error;
+        setPeople(data || []);
+      } catch (err) {
+        console.error(err);
+        setError('Could not load data. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPeople();
+  }, []);
+
+  // Get unique values for filters
+  const states = ['All', ...new Set(people.map(p => p.state).filter(Boolean))].sort();
+  const parties = ['All', ...new Set(people.map(p => p.party).filter(Boolean))].sort();
+
+  // Apply filters
+  const filtered = people.filter(person => {
+    if (stateFilter !== 'All' && person.state !== stateFilter) return false;
+    if (partyFilter !== 'All' && person.party !== partyFilter) return false;
+    if (afFilter === 'Yes' && person.america_first !== true && person.america_first !== 'Yes') return false;
+    if (afFilter === 'No' && (person.america_first === true || person.america_first === 'Yes')) return false;
+    return true;
+  });
+
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        {/* Hero Header */}
+      <main className="max-w-6xl mx-auto px-6 py-16">
+
+        {/* Hero */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-patriot-blue mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-patriot-blue mb-4">
             MAKE SENATE AMERICA FIRST
           </h1>
-          <p className="text-2xl text-patriot-red font-semibold">
+          <p className="text-xl md:text-2xl text-patriot-red font-semibold">
             Tracking Every Senator — Holding Them Accountable
           </p>
         </div>
 
-        {/* Introduction Section */}
-        <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 mb-16 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-patriot-blue mb-6 text-center">
+        {/* Introduction */}
+        <div className="bg-white p-8 rounded-3xl border border-gray-200 mb-12 max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-patriot-blue mb-4 text-center">
             No more guessing who’s America First.
           </h2>
-          
-          <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
-            <p>
-              This is a public scorecard that rates every Senate candidate and incumbent on the issues that actually matter:
-            </p>
-            
-            <ul className="list-disc list-inside space-y-2 ml-2">
+          <div className="space-y-3 text-gray-700 text-lg">
+            <p>This is a public scorecard that rates every Senate candidate and incumbent on the issues that actually matter:</p>
+            <ul className="list-disc list-inside ml-2 space-y-1">
               <li>Border security</li>
               <li>Election integrity</li>
               <li>American workers</li>
               <li>The Constitution</li>
               <li>America First foreign policy</li>
             </ul>
-
-            <p className="pt-2">
-              Clear scores. Real evidence. One place.
-            </p>
-            
-            <p>
-              See exactly who stands with the American people — and who doesn’t.
-            </p>
-            
-            <p className="font-semibold text-patriot-blue pt-2">
-              And this is only the beginning.
-            </p>
+            <p>Clear scores. Real evidence. One place.</p>
+            <p className="font-semibold text-patriot-blue">And this is only the beginning.</p>
           </div>
         </div>
 
-        {/* Placeholder for future tracker */}
-        <div className="bg-white p-10 rounded-3xl border border-gray-200 text-center">
-          <h2 className="text-3xl font-bold text-patriot-blue mb-4">
-            Senate Tracker Coming Next
-          </h2>
-          <p className="text-gray-600 text-lg">
-            The full scorecard and rankings will be added in the next steps.
+        {/* Highlight Box */}
+        <div className="bg-patriot-blue text-white p-8 rounded-3xl mb-12 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold mb-2">
+            Key Insight
+          </h3>
+          <p className="text-xl md:text-2xl">
+            If all non-incumbent America First Republicans win, we add <span className="text-yellow-300 font-bold">14 new America First Senators</span>
           </p>
         </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <a
+            href="https://givingtools.com/give/4206"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
+          >
+            DONATE NOW
+          </a>
+          <Link
+            to="/become-one"
+            className="bg-patriot-blue hover:bg-blue-800 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
+          >
+            BECOME A MEMBER ($25/year)
+          </Link>
+        </div>
+
+        {/* Filters */}
+        <div className="bg-white p-6 rounded-2xl border border-gray-200 mb-10 flex flex-wrap gap-4 justify-center items-center">
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 mb-1">State</label>
+            <select
+              value={stateFilter}
+              onChange={(e) => setStateFilter(e.target.value)}
+              className="border border-gray-300 rounded-lg px-4 py-2"
+            >
+              {states.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 mb-1">Party</label>
+            <select
+              value={partyFilter}
+              onChange={(e) => setPartyFilter(e.target.value)}
+              className="border border-gray-300 rounded-lg px-4 py-2"
+            >
+              {parties.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 mb-1">America First</label>
+            <select
+              value={afFilter}
+              onChange={(e) => setAfFilter(e.target.value)}
+              className="border border-gray-300 rounded-lg px-4 py-2"
+            >
+              <option value="All">All</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Loading / Error / Data */}
+        {loading && (
+          <div className="text-center py-20 text-xl text-patriot-blue font-semibold">
+            Loading America First scores…
+          </div>
+        )}
+
+        {error && (
+          <div className="text-center py-20 text-red-600 text-xl">
+            {error}
+          </div>
+        )}
+
+        {!loading && !error && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.length === 0 ? (
+              <div className="col-span-full text-center py-16 text-gray-500 text-xl">
+                No matching records found.
+              </div>
+            ) : (
+              filtered.map((person) => (
+                <div
+                  key={person.id || person.full_name}
+                  className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition"
+                >
+                  <h3 className="text-xl font-bold text-patriot-blue mb-1">
+                    {person.full_name}
+                  </h3>
+                  <p className="text-gray-600 mb-3">
+                    {person.state} • {person.party}
+                  </p>
+
+                  <div className="space-y-1 text-sm">
+                    <p><span className="font-semibold">Status:</span> {person.status || '—'}</p>
+                    <p><span className="font-semibold">Office:</span> {person.current_office || '—'}</p>
+                    <p>
+                      <span className="font-semibold">America First:</span>{' '}
+                      <span className={person.america_first === true || person.america_first === 'Yes' ? 'text-green-600 font-bold' : 'text-red-600'}>
+                        {person.america_first === true || person.america_first === 'Yes' ? 'YES' : 'NO'}
+                      </span>
+                    </p>
+                  </div>
+
+                  {(person.website || person.x_handle) && (
+                    <div className="mt-4 flex gap-3">
+                      {person.website && (
+                        <a href={person.website} target="_blank" rel="noopener noreferrer" className="text-patriot-blue hover:underline text-sm">
+                          Website
+                        </a>
+                      )}
+                      {person.x_handle && (
+                        <a href={`https://x.com/${person.x_handle.replace('@','')}`} target="_blank" rel="noopener noreferrer" className="text-patriot-blue hover:underline text-sm">
+                          X
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
+        )}
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <Link
             to="/take-action"
-            className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg transition-all shadow-lg"
+            className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-12 py-4 rounded-lg text-lg shadow-lg"
           >
             TAKE ACTION →
           </Link>
         </div>
+
       </main>
     </div>
   );
