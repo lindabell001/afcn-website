@@ -53,21 +53,21 @@ export default function Senate() {
       <main className="max-w-6xl mx-auto px-6 py-16">
 
         {/* Hero */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-patriot-blue mb-4">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl md:text-5xl font-bold text-patriot-blue mb-3">
             MAKE SENATE AMERICA FIRST
           </h1>
-          <p className="text-xl md:text-2xl text-patriot-red font-semibold">
+          <p className="text-xl text-patriot-red font-semibold">
             Tracking Every Senator — Holding Them Accountable
           </p>
         </div>
 
         {/* Introduction */}
-        <div className="bg-white p-8 rounded-3xl border border-gray-200 mb-12 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-patriot-blue mb-4 text-center">
+        <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 mb-8 max-w-3xl mx-auto">
+          <h2 className="text-xl font-bold text-patriot-blue mb-3 text-center">
             No more guessing who’s America First.
           </h2>
-          <div className="space-y-3 text-gray-700 text-lg">
+          <div className="space-y-2 text-gray-700 text-base">
             <p>This is a public scorecard that rates every Senate candidate and incumbent on the issues that actually matter:</p>
             <ul className="list-disc list-inside ml-2 space-y-1">
               <li>Border security</li>
@@ -81,42 +81,39 @@ export default function Senate() {
           </div>
         </div>
 
-        {/* Highlight Box */}
-        <div className="bg-patriot-blue text-white p-8 rounded-3xl mb-12 text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-2">
-            Key Insight
-          </h3>
-          <p className="text-xl md:text-2xl">
+        {/* Smaller Highlight Box */}
+        <div className="bg-patriot-blue text-white px-6 py-4 rounded-xl mb-8 text-center max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl">
             If all non-incumbent America First Republicans win, we add <span className="text-yellow-300 font-bold">14 new America First Senators</span>
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
           <a
             href="https://givingtools.com/give/4206"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
+            className="bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-8 py-3 rounded-lg text-center shadow-lg"
           >
             DONATE NOW
           </a>
           <Link
             to="/become-one"
-            className="bg-patriot-blue hover:bg-blue-800 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
+            className="bg-patriot-blue hover:bg-blue-800 text-white font-bold uppercase tracking-wider px-8 py-3 rounded-lg text-center shadow-lg"
           >
             BECOME A MEMBER ($25/year)
           </Link>
         </div>
 
         {/* Filters */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-200 mb-10 flex flex-wrap gap-4 justify-center items-center">
+        <div className="bg-white p-5 rounded-xl border border-gray-200 mb-8 flex flex-wrap gap-4 justify-center items-end">
           <div>
             <label className="block text-sm font-semibold text-gray-600 mb-1">State</label>
             <select
               value={stateFilter}
               onChange={(e) => setStateFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-4 py-2"
+              className="border border-gray-300 rounded-lg px-3 py-2"
             >
               {states.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
@@ -127,7 +124,7 @@ export default function Senate() {
             <select
               value={partyFilter}
               onChange={(e) => setPartyFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-4 py-2"
+              className="border border-gray-300 rounded-lg px-3 py-2"
             >
               {parties.map(p => <option key={p} value={p}>{p}</option>)}
             </select>
@@ -138,7 +135,7 @@ export default function Senate() {
             <select
               value={afFilter}
               onChange={(e) => setAfFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-4 py-2"
+              className="border border-gray-300 rounded-lg px-3 py-2"
             >
               <option value="All">All</option>
               <option value="Yes">Yes</option>
@@ -149,13 +146,13 @@ export default function Senate() {
 
         {/* Loading / Error / Data */}
         {loading && (
-          <div className="text-center py-20 text-xl text-patriot-blue font-semibold">
+          <div className="text-center py-16 text-xl text-patriot-blue font-semibold">
             Loading America First scores…
           </div>
         )}
 
         {error && (
-          <div className="text-center py-20 text-red-600 text-xl">
+          <div className="text-center py-16 text-red-600 text-xl">
             {error}
           </div>
         )}
@@ -170,12 +167,12 @@ export default function Senate() {
               filtered.map((person) => (
                 <div
                   key={person.id || person.full_name}
-                  className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition"
+                  className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition"
                 >
-                  <h3 className="text-xl font-bold text-patriot-blue mb-1">
+                  <h3 className="text-lg font-bold text-patriot-blue mb-1">
                     {person.full_name}
                   </h3>
-                  <p className="text-gray-600 mb-3">
+                  <p className="text-gray-600 text-sm mb-3">
                     {person.state} • {person.party}
                   </p>
 
@@ -191,14 +188,14 @@ export default function Senate() {
                   </div>
 
                   {(person.website || person.x_handle) && (
-                    <div className="mt-4 flex gap-3">
+                    <div className="mt-3 flex gap-3 text-sm">
                       {person.website && (
-                        <a href={person.website} target="_blank" rel="noopener noreferrer" className="text-patriot-blue hover:underline text-sm">
+                        <a href={person.website} target="_blank" rel="noopener noreferrer" className="text-patriot-blue hover:underline">
                           Website
                         </a>
                       )}
                       {person.x_handle && (
-                        <a href={`https://x.com/${person.x_handle.replace('@','')}`} target="_blank" rel="noopener noreferrer" className="text-patriot-blue hover:underline text-sm">
+                        <a href={`https://x.com/${person.x_handle.replace('@','')}`} target="_blank" rel="noopener noreferrer" className="text-patriot-blue hover:underline">
                           X
                         </a>
                       )}
@@ -211,10 +208,10 @@ export default function Senate() {
         )}
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-14">
           <Link
             to="/take-action"
-            className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-12 py-4 rounded-lg text-lg shadow-lg"
+            className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-3 rounded-lg shadow-lg"
           >
             TAKE ACTION →
           </Link>
