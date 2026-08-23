@@ -12,6 +12,7 @@ export default function SenateTracker() {
   const [stateFilter, setStateFilter] = useState('All');
   const [partyFilter, setPartyFilter] = useState('All');
   const [afFilter, setAfFilter] = useState('All');
+  const [viewMode, setViewMode] = useState('current'); // 'current' or 'historical'
 
   useEffect(() => {
     async function fetchPeople() {
@@ -39,8 +40,16 @@ export default function SenateTracker() {
   const states = ['All', ...new Set(people.map(p => p.state).filter(Boolean))].sort();
   const parties = ['All', ...new Set(people.map(p => p.party).filter(Boolean))].sort();
 
-  // Apply filters
+  // Apply all filters
   const filtered = people.filter(person => {
+    // View mode filter
+    if (viewMode === 'current') {
+      if (!['Candidate', 'Senator'].includes(person.status)) return false;
+    } else {
+      if (!['Lost Primary', 'Withdrawn', 'Former'].includes(person.status)) return false;
+    }
+
+    // Other filters
     if (stateFilter !== 'All' && person.state !== stateFilter) return false;
     if (partyFilter !== 'All' && person.party !== partyFilter) return false;
 
@@ -73,7 +82,6 @@ export default function SenateTracker() {
               This live tracker scores every U.S. Senate candidate and incumbent on the issues that matter most:
             </p>
             
-            {/* Horizontal list with * separators */}
             <p className="font-semibold text-patriot-blue text-lg md:text-xl leading-relaxed">
               Border security * Election integrity * American workers * The Constitution * America First foreign policy
             </p>
@@ -86,7 +94,7 @@ export default function SenateTracker() {
             </div>
 
             <p className="text-sm md:text-base text-gray-600">
-              <strong>How to use this tracker:</strong> Use the filters below to sort by State, Party, or America First status. Click any name for more details as they become available.
+              <strong>How to use this tracker:</strong> Use the filters below to sort by State, Party, or America First status.
             </p>
           </div>
         </div>
@@ -107,6 +115,32 @@ export default function SenateTracker() {
           >
             BECOME A MEMBER – $25/year
           </Link>
+        </div>
+
+        {/* View Mode Toggle */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex rounded-lg border border-gray-300 overflow-hidden">
+            <button
+              onClick={() => setViewMode('current')}
+              className={`px-6 py-3 font-semibold text-sm uppercase tracking-wider ${
+                viewMode === 'current'
+                  ? 'bg-patriot-blue text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              Current Candidates
+            </button>
+            <button
+              onClick={() => setViewMode('historical')}
+              className={`px-6 py-3 font-semibold text-sm uppercase tracking-wider ${
+                viewMode === 'historical'
+                  ? 'bg-patriot-blue text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              Historical / Also Ran
+            </button>
+          </div>
         </div>
 
         {/* Filters */}
