@@ -206,7 +206,7 @@ export default function SenateTracker() {
                   <th className="px-4 py-3 text-left">Party</th>
                   <th className="px-4 py-3 text-left">Status</th>
                   <th className="px-4 py-3 text-left">Office</th>
-                  <th className="px-4 py-3 text-left">America First</th>
+                  <th className="px-4 py-3 text-left">America First?</th>
                   <th className="px-4 py-3 text-left">Send Them Home</th>
                   <th className="px-4 py-3 text-left">Election Enforcement</th>
                   <th className="px-4 py-3 text-left">Foreign Policy</th>
