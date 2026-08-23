@@ -68,18 +68,15 @@ export default function SenateTracker() {
             No more guessing who actually stands with America.
           </h2>
           
-          <div className="space-y-3 text-gray-700 text-base md:text-lg">
+          <div className="space-y-4 text-gray-700 text-base md:text-lg text-center">
             <p>
               This live tracker scores every U.S. Senate candidate and incumbent on the issues that matter most:
             </p>
             
-            <ul className="list-disc list-inside ml-2 space-y-1">
-              <li>Border security</li>
-              <li>Election integrity</li>
-              <li>American workers</li>
-              <li>The Constitution</li>
-              <li>America First foreign policy</li>
-            </ul>
+            {/* Horizontal list with * separators */}
+            <p className="font-semibold text-patriot-blue text-lg md:text-xl leading-relaxed">
+              Border security * Election integrity * American workers * The Constitution * America First foreign policy
+            </p>
 
             <div className="bg-patriot-blue text-white p-4 rounded-xl my-4 text-center">
               <p className="font-semibold">
