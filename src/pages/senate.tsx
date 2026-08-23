@@ -29,7 +29,7 @@ export default function Senate() {
             </p>
 
             <p className="font-semibold text-patriot-blue pt-2">
-              This is the clearest path in years to take the Senate back for the American people.
+              This is the clearest path in years to MAKE SENATE AMERICA FIRST.
             </p>
           </div>
         </div>
