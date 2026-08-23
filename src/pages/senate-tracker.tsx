@@ -53,18 +53,62 @@ export default function SenateTracker() {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-7xl mx-auto px-4 py-12">
+      <main className="max-w-7xl mx-auto px-4 py-8">
 
-        {/* Header */}
-        <div className="text-center mb-10">
+        {/* Page Title */}
+        <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-patriot-blue mb-3">
-            Senate Tracker – Live Data
+            MAKE SENATE AMERICA FIRST
           </h1>
-          <p className="text-lg text-gray-600">
-            Real-time America First scores from Supabase
-          </p>
-          <Link to="/senate" className="text-patriot-red hover:underline mt-2 inline-block">
-            ← Back to Introduction
+        </div>
+
+        {/* Strong Introduction */}
+        <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 mb-8 max-w-4xl mx-auto">
+          <h2 className="text-xl md:text-2xl font-bold text-patriot-blue mb-4 text-center">
+            No more guessing who actually stands with America.
+          </h2>
+          
+          <div className="space-y-3 text-gray-700 text-base md:text-lg">
+            <p>
+              This live tracker scores every U.S. Senate candidate and incumbent on the issues that matter most:
+            </p>
+            
+            <ul className="list-disc list-inside ml-2 space-y-1">
+              <li>Border security</li>
+              <li>Election integrity</li>
+              <li>American workers</li>
+              <li>The Constitution</li>
+              <li>America First foreign policy</li>
+            </ul>
+
+            <div className="bg-patriot-blue text-white p-4 rounded-xl my-4 text-center">
+              <p className="font-semibold">
+                Key Insight:<br />
+                If all non-incumbent America First Republicans win, we add <span className="text-yellow-300 font-bold">14 new America First Senators</span>.
+              </p>
+            </div>
+
+            <p className="text-sm md:text-base text-gray-600">
+              <strong>How to use this tracker:</strong> Use the filters below to sort by State, Party, or America First status. Click any name for more details as they become available.
+            </p>
+          </div>
+        </div>
+
+        {/* Prominent Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <a
+            href="https://givingtools.com/give/4206"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
+          >
+            DONATE NOW
+          </a>
+          <Link
+            to="/become-one"
+            className="bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
+          >
+            BECOME A MEMBER – $25/year
           </Link>
         </div>
 
