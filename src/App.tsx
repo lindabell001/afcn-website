@@ -49,7 +49,8 @@ import MemberHelp from './pages/member/help';
 import Tavern from './pages/tavern';
 import Committees from './pages/committees';
 import TakeAction from './pages/take-action';
-import Senate from './pages/senate';                    // ← NEW
+import Senate from './pages/senate';
+import SenateTracker from './pages/senate-tracker';          // ← NEW
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
 import LearningSources from './pages/learning-sources';
 import TavernLocations from './pages/tavern/locations';
@@ -117,7 +118,8 @@ const App = () => {
           <Route path="/tavern" element={<Tavern />} />
           <Route path="/committees" element={<Committees />} />
           <Route path="/take-action" element={<TakeAction />} />
-          <Route path="/senate" element={<Senate />} />               {/* ← NEW */}
+          <Route path="/senate" element={<Senate />} />
+          <Route path="/senate-tracker" element={<SenateTracker />} />   {/* ← NEW */}
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
           <Route path="/resources/learning-sources" element={<LearningSources />} />
 
