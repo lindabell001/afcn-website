@@ -8,6 +8,7 @@ const navItems = [
   { to: "/mission", label: "Mission" },
   { to: "/resources", label: "Resources" },
   { to: "/take-action", label: "Take Action" },
+  { to: "/senate", label: "Senate" },          // ← NEW
   { to: "/about", label: "About" },
   { to: "/become-one", label: "Become One" },
   { to: "/donate", label: "Donate" },
@@ -19,7 +20,7 @@ const SiteHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
-      {/* Red Top Bar - slightly smaller */}
+      {/* Red Top Bar */}
       <div className="bg-patriot-red text-white text-sm">
         <div className="container flex justify-end items-center h-9 relative">
           <button
@@ -51,11 +52,11 @@ const SiteHeader = () => {
         </div>
       </div>
 
-      {/* Main Header - more compact */}
+      {/* Main Header */}
       <div className="bg-[#002868] py-3">
         <div className="container flex items-center justify-between px-4 md:px-6">
           
-          {/* Logo - smaller but still clear */}
+          {/* Logo */}
           <Link to="/">
             <img 
               src={newlogo} 
