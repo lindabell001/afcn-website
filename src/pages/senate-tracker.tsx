@@ -168,7 +168,7 @@ export default function SenateTracker() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-600 mb-1">America First</label>
+            <label className="block text-sm font-semibold text-gray-600 mb-1">America First?</label>
             <select
               value={afFilter}
               onChange={(e) => setAfFilter(e.target.value)}
