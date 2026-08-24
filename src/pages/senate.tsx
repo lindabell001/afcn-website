@@ -37,7 +37,7 @@ export default function Senate() {
             </div>
 
             <p className="pt-4 font-semibold">
-              This is the best shot we’ve had in a generation to take the Senate back for the American people.
+              This is the best shot we have in a generation to take the Senate back for the American people.
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function Senate() {
           </p>
         </div>
 
-        {/* Call-to-Action Buttons - all on one line on desktop */}
+        {/* Call-to-Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
             to="/senate-tracker"
