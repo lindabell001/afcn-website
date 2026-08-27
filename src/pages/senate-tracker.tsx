@@ -1,4 +1,3 @@
-// src/pages/senate-tracker.tsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
@@ -8,11 +7,11 @@ export default function SenateTracker() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Filters
   const [stateFilter, setStateFilter] = useState('All');
   const [partyFilter, setPartyFilter] = useState('All');
   const [afFilter, setAfFilter] = useState('All');
-  const [viewMode, setViewMode] = useState('current'); // 'current' or 'historical'
+  const [yearFilter, setYearFilter] = useState('All');
+  const [viewMode, setViewMode] = useState('current');
 
   useEffect(() => {
     async function fetchPeople() {
@@ -20,7 +19,7 @@ export default function SenateTracker() {
         setLoading(true);
         const { data, error } = await supabase
           .from('people')
-          .select('full_name, state, party, status, current_office, america_first, core_1_send_them_home, core_2_election_enforcement, core_3_america_first_foreign_policy, core_4_american_workers_trade, core_5_constitution_court_cases, reelection')
+          .select('full_name, state, party, status, current_office, america_first, core_1_send_them_home, core_2_election_enforcement, core_3_america_first_foreign_policy, core_4_american_workers_trade, core_5_constitution_court_cases, reelection, election_year, senate_class')
           .order('state', { ascending: true });
 
         if (error) throw error;
@@ -36,20 +35,28 @@ export default function SenateTracker() {
     fetchPeople();
   }, []);
 
-  // Unique values for filters
   const states = ['All', ...new Set(people.map(p => p.state).filter(Boolean))].sort();
   const parties = ['All', ...new Set(people.map(p => p.party).filter(Boolean))].sort();
 
-  // Apply all filters
+  const getYear = (person) => {
+    if (person.election_year) return String(person.election_year);
+    if (person.senate_class === 2 || person.senate_class === '2') return '2026';
+    if (person.senate_class === 3 || person.senate_class === '3') return '2028';
+    if (person.senate_class === 1 || person.senate_class === '1') return '2030';
+    const reelection = String(person.reelection || '');
+    if (reelection.includes('2026')) return '2026';
+    if (reelection.includes('2028')) return '2028';
+    if (reelection.includes('2030')) return '2030';
+    return '';
+  };
+
   const filtered = people.filter(person => {
-    // View mode filter
     if (viewMode === 'current') {
       if (!['Candidate', 'Senator'].includes(person.status)) return false;
     } else {
       if (!['Lost Primary', 'Withdrawn', 'Former'].includes(person.status)) return false;
     }
 
-    // Other filters
     if (stateFilter !== 'All' && person.state !== stateFilter) return false;
     if (partyFilter !== 'All' && person.party !== partyFilter) return false;
 
@@ -57,49 +64,35 @@ export default function SenateTracker() {
     if (afFilter === 'false' && (person.america_first === true || person.america_first === 'true' || person.america_first === 'Yes')) return false;
     if (afFilter === 'Insufficient' && person.america_first !== 'Insufficient') return false;
 
+    if (yearFilter !== 'All' && getYear(person) !== yearFilter) return false;
+
     return true;
   });
 
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-7xl mx-auto px-4 py-8">
-
-        {/* Page Title */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-patriot-blue mb-3">
             MAKE SENATE AMERICA FIRST
           </h1>
         </div>
 
-        {/* Strong Introduction */}
         <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 mb-8 max-w-4xl mx-auto">
           <h2 className="text-xl md:text-2xl font-bold text-patriot-blue mb-4 text-center">
             No more guessing who actually stands with America.
           </h2>
-          
           <div className="space-y-4 text-gray-700 text-base md:text-lg text-center">
-            <p>
-              This live tracker scores every U.S. Senate candidate and incumbent on the issues that matter most:
-            </p>
-            
+            <p>This live tracker scores every U.S. Senate candidate and incumbent on the issues that matter most:</p>
             <p className="font-semibold text-patriot-blue text-lg md:text-xl leading-relaxed">
               Border security * Election integrity * American workers * The Constitution * America First foreign policy
             </p>
-
-            <div className="bg-patriot-blue text-white p-4 rounded-xl my-4 text-center">
-              <p className="font-semibold">
-                Key Insight:<br />
-                If all non-incumbent America First Republicans win, we add <span className="text-yellow-300 font-bold">14 new America First Senators</span>.
-              </p>
-            </div>
-
             <p className="text-sm md:text-base text-gray-600">
-              <strong>How to use this tracker:</strong> Use the filters below to sort by State, Party, or America First status.
+              <strong>How to use this tracker:</strong> Filter by State, Party, America First status, or election year.
             </p>
           </div>
         </div>
 
-        {/* Prominent Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <a
             href="https://givingtools.com/give/4206"
@@ -113,19 +106,16 @@ export default function SenateTracker() {
             to="/become-one"
             className="bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
           >
-            BECOME A MEMBER – $25/year
+            JOIN $25
           </Link>
         </div>
 
-        {/* View Mode Toggle */}
         <div className="flex justify-center mb-6">
           <div className="inline-flex rounded-lg border border-gray-300 overflow-hidden">
             <button
               onClick={() => setViewMode('current')}
               className={`px-6 py-3 font-semibold text-sm uppercase tracking-wider ${
-                viewMode === 'current'
-                  ? 'bg-patriot-blue text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                viewMode === 'current' ? 'bg-patriot-blue text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
               }`}
             >
               Current Candidates
@@ -133,9 +123,7 @@ export default function SenateTracker() {
             <button
               onClick={() => setViewMode('historical')}
               className={`px-6 py-3 font-semibold text-sm uppercase tracking-wider ${
-                viewMode === 'historical'
-                  ? 'bg-patriot-blue text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                viewMode === 'historical' ? 'bg-patriot-blue text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
               }`}
             >
               Historical / Also Ran
@@ -143,46 +131,42 @@ export default function SenateTracker() {
           </div>
         </div>
 
-        {/* Filters */}
         <div className="bg-white p-5 rounded-xl border border-gray-200 mb-8 flex flex-wrap gap-4 justify-center items-end">
           <div>
             <label className="block text-sm font-semibold text-gray-600 mb-1">State</label>
-            <select
-              value={stateFilter}
-              onChange={(e) => setStateFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2"
-            >
+            <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
               {states.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-600 mb-1">Party</label>
-            <select
-              value={partyFilter}
-              onChange={(e) => setPartyFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2"
-            >
+            <select value={partyFilter} onChange={(e) => setPartyFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
               {parties.map(p => <option key={p} value={p}>{p}</option>)}
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-600 mb-1">America First?</label>
-            <select
-              value={afFilter}
-              onChange={(e) => setAfFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2"
-            >
+            <select value={afFilter} onChange={(e) => setAfFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
               <option value="All">All</option>
               <option value="true">Yes</option>
               <option value="false">No</option>
               <option value="Insufficient">Insufficient</option>
             </select>
           </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 mb-1">Election Year</label>
+            <select value={yearFilter} onChange={(e) => setYearFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
+              <option value="All">All</option>
+              <option value="2026">2026 / Class 2</option>
+              <option value="2028">2028 / Class 3</option>
+              <option value="2030">2030 / Class 1</option>
+            </select>
+          </div>
         </div>
 
-        {/* Loading / Error */}
         {loading && (
           <div className="text-center py-20 text-xl text-patriot-blue font-semibold">
             Loading America First scores…
@@ -195,7 +179,6 @@ export default function SenateTracker() {
           </div>
         )}
 
-        {/* Live Table */}
         {!loading && !error && (
           <div className="overflow-x-auto bg-white rounded-xl border border-gray-200 shadow-sm">
             <table className="min-w-full text-sm">
@@ -262,10 +245,9 @@ export default function SenateTracker() {
             to="/senate"
             className="inline-block bg-patriot-blue hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-lg"
           >
-            ← Back to Introduction
+            ← Back to 22 FOR THE SENATE
           </Link>
         </div>
-
       </main>
     </div>
   );
