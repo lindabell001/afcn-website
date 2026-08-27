@@ -50,10 +50,11 @@ import Tavern from './pages/tavern';
 import Committees from './pages/committees';
 import TakeAction from './pages/take-action';
 import Senate from './pages/senate';
-import SenateTracker from './pages/senate-tracker';          // ← NEW
+import SenateTracker from './pages/senate-tracker';
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
 import LearningSources from './pages/learning-sources';
 import TavernLocations from './pages/tavern/locations';
+import TavernIssues from './pages/tavern/issues';
 import CommitteesLocal from './pages/committees/local';
 import TavernChatRoom from './pages/tavern/chat/[slug]';
 import CommitteesChatRoom from './pages/committees/chat/[slug]';
@@ -116,10 +117,15 @@ const App = () => {
 
           {/* Other routes */}
           <Route path="/tavern" element={<Tavern />} />
+          <Route path="/tavern/locations" element={<TavernLocations />} />
+          <Route path="/tavern/issues" element={<TavernIssues />} />
+          <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
           <Route path="/committees" element={<Committees />} />
+          <Route path="/committees/local" element={<CommitteesLocal />} />
+          <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
           <Route path="/take-action" element={<TakeAction />} />
           <Route path="/senate" element={<Senate />} />
-          <Route path="/senate-tracker" element={<SenateTracker />} />   {/* ← NEW */}
+          <Route path="/senate-tracker" element={<SenateTracker />} />
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
           <Route path="/resources/learning-sources" element={<LearningSources />} />
 
@@ -127,11 +133,6 @@ const App = () => {
           <Route path="/resources/communism-in-america" element={<CommunismInAmerica />} />
           <Route path="/resources/take-down-of-mccarthy" element={<TakeDownOfMcCarthy />} />
           <Route path="/resources/communism-today" element={<CommunismToday />} />
-
-          <Route path="/tavern/locations" element={<TavernLocations />} />
-          <Route path="/committees/local" element={<CommitteesLocal />} />
-          <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
-          <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
 
           {/* Short Links */}
           <Route path="/:shortLink" element={<ShortLinkHandler />} />
