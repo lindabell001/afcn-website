@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 export default function Senate() {
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-patriot-blue mb-3">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="text-center mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-patriot-blue mb-2">
             22 FOR THE SENATE
           </h1>
-          <p className="text-2xl md:text-3xl font-bold text-patriot-red uppercase tracking-wide">
+          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-red uppercase tracking-wide">
             MAKE SENATE AMERICA FIRST
           </p>
         </div>
 
-        <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 mb-8 max-w-3xl mx-auto shadow-sm">
-          <div className="space-y-5 text-gray-800 text-lg md:text-xl leading-relaxed text-center">
+        <div className="bg-white p-5 sm:p-8 rounded-3xl border border-gray-200 mb-8 max-w-3xl mx-auto shadow-sm">
+          <div className="space-y-4 text-gray-800 text-lg md:text-xl leading-relaxed text-center">
             <p>
               Public slate: <span className="font-bold text-patriot-blue">22 names only</span>.
             </p>
@@ -25,28 +25,31 @@ export default function Senate() {
             <p>
               <span className="font-bold text-patriot-blue">12 America First new nominees</span>.
             </p>
+
+            <div className="pt-2 pb-1">
+              <p className="text-xl sm:text-2xl font-bold text-patriot-blue mb-2">
+                Stop guessing. See who is America First.
+              </p>
+              <p className="text-base sm:text-lg text-gray-700 mb-4">
+                Every senator. Every candidate. Yes, No, or Insufficient.
+              </p>
+              <Link
+                to="/senate-tracker"
+                className="block w-full bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-6 py-4 rounded-xl text-base sm:text-lg text-center shadow-lg transition-all"
+              >
+                OPEN THE LIVE TRACKER →
+              </Link>
+              <p className="mt-3 text-sm text-gray-600">
+                The 22 names below are the public slate. The tracker is the full ledger — including Also Ran.
+              </p>
+            </div>
+
             <p>
               A name is added only after winning the nomination and scoring America First.
             </p>
             <p>Watch-list races stay off this page.</p>
             <p className="text-sm text-gray-500">Last updated: August 27, 2026</p>
           </div>
-        </div>
-
-        {/* Tracker block — above the 22 names, no Donate button here */}
-        <div className="bg-white p-6 md:p-8 rounded-3xl border-2 border-patriot-blue mb-10 max-w-3xl mx-auto text-center shadow-sm">
-          <p className="text-gray-800 text-lg md:text-xl leading-relaxed mb-6">
-            See every senator and candidate. Scored Yes, No, or Insufficient. Filter by state, party, and year.
-          </p>
-          <Link
-            to="/senate-tracker"
-            className="block w-full bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl text-base sm:text-lg text-center shadow-lg transition-all"
-          >
-            OPEN THE LIVE TRACKER →
-          </Link>
-          <p className="mt-4 text-sm text-gray-600">
-            The 22 are the public slate. The tracker is the full ledger — including Also Ran.
-          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
