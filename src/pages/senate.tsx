@@ -14,7 +14,7 @@ export default function Senate() {
           </p>
         </div>
 
-        <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 mb-10 max-w-3xl mx-auto shadow-sm">
+        <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 mb-8 max-w-3xl mx-auto shadow-sm">
           <div className="space-y-5 text-gray-800 text-lg md:text-xl leading-relaxed text-center">
             <p>
               Public slate: <span className="font-bold text-patriot-blue">22 names only</span>.
@@ -31,6 +31,22 @@ export default function Senate() {
             <p>Watch-list races stay off this page.</p>
             <p className="text-sm text-gray-500">Last updated: August 27, 2026</p>
           </div>
+        </div>
+
+        {/* Tracker block — above the 22 names, no Donate button here */}
+        <div className="bg-white p-6 md:p-8 rounded-3xl border-2 border-patriot-blue mb-10 max-w-3xl mx-auto text-center shadow-sm">
+          <p className="text-gray-800 text-lg md:text-xl leading-relaxed mb-6">
+            See every senator and candidate. Scored Yes, No, or Insufficient. Filter by state, party, and year.
+          </p>
+          <Link
+            to="/senate-tracker"
+            className="block w-full bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl text-base sm:text-lg text-center shadow-lg transition-all"
+          >
+            OPEN THE LIVE TRACKER →
+          </Link>
+          <p className="mt-4 text-sm text-gray-600">
+            The 22 are the public slate. The tracker is the full ledger — including Also Ran.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
@@ -74,13 +90,6 @@ export default function Senate() {
         </div>
 
         <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center">
-          <Link
-            to="/senate-tracker"
-            className="bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl text-base text-center shadow-lg transition-all"
-          >
-            VIEW LIVE TRACKER →
-          </Link>
-
           <Link
             to="/become-one"
             className="bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl text-base text-center shadow-lg transition-all"
