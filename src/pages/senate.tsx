@@ -4,51 +4,47 @@ import { Link } from 'react-router-dom';
 export default function Senate() {
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-3 sm:pt-4 pb-10">
-        <div className="text-center mb-3">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-patriot-blue mb-1 leading-tight">
+      <main className="max-w-5xl mx-auto px-6 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-6xl font-bold text-patriot-blue mb-3">
             22 FOR THE SENATE
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl font-bold text-patriot-red uppercase tracking-wide">
+          <p className="text-2xl md:text-3xl font-bold text-patriot-red uppercase tracking-wide">
             MAKE SENATE AMERICA FIRST
           </p>
         </div>
 
-        <div className="bg-white px-5 py-4 sm:px-8 sm:py-5 rounded-2xl border border-gray-200 mb-6 max-w-3xl mx-auto shadow-sm">
-          <div className="text-center text-gray-800 text-base sm:text-lg leading-snug">
-            <p className="mb-1">
-              Public slate: <span className="font-bold text-patriot-blue">22 names only</span>.
-            </p>
-            <p className="mb-1">
-              <span className="font-bold text-patriot-blue">10 America First incumbents</span>.
-            </p>
-            <p className="mb-4">
-              <span className="font-bold text-patriot-blue">12 America First new nominees</span>.
+        <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 mb-10 max-w-3xl mx-auto shadow-sm">
+          <div className="space-y-4 text-gray-800 text-lg md:text-xl leading-relaxed text-center">
+            <p className="font-bold text-patriot-blue">
+              AFCN has the score. You don’t have to hunt.
             </p>
 
-            <p className="text-lg sm:text-xl font-bold text-patriot-blue mb-1">
-              Stop guessing. See who is America First.
-            </p>
-            <p className="text-sm sm:text-base text-gray-700 mb-3">
-              Every senator. Every candidate. Yes, No, or Insufficient.
-            </p>
-            <Link
-              to="/senate-tracker"
-              className="block w-full bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl text-base sm:text-lg text-center shadow-lg transition-all"
-            >
-              OPEN THE LIVE TRACKER →
-            </Link>
-            <p className="mt-2 text-xs sm:text-sm text-gray-600">
-              The 22 names below are the public slate. The tracker is the full ledger — including Also Ran.
+            <p>Vetted people are listed as candidates.</p>
+            <p>Win the primary: Nominee.</p>
+            <p>Lose: Also Ran.</p>
+
+            <p>The list is currently 22.</p>
+
+            <p>
+              10 incumbents · 12 nominees
+              <br />
+              2 still in a primary (Sununu, Katz).
             </p>
 
-            <p className="mt-3 text-sm sm:text-base">
-              A name is added only after winning the nomination and scoring America First.
-            </p>
-            <p className="mt-1 text-xs text-gray-500">
-              Watch-list races stay off this page. Last updated: August 27, 2026
-            </p>
+            <p>A republic is kept by holding the elected official accountable. We do.</p>
+            <p>Votes. Lobbyists. All public. Easy to find.</p>
+
+            <p>Listed below are the 22 best.</p>
+            <p>Everyone else is on the tracker.</p>
           </div>
+
+          <Link
+            to="/senate-tracker"
+            className="mt-6 block w-full bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl text-base text-center shadow-lg transition-all"
+          >
+            OPEN THE LIVE TRACKER →
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
