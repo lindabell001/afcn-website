@@ -51,6 +51,7 @@ import Committees from './pages/committees';
 import TakeAction from './pages/take-action';
 import Senate from './pages/senate';
 import SenateTracker from './pages/senate-tracker';
+import House from './pages/house';
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
 import LearningSources from './pages/learning-sources';
 import TavernLocations from './pages/tavern/locations';
@@ -126,6 +127,7 @@ const App = () => {
           <Route path="/take-action" element={<TakeAction />} />
           <Route path="/senate" element={<Senate />} />
           <Route path="/senate-tracker" element={<SenateTracker />} />
+          <Route path="/house" element={<House />} />
           <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
           <Route path="/resources/learning-sources" element={<LearningSources />} />
 
