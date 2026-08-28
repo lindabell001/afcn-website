@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 
+function formatAmericaFirst(value) {
+  const v = String(value ?? '').trim().toLowerCase();
+  if (value === true || v === 'true' || v === 'yes' || v === 'y') return 'YES';
+  if (v === 'insufficient') return 'INSUFFICIENT';
+  return 'NO';
+}
+
 export default function SenateTracker() {
   const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +17,7 @@ export default function SenateTracker() {
   const [stateFilter, setStateFilter] = useState('All');
   const [partyFilter, setPartyFilter] = useState('All');
   const [afFilter, setAfFilter] = useState('All');
-  const [yearFilter, setYearFilter] = useState('All');
+  const [yearFilter, setYearFilter] = useState('2026');
   const [viewMode, setViewMode] = useState('current');
 
   useEffect(() => {
@@ -60,9 +67,10 @@ export default function SenateTracker() {
     if (stateFilter !== 'All' && person.state !== stateFilter) return false;
     if (partyFilter !== 'All' && person.party !== partyFilter) return false;
 
-    if (afFilter === 'true' && person.america_first !== true && person.america_first !== 'true' && person.america_first !== 'Yes') return false;
-    if (afFilter === 'false' && (person.america_first === true || person.america_first === 'true' || person.america_first === 'Yes')) return false;
-    if (afFilter === 'Insufficient' && person.america_first !== 'Insufficient') return false;
+    const afLabel = formatAmericaFirst(person.america_first);
+    if (afFilter === 'YES' && afLabel !== 'YES') return false;
+    if (afFilter === 'NO' && afLabel !== 'NO') return false;
+    if (afFilter === 'INSUFFICIENT' && afLabel !== 'INSUFFICIENT') return false;
 
     if (yearFilter !== 'All' && getYear(person) !== yearFilter) return false;
 
@@ -79,11 +87,13 @@ export default function SenateTracker() {
         </div>
 
         <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 mb-8 max-w-4xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-bold text-patriot-blue mb-4 text-center">
-            No more guessing who actually stands with America.
+          <h2 className="text-xl md:text-2xl font-bold text-patriot-blue mb-3 text-center">
+            Franklin said we have a republic, if we can keep it.
           </h2>
           <div className="space-y-4 text-gray-700 text-base md:text-lg text-center">
-            <p>This live tracker scores every U.S. Senate candidate and incumbent on the issues that matter most:</p>
+            <p>
+              We the People keep it here — score the Senate, primary who isn’t America First, every cycle until the chamber is.
+            </p>
             <p className="font-semibold text-patriot-blue text-lg md:text-xl leading-relaxed">
               Border security * Election integrity * American workers * The Constitution * America First foreign policy
             </p>
@@ -150,9 +160,9 @@ export default function SenateTracker() {
             <label className="block text-sm font-semibold text-gray-600 mb-1">America First?</label>
             <select value={afFilter} onChange={(e) => setAfFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
               <option value="All">All</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-              <option value="Insufficient">Insufficient</option>
+              <option value="YES">YES</option>
+              <option value="NO">NO</option>
+              <option value="INSUFFICIENT">INSUFFICIENT</option>
             </select>
           </div>
 
@@ -206,34 +216,35 @@ export default function SenateTracker() {
                     </td>
                   </tr>
                 ) : (
-                  filtered.map((person, index) => (
-                    <tr key={index} className="border-t hover:bg-gray-50">
-                      <td className="px-4 py-3 font-medium">{person.full_name || '—'}</td>
-                      <td className="px-4 py-3">{person.state || '—'}</td>
-                      <td className="px-4 py-3">{person.party || '—'}</td>
-                      <td className="px-4 py-3">{person.status || '—'}</td>
-                      <td className="px-4 py-3">{person.current_office || '—'}</td>
-                      <td className="px-4 py-3">
-                        <span className={
-                          person.america_first === true || person.america_first === 'true' || person.america_first === 'Yes'
-                            ? 'text-green-600 font-bold'
-                            : person.america_first === 'Insufficient'
-                            ? 'text-yellow-600'
-                            : 'text-red-600'
-                        }>
-                          {person.america_first === true || person.america_first === 'true' || person.america_first === 'Yes'
-                            ? 'YES'
-                            : person.america_first || 'NO'}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3">{person.core_1_send_them_home || '—'}</td>
-                      <td className="px-4 py-3">{person.core_2_election_enforcement || '—'}</td>
-                      <td className="px-4 py-3">{person.core_3_america_first_foreign_policy || '—'}</td>
-                      <td className="px-4 py-3">{person.core_4_american_workers_trade || '—'}</td>
-                      <td className="px-4 py-3">{person.core_5_constitution_court_cases || '—'}</td>
-                      <td className="px-4 py-3">{person.reelection || '—'}</td>
-                    </tr>
-                  ))
+                  filtered.map((person, index) => {
+                    const afLabel = formatAmericaFirst(person.america_first);
+                    return (
+                      <tr key={index} className="border-t hover:bg-gray-50">
+                        <td className="px-4 py-3 font-medium">{person.full_name || '—'}</td>
+                        <td className="px-4 py-3">{person.state || '—'}</td>
+                        <td className="px-4 py-3">{person.party || '—'}</td>
+                        <td className="px-4 py-3">{person.status || '—'}</td>
+                        <td className="px-4 py-3">{person.current_office || '—'}</td>
+                        <td className="px-4 py-3">
+                          <span className={
+                            afLabel === 'YES'
+                              ? 'text-green-600 font-bold'
+                              : afLabel === 'INSUFFICIENT'
+                              ? 'text-yellow-600 font-bold'
+                              : 'text-red-600 font-bold'
+                          }>
+                            {afLabel}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">{person.core_1_send_them_home || '—'}</td>
+                        <td className="px-4 py-3">{person.core_2_election_enforcement || '—'}</td>
+                        <td className="px-4 py-3">{person.core_3_america_first_foreign_policy || '—'}</td>
+                        <td className="px-4 py-3">{person.core_4_american_workers_trade || '—'}</td>
+                        <td className="px-4 py-3">{person.core_5_constitution_court_cases || '—'}</td>
+                        <td className="px-4 py-3">{person.reelection || '—'}</td>
+                      </tr>
+                    );
+                  })
                 )}
               </tbody>
             </table>
