@@ -12,18 +12,17 @@ const SiteLayout = ({ children }) => {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
-      
+
       <main>
         {children}
       </main>
 
-      {/* Help Button - Fixed on every page */}
       <button
         onClick={sendHelpEmail}
-        className="fixed bottom-8 right-8 bg-patriot-blue hover:bg-patriot-red text-white px-8 py-4 rounded-2xl shadow-xl flex items-center gap-3 z-50 transition-all text-lg font-medium"
+        className="fixed bottom-4 right-4 bg-patriot-blue hover:bg-patriot-red text-white px-3 py-2 rounded-xl shadow-lg flex items-center gap-1.5 z-50 transition-all text-xs font-medium"
         title="Get help with the website"
       >
-        ❓ Website Help
+        ? Help
       </button>
 
       <SiteFooter />
