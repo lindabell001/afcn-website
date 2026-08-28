@@ -79,112 +79,114 @@ export default function SenateTracker() {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-patriot-blue mb-3">
+      <main className="max-w-7xl mx-auto px-4 pt-3 pb-8">
+        <div className="text-center mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-patriot-blue leading-tight">
             MAKE SENATE AMERICA FIRST
           </h1>
         </div>
 
-        <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 mb-8 max-w-4xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-bold text-patriot-blue mb-3 text-center">
+        <div className="bg-white px-4 py-3 sm:px-6 sm:py-4 rounded-xl border border-gray-200 mb-3 max-w-4xl mx-auto">
+          <h2 className="text-lg md:text-xl font-bold text-patriot-blue mb-1 text-center leading-snug">
             Franklin said we have a republic, if we can keep it.
           </h2>
-          <div className="space-y-4 text-gray-700 text-base md:text-lg text-center">
-            <p>
+          <div className="text-center text-gray-700 text-sm md:text-base leading-snug">
+            <p className="mb-1">
               We the People keep it here — score the Senate, primary who isn’t America First, every cycle until the chamber is.
             </p>
-            <p className="font-semibold text-patriot-blue text-lg md:text-xl leading-relaxed">
+            <p className="font-semibold text-patriot-blue mb-1">
               Border security * Election integrity * American workers * The Constitution * America First foreign policy
             </p>
-            <p className="text-sm md:text-base text-gray-600">
+            <p className="text-xs text-gray-600">
               <strong>How to use this tracker:</strong> Filter by State, Party, America First status, or election year.
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <div className="flex flex-row gap-3 justify-center mb-3">
           <a
             href="https://givingtools.com/give/4206"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
+            className="bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-5 py-2 rounded-lg text-sm text-center shadow"
           >
             DONATE NOW
           </a>
           <Link
             to="/become-one"
-            className="bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg text-center shadow-lg"
+            className="bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-5 py-2 rounded-lg text-sm text-center shadow"
           >
             JOIN $25
           </Link>
         </div>
 
-        <div className="flex justify-center mb-6">
-          <div className="inline-flex rounded-lg border border-gray-300 overflow-hidden">
-            <button
-              onClick={() => setViewMode('current')}
-              className={`px-6 py-3 font-semibold text-sm uppercase tracking-wider ${
-                viewMode === 'current' ? 'bg-patriot-blue text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              Current Candidates
-            </button>
-            <button
-              onClick={() => setViewMode('historical')}
-              className={`px-6 py-3 font-semibold text-sm uppercase tracking-wider ${
-                viewMode === 'historical' ? 'bg-patriot-blue text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              Historical / Also Ran
-            </button>
-          </div>
-        </div>
-
-        <div className="bg-white p-5 rounded-xl border border-gray-200 mb-8 flex flex-wrap gap-4 justify-center items-end">
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 mb-1">State</label>
-            <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
-              {states.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
+        <div className="bg-white p-3 rounded-xl border border-gray-200 mb-3">
+          <div className="flex justify-center mb-2">
+            <div className="inline-flex rounded-lg border border-gray-300 overflow-hidden">
+              <button
+                onClick={() => setViewMode('current')}
+                className={`px-4 py-1.5 font-semibold text-xs uppercase tracking-wider ${
+                  viewMode === 'current' ? 'bg-patriot-blue text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                Current Candidates
+              </button>
+              <button
+                onClick={() => setViewMode('historical')}
+                className={`px-4 py-1.5 font-semibold text-xs uppercase tracking-wider ${
+                  viewMode === 'historical' ? 'bg-patriot-blue text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                Historical / Also Ran
+              </button>
+            </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 mb-1">Party</label>
-            <select value={partyFilter} onChange={(e) => setPartyFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
-              {parties.map(p => <option key={p} value={p}>{p}</option>)}
-            </select>
-          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 items-end">
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-0.5">State</label>
+              <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-sm">
+                {states.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 mb-1">America First?</label>
-            <select value={afFilter} onChange={(e) => setAfFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
-              <option value="All">All</option>
-              <option value="YES">YES</option>
-              <option value="NO">NO</option>
-              <option value="INSUFFICIENT">INSUFFICIENT</option>
-            </select>
-          </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-0.5">Party</label>
+              <select value={partyFilter} onChange={(e) => setPartyFilter(e.target.value)} className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-sm">
+                {parties.map(p => <option key={p} value={p}>{p}</option>)}
+              </select>
+            </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 mb-1">Election Year</label>
-            <select value={yearFilter} onChange={(e) => setYearFilter(e.target.value)} className="border border-gray-300 rounded-lg px-3 py-2">
-              <option value="All">All</option>
-              <option value="2026">2026 / Class 2</option>
-              <option value="2028">2028 / Class 3</option>
-              <option value="2030">2030 / Class 1</option>
-            </select>
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-0.5">America First?</label>
+              <select value={afFilter} onChange={(e) => setAfFilter(e.target.value)} className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-sm">
+                <option value="All">All</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+                <option value="INSUFFICIENT">INSUFFICIENT</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-0.5">Election Year</label>
+              <select value={yearFilter} onChange={(e) => setYearFilter(e.target.value)} className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-sm">
+                <option value="All">All</option>
+                <option value="2026">2026 / Class 2</option>
+                <option value="2028">2028 / Class 3</option>
+                <option value="2030">2030 / Class 1</option>
+              </select>
+            </div>
           </div>
         </div>
 
         {loading && (
-          <div className="text-center py-20 text-xl text-patriot-blue font-semibold">
+          <div className="text-center py-10 text-lg text-patriot-blue font-semibold">
             Loading America First scores…
           </div>
         )}
 
         {error && (
-          <div className="text-center py-20 text-red-600 text-xl">
+          <div className="text-center py-10 text-red-600 text-lg">
             {error}
           </div>
         )}
@@ -194,18 +196,18 @@ export default function SenateTracker() {
             <table className="min-w-full text-sm">
               <thead className="bg-patriot-blue text-white">
                 <tr>
-                  <th className="px-4 py-3 text-left">Name</th>
-                  <th className="px-4 py-3 text-left">State</th>
-                  <th className="px-4 py-3 text-left">Party</th>
-                  <th className="px-4 py-3 text-left">Status</th>
-                  <th className="px-4 py-3 text-left">Office</th>
-                  <th className="px-4 py-3 text-left">America First?</th>
-                  <th className="px-4 py-3 text-left">Send Them Home</th>
-                  <th className="px-4 py-3 text-left">Election Enforcement</th>
-                  <th className="px-4 py-3 text-left">Foreign Policy</th>
-                  <th className="px-4 py-3 text-left">American Workers</th>
-                  <th className="px-4 py-3 text-left">Constitution</th>
-                  <th className="px-4 py-3 text-left">Reelection</th>
+                  <th className="px-4 py-2 text-left">Name</th>
+                  <th className="px-4 py-2 text-left">State</th>
+                  <th className="px-4 py-2 text-left">Party</th>
+                  <th className="px-4 py-2 text-left">Status</th>
+                  <th className="px-4 py-2 text-left">Office</th>
+                  <th className="px-4 py-2 text-left">America First?</th>
+                  <th className="px-4 py-2 text-left">Send Them Home</th>
+                  <th className="px-4 py-2 text-left">Election Enforcement</th>
+                  <th className="px-4 py-2 text-left">Foreign Policy</th>
+                  <th className="px-4 py-2 text-left">American Workers</th>
+                  <th className="px-4 py-2 text-left">Constitution</th>
+                  <th className="px-4 py-2 text-left">Reelection</th>
                 </tr>
               </thead>
               <tbody>
@@ -220,12 +222,12 @@ export default function SenateTracker() {
                     const afLabel = formatAmericaFirst(person.america_first);
                     return (
                       <tr key={index} className="border-t hover:bg-gray-50">
-                        <td className="px-4 py-3 font-medium">{person.full_name || '—'}</td>
-                        <td className="px-4 py-3">{person.state || '—'}</td>
-                        <td className="px-4 py-3">{person.party || '—'}</td>
-                        <td className="px-4 py-3">{person.status || '—'}</td>
-                        <td className="px-4 py-3">{person.current_office || '—'}</td>
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-2 font-medium">{person.full_name || '—'}</td>
+                        <td className="px-4 py-2">{person.state || '—'}</td>
+                        <td className="px-4 py-2">{person.party || '—'}</td>
+                        <td className="px-4 py-2">{person.status || '—'}</td>
+                        <td className="px-4 py-2">{person.current_office || '—'}</td>
+                        <td className="px-4 py-2">
                           <span className={
                             afLabel === 'YES'
                               ? 'text-green-600 font-bold'
@@ -236,12 +238,12 @@ export default function SenateTracker() {
                             {afLabel}
                           </span>
                         </td>
-                        <td className="px-4 py-3">{person.core_1_send_them_home || '—'}</td>
-                        <td className="px-4 py-3">{person.core_2_election_enforcement || '—'}</td>
-                        <td className="px-4 py-3">{person.core_3_america_first_foreign_policy || '—'}</td>
-                        <td className="px-4 py-3">{person.core_4_american_workers_trade || '—'}</td>
-                        <td className="px-4 py-3">{person.core_5_constitution_court_cases || '—'}</td>
-                        <td className="px-4 py-3">{person.reelection || '—'}</td>
+                        <td className="px-4 py-2">{person.core_1_send_them_home || '—'}</td>
+                        <td className="px-4 py-2">{person.core_2_election_enforcement || '—'}</td>
+                        <td className="px-4 py-2">{person.core_3_america_first_foreign_policy || '—'}</td>
+                        <td className="px-4 py-2">{person.core_4_american_workers_trade || '—'}</td>
+                        <td className="px-4 py-2">{person.core_5_constitution_court_cases || '—'}</td>
+                        <td className="px-4 py-2">{person.reelection || '—'}</td>
                       </tr>
                     );
                   })
@@ -251,7 +253,7 @@ export default function SenateTracker() {
           </div>
         )}
 
-        <div className="text-center mt-10">
+        <div className="text-center mt-8">
           <Link
             to="/senate"
             className="inline-block bg-patriot-blue hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-lg"
