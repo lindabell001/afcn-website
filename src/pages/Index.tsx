@@ -32,25 +32,17 @@ const Index = () => {
                 The start of the next 250 years
               </p>
 
-              {/* Your Requested Text */}
               <div className="mt-8 text-white text-3xl md:text-4xl font-light">
                 We the People<br />
                 Rebuilding America First — Citizen by Citizen
               </div>
               <div className="mt-4 text-white/90 text-lg md:text-xl">
-                Organized by state, district, county, city, and neighborhood, and Issue.<br />
-                By the people. For the people.
+                <p>Ben Franklin said we have a Republic, if we can keep it.</p>
+                <p>Certain people running for office are trying to destroy America.</p>
+                <p>Here We The People can keep the Republic.</p>
               </div>
 
-              {/* Buttons - Blue, Red, Blue */}
               <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link
-                  to="/resources"
-                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
-                >
-                  EXPLORE RESOURCES
-                </Link>
-
                 <Link
                   to="/mission"
                   className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
@@ -59,16 +51,24 @@ const Index = () => {
                 </Link>
 
                 <Link
-                  to="/become-one"
-                  onClick={() => {
-                    setTimeout(() => {
-                      window.scrollTo({ top: 0, behavior: 'instant' });
-                    }, 100);
-                  }}
+                  to="/resources"
                   className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
                 >
-                  BECOME ONE
+                  RESOURCES
                 </Link>
+
+                <Link
+                  to="/senate"
+                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
+                >
+                  SENATE
+                </Link>
+
+                <span
+                  className="inline-block bg-blue-600 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg"
+                >
+                  HOUSE (IN PROGRESS)
+                </span>
               </div>
             </div>
           </div>
