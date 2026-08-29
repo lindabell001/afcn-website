@@ -95,19 +95,17 @@ export default function SenateTracker() {
         </div>
 
         <div className="bg-white px-4 py-3 sm:px-6 sm:py-4 rounded-xl border border-gray-200 mb-3 max-w-4xl mx-auto">
-          <h2 className="text-lg md:text-xl font-bold text-patriot-blue mb-1 text-center leading-snug">
-            Franklin said we have a republic, if we can keep it.
-          </h2>
           <div className="text-center text-gray-700 text-sm md:text-base leading-snug">
-            <p className="mb-1">
-              We the People keep it here — score the Senate, primary who isn’t America First, every cycle until the chamber is.
+            <p className="text-lg md:text-xl font-bold text-patriot-blue mb-2">
+              Keep the Republic starts here.
             </p>
-            <p className="font-semibold text-patriot-blue mb-1">
-              Border security * Election integrity * American workers * The Constitution * America First foreign policy
-            </p>
-            <p className="text-xs text-gray-600">
-              <strong>How to use this tracker:</strong> Filter by State, Party, America First status, or election year.
-            </p>
+            <p className="mb-2">This is the live Senate record — all 100, plus 2026 challengers.</p>
+            <p>The table opens on 2026 because those are the seats up now.</p>
+            <p>Change Election Year to All to see the rest of the chamber.</p>
+            <p className="mb-2">Also Ran is the other tab.</p>
+            <p>Names, status, and scores are active now.</p>
+            <p>Search for bills, votes, and money — coming on this page.</p>
+            <p className="mt-2">Win the primary: Nominee.</p>
           </div>
         </div>
 
@@ -198,7 +196,6 @@ export default function SenateTracker() {
 
         {!loading && !error && (
           <>
-            {/* Mobile cards — no side scroll */}
             <div className="md:hidden space-y-3 pb-8">
               {filtered.length === 0 ? (
                 <p className="text-center py-8 text-gray-500">No matching records found.</p>
@@ -223,7 +220,7 @@ export default function SenateTracker() {
                         onClick={() => setOpenCard(isOpen ? null : index)}
                         className="mt-2 text-sm font-semibold text-patriot-blue underline"
                       >
-                        {isOpen ? 'Hide scores' : 'Show 5 core scores'}
+                        {isOpen ? 'Hide scores' : 'Show issue scores'}
                       </button>
                       {isOpen && (
                         <div className="mt-2 text-sm text-gray-800 space-y-1 border-t pt-2">
@@ -240,7 +237,6 @@ export default function SenateTracker() {
               )}
             </div>
 
-            {/* Desktop table */}
             <div className="hidden md:block overflow-x-auto bg-white rounded-xl border border-gray-200 shadow-sm">
               <table className="min-w-full text-sm">
                 <thead className="bg-patriot-blue text-white">
