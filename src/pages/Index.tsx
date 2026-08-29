@@ -23,58 +23,46 @@ const Index = () => {
 
           <div className="relative z-10 h-full flex items-center">
             <div className="container text-center px-6">
-              <div className="text-white text-xl sm:text-2xl md:text-3xl font-light leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] leading-none">
+                America First<br />Citizens Network
+              </h1>
+              <p className="mt-6 text-3xl md:text-4xl font-light italic text-white/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+                The start of the next 250 years
+              </p>
+
+              <div className="mt-8 text-white text-lg md:text-xl leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
                 <p>Ben Franklin said we have a Republic, if we can keep it.</p>
                 <p>Certain people running for office are trying to destroy America.</p>
                 <p className="font-semibold">Here We The People can keep the Republic.</p>
               </div>
 
-              <div className="mt-12 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+              <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
                 <Link
-                  to="/about"
-                  className="inline-block w-full bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-4 py-4 rounded-lg text-sm sm:text-base shadow-lg transition-all text-center whitespace-nowrap"
+                  to="/mission"
+                  className="inline-block w-full bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-3 py-4 rounded-lg text-sm sm:text-base shadow-lg transition-all text-center"
                 >
                   OUR MISSION
                 </Link>
                 <Link
-                  to="/resources"
-                  className="inline-block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-4 py-4 rounded-lg text-sm sm:text-base shadow-lg transition-all text-center whitespace-nowrap"
+                  to="/become-one"
+                  className="inline-block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-3 py-4 rounded-lg text-sm sm:text-base shadow-lg transition-all text-center"
                 >
-                  RESOURCES
+                  BECOME ONE
                 </Link>
                 <Link
                   to="/senate"
-                  className="inline-block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-4 py-4 rounded-lg text-sm sm:text-base shadow-lg transition-all text-center whitespace-nowrap"
+                  className="inline-block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-3 py-4 rounded-lg text-sm sm:text-base shadow-lg transition-all text-center"
                 >
                   SENATE
                 </Link>
                 <Link
                   to="/house"
-                  className="inline-block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-3 py-4 rounded-lg text-sm sm:text-base shadow-lg transition-all text-center"
+                  className="inline-block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider px-2 py-4 rounded-lg text-sm sm:text-base shadow-lg transition-all text-center"
                 >
                   HOUSE (IN PROGRESS)
                 </Link>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-8 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-gray-600 text-sm sm:text-base mb-5">
-            A household of citizens. Score in public. Rooms that meet. Captains in the states.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm sm:text-base">
-            <Link to="/senate" className="text-patriot-blue font-semibold underline">
-              Senate ledger →
-            </Link>
-            <Link to="/take-action" className="text-patriot-blue font-semibold underline">
-              Take action →
-            </Link>
-            <Link to="/about" className="text-patriot-blue font-semibold underline">
-              Offices 2026 →
-            </Link>
           </div>
         </div>
       </section>
