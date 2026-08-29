@@ -12,7 +12,7 @@ export default function Senate() {
             AMERICA FIRST
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-blue">
-            22 America First nominees — so far
+            22 America First — so far
           </p>
         </div>
 
