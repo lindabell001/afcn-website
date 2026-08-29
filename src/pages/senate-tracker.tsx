@@ -99,13 +99,13 @@ export default function SenateTracker() {
             <p className="text-lg md:text-xl font-bold text-patriot-blue mb-2">
               Keep the Republic starts here.
             </p>
-            <p className="mb-2">This is the live Senate record — all 100, plus 2026 challengers.</p>
+            <p>This is the live Senate record — all 100, plus 2026 challengers.</p>
+            <p className="mb-2">Win the primary: Nominee.</p>
             <p>The table opens on 2026 because those are the seats up now.</p>
             <p>Change Election Year to All to see the rest of the chamber.</p>
             <p className="mb-2">Also Ran is the other tab.</p>
             <p>Names, status, and scores are active now.</p>
             <p>Search for bills, votes, and money — coming on this page.</p>
-            <p className="mt-2">Win the primary: Nominee.</p>
           </div>
         </div>
 
