@@ -30,10 +30,14 @@ const Index = () => {
                 The start of the next 250 years
               </p>
 
-              <div className="mt-8 text-white text-lg md:text-xl leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
+              <div className="mt-8 text-white text-3xl md:text-4xl font-light">
+                We the People<br />
+                Rebuilding America First — Citizen by Citizen
+              </div>
+              <div className="mt-4 text-white/90 text-lg md:text-xl">
                 <p>Ben Franklin said we have a Republic, if we can keep it.</p>
                 <p>Certain people running for office are trying to destroy America.</p>
-                <p className="font-semibold">Here We The People can keep the Republic.</p>
+                <p>Here We The People can keep the Republic.</p>
               </div>
 
               <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
