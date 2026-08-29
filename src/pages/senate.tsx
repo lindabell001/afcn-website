@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom';
 export default function Senate() {
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-patriot-blue mb-3">
-            22 FOR THE SENATE
-          </h1>
-          <p className="text-2xl md:text-3xl font-bold text-patriot-red uppercase tracking-wide">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-4 pb-10">
+        <div className="text-center mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-patriot-red uppercase tracking-wide leading-tight mb-2">
             MAKE SENATE AMERICA FIRST
+          </h1>
+          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-blue">
+            22 America First nominees — so far
           </p>
         </div>
 
-        <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 mb-10 max-w-3xl mx-auto shadow-sm">
-          <div className="space-y-4 text-gray-800 text-lg md:text-xl leading-relaxed text-center">
-            <p className="font-bold text-patriot-blue">
+        <div className="bg-white px-5 py-5 sm:px-8 sm:py-6 rounded-2xl border border-gray-200 mb-6 max-w-3xl mx-auto shadow-sm">
+          <div className="text-center text-gray-800 text-base sm:text-lg leading-[1.5]">
+            <p className="font-bold text-patriot-blue mb-3">
               AFCN has the score. You don’t have to hunt.
             </p>
 
@@ -24,24 +24,20 @@ export default function Senate() {
             <p>Win the primary: Nominee.</p>
             <p>Lose: Also Ran.</p>
 
-            <p>The list is currently 22.</p>
+            <p className="mt-3">10 incumbents · 12 nominees</p>
+            <p>2 still in a primary (Sununu, Katz).</p>
 
-            <p>
-              10 incumbents · 12 nominees
-              <br />
-              2 still in a primary (Sununu, Katz).
-            </p>
-
-            <p>A republic is kept by holding the elected official accountable. We do.</p>
-            <p>Votes. Lobbyists. All public. Easy to find.</p>
-
-            <p>Listed below are the 22 best.</p>
+            <p className="mt-3">Listed below are the 22 best — so far.</p>
             <p>Everyone else is on the tracker.</p>
+
+            <p className="mt-3">Ready now: names, status, and America First as Yes, No, or Insufficient.</p>
+            <p>When finished: votes, lobbyists, and money on the same public ledger.</p>
+            <p>That record is being built. It is not all live yet.</p>
           </div>
 
           <Link
             to="/senate-tracker"
-            className="mt-6 block w-full bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-8 py-4 rounded-xl text-base text-center shadow-lg transition-all"
+            className="mt-5 block w-full bg-patriot-blue hover:bg-blue-900 text-white font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl text-base sm:text-lg text-center shadow-lg transition-all"
           >
             OPEN THE LIVE TRACKER →
           </Link>
