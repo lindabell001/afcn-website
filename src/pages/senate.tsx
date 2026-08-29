@@ -7,7 +7,9 @@ export default function Senate() {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-4 pb-10">
         <div className="text-center mb-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-patriot-red uppercase tracking-wide leading-tight mb-2">
-            MAKE SENATE AMERICA FIRST
+            MAKE SENATE
+            <br />
+            AMERICA FIRST
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-blue">
             22 America First nominees — so far
