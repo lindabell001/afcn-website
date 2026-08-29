@@ -12,7 +12,6 @@ export default function MemberLogin() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Redirect if already logged in
   useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
@@ -58,19 +57,21 @@ export default function MemberLogin() {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-md mx-auto px-6 py-20">
+      <main className="max-w-2xl mx-auto px-6 py-20">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-patriot-blue">Member Login</h1>
           <p className="text-xl text-gray-600 mt-4">Sign in to your AFCN account</p>
         </div>
 
-        <form onSubmit={handleLogin} className="bg-white rounded-3xl p-10">
+        <form onSubmit={handleLogin} className="bg-white rounded-3xl p-8 sm:p-10">
           <input
             type="email"
             placeholder="Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-2xl mb-4 text-lg"
+            autoComplete="email"
+            size={64}
+            className="block w-full min-w-0 box-border p-4 border border-gray-300 rounded-2xl mb-4 text-base sm:text-lg overflow-x-auto"
             required
           />
           <input
@@ -78,7 +79,8 @@ export default function MemberLogin() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-2xl mb-6 text-lg"
+            autoComplete="current-password"
+            className="block w-full min-w-0 box-border p-4 border border-gray-300 rounded-2xl mb-6 text-base sm:text-lg"
             required
           />
 
