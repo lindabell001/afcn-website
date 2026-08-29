@@ -36,6 +36,7 @@ import PublicEpisodePage from './pages/episode/[id]';
 
 // Admin Pages
 import VerificationDashboard from './pages/admin/verification';
+import PendingMembers from './pages/admin/pending-members';
 import FreeMembership from './pages/free-membership';
 
 // Short Link Handler
@@ -92,6 +93,7 @@ const App = () => {
           <Route path="/member-login" element={<MemberLogin />} />
           <Route path="/member-dashboard" element={<MemberDashboard />} />
           <Route path="/admin/verification" element={<VerificationDashboard />} />
+          <Route path="/admin/pending-members" element={<PendingMembers />} />
           <Route path="/free-membership" element={<FreeMembership />} />
 
           {/* Podcast Routes */}
