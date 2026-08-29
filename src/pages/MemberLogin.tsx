@@ -16,7 +16,7 @@ export default function MemberLogin() {
   useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (session) navigate('/member-dashboard');
+      if (session) navigate('/');
     };
     checkSession();
   }, [navigate]);
@@ -34,7 +34,7 @@ export default function MemberLogin() {
     if (error) {
       setMessage('Login failed: ' + error.message);
     } else {
-      navigate('/member-dashboard');
+      navigate('/');
     }
     setLoading(false);
   };
