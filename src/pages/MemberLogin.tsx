@@ -9,6 +9,7 @@ export default function MemberLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -70,19 +71,29 @@ export default function MemberLogin() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
-            size={64}
-            className="block w-full min-w-0 box-border p-4 border border-gray-300 rounded-2xl mb-4 text-base sm:text-lg overflow-x-auto"
+            className="block w-full min-w-0 box-border p-4 border border-gray-300 rounded-2xl mb-4 text-base sm:text-lg"
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            className="block w-full min-w-0 box-border p-4 border border-gray-300 rounded-2xl mb-6 text-base sm:text-lg"
-            required
-          />
+
+          <div className="relative mb-6">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              className="block w-full min-w-0 box-border p-4 pr-16 border border-gray-300 rounded-2xl text-base sm:text-lg"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((v) => !v)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-patriot-blue px-2 py-1"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
 
           <button
             type="submit"
