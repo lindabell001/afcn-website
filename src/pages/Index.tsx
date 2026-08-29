@@ -5,7 +5,6 @@ import heroRays from "@/assets/hero-rays.jpg";
 const Index = () => {
   return (
     <>
-      {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="relative h-[88vh] min-h-[560px] w-full">
           <img
@@ -14,7 +13,6 @@ const Index = () => {
             className="absolute inset-0 h-full w-full object-cover"
           />
 
-          {/* Divine rays overlay */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -25,24 +23,13 @@ const Index = () => {
 
           <div className="relative z-10 h-full flex items-center">
             <div className="container text-center px-6">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] leading-none">
-                America First<br />Citizens Network
-              </h1>
-              <p className="mt-6 text-3xl md:text-4xl font-light italic text-white/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
-                The start of the next 250 years
-              </p>
-
-              <div className="mt-8 text-white text-3xl md:text-4xl font-light">
-                We the People<br />
-                Rebuilding America First — Citizen by Citizen
-              </div>
-              <div className="mt-4 text-white/90 text-lg md:text-xl">
+              <div className="text-white text-2xl sm:text-3xl md:text-4xl font-light leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
                 <p>Ben Franklin said we have a Republic, if we can keep it.</p>
                 <p>Certain people running for office are trying to destroy America.</p>
                 <p>Here We The People can keep the Republic.</p>
               </div>
 
-              <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <div className="mt-12 flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center">
                 <Link
                   to="/mission"
                   className="inline-block bg-patriot-red hover:bg-red-700 text-white font-bold uppercase tracking-wider px-10 py-4 rounded-lg text-lg shadow-lg transition-all"
