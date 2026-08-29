@@ -2,8 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../lib/supabaseClient';
+import { membersDb, MEMBERS_URL } from '../lib/membersClient';
 import SiteFooter from '../components/SiteFooter';
+
+function withTimeout(promise, ms, label) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error(label || 'Timed out')), ms)
+    ),
+  ]);
+}
 
 export default function MemberLogin() {
   const navigate = useNavigate();
@@ -14,9 +23,18 @@ export default function MemberLogin() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+    console.log('Member login project URL:', MEMBERS_URL);
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) navigate('/');
+      try {
+        const { data: { session } } = await withTimeout(
+          membersDb.auth.getSession(),
+          5000,
+          'session timeout'
+        );
+        if (session?.user?.id) navigate('/');
+      } catch {
+        // stay on login
+      }
     };
     checkSession();
   }, [navigate]);
@@ -25,17 +43,32 @@ export default function MemberLogin() {
     e.preventDefault();
     setLoading(true);
     setMessage('');
+    console.log('Sign In POST to:', MEMBERS_URL);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { data, error } = await withTimeout(
+        membersDb.auth.signInWithPassword({ email, password }),
+        8000,
+        'Sign in timed out after 8 seconds'
+      );
 
-    if (error) {
-      setMessage('Login failed: ' + error.message);
-    } else {
+      if (error) {
+        setMessage('Login failed: ' + error.message);
+        setLoading(false);
+        return;
+      }
+
+      if (!data?.user?.id) {
+        setMessage('Login failed: no user returned');
+        setLoading(false);
+        return;
+      }
+
       navigate('/');
+    } catch (err) {
+      setMessage(err.message || 'Sign in timed out after 8 seconds');
     }
+
     setLoading(false);
   };
 
@@ -45,14 +78,19 @@ export default function MemberLogin() {
       return;
     }
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'https://americafirstcitizensnetwork.org/member-login',
-    });
+    try {
+      const { error } = await withTimeout(
+        membersDb.auth.resetPasswordForEmail(email, {
+          redirectTo: 'https://americafirstcitizensnetwork.org/member-login',
+        }),
+        8000,
+        'Reset email timed out'
+      );
 
-    if (error) {
-      setMessage('Error sending reset email: ' + error.message);
-    } else {
-      setMessage('Password reset email sent! Check your inbox.');
+      if (error) setMessage('Error sending reset email: ' + error.message);
+      else setMessage('Password reset email sent! Check your inbox.');
+    } catch (err) {
+      setMessage(err.message || 'Reset email timed out');
     }
   };
 
@@ -89,7 +127,6 @@ export default function MemberLogin() {
               type="button"
               onClick={() => setShowPassword((v) => !v)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-patriot-blue px-2 py-1"
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               {showPassword ? 'Hide' : 'Show'}
             </button>
