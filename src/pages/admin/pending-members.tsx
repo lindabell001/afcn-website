@@ -8,6 +8,10 @@ function xUrl(handle) {
   return clean ? `https://x.com/${clean}` : '';
 }
 
+function adminYes(value) {
+  return value === true || value === 'true' || value === 't' || value === 1 || value === '1';
+}
+
 export default function PendingMembers() {
   const navigate = useNavigate();
   const [rows, setRows] = useState([]);
@@ -19,9 +23,9 @@ export default function PendingMembers() {
 
   useEffect(() => {
     const run = async () => {
-      const { data: { user } } = await membersDb.auth.getUser();
+      const { data: { user }, error: userError } = await membersDb.auth.getUser();
 
-      if (!user) {
+      if (userError || !user) {
         setSignedIn(false);
         setAllowed(false);
         setLoading(false);
@@ -31,33 +35,50 @@ export default function PendingMembers() {
 
       setSignedIn(true);
 
-      const { data: profile } = await membersDb
+      let profile = null;
+      let profileError = null;
+
+      const byId = await membersDb
         .from('profiles')
-        .select('is_admin')
+        .select('id, email, is_admin, status')
         .eq('id', user.id)
         .maybeSingle();
 
-      if (!profile || profile.is_admin !== true) {
+      profile = byId.data;
+      profileError = byId.error;
+
+      if (!profile && user.email) {
+        const byEmail = await membersDb
+          .from('profiles')
+          .select('id, email, is_admin, status')
+          .eq('email', user.email)
+          .maybeSingle();
+        profile = byEmail.data;
+        profileError = byEmail.error;
+      }
+
+      if (profileError) {
+        setError('Logged in, profile failed to load: ' + profileError.message);
         setAllowed(false);
         setLoading(false);
         return;
       }
 
-      setAllowed(true);
+      if (adminYes(profile?.is_admin)) {
+        setAllowed(true);
+        const { data, error: listError } = await membersDb
+          .from('profiles')
+          .select('id, full_name, email, x_handle, state, paid_at, status')
+          .eq('status', 'pending')
+          .order('paid_at', { ascending: false });
 
-      const { data, error: listError } = await membersDb
-        .from('profiles')
-        .select('id, full_name, email, x_handle, state, paid_at, status')
-        .eq('status', 'pending')
-        .order('paid_at', { ascending: false });
-
-      if (listError) {
-        setError('Could not load pending members.');
+        if (listError) setError('Could not load pending members: ' + listError.message);
+        else setRows(data || []);
         setLoading(false);
         return;
       }
 
-      setRows(data || []);
+      setAllowed(false);
       setLoading(false);
     };
 
@@ -69,19 +90,14 @@ export default function PendingMembers() {
     setError('');
     const { error: updateError } = await membersDb
       .from('profiles')
-      .update({
-        status: 'member',
-        approved_at: new Date().toISOString(),
-      })
+      .update({ status: 'member', approved_at: new Date().toISOString() })
       .eq('id', id)
       .eq('status', 'pending');
-
     if (updateError) {
-      setError('Accept failed.');
+      setError('Accept failed: ' + updateError.message);
       setWorkingId(null);
       return;
     }
-
     setRows((current) => current.filter((row) => row.id !== id));
     setWorkingId(null);
   };
@@ -94,13 +110,11 @@ export default function PendingMembers() {
       .update({ status: 'declined' })
       .eq('id', id)
       .eq('status', 'pending');
-
     if (updateError) {
-      setError('Decline failed.');
+      setError('Decline failed: ' + updateError.message);
       setWorkingId(null);
       return;
     }
-
     setRows((current) => current.filter((row) => row.id !== id));
     setWorkingId(null);
   };
@@ -118,7 +132,8 @@ export default function PendingMembers() {
       <div className="min-h-screen bg-background flex items-center justify-center px-6">
         <div className="max-w-md text-center">
           <h1 className="text-3xl font-bold text-patriot-blue mb-4">Become a member</h1>
-          <p className="text-gray-700 mb-8">This desk is for admins only.</p>
+          <p className="text-gray-700 mb-4">This desk is for admins only.</p>
+          {error && <p className="text-red-600 mb-6">{error}</p>}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/become-one" className="bg-patriot-red text-white font-bold px-6 py-3 rounded-xl">
               Become a member
@@ -135,15 +150,11 @@ export default function PendingMembers() {
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-5xl mx-auto px-4 py-10">
-        <h1 className="text-3xl sm:text-4xl font-bold text-patriot-blue mb-2">
-          Pending members
-        </h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-patriot-blue mb-2">Pending members</h1>
         <p className="text-gray-600 mb-6">
           Accept makes them a member. Decline keeps any $25 as a donation. No refund.
         </p>
-
         {error && <p className="text-red-600 mb-4">{error}</p>}
-
         {rows.length === 0 ? (
           <p className="text-gray-500 py-16 text-center">No pending members.</p>
         ) : (
@@ -161,29 +172,14 @@ export default function PendingMembers() {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     {link && (
-                      <a
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-black text-white font-bold px-5 py-3 rounded-xl text-center"
-                      >
+                      <a href={link} target="_blank" rel="noopener noreferrer" className="bg-black text-white font-bold px-5 py-3 rounded-xl text-center">
                         Open on X
                       </a>
                     )}
-                    <button
-                      type="button"
-                      disabled={workingId === row.id}
-                      onClick={() => accept(row.id)}
-                      className="bg-patriot-blue hover:bg-blue-900 text-white font-bold px-5 py-3 rounded-xl disabled:opacity-50"
-                    >
+                    <button type="button" disabled={workingId === row.id} onClick={() => accept(row.id)} className="bg-patriot-blue hover:bg-blue-900 text-white font-bold px-5 py-3 rounded-xl disabled:opacity-50">
                       Accept
                     </button>
-                    <button
-                      type="button"
-                      disabled={workingId === row.id}
-                      onClick={() => decline(row.id)}
-                      className="bg-patriot-red hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl disabled:opacity-50"
-                    >
+                    <button type="button" disabled={workingId === row.id} onClick={() => decline(row.id)} className="bg-patriot-red hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl disabled:opacity-50">
                       Decline
                     </button>
                   </div>
