@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { membersDb } from '../../lib/membersClient';
+import { useNavigate } from 'react-router-dom';
+import { membersDb, MEMBERS_URL } from '../../lib/membersClient';
 
 function xUrl(handle) {
   if (!handle) return '';
@@ -17,52 +17,41 @@ export default function PendingMembers() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allowed, setAllowed] = useState(false);
-  const [signedIn, setSignedIn] = useState(false);
   const [workingId, setWorkingId] = useState(null);
   const [error, setError] = useState('');
+  const [debug, setDebug] = useState(null);
 
   useEffect(() => {
     const run = async () => {
-      const { data: { user }, error: userError } = await membersDb.auth.getUser();
+      console.log('Pending members project URL:', MEMBERS_URL);
 
-      if (userError || !user) {
-        setSignedIn(false);
-        setAllowed(false);
+      const { data: sessionData } = await membersDb.auth.getSession();
+      const sessionUser = sessionData?.session?.user || null;
+
+      const { data: userData, error: userError } = await membersDb.auth.getUser();
+      const user = userData?.user || sessionUser;
+
+      if (!user) {
         setLoading(false);
         navigate('/member-login');
         return;
       }
 
-      setSignedIn(true);
-
-      let profile = null;
-      let profileError = null;
-
-      const byId = await membersDb
+      const { data: profile, error: profileError } = await membersDb
         .from('profiles')
         .select('id, email, is_admin, status')
         .eq('id', user.id)
         .maybeSingle();
 
-      profile = byId.data;
-      profileError = byId.error;
-
-      if (!profile && user.email) {
-        const byEmail = await membersDb
-          .from('profiles')
-          .select('id, email, is_admin, status')
-          .eq('email', user.email)
-          .maybeSingle();
-        profile = byEmail.data;
-        profileError = byEmail.error;
-      }
-
-      if (profileError) {
-        setError('Logged in, profile failed to load: ' + profileError.message);
-        setAllowed(false);
-        setLoading(false);
-        return;
-      }
+      const facts = {
+        authEmail: user.email || '(none)',
+        authId: user.id || '(none)',
+        profileFound: !!profile,
+        isAdminValue: profile ? String(profile.is_admin) : '(no row)',
+        supabaseError: profileError?.message || userError?.message || '(none)',
+        projectUrl: MEMBERS_URL,
+      };
+      setDebug(facts);
 
       if (adminYes(profile?.is_admin)) {
         setAllowed(true);
@@ -127,21 +116,17 @@ export default function PendingMembers() {
     );
   }
 
-  if (signedIn && !allowed) {
+  if (!allowed) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center px-6">
-        <div className="max-w-md text-center">
-          <h1 className="text-3xl font-bold text-patriot-blue mb-4">Become a member</h1>
-          <p className="text-gray-700 mb-4">This desk is for admins only.</p>
-          {error && <p className="text-red-600 mb-6">{error}</p>}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/become-one" className="bg-patriot-red text-white font-bold px-6 py-3 rounded-xl">
-              Become a member
-            </Link>
-            <Link to="/member-login" className="bg-patriot-blue text-white font-bold px-6 py-3 rounded-xl">
-              Member login
-            </Link>
-          </div>
+      <div className="min-h-screen bg-background px-6 py-16">
+        <div className="max-w-xl mx-auto text-left text-gray-800">
+          <h1 className="text-2xl font-bold text-patriot-blue mb-4">Pending members</h1>
+          <p className="mb-1">Auth email: {debug?.authEmail}</p>
+          <p className="mb-1">Auth id: {debug?.authId}</p>
+          <p className="mb-1">Profiles row found: {debug?.profileFound ? 'yes' : 'no'}</p>
+          <p className="mb-1">is_admin: {debug?.isAdminValue}</p>
+          <p className="mb-1">Supabase error: {debug?.supabaseError}</p>
+          <p className="mb-1">Project: {debug?.projectUrl}</p>
         </div>
       </div>
     );
