@@ -13,6 +13,7 @@ import Donate from './pages/Donate';
 import Mission from './pages/Mission';
 import MemberLogin from './pages/MemberLogin';
 import MemberDashboard from './pages/MemberDashboard';
+import Inside from './pages/inside';
 
 // Podcast Pages
 import MyPodcasts from './pages/my-podcasts';
@@ -91,6 +92,7 @@ const App = () => {
           <Route path="/donate" element={<Donate />} />
           <Route path="/mission" element={<Mission />} />
           <Route path="/member-login" element={<MemberLogin />} />
+          <Route path="/inside" element={<Inside />} />
           <Route path="/member-dashboard" element={<MemberDashboard />} />
           <Route path="/admin/verification" element={<VerificationDashboard />} />
           <Route path="/admin/pending-members" element={<PendingMembers />} />
