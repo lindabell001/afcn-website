@@ -1,10 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const MEMBERS_URL = 'https://iskownhurcvgjrcsgtbe.supabase.co';
+const MEMBERS_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase environment variables!');
+if (!MEMBERS_ANON_KEY) {
+  console.error('Missing members VITE_SUPABASE_ANON_KEY');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(MEMBERS_URL, MEMBERS_ANON_KEY);
