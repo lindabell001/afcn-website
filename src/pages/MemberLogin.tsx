@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { membersDb } from '../lib/membersClient';
 
 export default function MemberLogin() {
   const [email, setEmail] = useState('');
@@ -7,7 +7,7 @@ export default function MemberLogin() {
   const [msg, setMsg] = useState('');
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
+    membersDb.auth.getUser().then(({ data }) => {
       if (data.user) {
         window.location.replace('/inside');
       }
@@ -16,7 +16,7 @@ export default function MemberLogin() {
 
   async function signIn() {
     setMsg('');
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await membersDb.auth.signInWithPassword({
       email,
       password,
     });
@@ -32,7 +32,7 @@ export default function MemberLogin() {
       setMsg('Enter your email first.');
       return;
     }
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await membersDb.auth.resetPasswordForEmail(email, {
       redirectTo: 'https://americafirstcitizensnetwork.org/member-login',
     });
     if (error) setMsg(error.message);
