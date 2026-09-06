@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { membersDb } from '../lib/membersClient';
 
 type Profile = {
   email: string | null;
@@ -20,18 +20,21 @@ function kindLabel(profile: Profile | null) {
 export default function Inside() {
   const [email, setEmail] = useState('');
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [msg, setMsg] = useState('Loading...');
+  const [msg, setMsg] = useState('');
 
   useEffect(() => {
     async function load() {
-      const { data: auth } = await supabase.auth.getUser();
+      const { data: auth } = await membersDb.auth.getUser();
       const user = auth.user;
+
       if (!user) {
-        window.location.href = '/member-login';
+        window.location.replace('/member-login');
         return;
       }
 
-      const { data, error } = await supabase
+      setEmail(user.email || '');
+
+      const { data, error } = await membersDb
         .from('profiles')
         .select('email, status, is_admin')
         .eq('id', user.id)
@@ -39,18 +42,21 @@ export default function Inside() {
 
       if (error) {
         setMsg(error.message);
+        setProfile({
+          email: user.email || null,
+          status: 'guest',
+          is_admin: false,
+        });
         return;
       }
 
-      const row = (data || {
-        email: user.email || null,
-        status: 'pending',
-        is_admin: false,
-      }) as Profile;
-
-      setEmail(user.email || row.email || '');
-      setProfile(row);
-      setMsg('');
+      setProfile(
+        (data || {
+          email: user.email || null,
+          status: 'guest',
+          is_admin: false,
+        }) as Profile
+      );
     }
 
     load();
