@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../lib/supabaseClient';
+import { senateDb } from '../lib/senateClient';
 
 function formatAmericaFirst(value) {
   const v = String(value ?? '').trim().toLowerCase();
@@ -25,7 +25,7 @@ export default function SenateTracker() {
     async function fetchPeople() {
       try {
         setLoading(true);
-        const { data, error } = await supabase
+        const { data, error } = await senateDb
           .from('people')
           .select('full_name, state, party, status, current_office, america_first, core_1_send_them_home, core_2_election_enforcement, core_3_america_first_foreign_policy, core_4_american_workers_trade, core_5_constitution_court_cases, reelection, election_year, senate_class')
           .order('state', { ascending: true });
@@ -34,7 +34,7 @@ export default function SenateTracker() {
         setPeople(data || []);
       } catch (err) {
         console.error(err);
-        setError('Could not load data. Please check Supabase connection.');
+        setError('Could not load data. Please check Senate Supabase connection.');
       } finally {
         setLoading(false);
       }
