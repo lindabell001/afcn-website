@@ -12,7 +12,7 @@ export default function Senate() {
             AMERICA FIRST
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-blue">
-            22 America First — so far
+            23 America First — so far
           </p>
         </div>
 
@@ -26,10 +26,10 @@ export default function Senate() {
             <p>Win the primary: Nominee.</p>
             <p>Lose: Also Ran.</p>
 
-            <p className="mt-3">10 incumbents · 12 nominees</p>
-            <p>2 still in a primary (Sununu, Katz).</p>
+            <p className="mt-3">10 incumbents · 13 nominees</p>
+            <p>1 still in a primary (Katz).</p>
 
-            <p className="mt-3">Listed below are the 22 best — so far.</p>
+            <p className="mt-3">Listed below are the 23 best — so far.</p>
             <p>Everyone else is on the tracker.</p>
 
             <p className="mt-3">Ready now: names, status, and America First as Yes, No, or Insufficient.</p>
@@ -77,6 +77,12 @@ export default function Senate() {
               <li>MI — Mike Rogers</li>
               <li>MT — Kurt Alme</li>
               <li>NC — Michael Whatley</li>
+              <li>
+                NH — John E. Sununu
+                <span className="block text-sm text-gray-600">
+                  New Hampshire Republican nominee. On the November ballot vs Chris Pappas.
+                </span>
+              </li>
               <li>OK — Kevin Hern</li>
               <li>SC — Darline Graham</li>
               <li>TX — Ken Paxton</li>
