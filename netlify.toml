@@ -1,16 +1,38 @@
-# netlify.toml - SPA Routing for React Router + Vite
+# netlify.toml - one site, short name sends to official name
+
+[[redirects]]
+  from = "https://afcnus.org/*"
+  to = "https://americafirstcitizensnetwork.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.afcnus.org/*"
+  to = "https://americafirstcitizensnetwork.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://afcnus.org/*"
+  to = "https://americafirstcitizensnetwork.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.afcnus.org/*"
+  to = "https://americafirstcitizensnetwork.org/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Build settings for Vite
 [build]
   command = "npm run build"
   publish = "dist"
 
-# Cache control for better performance
 [[headers]]
   for = "/*"
   [headers.values]
