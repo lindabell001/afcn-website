@@ -22,6 +22,36 @@ function formatAmericaFirst(value) {
   return 'NO';
 }
 
+function isTrumpEndorsed(value) {
+  const v = String(value ?? '').trim().toUpperCase();
+  return v === 'T' || v === 'TRUE' || v === 'YES' || v === 'Y';
+}
+
+function isRatedAf(value) {
+  const n = Number(String(value ?? '').trim());
+  return !Number.isNaN(n) && n >= 20;
+}
+
+function Badges({ person }) {
+  const trump = isTrumpEndorsed(person.trump_endorsed);
+  const rated = isRatedAf(person.america_first);
+  if (!trump && !rated) return null;
+  return (
+    <span className="inline-flex flex-wrap gap-1 mt-1">
+      {trump && (
+        <span className="inline-block bg-patriot-red text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+          Trump endorsed
+        </span>
+      )}
+      {rated && (
+        <span className="inline-block bg-patriot-blue text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+          Rated AF
+        </span>
+      )}
+    </span>
+  );
+}
+
 export default function SenateTracker() {
   const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +70,7 @@ export default function SenateTracker() {
         setLoading(true);
         const { data, error } = await senateDb
           .from('people')
-          .select('full_name, state, party, status, current_office, america_first, core_1_send_them_home, core_2_election_enforcement, core_3_america_first_foreign_policy, core_4_american_workers_trade, core_5_constitution_court_cases, reelection, election_year, senate_class')
+          .select('full_name, state, party, status, current_office, america_first, trump_endorsed, core_1_send_them_home, core_2_election_enforcement, core_3_america_first_foreign_policy, core_4_american_workers_trade, core_5_constitution_court_cases, reelection, election_year, senate_class')
           .order('state', { ascending: true });
 
         if (error) throw error;
@@ -220,6 +250,7 @@ export default function SenateTracker() {
                   return (
                     <div key={index} className="bg-white border border-gray-200 rounded-xl p-4">
                       <p className="font-bold text-patriot-blue text-lg leading-tight">{person.full_name || '—'}</p>
+                      <Badges person={person} />
                       <p className="text-sm text-gray-700 mt-1">
                         {[person.state, person.party, person.status].filter(Boolean).join(' · ') || '—'}
                       </p>
@@ -280,7 +311,10 @@ export default function SenateTracker() {
                       const afLabel = formatAmericaFirst(person.america_first);
                       return (
                         <tr key={index} className="border-t hover:bg-gray-50">
-                          <td className="px-4 py-2 font-medium">{person.full_name || '—'}</td>
+                          <td className="px-4 py-2 font-medium">
+                            <div>{person.full_name || '—'}</div>
+                            <Badges person={person} />
+                          </td>
                           <td className="px-4 py-2">{person.state || '—'}</td>
                           <td className="px-4 py-2">{person.party || '—'}</td>
                           <td className="px-4 py-2">{person.status || '—'}</td>
