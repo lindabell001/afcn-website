@@ -209,4 +209,135 @@ export default function SenateTracker() {
                 <option value="NO">Under 20</option>
                 <option value="INSUFFICIENT">Insufficient</option>
               </select>
-            </
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-0.5">Election Year</label>
+              <select value={yearFilter} onChange={(e) => setYearFilter(e.target.value)} className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-sm">
+                <option value="All">All</option>
+                <option value="2026">2026 / Class 2</option>
+                <option value="2028">2028 / Class 3</option>
+                <option value="2030">2030 / Class 1</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {loading && (
+          <div className="text-center py-10 text-lg text-patriot-blue font-semibold">
+            Loading America First scores…
+          </div>
+        )}
+
+        {error && (
+          <div className="text-center py-10 text-red-600 text-lg">
+            {error}
+          </div>
+        )}
+
+        {!loading && !error && (
+          <>
+            <div className="md:hidden space-y-3 pb-8">
+              {filtered.length === 0 ? (
+                <p className="text-center py-8 text-gray-500">No matching records found.</p>
+              ) : (
+                filtered.map((person, index) => {
+                  const year = getYear(person) || '—';
+                  const isOpen = openCard === index;
+                  return (
+                    <div key={index} className="bg-white border border-gray-200 rounded-xl p-4">
+                      <p className="font-bold text-patriot-blue text-lg leading-tight">{person.full_name || '—'}</p>
+                      <Badges person={person} />
+                      <p className="text-sm text-gray-700 mt-1">
+                        {[person.state, person.party, person.status].filter(Boolean).join(' · ') || '—'}
+                      </p>
+                      <p className="mt-2 text-sm">Trump Endorsed: {trumpColumn(person.trump_endorsed)}</p>
+                      <p className="text-sm">America First: {americaFirstColumn(person.america_first)}</p>
+                      <p className="text-sm text-gray-600">Election year: {year}</p>
+                      <button
+                        type="button"
+                        onClick={() => setOpenCard(isOpen ? null : index)}
+                        className="mt-2 text-sm font-semibold text-patriot-blue underline"
+                      >
+                        {isOpen ? 'Hide scores' : 'Show issue scores'}
+                      </button>
+                      {isOpen && (
+                        <div className="mt-2 text-sm text-gray-800 space-y-1 border-t pt-2">
+                          <p>Send Them Home: {person.core_1_send_them_home || '—'}</p>
+                          <p>Election Enforcement: {person.core_2_election_enforcement || '—'}</p>
+                          <p>Foreign Policy: {person.core_3_america_first_foreign_policy || '—'}</p>
+                          <p>American Workers: {person.core_4_american_workers_trade || '—'}</p>
+                          <p>Constitution: {person.core_5_constitution_court_cases || '—'}</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            <div className="hidden md:block overflow-x-auto bg-white rounded-xl border border-gray-200 shadow-sm">
+              <table className="min-w-full text-sm">
+                <thead className="bg-patriot-blue text-white">
+                  <tr>
+                    <th className="px-4 py-2 text-left">Name</th>
+                    <th className="px-4 py-2 text-left">State</th>
+                    <th className="px-4 py-2 text-left">Party</th>
+                    <th className="px-4 py-2 text-left">Status</th>
+                    <th className="px-4 py-2 text-left">Office</th>
+                    <th className="px-4 py-2 text-left">Trump Endorsed</th>
+                    <th className="px-4 py-2 text-left">America First?</th>
+                    <th className="px-4 py-2 text-left">Send Them Home</th>
+                    <th className="px-4 py-2 text-left">Election Enforcement</th>
+                    <th className="px-4 py-2 text-left">Foreign Policy</th>
+                    <th className="px-4 py-2 text-left">American Workers</th>
+                    <th className="px-4 py-2 text-left">Constitution</th>
+                    <th className="px-4 py-2 text-left">Reelection</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.length === 0 ? (
+                    <tr>
+                      <td colSpan={13} className="text-center py-10 text-gray-500">
+                        No matching records found.
+                      </td>
+                    </tr>
+                  ) : (
+                    filtered.map((person, index) => (
+                      <tr key={index} className="border-t hover:bg-gray-50">
+                        <td className="px-4 py-2 font-medium">
+                          <div>{person.full_name || '—'}</div>
+                          <Badges person={person} />
+                        </td>
+                        <td className="px-4 py-2">{person.state || '—'}</td>
+                        <td className="px-4 py-2">{person.party || '—'}</td>
+                        <td className="px-4 py-2">{person.status || '—'}</td>
+                        <td className="px-4 py-2">{person.current_office || '—'}</td>
+                        <td className="px-4 py-2">{trumpColumn(person.trump_endorsed)}</td>
+                        <td className="px-4 py-2">{americaFirstColumn(person.america_first)}</td>
+                        <td className="px-4 py-2">{person.core_1_send_them_home || '—'}</td>
+                        <td className="px-4 py-2">{person.core_2_election_enforcement || '—'}</td>
+                        <td className="px-4 py-2">{person.core_3_america_first_foreign_policy || '—'}</td>
+                        <td className="px-4 py-2">{person.core_4_american_workers_trade || '—'}</td>
+                        <td className="px-4 py-2">{person.core_5_constitution_court_cases || '—'}</td>
+                        <td className="px-4 py-2">{person.reelection || '—'}</td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+
+        <div className="text-center mt-8">
+          <Link
+            to="/senate"
+            className="inline-block bg-patriot-blue hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-lg"
+          >
+            ← Back to 22 FOR THE SENATE
+          </Link>
+        </div>
+      </main>
+    </div>
+  );
+}
