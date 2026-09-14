@@ -100,10 +100,12 @@ export default function SenateTracker() {
   };
 
   const filtered = people.filter(person => {
+    const status = String(person.status || '').trim();
+
     if (viewMode === 'current') {
-      if (!['Candidate', 'Senator'].includes(person.status)) return false;
+      if (!['Candidate', 'Nominee', 'Senator'].includes(status)) return false;
     } else {
-      if (!['Lost Primary', 'Withdrawn', 'Former'].includes(person.status)) return false;
+      if (!['Lost Primary', 'Withdrawn', 'Former'].includes(status)) return false;
     }
 
     if (stateFilter !== 'All' && person.state !== stateFilter) return false;
