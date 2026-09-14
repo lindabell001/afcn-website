@@ -3,9 +3,22 @@ import { Link } from 'react-router-dom';
 import { senateDb } from '../lib/senateClient';
 
 function formatAmericaFirst(value) {
-  const v = String(value ?? '').trim().toLowerCase();
-  if (value === true || v === 'true' || v === 'yes' || v === 'y') return 'YES';
+  if (value === null || value === undefined || String(value).trim() === '') {
+    return '';
+  }
+
+  const raw = String(value).trim();
+  const v = raw.toLowerCase();
+
   if (v === 'insufficient') return 'INSUFFICIENT';
+
+  const n = Number(raw);
+  if (!Number.isNaN(n)) {
+    if (n >= 20) return 'Yes / Rated AF';
+    return 'NO';
+  }
+
+  if (v === 'true' || v === 'yes' || v === 'y') return 'Yes / Rated AF';
   return 'NO';
 }
 
@@ -69,7 +82,7 @@ export default function SenateTracker() {
     if (partyFilter !== 'All' && person.party !== partyFilter) return false;
 
     const afLabel = formatAmericaFirst(person.america_first);
-    if (afFilter === 'YES' && afLabel !== 'YES') return false;
+    if (afFilter === 'YES' && afLabel !== 'Yes / Rated AF') return false;
     if (afFilter === 'NO' && afLabel !== 'NO') return false;
     if (afFilter === 'INSUFFICIENT' && afLabel !== 'INSUFFICIENT') return false;
 
@@ -78,12 +91,12 @@ export default function SenateTracker() {
     return true;
   });
 
-  const afClass = (label) =>
-    label === 'YES'
-      ? 'text-green-600 font-bold'
-      : label === 'INSUFFICIENT'
-      ? 'text-yellow-600 font-bold'
-      : 'text-red-600 font-bold';
+  const afClass = (label) => {
+    if (label === 'Yes / Rated AF') return 'text-green-600 font-bold';
+    if (label === 'INSUFFICIENT') return 'text-yellow-600 font-bold';
+    if (label === 'NO') return 'text-red-600 font-bold';
+    return 'text-gray-500';
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -165,7 +178,7 @@ export default function SenateTracker() {
               <label className="block text-xs font-semibold text-gray-600 mb-0.5">America First?</label>
               <select value={afFilter} onChange={(e) => setAfFilter(e.target.value)} className="w-full border border-gray-300 rounded-md px-2 py-1.5 text-sm">
                 <option value="All">All</option>
-                <option value="YES">YES</option>
+                <option value="YES">Yes / Rated AF</option>
                 <option value="NO">NO</option>
                 <option value="INSUFFICIENT">INSUFFICIENT</option>
               </select>
