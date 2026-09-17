@@ -108,6 +108,10 @@ export default function BecomeOne() {
             {loading ? 'Submitting...' : 'Join for $25/Year – Continue to Secure Payment'}
           </button>
 
+          <p className="mt-6 text-lg leading-relaxed text-gray-700">
+            Membership dues help build the citizen network. America First Citizens Network is a 501(c)(4) social welfare organization. Dues are not tax deductible.
+          </p>
+
           {message && <p className="text-center mt-6 text-lg font-medium text-green-600">{message}</p>}
         </form>
       </main>
