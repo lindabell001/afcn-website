@@ -2,7 +2,7 @@ const Donate = () => {
   return (
     <>
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-red-600 mb-4">
             Support the America First Citizens Network
           </h1>
@@ -11,11 +11,25 @@ const Donate = () => {
           </p>
         </div>
 
-        {/* Big Donate Button - Moved directly under the headline */}
+        <div className="space-y-6 text-lg leading-relaxed text-gray-700 mb-10">
+          <p>
+            We chose the name America First Citizens Network because the country is kept by ordinary people, citizen by citizen, not by a party office.
+          </p>
+          <p>
+            We the People are rebuilding America First. This is the start of the next 250 years. Our work is to train citizens, organize by county, and keep a public record of who in the Senate puts America First.
+          </p>
+          <p>
+            With your support we can keep that record honest and give people a real job in their own backyard. Thank you.
+          </p>
+          <p>
+            America First Citizens Network is a 501(c)(4) social welfare organization. It is not a Political Action Committee. Contributions to America First Citizens Network are not tax deductible.
+          </p>
+        </div>
+
         <div className="text-center mb-12">
-          <a 
-            href="https://givingtools.com/give/4206" 
-            target="_blank" 
+          <a
+            href="https://givingtools.com/give/4206"
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center h-16 px-12 bg-red-600 hover:bg-red-700 text-white text-xl font-bold uppercase tracking-wider rounded-md transition-all shadow-lg"
           >
@@ -38,9 +52,8 @@ const Donate = () => {
           </p>
           <p>
             Our Founders sometimes turned to destructive action and in fact had to fight a war.
-            We use smarter, lawful tools: targeted boycotts, massive voter mobilization, primary
-            challenges, and nonstop accountability campaigns — all driven by America First
-            priorities.
+            We use smarter, lawful tools: public records, county organization, and nonstop
+            accountability — all driven by America First priorities.
           </p>
           <p>
             Our Founders created a permanent lawful structure: The Constitution. Today's Patriots
@@ -56,13 +69,12 @@ const Donate = () => {
             up, get active, and stay involved — exactly as Ben Franklin and our Founders intended.
           </p>
           <p className="font-semibold text-red-600">
-            Your donation directly fuels this network and helps close the representation gap once
-            and for all.
+            Your gift funds the citizen network and the public Senate record.
           </p>
         </article>
 
-        <p className="mt-8 text-xs text-center text-gray-500">
-          America First Citizens Network is a grassroots movement. Contributions are not tax-deductible.
+        <p className="mt-8 text-lg leading-relaxed text-center text-gray-700">
+          Contributions to America First Citizens Network are not tax deductible.
         </p>
       </div>
     </>
