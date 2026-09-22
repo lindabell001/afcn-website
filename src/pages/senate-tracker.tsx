@@ -31,10 +31,17 @@ function afFilterBucket(value) {
 }
 
 function holdsSenateSeat(person) {
-  const status = String(person.status || '').trim();
   const office = String(person.current_office || '').toLowerCase();
-  if (status === 'Senator') return true;
-  if (status === 'Nominee' && office.includes('senator')) return true;
+  const seated = String(person.how_seated || '').toLowerCase();
+  if (office.includes('senator') || office.includes('u.s. senate') || office.includes('us senate')) return true;
+  if (
+    seated.includes('incumbent') ||
+    seated.includes('sitting') ||
+    seated.includes('appointed') ||
+    seated.includes('senator')
+  ) {
+    return true;
+  }
   return false;
 }
 
@@ -76,7 +83,7 @@ export default function SenateTracker() {
         setLoading(true);
         const { data, error } = await senateDb
           .from('people')
-          .select('full_name, state, party, status, current_office, america_first, trump_endorsed, core_1_send_them_home, core_2_election_enforcement, core_3_america_first_foreign_policy, core_4_american_workers_trade, core_5_constitution_court_cases, reelection, election_year, senate_class')
+          .select('full_name, state, party, status, current_office, how_seated, america_first, trump_endorsed, core_1_send_them_home, core_2_election_enforcement, core_3_america_first_foreign_policy, core_4_american_workers_trade, core_5_constitution_court_cases, reelection, election_year, senate_class')
           .order('state', { ascending: true });
 
         if (error) throw error;
@@ -126,15 +133,12 @@ export default function SenateTracker() {
     if (afFilter === 'NO' && bucket !== 'NO') return false;
     if (afFilter === 'INSUFFICIENT' && bucket !== 'INSUFFICIENT') return false;
 
-    if (viewMode !== 'sitting') {
-      if (yearFilter !== 'All' && getYear(person) !== yearFilter) return false;
-    } else if (yearFilter !== 'All') {
-      const year = getYear(person);
-      const isIncumbentNominee = status === 'Nominee' && holdsSenateSeat(person);
-      if (year && year !== yearFilter && !isIncumbentNominee && status !== 'Senator') return false;
-      if (status === 'Senator' && year && year !== yearFilter) {
-        // still a sitting senator for another class; keep them on Sitting
+    if (viewMode === 'sitting') {
+      if (yearFilter !== 'All') {
+        // Sitting list is who holds a seat now. Year filter does not remove them.
       }
+    } else if (yearFilter !== 'All' && getYear(person) !== yearFilter) {
+      return false;
     }
 
     return true;
@@ -159,7 +163,7 @@ export default function SenateTracker() {
             <p>The table opens on sitting senators.</p>
             <p>Current candidates shows Candidate and Nominee only.</p>
             <p className="mb-2">Also Ran is the third tab.</p>
-            <p>Names, status, and scores are active now.</p>
+            <p>Names, race status, and scores are active now.</p>
             <p>Search for bills, votes, and money — coming on this page.</p>
           </div>
         </div>
@@ -271,8 +275,9 @@ export default function SenateTracker() {
                       <p className="font-bold text-patriot-blue text-lg leading-tight">{person.full_name || '—'}</p>
                       <Badges person={person} />
                       <p className="text-sm text-gray-700 mt-1">
-                        {[person.state, person.party, person.status].filter(Boolean).join(' · ') || '—'}
+                        {[person.state, person.party].filter(Boolean).join(' · ') || '—'}
                       </p>
+                      <p className="text-sm">Race status: {person.status || '—'}</p>
                       <p className="mt-2 text-sm">Trump Endorsed: {trumpColumn(person.trump_endorsed)}</p>
                       <p className="text-sm">America First: {americaFirstColumn(person.america_first)}</p>
                       <p className="text-sm text-gray-600">Election year: {year}</p>
@@ -305,7 +310,7 @@ export default function SenateTracker() {
                     <th className="px-4 py-2 text-left">Name</th>
                     <th className="px-4 py-2 text-left">State</th>
                     <th className="px-4 py-2 text-left">Party</th>
-                    <th className="px-4 py-2 text-left">Status</th>
+                    <th className="px-4 py-2 text-left">Race status</th>
                     <th className="px-4 py-2 text-left">Office</th>
                     <th className="px-4 py-2 text-left">Trump Endorsed</th>
                     <th className="px-4 py-2 text-left">America First?</th>
