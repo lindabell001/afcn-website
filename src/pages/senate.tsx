@@ -12,7 +12,7 @@ export default function Senate() {
             AMERICA FIRST
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-blue">
-            23 America First — so far
+            24 America First — so far
           </p>
         </div>
 
@@ -26,10 +26,10 @@ export default function Senate() {
             <p>Win the primary: Nominee.</p>
             <p>Lose: Also Ran.</p>
 
-            <p className="mt-3">10 incumbents · 13 nominees</p>
-            <p>1 still in a primary (Katz).</p>
+            <p className="mt-3">10 incumbents · 14 nominees</p>
+            <p>No primaries left on this slate.</p>
 
-            <p className="mt-3">Listed below are the 23 best — so far.</p>
+            <p className="mt-3">Listed below are the 24 best — so far.</p>
             <p>Everyone else is on the tracker.</p>
 
             <p className="mt-3">Ready now: names, status, and America First as Yes, No, or Insufficient.</p>
@@ -70,6 +70,12 @@ export default function Senate() {
             </h2>
             <ul className="space-y-2 text-gray-800">
               <li>AL — Barry Moore</li>
+              <li>
+                DE — Mike Katz
+                <span className="block text-sm text-gray-600">
+                  Delaware Republican nominee. On the November ballot vs Chris Coons.
+                </span>
+              </li>
               <li>GA — Mike Collins</li>
               <li>IA — Ashley Hinson</li>
               <li>KY — Andy Barr</li>
