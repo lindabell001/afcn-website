@@ -59,7 +59,7 @@ export default function SenateTracker() {
   const [partyFilter, setPartyFilter] = useState('All');
   const [afFilter, setAfFilter] = useState('All');
   const [yearFilter, setYearFilter] = useState('2026');
-  const [viewMode, setViewMode] = useState('current');
+  const [viewMode, setViewMode] = useState('sitting');
   const [openCard, setOpenCard] = useState(null);
 
   useEffect(() => {
@@ -102,8 +102,10 @@ export default function SenateTracker() {
   const filtered = people.filter(person => {
     const status = String(person.status || '').trim();
 
-    if (viewMode === 'current') {
-      if (!['Candidate', 'Nominee', 'Senator'].includes(status)) return false;
+    if (viewMode === 'sitting') {
+      if (status !== 'Senator') return false;
+    } else if (viewMode === 'current') {
+      if (status !== 'Candidate' && status !== 'Nominee') return false;
     } else {
       if (!['Lost Primary', 'Withdrawn', 'Former'].includes(status)) return false;
     }
@@ -137,9 +139,9 @@ export default function SenateTracker() {
             </p>
             <p>This is the live Senate record — all 100, plus 2026 challengers.</p>
             <p className="mb-2">Win the primary: Nominee.</p>
-            <p>The table opens on 2026 because those are the seats up now.</p>
-            <p>Change Election Year to All to see the rest of the chamber.</p>
-            <p className="mb-2">Also Ran is the other tab.</p>
+            <p>The table opens on sitting senators.</p>
+            <p>Current candidates shows Candidate and Nominee only.</p>
+            <p className="mb-2">Also Ran is the third tab.</p>
             <p>Names, status, and scores are active now.</p>
             <p>Search for bills, votes, and money — coming on this page.</p>
           </div>
@@ -164,14 +166,22 @@ export default function SenateTracker() {
 
         <div className="bg-white p-3 rounded-xl border border-gray-200 mb-3">
           <div className="flex justify-center mb-2">
-            <div className="inline-flex rounded-lg border border-gray-300 overflow-hidden">
+            <div className="inline-flex rounded-lg border border-gray-300 overflow-hidden flex-wrap justify-center">
+              <button
+                onClick={() => setViewMode('sitting')}
+                className={`px-3 py-1.5 font-semibold text-xs uppercase tracking-wider ${
+                  viewMode === 'sitting' ? 'bg-patriot-blue text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                Sitting senators
+              </button>
               <button
                 onClick={() => setViewMode('current')}
                 className={`px-3 py-1.5 font-semibold text-xs uppercase tracking-wider ${
                   viewMode === 'current' ? 'bg-patriot-blue text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                Current Candidates
+                Current candidates
               </button>
               <button
                 onClick={() => setViewMode('historical')}
