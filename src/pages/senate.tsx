@@ -12,7 +12,7 @@ export default function Senate() {
             AMERICA FIRST
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-blue">
-            24 America First — so far
+            24 America First
           </p>
         </div>
 
@@ -29,7 +29,7 @@ export default function Senate() {
             <p className="mt-3">10 incumbents · 14 nominees</p>
             <p>No primaries left on this slate.</p>
 
-            <p className="mt-3">Listed below are the 24 best — so far.</p>
+            <p className="mt-3">Listed below are the 24 best.</p>
             <p>Everyone else is on the tracker.</p>
 
             <p className="mt-3">Ready now: names, status, and America First as Yes, No, or Insufficient.</p>
