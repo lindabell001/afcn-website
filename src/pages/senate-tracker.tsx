@@ -30,19 +30,13 @@ function afFilterBucket(value) {
   return '';
 }
 
+function howSeatedValue(person) {
+  return String(person.how_seated || '').trim().toLowerCase();
+}
+
 function holdsSenateSeat(person) {
-  const office = String(person.current_office || '').toLowerCase();
-  const seated = String(person.how_seated || '').toLowerCase();
-  if (office.includes('senator') || office.includes('u.s. senate') || office.includes('us senate')) return true;
-  if (
-    seated.includes('incumbent') ||
-    seated.includes('sitting') ||
-    seated.includes('appointed') ||
-    seated.includes('senator')
-  ) {
-    return true;
-  }
-  return false;
+  const seated = howSeatedValue(person);
+  return seated === 'elected' || seated === 'appointed';
 }
 
 function Badges({ person }) {
@@ -118,6 +112,7 @@ export default function SenateTracker() {
     const status = String(person.status || '').trim();
 
     if (viewMode === 'sitting') {
+      if (['Lost Primary', 'Withdrawn', 'Former'].includes(status)) return false;
       if (!holdsSenateSeat(person)) return false;
     } else if (viewMode === 'current') {
       if (status !== 'Candidate' && status !== 'Nominee') return false;
@@ -133,11 +128,7 @@ export default function SenateTracker() {
     if (afFilter === 'NO' && bucket !== 'NO') return false;
     if (afFilter === 'INSUFFICIENT' && bucket !== 'INSUFFICIENT') return false;
 
-    if (viewMode === 'sitting') {
-      if (yearFilter !== 'All') {
-        // Sitting list is who holds a seat now. Year filter does not remove them.
-      }
-    } else if (yearFilter !== 'All' && getYear(person) !== yearFilter) {
+    if (viewMode !== 'sitting' && yearFilter !== 'All' && getYear(person) !== yearFilter) {
       return false;
     }
 
