@@ -30,6 +30,14 @@ function afFilterBucket(value) {
   return '';
 }
 
+function holdsSenateSeat(person) {
+  const status = String(person.status || '').trim();
+  const office = String(person.current_office || '').toLowerCase();
+  if (status === 'Senator') return true;
+  if (status === 'Nominee' && office.includes('senator')) return true;
+  return false;
+}
+
 function Badges({ person }) {
   const trump = isTrumpEndorsed(person.trump_endorsed);
   const rated = isRatedAf(person.america_first);
@@ -103,7 +111,7 @@ export default function SenateTracker() {
     const status = String(person.status || '').trim();
 
     if (viewMode === 'sitting') {
-      if (status !== 'Senator') return false;
+      if (!holdsSenateSeat(person)) return false;
     } else if (viewMode === 'current') {
       if (status !== 'Candidate' && status !== 'Nominee') return false;
     } else {
@@ -118,7 +126,16 @@ export default function SenateTracker() {
     if (afFilter === 'NO' && bucket !== 'NO') return false;
     if (afFilter === 'INSUFFICIENT' && bucket !== 'INSUFFICIENT') return false;
 
-    if (yearFilter !== 'All' && getYear(person) !== yearFilter) return false;
+    if (viewMode !== 'sitting') {
+      if (yearFilter !== 'All' && getYear(person) !== yearFilter) return false;
+    } else if (yearFilter !== 'All') {
+      const year = getYear(person);
+      const isIncumbentNominee = status === 'Nominee' && holdsSenateSeat(person);
+      if (year && year !== yearFilter && !isIncumbentNominee && status !== 'Senator') return false;
+      if (status === 'Senator' && year && year !== yearFilter) {
+        // still a sitting senator for another class; keep them on Sitting
+      }
+    }
 
     return true;
   });
