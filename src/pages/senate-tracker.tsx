@@ -68,7 +68,7 @@ export default function SenateTracker() {
   const [partyFilter, setPartyFilter] = useState('All');
   const [afFilter, setAfFilter] = useState('All');
   const [yearFilter, setYearFilter] = useState('2026');
-  const [viewMode, setViewMode] = useState('sitting');
+  const [viewMode, setViewMode] = useState('current');
   const [openCard, setOpenCard] = useState(null);
 
   useEffect(() => {
@@ -151,10 +151,9 @@ export default function SenateTracker() {
             </p>
             <p>This is the live Senate record — all 100, plus 2026 challengers.</p>
             <p className="mb-2">Win the primary: Nominee.</p>
-            <p>The table opens on sitting senators.</p>
-            <p>Current candidates shows Candidate and Nominee only.</p>
-            <p className="mb-2">Also Ran is the third tab.</p>
-            <p>Names, race status, and scores are active now.</p>
+            <p>The table opens on current candidates for 2026.</p>
+            <p>Sitting senators and Also Ran are the other tabs.</p>
+            <p className="mb-2">Names, race status, and scores are active now.</p>
             <p>Search for bills, votes, and money — coming on this page.</p>
           </div>
         </div>
