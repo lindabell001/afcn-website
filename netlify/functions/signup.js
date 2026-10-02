@@ -1,6 +1,6 @@
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
-exports.handler = async function(event, context) {
+export const handler = async function(event, context) {
   console.log("=== FUNCTION STARTED ===");
   console.log("Method:", event.httpMethod);
 
@@ -16,7 +16,7 @@ exports.handler = async function(event, context) {
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
-    console.log("✅ Supabase client created successfully");
+    console.log("Supabase client created successfully");
 
     const { data, error } = await supabase.auth.signUp({
       email: body.email,
@@ -35,22 +35,22 @@ exports.handler = async function(event, context) {
     });
 
     if (error) {
-      console.error("❌ Auth signup error:", error);
+      console.error("Auth signup error:", error);
       throw error;
     }
 
-    console.log("✅ User created in Supabase Auth");
+    console.log("User created in Supabase Auth");
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
-        success: true, 
-        message: "Application received! Norine will review it." 
+      body: JSON.stringify({
+        success: true,
+        message: "Application received! Norine will review it."
       })
     };
 
   } catch (err) {
-    console.error("💥 FUNCTION ERROR:", err);
+    console.error("FUNCTION ERROR:", err);
     return {
       statusCode: 400,
       body: JSON.stringify({ error: err.message || "Unknown error" })
