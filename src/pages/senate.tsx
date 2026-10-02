@@ -80,12 +80,7 @@ export default function Senate() {
             </h2>
             <ul className="space-y-2 text-gray-800">
               <li>AL — Barry Moore</li>
-              <li>
-                DE — Mike Katz
-                <span className="block text-sm text-gray-600">
-                  Delaware Republican nominee. On the November ballot vs Chris Coons.
-                </span>
-              </li>
+              <li>DE — Mike Katz</li>
               <li>GA — Mike Collins</li>
               <li>IA — Ashley Hinson</li>
               <li>KY — Andy Barr</li>
@@ -93,12 +88,7 @@ export default function Senate() {
               <li>MI — Mike Rogers</li>
               <li>MT — Kurt Alme</li>
               <li>NC — Michael Whatley</li>
-              <li>
-                NH — John E. Sununu
-                <span className="block text-sm text-gray-600">
-                  New Hampshire Republican nominee. On the November ballot vs Chris Pappas.
-                </span>
-              </li>
+              <li>NH — John E. Sununu</li>
               <li>OK — Kevin Hern</li>
               <li>TX — Ken Paxton</li>
               <li>WY — Harriet Hageman</li>
