@@ -1,65 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { senateDb } from '../lib/senateClient';
-
-function isRatedAf(value) {
-  const n = Number(String(value ?? '').trim());
-  return !Number.isNaN(n) && String(value).trim() !== '' && n >= 20;
-}
-
-function isSeated(person) {
-  const seated = String(person.how_seated || '').trim().toLowerCase();
-  return seated === 'elected' || seated === 'appointed';
-}
-
-function getYear(person) {
-  if (person.election_year) return String(person.election_year);
-  if (person.senate_class === 2 || person.senate_class === '2') return '2026';
-  if (person.senate_class === 3 || person.senate_class === '3') return '2028';
-  if (person.senate_class === 1 || person.senate_class === '1') return '2030';
-  const reelection = String(person.reelection || '');
-  if (reelection.includes('2026')) return '2026';
-  if (reelection.includes('2028')) return '2028';
-  if (reelection.includes('2030')) return '2030';
-  return '';
-}
 
 export default function Senate() {
-  const [ratedOnBallot, setRatedOnBallot] = useState(null);
-  const [alreadyInOffice, setAlreadyInOffice] = useState(null);
-  const [newNominees, setNewNominees] = useState(null);
-
-  useEffect(() => {
-    async function loadCounts() {
-      const { data, error } = await senateDb
-        .from('people')
-        .select('status, america_first, how_seated, election_year, senate_class, reelection, trump_endorsed');
-
-      if (error || !data) {
-        setRatedOnBallot(0);
-        setAlreadyInOffice(0);
-        setNewNominees(0);
-        return;
-      }
-
-      const ballot = data.filter((person) => {
-        const status = String(person.status || '').trim();
-        if (status !== 'Candidate' && status !== 'Nominee') return false;
-        if (getYear(person) !== '2026') return false;
-        return isRatedAf(person.america_first);
-      });
-
-      const seated = ballot.filter(isSeated);
-      const fresh = ballot.filter((person) => !isSeated(person));
-
-      setRatedOnBallot(ballot.length);
-      setAlreadyInOffice(seated.length);
-      setNewNominees(fresh.length);
-    }
-
-    loadCounts();
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-4 pb-10">
@@ -70,7 +12,7 @@ export default function Senate() {
             AMERICA FIRST
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-blue">
-            Rated AF on the 2026 ballot: {ratedOnBallot === null ? '…' : ratedOnBallot}
+            24 America First
           </p>
         </div>
 
@@ -80,17 +22,18 @@ export default function Senate() {
               AFCN has the score. You don’t have to hunt.
             </p>
 
-            <p>Vetted people are listed as candidates.</p>
-            <p>Win the primary: Nominee.</p>
-            <p>Lose: Also Ran.</p>
-
-            <p className="mt-3">Already in office: {alreadyInOffice === null ? '…' : alreadyInOffice}</p>
-            <p>New nominees: {newNominees === null ? '…' : newNominees}</p>
-            <p className="mt-2 text-sm sm:text-base text-gray-600">
-              Trump Endorsed is a separate badge. Rated AF is a score of 20 or more.
+            <p>The primaries are over.</p>
+            <p>
+              The names below are the America First incumbents on the 2026 ballot and the America First party nominees on the November ballot.
             </p>
+            <p>People who lost a primary are on the tracker under Historical / Also Ran.</p>
+            <p>They are not on this page.</p>
+            <p>Trump Endorsed is a separate badge. Rated AF is a score of 20 or more.</p>
 
-            <p className="mt-3">Listed below are the 2026 America First names.</p>
+            <p className="mt-3">Already in office: 11</p>
+            <p>New nominees: 13</p>
+
+            <p className="mt-3">Listed below are the 24 America First names.</p>
             <p>Everyone else is on the tracker.</p>
 
             <p className="mt-3">Ready now: names, status, and America First as Yes, No, or Insufficient.</p>
@@ -120,6 +63,12 @@ export default function Senate() {
               <li>NE — Pete Ricketts</li>
               <li>OH — Jon Husted</li>
               <li>SD — Mike Rounds</li>
+              <li>
+                SC — Darline Graham
+                <span className="block text-sm text-gray-600">
+                  Sitting by appointment. On the November ballot.
+                </span>
+              </li>
               <li>TN — Bill Hagerty</li>
               <li>WV — Shelley Moore Capito</li>
             </ul>
@@ -151,7 +100,6 @@ export default function Senate() {
                 </span>
               </li>
               <li>OK — Kevin Hern</li>
-              <li>SC — Darline Graham</li>
               <li>TX — Ken Paxton</li>
               <li>WY — Harriet Hageman</li>
             </ul>
