@@ -81,7 +81,7 @@ export default function Inside() {
         <a href="/senate-tracker" style={{ padding: 16, border: '1px solid #1e3a5f', borderRadius: 8, textDecoration: 'none', color: '#1e3a5f' }}>
           Senate tracker
         </a>
-        <a href="/my-podcasts" style={{ padding: 16, border: '1px solid #1e3a5f', borderRadius: 8, textDecoration: 'none', color: '#1e3a5f' }}>
+        <a href="/my-podcast-dashboard" style={{ padding: 16, border: '1px solid #1e3a5f', borderRadius: 8, textDecoration: 'none', color: '#1e3a5f' }}>
           My podcasts
         </a>
         {isAdmin && (
