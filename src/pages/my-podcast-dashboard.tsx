@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../lib/supabaseClient';
+import { membersDb } from '../lib/membersClient';
 import SiteFooter from '../components/SiteFooter';
 
 interface Podcast {
@@ -26,19 +26,21 @@ export default function MyPodcastDashboard() {
   useEffect(() => {
     const loadDashboard = async () => {
       try {
-        // Get current user
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session?.user) {
+        // Get current user using the same client as inside.tsx
+        const { data: auth } = await membersDb.auth.getUser();
+        const user = auth.user;
+
+        if (!user) {
           setLoading(false);
           return;
         }
-        setUserId(session.user.id);
+        setUserId(user.id);
 
         // Fetch podcasts owned by this user
-        const { data: podcastData, error: podcastError } = await supabase
+        const { data: podcastData, error: podcastError } = await membersDb
           .from('podcasts')
           .select('id, title, slug, tagline')
-          .eq('host_id', session.user.id)
+          .eq('host_id', user.id)
           .order('created_at', { ascending: false });
 
         if (podcastError) throw podcastError;
@@ -50,7 +52,7 @@ export default function MyPodcastDashboard() {
         const episodeMap: Record<string, Episode[]> = {};
 
         for (const podcast of podcastsList) {
-          const { data: episodeData, error: episodeError } = await supabase
+          const { data: episodeData, error: episodeError } = await membersDb
             .from('episodes')
             .select('id, title, show_name, created_at')
             .eq('show_name', podcast.title)
