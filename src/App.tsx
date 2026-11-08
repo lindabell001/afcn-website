@@ -16,7 +16,8 @@ import MemberDashboard from './pages/MemberDashboard';
 import Inside from './pages/inside';
 
 // Podcast Pages
-import MyPodcasts from './pages/my-podcasts';
+import MyPodcastDashboard from './pages/my-podcast-dashboard';
+import PodcastProduction from './pages/podcast-production';
 import MyEpisodes from './pages/my-episodes';
 import BeginnerSetup from './pages/podcast-setup/beginner';
 import ExperiencedSetup from './pages/podcast-setup/experienced';
@@ -99,7 +100,8 @@ const App = () => {
           <Route path="/free-membership" element={<FreeMembership />} />
 
           {/* Podcast Routes */}
-          <Route path="/my-podcasts" element={<MyPodcasts />} />
+          <Route path="/my-podcast-dashboard" element={<MyPodcastDashboard />} />
+          <Route path="/podcast-production" element={<PodcastProduction />} />
           <Route path="/my-episodes" element={<MyEpisodes />} />
           <Route path="/episode-calendar" element={<EpisodeCalendar />} />
           <Route path="/podcast-setup" element={<PodcastSetupHub />} />
