@@ -128,7 +128,7 @@ export default function MyPodcastDashboard() {
                   <div className="mb-8">
                     {podcast.slug ? (
                       <Link
-                        to={`/podcast/${podcast.slug}`}
+                        to={`/resources/podcasts/${podcast.slug}`}
                         className="text-4xl font-bold text-patriot-blue hover:text-patriot-red transition-colors"
                       >
                         {podcast.title}
