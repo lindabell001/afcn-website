@@ -12,7 +12,7 @@ export default function Senate() {
             AMERICA FIRST
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-patriot-blue">
-            24 America First
+            12 Winners • 10 Losses • 2 Awaiting Final Calls
           </p>
         </div>
 
@@ -55,22 +55,22 @@ export default function Senate() {
               AMERICA FIRST INCUMBENTS
             </h2>
             <ul className="space-y-2 text-gray-800">
-              <li>AK — Dan Sullivan</li>
-              <li>AR — Tom Cotton</li>
-              <li>ID — Jim Risch</li>
-              <li>KS — Roger Marshall</li>
-              <li>MS — Cindy Hyde-Smith</li>
-              <li>NE — Pete Ricketts</li>
-              <li>OH — Jon Husted</li>
-              <li>SD — Mike Rounds</li>
+              <li>⏳ AK — Dan Sullivan</li>
+              <li>✅ AR — Tom Cotton</li>
+              <li>✅ ID — Jim Risch</li>
+              <li>❌ KS — Roger Marshall</li>
+              <li>⏳ MS — Cindy Hyde-Smith</li>
+              <li>✅ NE — Pete Ricketts</li>
+              <li>❌ OH — Jon Husted</li>
+              <li>✅ SD — Mike Rounds</li>
               <li>
-                SC — Darline Graham
+                ❌ SC — Darline Graham
                 <span className="block text-sm text-gray-600">
                   Sitting by appointment. On the November ballot.
                 </span>
               </li>
-              <li>TN — Bill Hagerty</li>
-              <li>WV — Shelley Moore Capito</li>
+              <li>✅ TN — Bill Hagerty</li>
+              <li>✅ WV — Shelley Moore Capito</li>
             </ul>
           </div>
 
@@ -79,19 +79,19 @@ export default function Senate() {
               AMERICA FIRST NEW NOMINEES
             </h2>
             <ul className="space-y-2 text-gray-800">
-              <li>AL — Barry Moore</li>
-              <li>DE — Mike Katz</li>
-              <li>GA — Mike Collins</li>
-              <li>IA — Ashley Hinson</li>
-              <li>KY — Andy Barr</li>
-              <li>LA — Julia Letlow</li>
-              <li>MI — Mike Rogers</li>
-              <li>MT — Kurt Alme</li>
-              <li>NC — Michael Whatley</li>
-              <li>NH — John E. Sununu</li>
-              <li>OK — Kevin Hern</li>
-              <li>TX — Ken Paxton</li>
-              <li>WY — Harriet Hageman</li>
+              <li>✅ AL — Barry Moore</li>
+              <li>❌ DE — Mike Katz</li>
+              <li>❌ GA — Mike Collins</li>
+              <li>❌ IA — Ashley Hinson</li>
+              <li>✅ KY — Andy Barr</li>
+              <li>✅ LA — Julia Letlow</li>
+              <li>❌ MI — Mike Rogers</li>
+              <li>✅ MT — Kurt Alme</li>
+              <li>❌ NC — Michael Whatley</li>
+              <li>❌ NH — John E. Sununu</li>
+              <li>✅ OK — Kevin Hern</li>
+              <li>❌ TX — Ken Paxton</li>
+              <li>✅ WY — Harriet Hageman</li>
             </ul>
           </div>
         </div>
