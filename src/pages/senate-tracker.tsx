@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { senateDb } from '../lib/senateClient';
 
+function slugify(name) {
+  return String(name || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 function isTrumpEndorsed(value) {
   return String(value ?? '').trim().toUpperCase() === 'T';
 }
@@ -260,9 +267,12 @@ export default function SenateTracker() {
                 filtered.map((person, index) => {
                   const year = getYear(person) || '—';
                   const isOpen = openCard === index;
+                  const slug = slugify(person.full_name);
                   return (
                     <div key={index} className="bg-white border border-gray-200 rounded-xl p-4">
-                      <p className="font-bold text-patriot-blue text-lg leading-tight">{person.full_name || '—'}</p>
+                      <Link to={`/senator/${slug}`} className="font-bold text-patriot-blue text-lg leading-tight hover:underline">
+                        {person.full_name || '—'}
+                      </Link>
                       <Badges person={person} />
                       <p className="text-sm text-gray-700 mt-1">
                         {[person.state, person.party].filter(Boolean).join(' · ') || '—'}
@@ -320,26 +330,31 @@ export default function SenateTracker() {
                       </td>
                     </tr>
                   ) : (
-                    filtered.map((person) => (
-                      <tr key={person.full_name + person.state + person.status} className="border-t hover:bg-gray-50">
-                        <td className="px-4 py-2 font-medium">
-                          <div>{person.full_name || '—'}</div>
-                          <Badges person={person} />
-                        </td>
-                        <td className="px-4 py-2">{person.state || '—'}</td>
-                        <td className="px-4 py-2">{person.party || '—'}</td>
-                        <td className="px-4 py-2">{person.status || '—'}</td>
-                        <td className="px-4 py-2">{person.current_office || '—'}</td>
-                        <td className="px-4 py-2">{trumpColumn(person.trump_endorsed)}</td>
-                        <td className="px-4 py-2">{americaFirstColumn(person.america_first)}</td>
-                        <td className="px-4 py-2">{person.core_1_send_them_home || '—'}</td>
-                        <td className="px-4 py-2">{person.core_2_election_enforcement || '—'}</td>
-                        <td className="px-4 py-2">{person.core_3_america_first_foreign_policy || '—'}</td>
-                        <td className="px-4 py-2">{person.core_4_american_workers_trade || '—'}</td>
-                        <td className="px-4 py-2">{person.core_5_constitution_court_cases || '—'}</td>
-                        <td className="px-4 py-2">{person.reelection || '—'}</td>
-                      </tr>
-                    ))
+                    filtered.map((person) => {
+                      const slug = slugify(person.full_name);
+                      return (
+                        <tr key={person.full_name + person.state + person.status} className="border-t hover:bg-gray-50">
+                          <td className="px-4 py-2 font-medium">
+                            <Link to={`/senator/${slug}`} className="hover:underline text-patriot-blue">
+                              {person.full_name || '—'}
+                            </Link>
+                            <Badges person={person} />
+                          </td>
+                          <td className="px-4 py-2">{person.state || '—'}</td>
+                          <td className="px-4 py-2">{person.party || '—'}</td>
+                          <td className="px-4 py-2">{person.status || '—'}</td>
+                          <td className="px-4 py-2">{person.current_office || '—'}</td>
+                          <td className="px-4 py-2">{trumpColumn(person.trump_endorsed)}</td>
+                          <td className="px-4 py-2">{americaFirstColumn(person.america_first)}</td>
+                          <td className="px-4 py-2">{person.core_1_send_them_home || '—'}</td>
+                          <td className="px-4 py-2">{person.core_2_election_enforcement || '—'}</td>
+                          <td className="px-4 py-2">{person.core_3_america_first_foreign_policy || '—'}</td>
+                          <td className="px-4 py-2">{person.core_4_american_workers_trade || '—'}</td>
+                          <td className="px-4 py-2">{person.core_5_constitution_court_cases || '—'}</td>
+                          <td className="px-4 py-2">{person.reelection || '—'}</td>
+                        </tr>
+                      );
+                    })
                   )}
                 </tbody>
               </table>
