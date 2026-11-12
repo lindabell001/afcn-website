@@ -54,7 +54,7 @@ import Committees from './pages/committees';
 import TakeAction from './pages/take-action';
 import Senate from './pages/senate';
 import SenateTracker from './pages/senate-tracker';
-import SenatorPage from './pages/senator/SenatorPage.tsx';
+import SenatorPage from './pages/senator/SenatorPage';
 import House from './pages/house';
 import ConstitutionAcademy from './pages/ConstitutionAcademy';
 import LearningSources from './pages/learning-sources';
