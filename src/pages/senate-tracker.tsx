@@ -270,7 +270,10 @@ export default function SenateTracker() {
                   const slug = slugify(person.full_name);
                   return (
                     <div key={index} className="bg-white border border-gray-200 rounded-xl p-4">
-                      <Link to={`/senator/${slug}`} className="font-bold text-patriot-blue text-lg leading-tight hover:underline">
+                      <Link
+                        to={`/senator/${slug}`}
+                        className="font-bold text-patriot-blue text-lg leading-tight underline hover:text-patriot-red"
+                      >
                         {person.full_name || '—'}
                       </Link>
                       <Badges person={person} />
@@ -335,7 +338,10 @@ export default function SenateTracker() {
                       return (
                         <tr key={person.full_name + person.state + person.status} className="border-t hover:bg-gray-50">
                           <td className="px-4 py-2 font-medium">
-                            <Link to={`/senator/${slug}`} className="hover:underline text-patriot-blue">
+                            <Link
+                              to={`/senator/${slug}`}
+                              className="text-patriot-blue underline hover:text-patriot-red font-semibold"
+                            >
                               {person.full_name || '—'}
                             </Link>
                             <Badges person={person} />
@@ -374,3 +380,4 @@ export default function SenateTracker() {
     </div>
   );
 }
+After you commit
