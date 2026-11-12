@@ -380,4 +380,3 @@ export default function SenateTracker() {
     </div>
   );
 }
-After you commit
