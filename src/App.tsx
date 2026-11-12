@@ -1,157 +1,89 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
-import SiteLayout from './components/SiteLayout';
-import SiteFooter from './components/SiteFooter';
+The Netlify deploy errored, with the following guidance provided:
 
-// Main Pages
-import Index from './pages/Index';
-import About from './pages/About';
-import Resources from './pages/Resources';
-import BecomeOne from './pages/BecomeOne';
-import Donate from './pages/Donate';
-import Mission from './pages/Mission';
-import MemberLogin from './pages/MemberLogin';
-import MemberDashboard from './pages/MemberDashboard';
-import Inside from './pages/inside';
+The build is failing due to an unresolved import.
 
-// Podcast Pages
-import MyPodcastDashboard from './pages/my-podcast-dashboard';
-import PodcastProduction from './pages/podcast-production';
-import MyEpisodes from './pages/my-episodes';
-import BeginnerSetup from './pages/podcast-setup/beginner';
-import ExperiencedSetup from './pages/podcast-setup/experienced';
-import PodcastSetupHub from './pages/podcast-setup';
-import RecordNewEpisode from './pages/record-new';
-import LiveRecording from './pages/live-recording';
-import PhoneRecording from './pages/phone-recording';
-import EpisodeEditor from './pages/episode-editor';
-import VideoStudio from './pages/video-studio';
-import TextToVideo from './pages/text-to-video';
-import FacelessOptions from './pages/faceless-options';
-import FacelessGenerate from './pages/faceless-generate';
-import ShortsGenerator from './pages/shorts-generator';
-import MemberPodcasts from './pages/resources/member-podcasts';
-import PodcastPage from './pages/resources/podcasts/[slug]';
-import EpisodeCalendar from './pages/episode-calendar';
-import PublicEpisodePage from './pages/episode/[id]';
+**Error type:** Module resolution error (Rollup).
 
-// Admin Pages
-import VerificationDashboard from './pages/admin/verification';
-import PendingMembers from './pages/admin/pending-members';
-import FreeMembership from './pages/free-membership';
+[Line 69](#L69) shows the cause: Rollup could not resolve the import `"./pages/senator/[slug]"` from `src/App.tsx` ([line 70](#L70)).
 
-// Short Link Handler
-import ShortLinkHandler from './pages/ShortLinkHandler';
+This happens because the file `src/pages/senator/[slug]` does not exist at the path/name being imported. Common causes:
 
-// Member Pages
-import MemberRequestNew from './pages/member/request-new';
-import MemberHelp from './pages/member/help';
+- The file was not committed to the repo, or is in `.gitignore`.
+- A filename case mismatch (Netlify's Linux build is case-sensitive, unlike macOS/Windows), e.g. the file is `Senator` but imported as `senator`.
+- A missing or incorrect file extension. Unlike some file-based routers, Vite/Rollup needs a real module path. The literal `[slug]` filename is unusual for a Vite project — this is a Next.js-style dynamic route convention that Vite does not support natively.
 
-// Other pages
-import Tavern from './pages/tavern';
-import Committees from './pages/committees';
-import TakeAction from './pages/take-action';
-import Senate from './pages/senate';
-import SenateTracker from './pages/senate-tracker';
-import SenatorPage from './pages/senator/[slug]';
-import House from './pages/house';
-import ConstitutionAcademy from './pages/ConstitutionAcademy';
-import LearningSources from './pages/learning-sources';
-import TavernLocations from './pages/tavern/locations';
-import TavernIssues from './pages/tavern/issues';
-import CommitteesLocal from './pages/committees/local';
-import TavernChatRoom from './pages/tavern/chat/[slug]';
-import CommitteesChatRoom from './pages/committees/chat/[slug]';
+**Solution:**
 
-// Communism Pages
-import CommunismInAmerica from './pages/resources/CommunismInAmerica';
-import TakeDownOfMcCarthy from './pages/resources/TakeDownOfMcCarthy';
-import CommunismToday from './pages/resources/CommunismToday';
+1. First verify the file was actually committed to the repo and exists at `src/pages/senator/`. Check the exact filename and casing in your [repo](https://github.com/lindabell001/afcn-website/tree/main/src/pages).
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  useLayoutEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
-  return null;
-}
+2. Ensure the import path in [`src/App.tsx`](https://github.com/lindabell001/afcn-website/blob/main/src/App.tsx) matches the actual filename exactly, including case and extension. For example:
 
-const App = () => {
-  return (
-    <Router>
-      <ScrollToTop />
-      <SiteLayout>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/member-podcasts" element={<MemberPodcasts />} />
-          <Route path="/resources/podcasts/:slug" element={<PodcastPage />} />
-          <Route path="/episode/:id" element={<PublicEpisodePage />} />
+```tsx
+import SenatorPage from "./pages/senator/[slug]";
+```
 
-          <Route path="/become-one" element={<BecomeOne />} />
-          <Route path="/donate" element={<Donate />} />
-          <Route path="/mission" element={<Mission />} />
-          <Route path="/member-login" element={<MemberLogin />} />
-          <Route path="/inside" element={<Inside />} />
-          <Route path="/member-dashboard" element={<MemberDashboard />} />
-          <Route path="/admin/verification" element={<VerificationDashboard />} />
-          <Route path="/admin/pending-members" element={<PendingMembers />} />
-          <Route path="/free-membership" element={<FreeMembership />} />
+must correspond to a real file like `src/pages/senator/[slug].tsx`.
 
-          {/* Podcast Routes */}
-          <Route path="/my-podcast-dashboard" element={<MyPodcastDashboard />} />
-          <Route path="/podcast-production" element={<PodcastProduction />} />
-          <Route path="/my-episodes" element={<MyEpisodes />} />
-          <Route path="/episode-calendar" element={<EpisodeCalendar />} />
-          <Route path="/podcast-setup" element={<PodcastSetupHub />} />
-          <Route path="/podcast-setup/beginner" element={<BeginnerSetup />} />
-          <Route path="/podcast-setup/experienced" element={<ExperiencedSetup />} />
-          <Route path="/record-new" element={<RecordNewEpisode />} />
-          <Route path="/live-recording" element={<LiveRecording />} />
-          <Route path="/phone-recording" element={<PhoneRecording />} />
-          <Route path="/episode-editor" element={<EpisodeEditor />} />
-          <Route path="/episode-editor/:id" element={<EpisodeEditor />} />
-          <Route path="/video-studio" element={<VideoStudio />} />
-          <Route path="/text-to-video" element={<TextToVideo />} />
-          <Route path="/faceless-options" element={<FacelessOptions />} />
-          <Route path="/faceless-generate" element={<FacelessGenerate />} />
-          <Route path="/shorts-generator" element={<ShortsGenerator />} />
+3. Since this looks like a Next.js-style dynamic route (`[slug]`) but you are using Vite + React Router, rename the file to a standard component name and implement the dynamic route with React Router params instead. For example, rename to `src/pages/senator/SenatorDetail.tsx` and define a route like:
 
-          {/* Member Pages */}
-          <Route path="/member/request-new" element={<MemberRequestNew />} />
-          <Route path="/member/help" element={<MemberHelp />} />
+```tsx
+<Route path="/senator/:slug" element={<SenatorDetail />} />
+```
 
-          {/* Other routes */}
-          <Route path="/tavern" element={<Tavern />} />
-          <Route path="/tavern/locations" element={<TavernLocations />} />
-          <Route path="/tavern/issues" element={<TavernIssues />} />
-          <Route path="/tavern/chat/:slug" element={<TavernChatRoom />} />
-          <Route path="/committees" element={<Committees />} />
-          <Route path="/committees/local" element={<CommitteesLocal />} />
-          <Route path="/committees/chat/:slug" element={<CommitteesChatRoom />} />
-          <Route path="/take-action" element={<TakeAction />} />
-          <Route path="/senate" element={<Senate />} />
-          <Route path="/senate-tracker" element={<SenateTracker />} />
-          <Route path="/senator/:slug" element={<SenatorPage />} />
-          <Route path="/house" element={<House />} />
-          <Route path="/resources/constitution-academy" element={<ConstitutionAcademy />} />
-          <Route path="/resources/learning-sources" element={<LearningSources />} />
+then read the param with `useParams()`.
 
-          {/* Communism Routes */}
-          <Route path="/resources/communism-in-america" element={<CommunismInAmerica />} />
-          <Route path="/resources/take-down-of-mccarthy" element={<TakeDownOfMcCarthy />} />
-          <Route path="/resources/communism-today" element={<CommunismToday />} />
+Fix the import/filename (and commit the file), then redeploy.
 
-          {/* Short Links */}
-          <Route path="/:shortLink" element={<ShortLinkHandler />} />
+The relevant error logs are:
 
-          <Route path="*" element={<div className="text-center py-20 text-xl">Page Not Found</div>} />
-        </Routes>
-      </SiteLayout>
-    </Router>
-  );
-};
-
-export default App;
+Line 55: ────────────────────────────────────────────────────────────────
+Line 56: ​
+Line 57: $ npm run build
+Line 58: > vite_react_shadcn_ts@0.0.0 build
+Line 59: > vite build
+Line 60: vite v5.4.19 building for production...
+Line 61: transforming...
+Line 62: Browserslist: browsers data (caniuse-lite) is 17 months old. Please run:
+Line 63:   npx update-browserslist-db@latest
+Line 64:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Line 65: Failed during stage 'building site': Build script returned non-zero exit code: 2
+Line 66: ✓ 5 modules transformed.
+Line 67: x Build failed in 941ms
+Line 68: error during build:
+Line 69: Could not resolve "./pages/senator/[slug]" from "src/App.tsx"
+Line 70: file: /opt/build/repo/src/App.tsx
+Line 71:     at getRollupError (file:///opt/build/repo/node_modules/rollup/dist/es/shared/parseAst.js:395:41)
+Line 72:     at error (file:///opt/build/repo/node_modules/rollup/dist/es/shared/parseAst.js:391:42)
+Line 73:     at ModuleLoader.handleInvalidResolvedId (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:20006:24)
+Line 74:     at file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:19966:26
+Line 75: ​
+Line 76: "build.command" failed                                        
+Line 77: ────────────────────────────────────────────────────────────────
+Line 78: ​
+Line 79:   Error message
+Line 80:   Command failed with exit code 1: npm run build
+Line 81: ​
+Line 82:   Error location
+Line 83:   In build.command from netlify.toml:
+Line 84:   npm run build
+Line 85: ​
+Line 86:   Resolved config
+Line 87:   build:
+Line 88:     command: npm run build
+Line 89:     commandOrigin: config
+Line 90:     environment:
+Line 91:       - SUPABASE_ANON_KEY
+Line 92:       - SUPABASE_DATABASE_URL
+Line 123:       status: 301
+Line 124:       to: https://americafirstcitizensnetwork.org/:splat
+Line 125:     - force: true
+Line 126:       from: http://www.afcnus.org/*
+Line 127:       status: 301
+Line 128:       to: https://americafirstcitizensnetwork.org/:splat
+Line 129:     - from: /*
+Line 130:       status: 200
+Line 131:       to: /index.html
+Line 132:   redirectsOrigin: config
+Line 133: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 134: Failing build: Failed to build site
+Line 135: Finished processing build request in 14.123s
